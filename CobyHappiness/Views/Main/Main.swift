@@ -6,19 +6,22 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct Main: View {
-    @EnvironmentObject var myEvents: EventStore
+    @Environment(\.modelContext) private var context
+    @Query private var items: [Event]
+    
     @State private var formType: EventFormType?
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(myEvents.events) { event in
+                ForEach(items) { event in
                     ListViewRow(event: event, formType: $formType)
                     .swipeActions {
                         Button(role: .destructive) {
-                            myEvents.delete(event)
+                            deleteItem(event)
                         } label: {
                             Image(systemName: "trash")
                         }
@@ -39,8 +42,8 @@ struct Main: View {
             }
         }
     }
-}
-
-#Preview {
-    Main()
+    
+    func deleteItem(_ item: Event) {
+        context.delete(item)
+    }
 }

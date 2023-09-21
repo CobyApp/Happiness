@@ -6,15 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct CobyHappinessApp: App {
-    @StateObject var myEvents = EventStore(preview: true)
-    
     var body: some Scene {
         WindowGroup {
             Main()
-                .environmentObject(myEvents)
+                .modelContainer(for: Event.self)
         }
     }
 }

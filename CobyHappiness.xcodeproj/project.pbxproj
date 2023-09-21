@@ -14,9 +14,7 @@
 		CB9EF8EC2ABC68E500FDCE12 /* UIImage+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8EB2ABC68E500FDCE12 /* UIImage+Assets.swift */; };
 		CB9EF8EE2ABC691000FDCE12 /* Color+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8ED2ABC691000FDCE12 /* Color+Additions.swift */; };
 		CB9EF8F12ABC69A500FDCE12 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8F02ABC69A500FDCE12 /* Main.swift */; };
-		CB9EF8F32ABC7B0200FDCE12 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8F22ABC7B0200FDCE12 /* MainViewModel.swift */; };
 		CB9EF8FA2ABC7C7500FDCE12 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8F92ABC7C7500FDCE12 /* Event.swift */; };
-		CB9EF8FC2ABC80AE00FDCE12 /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8FB2ABC80AE00FDCE12 /* EventStore.swift */; };
 		CB9EF8FE2ABC80EA00FDCE12 /* EventFormType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8FD2ABC80EA00FDCE12 /* EventFormType.swift */; };
 		CB9EF9012ABC812300FDCE12 /* EventFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF9002ABC812300FDCE12 /* EventFormView.swift */; };
 		CB9EF9032ABC814400FDCE12 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF9022ABC814400FDCE12 /* EventViewModel.swift */; };
@@ -33,9 +31,7 @@
 		CB9EF8EB2ABC68E500FDCE12 /* UIImage+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Assets.swift"; sourceTree = "<group>"; };
 		CB9EF8ED2ABC691000FDCE12 /* Color+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Additions.swift"; sourceTree = "<group>"; };
 		CB9EF8F02ABC69A500FDCE12 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
-		CB9EF8F22ABC7B0200FDCE12 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		CB9EF8F92ABC7C7500FDCE12 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		CB9EF8FB2ABC80AE00FDCE12 /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
 		CB9EF8FD2ABC80EA00FDCE12 /* EventFormType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFormType.swift; sourceTree = "<group>"; };
 		CB9EF9002ABC812300FDCE12 /* EventFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFormView.swift; sourceTree = "<group>"; };
 		CB9EF9022ABC814400FDCE12 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
@@ -95,7 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				CB9EF8F92ABC7C7500FDCE12 /* Event.swift */,
-				CB9EF8FB2ABC80AE00FDCE12 /* EventStore.swift */,
+				CB9EF8FD2ABC80EA00FDCE12 /* EventFormType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -157,7 +153,6 @@
 		CB9EF8FF2ABC810600FDCE12 /* Event */ = {
 			isa = PBXGroup;
 			children = (
-				CB9EF8FD2ABC80EA00FDCE12 /* EventFormType.swift */,
 				CB9EF9002ABC812300FDCE12 /* EventFormView.swift */,
 			);
 			path = Event;
@@ -166,7 +161,6 @@
 		CB9EF9062ABC81BF00FDCE12 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				CB9EF8F22ABC7B0200FDCE12 /* MainViewModel.swift */,
 				CB9EF9022ABC814400FDCE12 /* EventViewModel.swift */,
 			);
 			path = ViewModels;
@@ -242,7 +236,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB9EF8FC2ABC80AE00FDCE12 /* EventStore.swift in Sources */,
 				CB9EF9052ABC815E00FDCE12 /* ListViewRow.swift in Sources */,
 				CB9EF8FA2ABC7C7500FDCE12 /* Event.swift in Sources */,
 				CB9EF9012ABC812300FDCE12 /* EventFormView.swift in Sources */,
@@ -253,7 +246,6 @@
 				CB9EF8F12ABC69A500FDCE12 /* Main.swift in Sources */,
 				CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */,
 				CB9EF9032ABC814400FDCE12 /* EventViewModel.swift in Sources */,
-				CB9EF8F32ABC7B0200FDCE12 /* MainViewModel.swift in Sources */,
 				CB9EF8FE2ABC80EA00FDCE12 /* EventFormType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

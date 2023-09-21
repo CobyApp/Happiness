@@ -13,17 +13,15 @@ struct ListViewRow: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                HStack {
-                    Text(event.eventType.icon)
-                        .font(.system(size: 40))
-                    Text(event.note)
-                }
                 Text(
-                    event.date.formatted(date: .abbreviated,
-                                         time: .shortened)
+                    event.date.format("yyyy년 MM월 yy일")
                 )
+                
+                Text(event.note)
             }
+            
             Spacer()
+            
             Button {
                 formType = .update(event)
             } label: {
