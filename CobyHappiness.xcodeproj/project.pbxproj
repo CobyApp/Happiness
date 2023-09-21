@@ -8,27 +8,39 @@
 
 /* Begin PBXBuildFile section */
 		CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */; };
-		CB9EF8D62ABC633A00FDCE12 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8D52ABC633A00FDCE12 /* ContentView.swift */; };
-		CB9EF8D82ABC633B00FDCE12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF8D72ABC633B00FDCE12 /* Assets.xcassets */; };
 		CB9EF8DB2ABC633B00FDCE12 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF8DA2ABC633B00FDCE12 /* Preview Assets.xcassets */; };
 		CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */; };
 		CB9EF8E92ABC684200FDCE12 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8E82ABC684200FDCE12 /* Date+Extensions.swift */; };
 		CB9EF8EC2ABC68E500FDCE12 /* UIImage+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8EB2ABC68E500FDCE12 /* UIImage+Assets.swift */; };
 		CB9EF8EE2ABC691000FDCE12 /* Color+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8ED2ABC691000FDCE12 /* Color+Additions.swift */; };
 		CB9EF8F12ABC69A500FDCE12 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8F02ABC69A500FDCE12 /* Main.swift */; };
+		CB9EF8F32ABC7B0200FDCE12 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8F22ABC7B0200FDCE12 /* MainViewModel.swift */; };
+		CB9EF8FA2ABC7C7500FDCE12 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8F92ABC7C7500FDCE12 /* Event.swift */; };
+		CB9EF8FC2ABC80AE00FDCE12 /* EventStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8FB2ABC80AE00FDCE12 /* EventStore.swift */; };
+		CB9EF8FE2ABC80EA00FDCE12 /* EventFormType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8FD2ABC80EA00FDCE12 /* EventFormType.swift */; };
+		CB9EF9012ABC812300FDCE12 /* EventFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF9002ABC812300FDCE12 /* EventFormView.swift */; };
+		CB9EF9032ABC814400FDCE12 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF9022ABC814400FDCE12 /* EventViewModel.swift */; };
+		CB9EF9052ABC815E00FDCE12 /* ListViewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF9042ABC815E00FDCE12 /* ListViewRow.swift */; };
+		CB9EF9082ABC829F00FDCE12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CB9EF8D02ABC633A00FDCE12 /* CobyHappiness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CobyHappiness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CobyHappinessApp.swift; sourceTree = "<group>"; };
-		CB9EF8D52ABC633A00FDCE12 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		CB9EF8D72ABC633B00FDCE12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB9EF8DA2ABC633B00FDCE12 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		CB9EF8E82ABC684200FDCE12 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		CB9EF8EB2ABC68E500FDCE12 /* UIImage+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Assets.swift"; sourceTree = "<group>"; };
 		CB9EF8ED2ABC691000FDCE12 /* Color+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Additions.swift"; sourceTree = "<group>"; };
 		CB9EF8F02ABC69A500FDCE12 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		CB9EF8F22ABC7B0200FDCE12 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		CB9EF8F92ABC7C7500FDCE12 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		CB9EF8FB2ABC80AE00FDCE12 /* EventStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventStore.swift; sourceTree = "<group>"; };
+		CB9EF8FD2ABC80EA00FDCE12 /* EventFormType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFormType.swift; sourceTree = "<group>"; };
+		CB9EF9002ABC812300FDCE12 /* EventFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFormView.swift; sourceTree = "<group>"; };
+		CB9EF9022ABC814400FDCE12 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
+		CB9EF9042ABC815E00FDCE12 /* ListViewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewRow.swift; sourceTree = "<group>"; };
+		CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +74,8 @@
 			isa = PBXGroup;
 			children = (
 				CB9EF8E12ABC670100FDCE12 /* Models */,
-				CB9EF8E22ABC670E00FDCE12 /* Screens */,
+				CB9EF8E22ABC670E00FDCE12 /* Views */,
+				CB9EF9062ABC81BF00FDCE12 /* ViewModels */,
 				CB9EF8E32ABC671C00FDCE12 /* Global */,
 				CB9EF8E42ABC672B00FDCE12 /* Supports */,
 				CB9EF8D92ABC633B00FDCE12 /* Preview Content */,
@@ -81,16 +94,19 @@
 		CB9EF8E12ABC670100FDCE12 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CB9EF8F92ABC7C7500FDCE12 /* Event.swift */,
+				CB9EF8FB2ABC80AE00FDCE12 /* EventStore.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		CB9EF8E22ABC670E00FDCE12 /* Screens */ = {
+		CB9EF8E22ABC670E00FDCE12 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				CB9EF8EF2ABC699900FDCE12 /* Main */,
+				CB9EF8FF2ABC810600FDCE12 /* Event */,
 			);
-			path = Screens;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CB9EF8E32ABC671C00FDCE12 /* Global */ = {
@@ -106,8 +122,6 @@
 				CB9EF8EA2ABC68D100FDCE12 /* Utils */,
 				CB9EF8E52ABC673100FDCE12 /* Extensions */,
 				CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */,
-				CB9EF8D52ABC633A00FDCE12 /* ContentView.swift */,
-				CB9EF8D72ABC633B00FDCE12 /* Assets.xcassets */,
 			);
 			path = Supports;
 			sourceTree = "<group>";
@@ -117,6 +131,7 @@
 			children = (
 				CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */,
 				CB9EF8E82ABC684200FDCE12 /* Date+Extensions.swift */,
+				CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -134,8 +149,27 @@
 			isa = PBXGroup;
 			children = (
 				CB9EF8F02ABC69A500FDCE12 /* Main.swift */,
+				CB9EF9042ABC815E00FDCE12 /* ListViewRow.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		CB9EF8FF2ABC810600FDCE12 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				CB9EF8FD2ABC80EA00FDCE12 /* EventFormType.swift */,
+				CB9EF9002ABC812300FDCE12 /* EventFormView.swift */,
+			);
+			path = Event;
+			sourceTree = "<group>";
+		};
+		CB9EF9062ABC81BF00FDCE12 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				CB9EF8F22ABC7B0200FDCE12 /* MainViewModel.swift */,
+				CB9EF9022ABC814400FDCE12 /* EventViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,8 +230,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB9EF9082ABC829F00FDCE12 /* Assets.xcassets in Resources */,
 				CB9EF8DB2ABC633B00FDCE12 /* Preview Assets.xcassets in Resources */,
-				CB9EF8D82ABC633B00FDCE12 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,13 +242,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB9EF8D62ABC633A00FDCE12 /* ContentView.swift in Sources */,
+				CB9EF8FC2ABC80AE00FDCE12 /* EventStore.swift in Sources */,
+				CB9EF9052ABC815E00FDCE12 /* ListViewRow.swift in Sources */,
+				CB9EF8FA2ABC7C7500FDCE12 /* Event.swift in Sources */,
+				CB9EF9012ABC812300FDCE12 /* EventFormView.swift in Sources */,
 				CB9EF8EE2ABC691000FDCE12 /* Color+Additions.swift in Sources */,
 				CB9EF8EC2ABC68E500FDCE12 /* UIImage+Assets.swift in Sources */,
 				CB9EF8E92ABC684200FDCE12 /* Date+Extensions.swift in Sources */,
 				CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */,
 				CB9EF8F12ABC69A500FDCE12 /* Main.swift in Sources */,
 				CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */,
+				CB9EF9032ABC814400FDCE12 /* EventViewModel.swift in Sources */,
+				CB9EF8F32ABC7B0200FDCE12 /* MainViewModel.swift in Sources */,
+				CB9EF8FE2ABC80EA00FDCE12 /* EventFormType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +313,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Happy;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -330,6 +371,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Happy;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -357,6 +399,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -387,6 +430,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

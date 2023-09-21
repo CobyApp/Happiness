@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct CobyHappinessApp: App {
+    @StateObject var myEvents = EventStore(preview: true)
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Main()
+                .environmentObject(myEvents)
         }
     }
 }

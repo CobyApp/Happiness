@@ -8,6 +8,14 @@
 import Foundation
 
 extension Date {
+    var startOfDay: Date {
+        Calendar.current.startOfDay(for: self)
+    }
+    
+    func diff(numDays: Int) -> Date {
+        Calendar.current.date(byAdding: .day, value: numDays, to: self)!
+    }
+    
     func format(_ pattern: String) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = pattern
