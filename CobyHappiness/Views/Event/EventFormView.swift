@@ -16,9 +16,6 @@ struct EventFormView: View {
         NavigationStack {
             VStack {
                 Form {
-                    DatePicker(selection: $viewModel.date) {
-                        Text("Date and Time")
-                    }
                     TextField("Note", text: $viewModel.note, axis: .vertical)
                         .focused($focus, equals: true)
                     Picker("Event Type", selection: $viewModel.eventType) {
