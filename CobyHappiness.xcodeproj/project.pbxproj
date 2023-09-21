@@ -11,6 +11,11 @@
 		CB9EF8D62ABC633A00FDCE12 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8D52ABC633A00FDCE12 /* ContentView.swift */; };
 		CB9EF8D82ABC633B00FDCE12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF8D72ABC633B00FDCE12 /* Assets.xcassets */; };
 		CB9EF8DB2ABC633B00FDCE12 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF8DA2ABC633B00FDCE12 /* Preview Assets.xcassets */; };
+		CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */; };
+		CB9EF8E92ABC684200FDCE12 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8E82ABC684200FDCE12 /* Date+Extensions.swift */; };
+		CB9EF8EC2ABC68E500FDCE12 /* UIImage+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8EB2ABC68E500FDCE12 /* UIImage+Assets.swift */; };
+		CB9EF8EE2ABC691000FDCE12 /* Color+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8ED2ABC691000FDCE12 /* Color+Additions.swift */; };
+		CB9EF8F12ABC69A500FDCE12 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8F02ABC69A500FDCE12 /* Main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,11 @@
 		CB9EF8D52ABC633A00FDCE12 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CB9EF8D72ABC633B00FDCE12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB9EF8DA2ABC633B00FDCE12 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		CB9EF8E82ABC684200FDCE12 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		CB9EF8EB2ABC68E500FDCE12 /* UIImage+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Assets.swift"; sourceTree = "<group>"; };
+		CB9EF8ED2ABC691000FDCE12 /* Color+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Additions.swift"; sourceTree = "<group>"; };
+		CB9EF8F02ABC69A500FDCE12 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,9 +61,10 @@
 		CB9EF8D22ABC633A00FDCE12 /* CobyHappiness */ = {
 			isa = PBXGroup;
 			children = (
-				CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */,
-				CB9EF8D52ABC633A00FDCE12 /* ContentView.swift */,
-				CB9EF8D72ABC633B00FDCE12 /* Assets.xcassets */,
+				CB9EF8E12ABC670100FDCE12 /* Models */,
+				CB9EF8E22ABC670E00FDCE12 /* Screens */,
+				CB9EF8E32ABC671C00FDCE12 /* Global */,
+				CB9EF8E42ABC672B00FDCE12 /* Supports */,
 				CB9EF8D92ABC633B00FDCE12 /* Preview Content */,
 			);
 			path = CobyHappiness;
@@ -65,6 +76,66 @@
 				CB9EF8DA2ABC633B00FDCE12 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CB9EF8E12ABC670100FDCE12 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CB9EF8E22ABC670E00FDCE12 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				CB9EF8EF2ABC699900FDCE12 /* Main */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		CB9EF8E32ABC671C00FDCE12 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		CB9EF8E42ABC672B00FDCE12 /* Supports */ = {
+			isa = PBXGroup;
+			children = (
+				CB9EF8EA2ABC68D100FDCE12 /* Utils */,
+				CB9EF8E52ABC673100FDCE12 /* Extensions */,
+				CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */,
+				CB9EF8D52ABC633A00FDCE12 /* ContentView.swift */,
+				CB9EF8D72ABC633B00FDCE12 /* Assets.xcassets */,
+			);
+			path = Supports;
+			sourceTree = "<group>";
+		};
+		CB9EF8E52ABC673100FDCE12 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */,
+				CB9EF8E82ABC684200FDCE12 /* Date+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CB9EF8EA2ABC68D100FDCE12 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CB9EF8EB2ABC68E500FDCE12 /* UIImage+Assets.swift */,
+				CB9EF8ED2ABC691000FDCE12 /* Color+Additions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		CB9EF8EF2ABC699900FDCE12 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				CB9EF8F02ABC69A500FDCE12 /* Main.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +209,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB9EF8D62ABC633A00FDCE12 /* ContentView.swift in Sources */,
+				CB9EF8EE2ABC691000FDCE12 /* Color+Additions.swift in Sources */,
+				CB9EF8EC2ABC68E500FDCE12 /* UIImage+Assets.swift in Sources */,
+				CB9EF8E92ABC684200FDCE12 /* Date+Extensions.swift in Sources */,
+				CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */,
+				CB9EF8F12ABC69A500FDCE12 /* Main.swift in Sources */,
 				CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,6 +351,7 @@
 				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -304,6 +381,7 @@
 				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
