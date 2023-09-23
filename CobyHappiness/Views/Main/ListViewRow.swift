@@ -24,6 +24,7 @@ struct ListViewRow: View {
                         .font(.system(size: 40))
                     
                     Text(event.note)
+                        .font(.bmjua())
                 }
             }
             

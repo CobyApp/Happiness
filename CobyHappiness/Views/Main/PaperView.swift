@@ -13,6 +13,7 @@ struct PaperView: View {
     var body: some View {
         List {
             Text(paper.date.format("yyyy년 MM월 yy일"))
+                .font(.bmjua())
             
             ForEach(paper.events) { event in
                 ListViewRow(event: event)

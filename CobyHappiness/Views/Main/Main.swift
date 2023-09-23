@@ -23,7 +23,7 @@ struct Main: View {
                     PaperView(paper: paper)
                 }
             }
-            .navigationTitle("Calendar Events")
+            .navigationTitle("행복 리스트")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
