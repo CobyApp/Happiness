@@ -9,12 +9,24 @@ import SwiftUI
 
 struct EventFormView: View {
     @Environment(\.modelContext) private var context
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
     
-    @State private var note = ""
-    @StateObject var viewModel: EventFormViewModel
+    @State private var type: Event.EventType = .unspecified
+    @State private var note: String = ""
+    
+    private var updating: Bool = false
+    private var event: Event?
     
     @FocusState private var focus: Bool?
+    
+    init() { }
+    
+    init(event: Event) {
+        self.updating = true
+        self.event = event
+        self._type = State(wrappedValue: event.type)
+        self._note = State(wrappedValue: event.note)
+    }
     
     var body: some View {
         NavigationStack {
@@ -23,18 +35,27 @@ struct EventFormView: View {
                     TextField("Note", text: $note, axis: .vertical)
                         .focused($focus, equals: true)
                     
+                    Picker("Event Type", selection: $type) {
+                        ForEach(Event.EventType.allCases) { eventType in
+                            Text(eventType.icon + " " + eventType.rawValue.capitalized)
+                                .tag(eventType)
+                        }
+                    }
+                    
                     Section(footer: HStack {
                         Spacer()
                         Button {
-                            if viewModel.updating {
-                                updateItem(viewModel.event!)
+                            if let event {
+                                event.type = type
+                                event.note = note
+                                try? context.save()
                             } else {
-                                let newEvent = Event(date: Date(), note: note)
-                                addItem(newEvent)
+                                let item = Event(type: type , date: Date(), note: note)
+                                context.insert(item)
                             }
                             dismiss()
                         } label: {
-                            Text(viewModel.updating ? "Update Event" : "Add Event")
+                            Text(updating ? "Update Event" : "Add Event")
                         }
                         .buttonStyle(.borderedProminent)
                         Spacer()
@@ -44,20 +65,10 @@ struct EventFormView: View {
                     }
                 }
             }
-            .navigationTitle(viewModel.updating ? "Update" : "New Event")
+            .navigationTitle(updating ? "Update" : "New Event")
             .onAppear {
                 focus = true
-                note = viewModel.event?.note ?? ""
             }
         }
-    }
-    
-    func addItem(_ item: Event) {
-        context.insert(item)
-    }
-    
-    func updateItem(_ item: Event) {
-        item.note = note
-        try? context.save()
     }
 }

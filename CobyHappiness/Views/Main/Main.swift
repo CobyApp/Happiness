@@ -12,33 +12,35 @@ struct Main: View {
     @Environment(\.modelContext) private var context
     @Query private var items: [Event]
     
-    @State private var formType: EventFormType?
+    @State private var isPresented: Bool = false
     
     var body: some View {
         NavigationStack {
             List {
                 ForEach(items) { event in
-                    ListViewRow(event: event, formType: $formType)
-                    .swipeActions {
-                        Button(role: .destructive) {
-                            deleteItem(event)
-                        } label: {
-                            Image(systemName: "trash")
+                    ListViewRow(event: event)
+                        .swipeActions {
+                            Button(role: .destructive) {
+                                deleteItem(event)
+                            } label: {
+                                Image(systemName: "trash")
+                            }
                         }
-                    }
                 }
             }
             .navigationTitle("Calendar Events")
-            .sheet(item: $formType) { $0 }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        formType = .new
+                        isPresented = true
                     } label: {
                         Image(systemName: "plus.circle.fill")
                             .imageScale(.medium)
                     }
                 }
+            }
+            .sheet(isPresented: $isPresented) {
+                EventFormView()
             }
         }
     }

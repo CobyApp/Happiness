@@ -8,26 +8,35 @@
 import SwiftUI
 
 struct ListViewRow: View {
+    @State private var isPresented: Bool = false
+    
     let event: Event
-    @Binding var formType: EventFormType?
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
+                HStack {
+                    Text(event.type.icon)
+                        .font(.system(size: 40))
+                    Text(event.note)
+                }
+                
                 Text(
                     event.date.format("yyyy년 MM월 yy일")
                 )
-                
-                Text(event.note)
             }
             
             Spacer()
             
             Button {
-                formType = .update(event)
+                isPresented = true
             } label: {
                 Text("Edit")
             }
             .buttonStyle(.bordered)
+        }
+        .sheet(isPresented: $isPresented) {
+            EventFormView(event: event)
         }
     }
 }
