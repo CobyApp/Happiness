@@ -10,7 +10,11 @@ import SwiftUI
 struct ListViewRow: View {
     @State private var isPresented: Bool = false
     
-    var event: Event
+    private var event: Event
+    
+    init(event: Event) {
+        self.event = event
+    }
     
     var body: some View {
         HStack {
@@ -21,10 +25,6 @@ struct ListViewRow: View {
                     
                     Text(event.note)
                 }
-                
-                Text(
-                    event.date.format("yyyy년 MM월 yy일")
-                )
             }
             
             Spacer()
@@ -35,6 +35,9 @@ struct ListViewRow: View {
                 Text("Edit")
             }
             .buttonStyle(.bordered)
+        }
+        .sheet(isPresented: $isPresented) {
+            EventEdit(event: event)
         }
     }
 }

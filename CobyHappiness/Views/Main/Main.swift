@@ -11,7 +11,7 @@ import SwiftData
 struct Main: View {
     @Environment(\.modelContext) private var context
     
-    @Query(sort: \Paper.date, order: .forward)
+    @Query(sort: \Paper.date, order: .reverse)
     private var papers: [Paper]
     
     @State private var isPresented: Bool = false
@@ -20,6 +20,8 @@ struct Main: View {
         NavigationStack {
             List {
                 if let paper = papers.first {
+                    Text(paper.date.format("yyyy년 MM월 yy일"))
+                    
                     ForEach(paper.events) { event in
                         ListViewRow(event: event)
                     }
