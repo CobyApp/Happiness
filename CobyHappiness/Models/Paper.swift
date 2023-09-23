@@ -11,8 +11,8 @@ import SwiftData
 @Model
 final class Paper {
     @Attribute(.unique) var id: UUID
+    @Relationship(deleteRule: .cascade) var events: [Event]
     var date: Date
-    var events: [Event]
 
     init() {
         self.id = UUID()

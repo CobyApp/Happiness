@@ -8,8 +8,9 @@
 import SwiftUI
 import SwiftData
 
-final class Event: Identifiable, Codable {
-    var id: UUID
+@Model
+final class Event {
+    @Attribute(.unique) var id: UUID
     var date: Date
     var type: EventType
     var note: String
@@ -24,6 +25,7 @@ final class Event: Identifiable, Codable {
 
 enum EventType: String, Identifiable, CaseIterable, Codable {
     case work, home, social, sport, unspecified
+    
     var id: String {
         self.rawValue
     }
