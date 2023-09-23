@@ -18,13 +18,9 @@ struct Main: View {
     
     var body: some View {
         NavigationStack {
-            List {
+            VStack {
                 if let paper = papers.first {
-                    Text(paper.date.format("yyyy년 MM월 yy일"))
-                    
-                    ForEach(paper.events) { event in
-                        ListViewRow(event: event)
-                    }
+                    PaperView(paper: paper)
                 }
             }
             .navigationTitle("Calendar Events")

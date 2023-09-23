@@ -53,6 +53,9 @@ struct EventEdit: View {
             .onAppear {
                 focus = true
             }
+            .onTapGesture {
+                closeKeyboard()
+            }
         }
     }
 }
