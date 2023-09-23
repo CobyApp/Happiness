@@ -10,7 +10,7 @@ import SwiftUI
 struct ListViewRow: View {
     @State private var isPresented: Bool = false
     
-    let event: Event
+    var event: Event
     
     var body: some View {
         HStack {
@@ -18,6 +18,7 @@ struct ListViewRow: View {
                 HStack {
                     Text(event.type.icon)
                         .font(.system(size: 40))
+                    
                     Text(event.note)
                 }
                 
@@ -34,9 +35,6 @@ struct ListViewRow: View {
                 Text("Edit")
             }
             .buttonStyle(.bordered)
-        }
-        .sheet(isPresented: $isPresented) {
-            EventFormView(event: event)
         }
     }
 }

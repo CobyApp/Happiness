@@ -10,42 +10,33 @@ import SwiftData
 
 struct Main: View {
     @Environment(\.modelContext) private var context
-    @Query private var items: [Event]
+    
+    @Query(sort: \Paper.date, order: .forward)
+    private var papers: [Paper]
     
     @State private var isPresented: Bool = false
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(items) { event in
-                    ListViewRow(event: event)
-                        .swipeActions {
-                            Button(role: .destructive) {
-                                deleteItem(event)
-                            } label: {
-                                Image(systemName: "trash")
-                            }
-                        }
+                if let paper = papers.first {
+                    ForEach(paper.events) { event in
+                        ListViewRow(event: event)
+                    }
                 }
             }
             .navigationTitle("Calendar Events")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        isPresented = true
+                        let paper = Paper()
+                        context.insert(paper)
                     } label: {
                         Image(systemName: "plus.circle.fill")
                             .imageScale(.medium)
                     }
                 }
             }
-            .sheet(isPresented: $isPresented) {
-                EventFormView()
-            }
         }
-    }
-    
-    func deleteItem(_ item: Event) {
-        context.delete(item)
     }
 }

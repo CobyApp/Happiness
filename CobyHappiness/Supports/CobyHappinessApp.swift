@@ -13,7 +13,7 @@ struct CobyHappinessApp: App {
     var body: some Scene {
         WindowGroup {
             Main()
-                .modelContainer(for: Event.self)
         }
+        .modelContainer(for: Paper.self)
     }
 }
