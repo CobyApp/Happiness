@@ -20,16 +20,12 @@ struct EventViewRow: View {
     }
     
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(event.type.icon)
-                    .font(.system(size: 40))
-                
-                TextField(event.type.id, text: $note)
-                    .textFieldStyle(CommonTextfieldStyle())
-            }
+        VStack(alignment: .leading, spacing: 4) {
+            Text(event.type.id)
+                .font(.headline)
             
-            Spacer()
+            TextField(event.type.description, text: $note)
+                .textFieldStyle(CommonTextfieldStyle())
         }
         .onChange(of: note) {
             event.note = note

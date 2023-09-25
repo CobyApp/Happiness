@@ -29,6 +29,21 @@ enum EventType: String, Identifiable, CaseIterable, Codable {
     var id: String {
         self.rawValue
     }
+    
+    var description: String {
+        switch self {
+        case .music:
+            return "기분이 좋아지는 음악"
+        case .video:
+            return "보기만 해도 힐링되는 영상"
+        case .food:
+            return "나를 행복하게 하는 음식"
+        case .flex:
+            return "스트레스를 푸는 플렉스"
+        case .moment:
+            return "오늘 가장 행복했던 순간"
+        }
+    }
 
     var icon: String {
         switch self {

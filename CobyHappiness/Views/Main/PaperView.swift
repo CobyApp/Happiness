@@ -15,20 +15,20 @@ struct PaperView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(paper.date.format("yyyy년 MM월 dd일"))
-                .font(.bmjua())
+        VStack(alignment: .leading, spacing: 30) {
+            Text(paper.date.format("MMM d, yyyy"))
+                .font(.title3)
             
-            ScrollView(showsIndicators: false) {
-                VStack {
-                    ForEach(paper.events) { event in
-                        EventViewRow(event: event)
-                    }
+            LazyVStack(spacing: 24) {
+                ForEach(paper.events) { event in
+                    EventViewRow(event: event)
                 }
             }
         }
         .padding(.horizontal, BaseSize.horizantalPadding)
         .padding(.vertical, BaseSize.verticalPadding)
         .background(Color.backgroundSecondary)
+        .frame(width: BaseSize.fullWidth)
+        .cornerRadius(25)
     }
 }

@@ -25,8 +25,6 @@ struct Main: View {
                 ZStack {
                     ForEach(0..<papers.count, id: \.self) { index in
                         PaperView(paper: papers[index])
-                            .frame(width: BaseSize.fullWidth, height: BaseSize.fullHeight)
-                            .cornerRadius(25)
                             .opacity(currentIndex == index ? 1.0 : 0.5)
                             .scaleEffect(currentIndex == index ? 1.0 : 0.8)
                             .offset(x: CGFloat(index - currentIndex) * BaseSize.fullWidth + dragOffset, y: 0)
@@ -83,6 +81,9 @@ struct Main: View {
                 if paper.date.format("yyyy-mm-dd") != Date().format("yyyy-mm-dd") {
                     createPages()
                 }
+            }
+            .onTapGesture {
+                closeKeyboard()
             }
         }
     }
