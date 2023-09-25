@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PaperView: View {    
+struct PaperView: View {
     private var paper: Paper
     
     init(paper: Paper) {
@@ -20,7 +20,7 @@ struct PaperView: View {
                 .font(.title3)
             
             LazyVStack(spacing: 24) {
-                ForEach(paper.events) { event in
+                ForEach(paper.events.sorted(by: { $0.type.id > $1.type.id })) { event in
                     EventViewRow(event: event)
                 }
             }

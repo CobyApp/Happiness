@@ -58,6 +58,7 @@ struct Main: View {
                             Image(systemName: "arrow.left")
                                 .font(.title)
                         }
+                        .disabled(currentIndex == 0)
 
                         Spacer()
                         
@@ -69,6 +70,7 @@ struct Main: View {
                             Image(systemName: "arrow.right")
                                 .font(.title)
                         }
+                        .disabled(currentIndex == papers.count - 1)
                     }
                 }
             }
@@ -78,7 +80,7 @@ struct Main: View {
                     return
                 }
                 
-                if paper.date.format("yyyy-mm-dd") != Date().format("yyyy-mm-dd") {
+                if paper.date.format("yyyy-MM-dd") != Date().format("yyyy-MM-dd") {
                     createPages()
                 }
             }
