@@ -24,7 +24,7 @@ final class Event {
 }
 
 enum EventType: String, Identifiable, CaseIterable, Codable {
-    case work, home, social, sport, unspecified
+    case music, video, food, flex, moment
     
     var id: String {
         self.rawValue
@@ -32,15 +32,15 @@ enum EventType: String, Identifiable, CaseIterable, Codable {
 
     var icon: String {
         switch self {
-        case .work:
+        case .music:
             return "🏦"
-        case .home:
+        case .video:
             return "🏡"
-        case .social:
+        case .food:
             return "🎉"
-        case .sport:
+        case .flex:
             return "🏟"
-        case .unspecified:
+        case .moment:
             return "📌"
         }
     }

@@ -7,17 +7,28 @@
 
 import SwiftUI
 
-struct PaperView: View {
-    var paper: Paper
+struct PaperView: View {    
+    private var paper: Paper
+    
+    init(paper: Paper) {
+        self.paper = paper
+    }
     
     var body: some View {
-        List {
-            Text(paper.date.format("yyyy년 MM월 yy일"))
+        VStack(alignment: .leading) {
+            Text(paper.date.format("yyyy년 MM월 dd일"))
                 .font(.bmjua())
             
-            ForEach(paper.events) { event in
-                ListViewRow(event: event)
+            ScrollView(showsIndicators: false) {
+                VStack {
+                    ForEach(paper.events) { event in
+                        EventViewRow(event: event)
+                    }
+                }
             }
         }
+        .padding(.horizontal, BaseSize.horizantalPadding)
+        .padding(.vertical, BaseSize.verticalPadding)
+        .background(Color.backgroundSecondary)
     }
 }
