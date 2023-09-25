@@ -39,7 +39,7 @@ enum EventType: String, Identifiable, CaseIterable, Codable {
         case .food:
             return "나를 행복하게 하는 음식"
         case .flex:
-            return "스트레스를 푸는 플렉스"
+            return "스트레스가 풀리는 플렉스"
         case .moment:
             return "오늘 가장 행복했던 순간"
         }

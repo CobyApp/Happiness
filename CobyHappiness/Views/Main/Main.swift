@@ -46,7 +46,7 @@ struct Main: View {
                         })
                 )
             }
-            .navigationBarHidden(true)
+            .navigationTitle("행복 리스트")
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     HStack {
