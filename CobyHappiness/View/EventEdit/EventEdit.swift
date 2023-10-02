@@ -60,10 +60,7 @@ struct EventEdit: View {
                                     title: title,
                                     note: note
                                 )
-                                print("저긴뎁")
-                                print(item)
-//                                context.insert(item)
-                                print("여긴뎁")
+                                context.insert(item)
                             }
 
                             dismiss()

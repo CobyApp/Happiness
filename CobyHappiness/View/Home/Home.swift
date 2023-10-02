@@ -115,7 +115,7 @@ struct Home: View {
                     .fontWeight(.black)
                     .foregroundStyle(.white)
                 
-                Text(event.date.format("yyyy-mm-dd"))
+                Text(event.date.format("MMM d, yyyy"))
                     .font(.callout)
                     .foregroundStyle(.white.opacity(0.8))
             })
