@@ -13,13 +13,20 @@ final class Event {
     @Attribute(.unique) var id: UUID
     var date: Date
     var type: EventType
+    var title: String
     var note: String
-    
-    init(type: EventType) {
+
+    init(
+        date: Date,
+        type: EventType,
+        title: String,
+        note: String
+    ) {
         self.id = UUID()
-        self.date = Date()
+        self.date = date
         self.type = type
-        self.note = ""
+        self.title = title
+        self.note = note
     }
 }
 
