@@ -16,12 +16,12 @@ struct CardView: View {
                 .resizable()
                 .scaledToFill()
                 .frame(width: BaseSize.fullWidth, height: BaseSize.fullHeight)
-                .clipShape(.rect(cornerRadius: 15))
                 .overlay {
                     OverlayView(event)
                 }
+                .clipShape(.rect(cornerRadius: 15))
                 .shadow(color: .black.opacity(0.25), radius: 8, x: 5, y: 10)
-                .padding(.bottom, BaseSize.verticalPadding)
+                .padding(.bottom, 20)
         }
     }
     

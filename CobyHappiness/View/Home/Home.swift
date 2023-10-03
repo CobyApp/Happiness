@@ -18,8 +18,6 @@ struct Home: View {
     @State private var isPresented: Bool = false
     
     @State private var activeID: UUID?
-    @State private var event: Event?
-    @State private var showDetailPage: Bool = false
     
     var body: some View {
         VStack(spacing: 15) {
@@ -53,12 +51,6 @@ struct Home: View {
                                 content
                                     .rotation3DEffect(.degrees(phase.value * -30), axis: (x: 0, y: 1, z: 0))
                                     .opacity(phase.isIdentity ? 1.0 : 0.3)
-                            }
-                            .onTapGesture {
-                                withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7)) {
-                                    self.event = event
-                                    showDetailPage = true
-                                }
                             }
                     }
                 }

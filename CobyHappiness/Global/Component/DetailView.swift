@@ -30,7 +30,7 @@ struct DetailView: View {
                         Text("SFsdf")
                             .multilineTextAlignment(.leading)
                             .lineSpacing(10)
-                            .padding(.bottom,20)
+                            .padding(.bottom, 20)
                         
                         Divider()
                         
