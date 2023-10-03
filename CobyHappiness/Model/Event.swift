@@ -15,18 +15,21 @@ final class Event {
     var type: EventType
     var title: String
     var note: String
+    var photo: Data
 
     init(
         date: Date,
         type: EventType,
         title: String,
-        note: String
+        note: String,
+        photo: Data
     ) {
         self.id = UUID()
         self.date = date
         self.type = type
         self.title = title
         self.note = note
+        self.photo = photo
     }
 }
 

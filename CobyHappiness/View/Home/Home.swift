@@ -52,20 +52,19 @@ struct Home: View {
                                     let cardSize = proxy.size
                                     let minX = min((proxy.frame(in: .scrollView).minX - 30.0) * 1.4, size.width * 1.4)
                                     
-                                    Image(systemName: "")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        /// Or You can simply Use scaling
-                                        //.scaleEffect(1.25)
-                                        .offset(x: -minX)
-                                        /// Disable this for Type one Effect
-                                        .frame(width: proxy.size.width * 2.5)
-                                        .frame(width: cardSize.width, height: cardSize.height)
-                                        .overlay {
-                                            OverlayView(event)
-                                        }
-                                        .clipShape(.rect(cornerRadius: 15))
-                                        .shadow(color: .black.opacity(0.25), radius: 8, x: 5, y: 10)
+                                    if let uiImage = UIImage(data: event.photo) {
+                                        Image(uiImage: uiImage)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .offset(x: -minX)
+                                            .frame(width: proxy.size.width * 2.5)
+                                            .frame(width: cardSize.width, height: cardSize.height)
+                                            .overlay {
+                                                OverlayView(event)
+                                            }
+                                            .clipShape(.rect(cornerRadius: 15))
+                                            .shadow(color: .black.opacity(0.25), radius: 8, x: 5, y: 10)
+                                    }
                                 })
                                 .frame(width: size.width - 60, height: size.height - 50)
                                 /// Scroll Animation
