@@ -49,19 +49,25 @@ struct Home: View {
                             .containerRelativeFrame(.horizontal)
                             .scrollTransition { content, phase in
                                 content
-                                    .rotation3DEffect(.degrees(phase.value * -30), axis: (x: 0, y: 1, z: 0))
-                                    .opacity(phase.isIdentity ? 1.0 : 0.3)
+                                    .opacity(phase.isIdentity ? 1.0 : 0.5)
                             }
                     }
                 }
                 .scrollTargetLayout()
-                
-                Spacer()
             }
             .contentMargins(.horizontal, BaseSize.horizantalPadding, for: .scrollContent)
             .scrollIndicators(.hidden)
             .scrollTargetBehavior(.viewAligned)
             .scrollPosition(id: $activeID)
+            
+            Spacer()
+        }
+        .onChange(of: events.count) {
+            withAnimation {
+                if !events.isEmpty {
+                    activeID = events[0].id
+                }
+            }
         }
         .sheet(isPresented: $isPresented) {
             EventEdit()

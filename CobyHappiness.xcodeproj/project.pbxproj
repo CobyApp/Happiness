@@ -19,7 +19,6 @@
 		CB9EF9082ABC829F00FDCE12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */; };
 		CBA038692ABF352F00BD74CF /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA038682ABF352F00BD74CF /* Event.swift */; };
 		CBA371682ACC3DF100FF5F56 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA371672ACC3DF100FF5F56 /* CardView.swift */; };
-		CBA3716B2ACC434500FF5F56 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA3716A2ACC434400FF5F56 /* DetailView.swift */; };
 		CBABE92F2ACB313C00103BB0 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABE92E2ACB313C00103BB0 /* Home.swift */; };
 		CBABE9322ACB379200103BB0 /* EventEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABE9312ACB379200103BB0 /* EventEdit.swift */; };
 		CBAD08C02AC16B21000E2DD3 /* CommonTextfieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD08BF2AC16B21000E2DD3 /* CommonTextfieldStyle.swift */; };
@@ -40,7 +39,6 @@
 		CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CBA038682ABF352F00BD74CF /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		CBA371672ACC3DF100FF5F56 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		CBA3716A2ACC434400FF5F56 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		CBABE92E2ACB313C00103BB0 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		CBABE9312ACB379200103BB0 /* EventEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEdit.swift; sourceTree = "<group>"; };
 		CBAD08BF2AC16B21000E2DD3 /* CommonTextfieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextfieldStyle.swift; sourceTree = "<group>"; };
@@ -180,7 +178,6 @@
 			isa = PBXGroup;
 			children = (
 				CBA371672ACC3DF100FF5F56 /* CardView.swift */,
-				CBA3716A2ACC434400FF5F56 /* DetailView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -287,7 +284,6 @@
 				CB96DE3A2ABF599B00B01762 /* Font+Extension.swift in Sources */,
 				CBABE9322ACB379200103BB0 /* EventEdit.swift in Sources */,
 				CBAD08C02AC16B21000E2DD3 /* CommonTextfieldStyle.swift in Sources */,
-				CBA3716B2ACC434500FF5F56 /* DetailView.swift in Sources */,
 				CB9EF8E92ABC684200FDCE12 /* Date+Extensions.swift in Sources */,
 				CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */,
 				CBABE92F2ACB313C00103BB0 /* Home.swift in Sources */,
