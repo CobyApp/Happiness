@@ -17,108 +17,62 @@ struct Home: View {
     @State private var searchText: String = ""
     @State private var isPresented: Bool = false
     
+    @State private var activeID: UUID?
+    @State private var event: Event?
+    @State private var showDetailPage: Bool = false
+    
     var body: some View {
-        ScrollView(.vertical) {
-            VStack(spacing: 15) {
+        VStack(spacing: 15) {
+            HStack(spacing: 12) {
                 HStack(spacing: 12) {
-                    HStack(spacing: 12) {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundStyle(.gray)
-                        
-                        TextField("Search", text: $searchText)
-                    }
-                    .padding(.horizontal, 15)
-                    .padding(.vertical, 10)
-                    .background(.ultraThinMaterial, in: .capsule)
+                    Image(systemName: "magnifyingglass")
+                        .foregroundStyle(.gray)
                     
-                    Button(action: {
-                        isPresented = true
-                    }, label: {
-                        Image(systemName: "plus")
-                            .font(.title)
-                            .foregroundStyle(.blue)
-                    })
+                    TextField("Search", text: $searchText)
                 }
+                .padding(.horizontal, 15)
+                .padding(.vertical, 10)
+                .background(.ultraThinMaterial, in: .capsule)
                 
-                /// Parallax Carousel
-                GeometryReader(content: { geometry in
-                    let size = geometry.size
-                    
-                    ScrollView(.horizontal) {
-                        HStack(spacing: 5) {
-                            ForEach(events) { event in
-                                /// In order to Move the Card in Reverse Direction (Parallax Effect)
-                                GeometryReader(content: { proxy in
-                                    let cardSize = proxy.size
-                                    let minX = min((proxy.frame(in: .scrollView).minX - 30.0) * 1.4, size.width * 1.4)
-                                    
-                                    if let uiImage = UIImage(data: event.photo) {
-                                        Image(uiImage: uiImage)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .offset(x: -minX)
-                                            .frame(width: proxy.size.width * 2.5)
-                                            .frame(width: cardSize.width, height: cardSize.height)
-                                            .overlay {
-                                                OverlayView(event)
-                                            }
-                                            .clipShape(.rect(cornerRadius: 15))
-                                            .shadow(color: .black.opacity(0.25), radius: 8, x: 5, y: 10)
-                                    }
-                                })
-                                .frame(width: size.width - 60, height: size.height - 50)
-                                /// Scroll Animation
-                                .scrollTransition(.interactive, axis: .horizontal) { view, phase in
-                                    view
-                                        .scaleEffect(phase.isIdentity ? 1 : 0.95)
+                Button(action: {
+                    isPresented = true
+                }, label: {
+                    Image(systemName: "plus")
+                        .font(.title)
+                        .foregroundStyle(.blue)
+                })
+            }
+            .padding(.horizontal, BaseSize.horizantalPadding)
+            
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(events) { event in
+                        CardView(event: event)
+                            .containerRelativeFrame(.horizontal)
+                            .scrollTransition { content, phase in
+                                content
+                                    .rotation3DEffect(.degrees(phase.value * -30), axis: (x: 0, y: 1, z: 0))
+                                    .opacity(phase.isIdentity ? 1.0 : 0.3)
+                            }
+                            .onTapGesture {
+                                withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7)) {
+                                    self.event = event
+                                    showDetailPage = true
                                 }
                             }
-                        }
-                        .padding(.horizontal, 30)
-                        .scrollTargetLayout()
-                        .frame(height: size.height, alignment: .top)
                     }
-                    .scrollTargetBehavior(.viewAligned)
-                    .scrollIndicators(.hidden)
-                })
-                .frame(height: BaseSize.fullHeight)
-                .padding(.horizontal, -15)
-                .padding(.top, 10)
+                }
+                .scrollTargetLayout()
+                
+                Spacer()
             }
-            .padding(15)
+            .contentMargins(.horizontal, BaseSize.horizantalPadding, for: .scrollContent)
+            .scrollIndicators(.hidden)
+            .scrollTargetBehavior(.viewAligned)
+            .scrollPosition(id: $activeID)
         }
-        .scrollIndicators(.hidden)
         .sheet(isPresented: $isPresented) {
             EventEdit()
         }
-    }
-    
-    /// Overlay View
-    @ViewBuilder
-    func OverlayView(_ event: Event) -> some View {
-        ZStack(alignment: .bottomLeading, content: {
-            LinearGradient(colors: [
-                .clear,
-                .clear,
-                .clear,
-                .clear,
-                .clear,
-                .black.opacity(0.1),
-                .black.opacity(0.5),
-                .black
-            ], startPoint: .top, endPoint: .bottom)
-            
-            VStack(alignment: .leading, spacing: 4, content: {
-                Text(event.title)
-                    .font(.title2)
-                    .fontWeight(.black)
-                    .foregroundStyle(.white)
-                
-                Text(event.date.format("MMM d, yyyy"))
-                    .font(.callout)
-                    .foregroundStyle(.white.opacity(0.8))
-            })
-            .padding(20)
-        })
     }
 }

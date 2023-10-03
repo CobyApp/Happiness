@@ -12,7 +12,9 @@ import SwiftData
 struct CobyHappinessApp: App {
     var body: some Scene {
         WindowGroup {
-            Home()
+            NavigationStack {
+                Home()
+            }
         }
         .modelContainer(for: Event.self)
     }
