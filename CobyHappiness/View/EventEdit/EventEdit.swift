@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 import PhotosUI
 
 struct EventEdit: View {
@@ -43,103 +44,122 @@ struct EventEdit: View {
     }
     
     var body: some View {
-        NavigationStack {
+        ScrollView {
             VStack {
-                Form {
-                    DatePicker("Please enter a date", selection: $date)
-                    
-                    Picker("Event Type", selection: $type) {
-                        ForEach(EventType.allCases) { eventType in
-                            Text(eventType.icon + " " + eventType.id.capitalized)
-                                .tag(eventType)
-                        }
-                    }
-                    
-                    TextField("Title", text: $title, axis: .vertical)
-                    
-                    TextField("Note", text: $note, axis: .vertical)
-                    
-                    if let selectedImageData,
-                       let uiImage = UIImage(data: selectedImageData) {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 250, height: 250)
-                            .clipped()
-                    }
-                    
-                    Section(footer: HStack {
-                        PhotosPicker(
-                            selection: $selectedItem,
-                            matching: .images,
-                            photoLibrary: .shared()
-                        ) {
-                            Text("Select a photo")
-                        }
-                        .onChange(of: selectedItem) {
-                            Task {
-                                if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
-                                    selectedImageData = data
-                                }
-                                
-                                if let localID = selectedItem?.itemIdentifier {
-                                    let result = PHAsset.fetchAssets(withLocalIdentifiers: [localID], options: nil)
-                                    
-                                    if let asset = result.firstObject {
-                                        print("Got " + asset.debugDescription)
-                                        date = asset.creationDate ?? Date()
-                                        
-                                        if let location = asset.location?.coordinate {
-                                            lat = location.latitude
-                                            lon = location.longitude
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        Spacer()
-                        
-                        Button {
-                            if let event, let data = selectedImageData {
-                                event.date = date
-                                event.type = type
-                                event.title = title
-                                event.note = note
-                                event.photo = data
-                                event.lat = lat
-                                event.lon = lon
-                                try? context.save()
-                            } else {
-                                if let data = selectedImageData {
-                                    let item = Event(
-                                        date: date,
-                                        type: type,
-                                        title: title,
-                                        note: note,
-                                        photo: data,
-                                        lat: lat,
-                                        lon: lon
-                                    )
-                                    context.insert(item)
-                                }
-                            }
-
-                            dismiss()
-                        } label: {
-                            Text("Update Event")
-                        }
-                        .buttonStyle(.borderedProminent)
-                        Spacer()
-                    }
-                    ) {
-                        EmptyView()
-                    }
+                EventEditView()
+                
+                EventContentView()
+                
+                Button {
+                    storeEvent()
+                } label: {
+                    Text("저장")
+                }
+                .buttonStyle(.borderedProminent)
+            }
+        }
+        .onTapGesture {
+            closeKeyboard()
+        }
+    }
+    @ViewBuilder
+    func EventEditView() -> some View {
+        VStack(spacing: 4) {
+            DatePicker("날짜", selection: $date)
+            
+            Picker("분야", selection: $type) {
+                ForEach(EventType.allCases) { eventType in
+                    Text(eventType.icon + " " + eventType.id.capitalized)
+                        .tag(eventType)
                 }
             }
-            .navigationTitle("Update")
-            .onTapGesture {
-                closeKeyboard()
+            
+            TextField("제목", text: $title, axis: .vertical)
+            
+            TextField("내용", text: $note, axis: .vertical)
+            
+            PhotosPicker(
+                selection: $selectedItem,
+                matching: .images,
+                photoLibrary: .shared()
+            ) {
+                Text("Select a photo")
+            }
+            .onChange(of: selectedItem) {
+                setPhoto()
+            }
+        }
+        .padding(BaseSize.horizantalPadding)
+    }
+    
+    @ViewBuilder
+    func EventContentView() -> some View {
+        VStack(spacing: 10) {
+            if let selectedImageData,
+               let uiImage = UIImage(data: selectedImageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: BaseSize.cardWidth, height: BaseSize.cardHeight)
+                    .clipShape(.rect(cornerRadius: 15))
+                    .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 5)
+            }
+            
+            if let lat = lat, let lon = lon {
+                MapView(placeName: title, location: CLLocationCoordinate2D(latitude: lat, longitude: lon))
+                    .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 0.7)
+                    .clipShape(.rect(cornerRadius: 15))
+                    .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 5)
+            }
+        }
+    }
+    
+    private func storeEvent() {
+        if let event, let data = selectedImageData {
+            event.date = date
+            event.type = type
+            event.title = title
+            event.note = note
+            event.photo = data
+            event.lat = lat
+            event.lon = lon
+            try? context.save()
+        } else {
+            if let data = selectedImageData {
+                let item = Event(
+                    date: date,
+                    type: type,
+                    title: title,
+                    note: note,
+                    photo: data,
+                    lat: lat,
+                    lon: lon
+                )
+                context.insert(item)
+            }
+        }
+
+        dismiss()
+    }
+    
+    private func setPhoto() {
+        Task {
+            if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
+                selectedImageData = data
+            }
+            
+            if let localID = selectedItem?.itemIdentifier {
+                let result = PHAsset.fetchAssets(withLocalIdentifiers: [localID], options: nil)
+                
+                if let asset = result.firstObject {
+                    print("Got " + asset.debugDescription)
+                    date = asset.creationDate ?? Date()
+                    
+                    if let location = asset.location?.coordinate {
+                        lat = location.latitude
+                        lon = location.longitude
+                    }
+                }
             }
         }
     }

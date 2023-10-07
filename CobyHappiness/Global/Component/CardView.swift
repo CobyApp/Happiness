@@ -19,7 +19,7 @@ struct CardView: View {
                 .matchedGeometryEffect(id: event.id.uuidString, in: animation)
                 .frame(width: BaseSize.cardWidth, height: BaseSize.cardHeight)
                 .overlay {
-                    OverlayView(event)
+                    OverlayView()
                 }
                 .clipShape(.rect(cornerRadius: 15))
                 .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 5)
@@ -27,7 +27,7 @@ struct CardView: View {
     }
     
     @ViewBuilder
-    func OverlayView(_ event: Event) -> some View {
+    func OverlayView() -> some View {
         ZStack(alignment: .bottomLeading, content: {
             LinearGradient(colors: [
                 .clear,
