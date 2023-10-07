@@ -38,12 +38,6 @@ struct Home: View {
                                 content
                                     .opacity(phase.isIdentity ? 1.0 : 0.5)
                             }
-                            .onTapGesture(perform: {
-                                withAnimation(.easeInOut) {
-                                    appModel.currentActiveItem = event
-                                    appModel.showDetailView = true
-                                }
-                            })
                     }
                 }
                 .scrollTargetLayout()

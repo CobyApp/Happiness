@@ -15,27 +15,23 @@ struct CardView: View {
     
     var body: some View {
         if let uiImage = UIImage(data: event.photo) {
-            Group {
-                if appModel.currentActiveItem?.id == event.id && appModel.showDetailView {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: BaseSize.cardWidth)
-                        .opacity(0)
-                } else {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: BaseSize.cardWidth)
-                        .overlay {
-                            OverlayView(event)
-                        }
-                        .clipShape(.rect(cornerRadius: 15))
-                        .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 5)
-                        .matchedGeometryEffect(id: event.id.uuidString, in: animation)
+            Image(uiImage: uiImage)
+                .resizable()
+                .scaledToFill()
+                .frame(width: BaseSize.cardWidth)
+                .matchedGeometryEffect(id: event.id.uuidString, in: animation)
+                .overlay {
+                    OverlayView(event)
                 }
-            }
-            .padding(.vertical, 20)
+                .clipShape(.rect(cornerRadius: 15))
+                .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 5)
+                .onTapGesture(perform: {
+                    withAnimation(.easeInOut) {
+                        appModel.currentActiveItem = event
+                        appModel.showDetailView = true
+                    }
+                })
+                .padding(.vertical, 20)
         }
     }
     

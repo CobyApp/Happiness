@@ -26,9 +26,9 @@ struct Detail: View {
                         Image(uiImage: uiImage)
                             .resizable()
                             .scaledToFill()
+                            .matchedGeometryEffect(id: event.id.uuidString, in: animation)
                             .frame(width: size.width, height: size.height * (2/3))
                             .clipped()
-                            .matchedGeometryEffect(id: event.id.uuidString, in: animation)
                     }
                     
                     VStack(alignment: .leading) {
@@ -61,7 +61,7 @@ struct Detail: View {
                             .ignoresSafeArea()
                     }
                     .opacity(showDetailContent ? 1 : 0)
-                    .padding(.top, -50)
+                    .padding(.top, -80)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .ignoresSafeArea()
@@ -84,10 +84,10 @@ struct Detail: View {
     func DetailHeader() -> some View {
         HStack {
             Button {
-                withAnimation(.easeInOut) {
+                withAnimation(.easeInOut(duration: 0.2)) {
                     showDetailContent = false
                 }
-                withAnimation(.easeInOut.delay(0.05)) {
+                withAnimation(.easeInOut(duration: 0.2).delay(0.01)) {
                     appModel.showDetailView = false
                 }
             } label: {
