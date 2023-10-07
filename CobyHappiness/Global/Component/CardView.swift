@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct CardView: View {
-    @EnvironmentObject private var appModel: AppViewModel
-    
     var event: Event
     var animation: Namespace.ID
     
@@ -25,13 +23,6 @@ struct CardView: View {
                 }
                 .clipShape(.rect(cornerRadius: 15))
                 .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 5)
-                .onTapGesture(perform: {
-                    withAnimation(.easeInOut) {
-                        appModel.currentActiveItem = event
-                        appModel.showDetailView = true
-                    }
-                })
-                .padding(.vertical, 20)
         }
     }
     

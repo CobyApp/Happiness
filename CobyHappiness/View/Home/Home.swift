@@ -33,6 +33,13 @@ struct Home: View {
                 HStack {
                     ForEach(events) { event in
                         CardView(event: event, animation: animation)
+                            .onTapGesture(perform: {
+                                withAnimation(.easeInOut) {
+                                    appModel.currentActiveItem = event
+                                    appModel.showDetailView = true
+                                }
+                            })
+                            .padding(.vertical, 20)
                             .containerRelativeFrame(.horizontal)
                             .scrollTransition { content, phase in
                                 content
