@@ -16,13 +16,17 @@ final class Event {
     var title: String
     var note: String
     var photo: Data
+    var lat: Double
+    var lon: Double
 
     init(
         date: Date,
         type: EventType,
         title: String,
         note: String,
-        photo: Data
+        photo: Data,
+        lat: Double,
+        lon: Double
     ) {
         self.id = UUID()
         self.date = date
@@ -30,6 +34,8 @@ final class Event {
         self.title = title
         self.note = note
         self.photo = photo
+        self.lat = lat
+        self.lon = lon
     }
 }
 

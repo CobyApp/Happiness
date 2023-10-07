@@ -19,6 +19,13 @@
 		CB9EF9082ABC829F00FDCE12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */; };
 		CBA038692ABF352F00BD74CF /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA038682ABF352F00BD74CF /* Event.swift */; };
 		CBA371682ACC3DF100FF5F56 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA371672ACC3DF100FF5F56 /* CardView.swift */; };
+		CBAB7F432ACD3D6A00257778 /* CustomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F422ACD3D6A00257778 /* CustomMenu.swift */; };
+		CBAB7F452ACD3E7A00257778 /* CustomHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F442ACD3E7A00257778 /* CustomHeader.swift */; };
+		CBAB7F482ACD3F7400257778 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F472ACD3F7400257778 /* AppViewModel.swift */; };
+		CBAB7F4A2ACD3FBE00257778 /* BottomCurve.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F492ACD3FBE00257778 /* BottomCurve.swift */; };
+		CBAB7F4C2ACD3FCE00257778 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F4B2ACD3FCE00257778 /* CustomTabBar.swift */; };
+		CBAB7F4F2ACD402500257778 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F4E2ACD402500257778 /* Main.swift */; };
+		CBAB7F542ACD455E00257778 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F532ACD455E00257778 /* Detail.swift */; };
 		CBABE92F2ACB313C00103BB0 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABE92E2ACB313C00103BB0 /* Home.swift */; };
 		CBABE9322ACB379200103BB0 /* EventEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABE9312ACB379200103BB0 /* EventEdit.swift */; };
 		CBAD08C02AC16B21000E2DD3 /* CommonTextfieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD08BF2AC16B21000E2DD3 /* CommonTextfieldStyle.swift */; };
@@ -39,6 +46,13 @@
 		CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CBA038682ABF352F00BD74CF /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		CBA371672ACC3DF100FF5F56 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		CBAB7F422ACD3D6A00257778 /* CustomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenu.swift; sourceTree = "<group>"; };
+		CBAB7F442ACD3E7A00257778 /* CustomHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeader.swift; sourceTree = "<group>"; };
+		CBAB7F472ACD3F7400257778 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		CBAB7F492ACD3FBE00257778 /* BottomCurve.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomCurve.swift; sourceTree = "<group>"; };
+		CBAB7F4B2ACD3FCE00257778 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		CBAB7F4E2ACD402500257778 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		CBAB7F532ACD455E00257778 /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
 		CBABE92E2ACB313C00103BB0 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		CBABE9312ACB379200103BB0 /* EventEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEdit.swift; sourceTree = "<group>"; };
 		CBAD08BF2AC16B21000E2DD3 /* CommonTextfieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextfieldStyle.swift; sourceTree = "<group>"; };
@@ -102,6 +116,7 @@
 			children = (
 				CB96DE382ABF597600B01762 /* Info.plist */,
 				CB9EF8E12ABC670100FDCE12 /* Model */,
+				CBAB7F462ACD3F6200257778 /* ViewModel */,
 				CB9EF8E22ABC670E00FDCE12 /* View */,
 				CB9EF8E32ABC671C00FDCE12 /* Global */,
 				CB9EF8E42ABC672B00FDCE12 /* Supports */,
@@ -130,7 +145,9 @@
 		CB9EF8E22ABC670E00FDCE12 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CBAB7F4D2ACD401C00257778 /* Main */,
 				CBABE92D2ACB313400103BB0 /* Home */,
+				CBAB7F522ACD455200257778 /* Detail */,
 				CBABE9302ACB378500103BB0 /* EventEdit */,
 			);
 			path = View;
@@ -182,9 +199,53 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
+		CBAB7F462ACD3F6200257778 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CBAB7F472ACD3F7400257778 /* AppViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CBAB7F4D2ACD401C00257778 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				CBAB7F502ACD402900257778 /* Component */,
+				CBAB7F4E2ACD402500257778 /* Main.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		CBAB7F502ACD402900257778 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				CBAB7F492ACD3FBE00257778 /* BottomCurve.swift */,
+				CBAB7F4B2ACD3FCE00257778 /* CustomTabBar.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		CBAB7F512ACD419E00257778 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				CBAB7F442ACD3E7A00257778 /* CustomHeader.swift */,
+				CBAB7F422ACD3D6A00257778 /* CustomMenu.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		CBAB7F522ACD455200257778 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				CBAB7F532ACD455E00257778 /* Detail.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		CBABE92D2ACB313400103BB0 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				CBAB7F512ACD419E00257778 /* Component */,
 				CBABE92E2ACB313C00103BB0 /* Home.swift */,
 			);
 			path = Home;
@@ -278,16 +339,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB9EF8EE2ABC691000FDCE12 /* Color+Additions.swift in Sources */,
+				CBAB7F452ACD3E7A00257778 /* CustomHeader.swift in Sources */,
 				CBA038692ABF352F00BD74CF /* Event.swift in Sources */,
 				CB08C0692AC27AD100FDB79B /* BaseSize.swift in Sources */,
+				CBAB7F542ACD455E00257778 /* Detail.swift in Sources */,
 				CB9EF8EC2ABC68E500FDCE12 /* UIImage+Assets.swift in Sources */,
+				CBAB7F482ACD3F7400257778 /* AppViewModel.swift in Sources */,
+				CBAB7F4A2ACD3FBE00257778 /* BottomCurve.swift in Sources */,
 				CB96DE3A2ABF599B00B01762 /* Font+Extension.swift in Sources */,
+				CBAB7F4C2ACD3FCE00257778 /* CustomTabBar.swift in Sources */,
 				CBABE9322ACB379200103BB0 /* EventEdit.swift in Sources */,
 				CBAD08C02AC16B21000E2DD3 /* CommonTextfieldStyle.swift in Sources */,
 				CB9EF8E92ABC684200FDCE12 /* Date+Extensions.swift in Sources */,
 				CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */,
+				CBAB7F432ACD3D6A00257778 /* CustomMenu.swift in Sources */,
 				CBABE92F2ACB313C00103BB0 /* Home.swift in Sources */,
 				CBA371682ACC3DF100FF5F56 /* CardView.swift in Sources */,
+				CBAB7F4F2ACD402500257778 /* Main.swift in Sources */,
 				CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,6 +498,7 @@
 				INFOPLIST_FILE = CobyHappiness/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Happy;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need date and loacation";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -463,6 +532,7 @@
 				INFOPLIST_FILE = CobyHappiness/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Happy;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need date and loacation";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

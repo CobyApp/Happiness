@@ -9,48 +9,41 @@ import SwiftUI
 import SwiftData
 
 struct Home: View {
+    @EnvironmentObject private var appModel: AppViewModel
     @Environment(\.modelContext) private var context
     
     @Query(sort: \Event.date, order: .reverse)
     private var events: [Event]
     
-    @State private var searchText: String = ""
     @State private var isPresented: Bool = false
-    
+    @State private var searchText: String = ""
+    @State private var currentMenu: EventType = .music
     @State private var activeID: UUID?
     
+    var animation: Namespace.ID
+    
     var body: some View {
-        VStack(spacing: 15) {
-            HStack(spacing: 12) {
-                HStack(spacing: 12) {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundStyle(.gray)
-                    
-                    TextField("Search", text: $searchText)
-                }
-                .padding(.horizontal, 15)
-                .padding(.vertical, 10)
-                .background(.ultraThinMaterial, in: .capsule)
-                
-                Button(action: {
-                    isPresented = true
-                }, label: {
-                    Image(systemName: "plus")
-                        .font(.title)
-                        .foregroundStyle(.blue)
-                })
-            }
-            .padding(.horizontal, BaseSize.horizantalPadding)
+        VStack(spacing: 0) {
+            CustomHeader(isPresented: $isPresented, searchText: $searchText)
+            
+            CustomMenu(currentMenu: $currentMenu, animation: animation)
+                .padding(.top, 20)
             
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(events) { event in
-                        CardView(event: event)
+                        CardView(event: event, animation: animation)
                             .containerRelativeFrame(.horizontal)
                             .scrollTransition { content, phase in
                                 content
                                     .opacity(phase.isIdentity ? 1.0 : 0.5)
                             }
+                            .onTapGesture(perform: {
+                                withAnimation(.easeInOut) {
+                                    appModel.currentActiveItem = event
+                                    appModel.showDetailView = true
+                                }
+                            })
                     }
                 }
                 .scrollTargetLayout()
@@ -59,6 +52,7 @@ struct Home: View {
             .scrollIndicators(.hidden)
             .scrollTargetBehavior(.viewAligned)
             .scrollPosition(id: $activeID)
+            .padding(.bottom, 100)
             
             Spacer()
         }

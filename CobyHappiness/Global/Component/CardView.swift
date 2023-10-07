@@ -8,20 +8,34 @@
 import SwiftUI
 
 struct CardView: View {
+    @EnvironmentObject private var appModel: AppViewModel
+    
     var event: Event
+    var animation: Namespace.ID
     
     var body: some View {
         if let uiImage = UIImage(data: event.photo) {
-            Image(uiImage: uiImage)
-                .resizable()
-                .scaledToFill()
-                .frame(width: BaseSize.fullWidth, height: BaseSize.fullHeight)
-                .overlay {
-                    OverlayView(event)
+            Group {
+                if appModel.currentActiveItem?.id == event.id && appModel.showDetailView {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: BaseSize.cardWidth)
+                        .opacity(0)
+                } else {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: BaseSize.cardWidth)
+                        .overlay {
+                            OverlayView(event)
+                        }
+                        .clipShape(.rect(cornerRadius: 15))
+                        .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 5)
+                        .matchedGeometryEffect(id: event.id.uuidString, in: animation)
                 }
-                .clipShape(.rect(cornerRadius: 15))
-                .shadow(color: .black.opacity(0.25), radius: 8, x: 5, y: 10)
-                .padding(.bottom, 20)
+            }
+            .padding(.vertical, 20)
         }
     }
     
