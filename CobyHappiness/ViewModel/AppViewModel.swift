@@ -8,7 +8,6 @@
 import SwiftUI
 
 class AppViewModel: ObservableObject {
-    @Published var currentTab: Tab = .home
     @Published var showDetailView: Bool = false
     @Published var currentActiveItem: Event?
 }

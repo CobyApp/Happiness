@@ -18,8 +18,8 @@ struct CardView: View {
             Image(uiImage: uiImage)
                 .resizable()
                 .scaledToFill()
-                .frame(width: BaseSize.cardWidth)
                 .matchedGeometryEffect(id: event.id.uuidString, in: animation)
+                .frame(width: BaseSize.cardWidth, height: BaseSize.cardHeight)
                 .overlay {
                     OverlayView(event)
                 }

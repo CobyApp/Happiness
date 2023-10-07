@@ -87,7 +87,7 @@ struct Detail: View {
                 withAnimation(.easeInOut(duration: 0.2)) {
                     showDetailContent = false
                 }
-                withAnimation(.easeInOut(duration: 0.2).delay(0.01)) {
+                withAnimation(.easeInOut(duration: 0.2).delay(0.05)) {
                     appModel.showDetailView = false
                 }
             } label: {
