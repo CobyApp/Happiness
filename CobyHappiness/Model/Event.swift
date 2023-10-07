@@ -16,8 +16,8 @@ final class Event {
     var title: String
     var note: String
     var photo: Data
-    var lat: Double
-    var lon: Double
+    var lat: Double?
+    var lon: Double?
 
     init(
         date: Date,
@@ -25,8 +25,8 @@ final class Event {
         title: String,
         note: String,
         photo: Data,
-        lat: Double,
-        lon: Double
+        lat: Double? = nil,
+        lon: Double? = nil
     ) {
         self.id = UUID()
         self.date = date

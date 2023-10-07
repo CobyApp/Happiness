@@ -16,8 +16,8 @@ struct EventEdit: View {
     @State private var date: Date
     @State private var title: String
     @State private var note: String
-    @State private var lat: Double
-    @State private var lon: Double
+    @State private var lat: Double?
+    @State private var lon: Double?
     
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var selectedImageData: Data? = nil
@@ -29,8 +29,6 @@ struct EventEdit: View {
         self._type = State(initialValue: EventType.moment)
         self._title = State(initialValue: "")
         self._note = State(initialValue: "")
-        self._lat = State(initialValue: 0.0)
-        self._lon = State(initialValue: 0.0)
     }
     
     init(event: Event) {

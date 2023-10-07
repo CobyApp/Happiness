@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct Detail: View {
     @EnvironmentObject private var appModel: AppViewModel
@@ -31,37 +32,7 @@ struct Detail: View {
                             .clipped()
                     }
                     
-                    VStack(alignment: .leading) {
-                        HStack(spacing: 10) {
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text(event.title)
-                                    .font(.title.bold())
-                                    .foregroundColor(Color.grayscale100)
-                                
-                                Text(event.date.format("MMM d, yyyy"))
-                                    .font(.caption2)
-                                    .bold()
-                                    .foregroundColor(.gray)
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                        
-                        Text(event.note)
-                            .font(.callout)
-                            .foregroundColor(Color.grayscale200)
-                            .multilineTextAlignment(.leading)
-                            .padding(.vertical)
-                    }
-                    .padding(.top, 30)
-                    .padding(.horizontal, BaseSize.horizantalPadding)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                    .background {
-                        RoundedRectangle(cornerRadius: 30, style: .continuous)
-                            .fill(.white)
-                            .ignoresSafeArea()
-                    }
-                    .opacity(showDetailContent ? 1 : 0)
-                    .padding(.top, -80)
+                    DetailContent()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 .ignoresSafeArea()
@@ -116,5 +87,50 @@ struct Detail: View {
         }
         .padding()
         .opacity(showDetailContent ? 1 : 0)
+    }
+    
+    @ViewBuilder
+    func DetailContent() -> some View {
+        ScrollView {
+            VStack {
+                VStack(alignment: .leading) {
+                    HStack(spacing: 10) {
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text(event.title)
+                                .font(.title.bold())
+                                .foregroundColor(Color.grayscale100)
+                            
+                            Text(event.date.format("MMM d, yyyy"))
+                                .font(.callout.bold())
+                                .foregroundColor(Color.grayscale300)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    
+                    Text(event.note)
+                        .font(.callout)
+                        .foregroundColor(Color.grayscale200)
+                        .multilineTextAlignment(.leading)
+                        .padding(.vertical)
+                }
+                .padding(.horizontal, BaseSize.horizantalPadding)
+                
+                if let lat = event.lat, let lon = event.lon {
+                    MapView(placeName: event.title, location: CLLocationCoordinate2D(latitude: lat, longitude: lon))
+                        .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 0.7)
+                        .clipShape(.rect(cornerRadius: 15))
+                        .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 5)
+                }
+            }
+        }
+        .padding(.top, 30)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        .background {
+            RoundedRectangle(cornerRadius: 30, style: .continuous)
+                .fill(.white)
+                .ignoresSafeArea()
+        }
+        .opacity(showDetailContent ? 1 : 0)
+        .padding(.top, -100)
     }
 }

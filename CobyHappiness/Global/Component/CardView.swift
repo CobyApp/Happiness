@@ -51,12 +51,11 @@ struct CardView: View {
             
             VStack(alignment: .leading, spacing: 4, content: {
                 Text(event.title)
-                    .font(.title2)
-                    .fontWeight(.black)
+                    .font(.title.bold())
                     .foregroundStyle(.white)
                 
                 Text(event.date.format("MMM d, yyyy"))
-                    .font(.callout)
+                    .font(.callout.bold())
                     .foregroundStyle(.white.opacity(0.8))
             })
             .padding(20)

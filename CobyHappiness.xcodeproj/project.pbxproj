@@ -27,6 +27,7 @@
 		CBABE92F2ACB313C00103BB0 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABE92E2ACB313C00103BB0 /* Home.swift */; };
 		CBABE9322ACB379200103BB0 /* EventEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABE9312ACB379200103BB0 /* EventEdit.swift */; };
 		CBAD08C02AC16B21000E2DD3 /* CommonTextfieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD08BF2AC16B21000E2DD3 /* CommonTextfieldStyle.swift */; };
+		CBED4DD22AD14E2D00B8AB68 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED4DD12AD14E2D00B8AB68 /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		CBABE92E2ACB313C00103BB0 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		CBABE9312ACB379200103BB0 /* EventEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEdit.swift; sourceTree = "<group>"; };
 		CBAD08BF2AC16B21000E2DD3 /* CommonTextfieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextfieldStyle.swift; sourceTree = "<group>"; };
+		CBED4DD12AD14E2D00B8AB68 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +217,7 @@
 		CBAB7F522ACD455200257778 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				CBED4DD02AD14E2300B8AB68 /* Component */,
 				CBAB7F532ACD455E00257778 /* Detail.swift */,
 			);
 			path = Detail;
@@ -243,6 +246,14 @@
 				CBAD08BF2AC16B21000E2DD3 /* CommonTextfieldStyle.swift */,
 			);
 			path = Style;
+			sourceTree = "<group>";
+		};
+		CBED4DD02AD14E2300B8AB68 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				CBED4DD12AD14E2D00B8AB68 /* MapView.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,6 +334,7 @@
 				CBAB7F542ACD455E00257778 /* Detail.swift in Sources */,
 				CB9EF8EC2ABC68E500FDCE12 /* UIImage+Assets.swift in Sources */,
 				CBAB7F482ACD3F7400257778 /* AppViewModel.swift in Sources */,
+				CBED4DD22AD14E2D00B8AB68 /* MapView.swift in Sources */,
 				CB96DE3A2ABF599B00B01762 /* Font+Extension.swift in Sources */,
 				CBABE9322ACB379200103BB0 /* EventEdit.swift in Sources */,
 				CBAD08C02AC16B21000E2DD3 /* CommonTextfieldStyle.swift in Sources */,
