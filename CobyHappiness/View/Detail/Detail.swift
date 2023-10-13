@@ -18,28 +18,22 @@ struct Detail: View {
     var animation: Namespace.ID
     
     var body: some View {
-        GeometryReader { proxy in
-            let size = proxy.size
-            
-            ZStack(alignment: .top) {
-                VStack(spacing: 0) {
-                    if let uiImage = UIImage(data: event.photo) {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .scaledToFill()
-                            .matchedGeometryEffect(id: event.id.uuidString, in: animation)
-                            .frame(width: size.width, height: size.height * (2/3))
-                            .clipped()
-                    }
-                    
-                    DetailContent()
+        ScrollView {
+            VStack(spacing: 0) {
+                if let uiImage = UIImage(data: event.photo) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .matchedGeometryEffect(id: event.id.uuidString, in: animation)
+                        .frame(width: BaseSize.fullWidth, height: BaseSize.fullHeight * (2/3))
+                        .clipShape(RoundedRectangle(cornerRadius: 30))
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .ignoresSafeArea()
                 
-                DetailHeader()
+                DetailContent()
             }
         }
+        .ignoresSafeArea()
+        .overlay(alignment: .top, content: DetailHeader)
         .onAppear {
             withAnimation(.easeInOut) {
                 showDetailContent = true
@@ -91,40 +85,37 @@ struct Detail: View {
     
     @ViewBuilder
     func DetailContent() -> some View {
-        ScrollView {
-            VStack {
-                VStack(alignment: .leading) {
-                    HStack(spacing: 10) {
-                        VStack(alignment: .leading, spacing: 5) {
-                            Text(event.title)
-                                .font(.title.bold())
-                                .foregroundColor(Color.grayscale100)
-                            
-                            Text(event.date.format("MMM d, yyyy"))
-                                .font(.callout.bold())
-                                .foregroundColor(Color.grayscale300)
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
+        VStack {
+            VStack(alignment: .leading) {
+                HStack(spacing: 10) {
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text(event.title)
+                            .font(.title.bold())
+                            .foregroundColor(Color.grayscale100)
+                        
+                        Text(event.date.format("MMM d, yyyy"))
+                            .font(.callout.bold())
+                            .foregroundColor(Color.grayscale300)
                     }
-                    
-                    Text(event.note)
-                        .font(.callout)
-                        .foregroundColor(Color.grayscale200)
-                        .multilineTextAlignment(.leading)
-                        .padding(.vertical)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                .padding(.horizontal, BaseSize.horizantalPadding)
                 
-                if let lat = event.lat, let lon = event.lon {
-                    MapView(placeName: event.title, location: CLLocationCoordinate2D(latitude: lat, longitude: lon))
-                        .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 0.7)
-                        .clipShape(.rect(cornerRadius: 15))
-                        .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 5)
-                }
+                Text(event.note)
+                    .font(.callout)
+                    .foregroundColor(Color.grayscale200)
+                    .multilineTextAlignment(.leading)
+                    .padding(.vertical)
+            }
+            .padding(.horizontal, BaseSize.horizantalPadding)
+            
+            if let lat = event.lat, let lon = event.lon {
+                MapView(placeName: event.title, location: CLLocationCoordinate2D(latitude: lat, longitude: lon))
+                    .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 0.7)
+                    .clipShape(.rect(cornerRadius: 15))
+                    .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 5)
             }
         }
         .padding(.top, 30)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background {
             RoundedRectangle(cornerRadius: 30, style: .continuous)
                 .fill(.white)
