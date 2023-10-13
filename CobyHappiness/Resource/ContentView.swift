@@ -13,19 +13,18 @@ struct ContentView: View {
     @Namespace var animation
     
     var body: some View {
-        Home(animation: animation)
-            .background {
-                Color(Color.backgroundLightGray)
-                    .ignoresSafeArea()
+        ZStack{
+            Home(animation: animation)
+                .opacity(appModel.showDetailView ? 0 : 1)
+                .environmentObject(appModel)
+                .modelContainer(for: Event.self)
+            
+            if let event = appModel.currentActiveItem, appModel.showDetailView {
+                Detail(event: event, animation: animation)
+                    .environmentObject(appModel)
             }
-            .environmentObject(appModel)
-            .overlay {
-                if let event = appModel.currentActiveItem, appModel.showDetailView {
-                    Detail(event: event, animation: animation)
-                        .environmentObject(appModel)
-                }
-            }
-            .ignoresSafeArea(.keyboard, edges: .bottom)
-            .modelContainer(for: Event.self)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.backgroundLightGray)
     }
 }

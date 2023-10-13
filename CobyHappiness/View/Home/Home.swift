@@ -25,6 +25,7 @@ struct Home: View {
     var body: some View {
         VStack(spacing: 0) {
             CustomHeader(isPresented: $isPresented, searchText: $searchText)
+                .padding(.top, 10)
             
             CustomMenu(currentMenu: $currentMenu, animation: animation)
                 .padding(.top, 20)
@@ -33,17 +34,17 @@ struct Home: View {
                 HStack {
                     ForEach(events) { event in
                         CardView(event: event, animation: animation)
-                            .onTapGesture(perform: {
-                                withAnimation(.easeInOut) {
-                                    appModel.currentActiveItem = event
-                                    appModel.showDetailView = true
-                                }
-                            })
                             .padding(.vertical, 20)
                             .containerRelativeFrame(.horizontal)
                             .scrollTransition { content, phase in
                                 content
                                     .opacity(phase.isIdentity ? 1.0 : 0.5)
+                            }
+                            .onTapGesture {
+                                withAnimation(.easeInOut) {
+                                    appModel.currentActiveItem = event
+                                    appModel.showDetailView = true
+                                }
                             }
                     }
                 }

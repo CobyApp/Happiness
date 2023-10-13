@@ -13,5 +13,18 @@ enum BaseSize {
     static let fullWidth: CGFloat = UIScreen.main.bounds.size.width
     static let fullHeight: CGFloat = UIScreen.main.bounds.size.height
     static let cardWidth: CGFloat = UIScreen.main.bounds.size.width - horizantalPadding * 2
-    static let cardHeight: CGFloat = cardWidth * 1.2
+    static var topAreaPadding: CGFloat {
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        let topPadding = window?.safeAreaInsets.top ?? 0
+        return topPadding
+    }
+    static var bottomAreaPadding: CGFloat {
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        let bottomPadding = window?.safeAreaInsets.bottom ?? 0
+        return bottomPadding
+    }
 }

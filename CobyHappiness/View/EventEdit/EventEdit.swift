@@ -100,7 +100,7 @@ struct EventEdit: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: BaseSize.cardWidth, height: BaseSize.cardHeight)
+                    .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 1.2)
                     .clipShape(.rect(cornerRadius: 15))
                     .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 5)
             }

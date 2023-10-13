@@ -11,7 +11,7 @@ import MapKit
 struct Detail: View {
     @EnvironmentObject private var appModel: AppViewModel
     
-    @State private var showDetailContent: Bool = false
+    @State private var scale: CGFloat = 1
     @State private var isPresented: Bool = false
     
     var event: Event
@@ -20,25 +20,45 @@ struct Detail: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 0) {
-                if let uiImage = UIImage(data: event.photo) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFill()
-                        .matchedGeometryEffect(id: event.id.uuidString, in: animation)
-                        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
-                        .clipped()
+                GeometryReader { reader in
+                    ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
+                        if let uiImage = UIImage(data: event.photo) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .scaledToFill()
+                                .matchedGeometryEffect(id: event.id.uuidString, in: animation)
+                                .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
+                                .clipped()
+                        }
+                    }
+                    .offset(y: (reader.frame(in: .global).minY > 0 && scale == 1) ? -reader.frame(in: .global).minY : 0)
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { value in
+                                let scale = value.translation.height / UIScreen.main.bounds.height
+                                
+                                if 1 - scale > 0.75 && 1 - scale <= 1  {
+                                    self.scale = 1 - scale
+                                }
+                                
+                                if self.scale < 0.9 {
+                                    withAnimation(.easeInOut(duration: 0.2)) {
+                                        appModel.showDetailView = false
+                                    }
+                                    self.scale = 1
+                                }
+                            }
+                    )
                 }
+                .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
                 
                 DetailContent()
             }
         }
         .ignoresSafeArea()
+        .background(Color.backgroundPrimary)
         .overlay(alignment: .top, content: DetailHeader)
-        .onAppear {
-            withAnimation(.easeInOut) {
-                showDetailContent = true
-            }
-        }
+        .scaleEffect(scale)
         .sheet(isPresented: $isPresented) {
             EventEdit(event: event)
         }
@@ -49,19 +69,14 @@ struct Detail: View {
         HStack {
             Button {
                 withAnimation(.easeInOut(duration: 0.2)) {
-                    showDetailContent = false
-                }
-                withAnimation(.easeInOut(duration: 0.2).delay(0.05)) {
                     appModel.showDetailView = false
                 }
             } label: {
                 Image(systemName: "xmark")
-                    .foregroundColor(Color.black)
-                    .padding(12)
-                    .background {
-                        Circle()
-                            .fill(.white)
-                    }
+                    .foregroundColor(Color.black.opacity(0.7))
+                    .padding()
+                    .background(Color.white.opacity(0.8))
+                    .clipShape(Circle())
             }
             
             Spacer()
@@ -78,8 +93,9 @@ struct Detail: View {
                     }
             }
         }
-        .padding()
-        .opacity(showDetailContent ? 1 : 0)
+        .padding(.horizontal, BaseSize.horizantalPadding)
+        .padding(.top, 10)
+        .opacity(scale == 1 ? 1 : 0)
     }
     
     @ViewBuilder
@@ -115,6 +131,5 @@ struct Detail: View {
         }
         .padding(.vertical, 30)
         .background(Color.backgroundPrimary)
-        .opacity(showDetailContent ? 1 : 0)
     }
 }
