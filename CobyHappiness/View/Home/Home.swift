@@ -33,19 +33,27 @@ struct Home: View {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(events) { event in
-                        CardView(event: event, animation: animation)
-                            .padding(.vertical, 20)
-                            .containerRelativeFrame(.horizontal)
-                            .scrollTransition { content, phase in
-                                content
-                                    .opacity(phase.isIdentity ? 1.0 : 0.5)
+                        Group {
+                            if appModel.showDetailView {
+                                Rectangle()
+                                    .fill(Color.clear)
+                                    .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 1.2)
+                            } else {
+                                CardView(event: event, animation: animation)
+                                    .onTapGesture {
+                                        withAnimation(.spring()) {
+                                            appModel.currentActiveItem = event
+                                            appModel.showDetailView = true
+                                        }
+                                    }
                             }
-                            .onTapGesture {
-                                withAnimation(.spring()) {
-                                    appModel.currentActiveItem = event
-                                    appModel.showDetailView = true
-                                }
-                            }
+                        }
+                        .padding(.vertical, 20)
+                        .containerRelativeFrame(.horizontal)
+                        .scrollTransition { content, phase in
+                            content
+                                .opacity(phase.isIdentity ? 1.0 : 0.5)
+                        }
                     }
                 }
                 .scrollTargetLayout()

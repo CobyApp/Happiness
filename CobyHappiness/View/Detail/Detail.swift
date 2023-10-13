@@ -37,13 +37,15 @@ struct Detail: View {
                             .onChanged { value in
                                 let scale = value.translation.height / UIScreen.main.bounds.height
                                 
-                                if 1 - scale > 0.75 && 1 - scale <= 1  {
+                                if 1 - scale > 0.8 && 1 - scale <= 1  {
                                     self.scale = 1 - scale
                                 }
                             }
                             .onEnded { value in
                                 if scale < 0.9 {
-                                    appModel.showDetailView = false
+                                    withAnimation(.spring()) {
+                                        appModel.showDetailView = false
+                                    }
                                 }
                                 scale = 1
                             }
@@ -54,10 +56,10 @@ struct Detail: View {
                 DetailContent()
             }
         }
-        .ignoresSafeArea()
         .background(Color.backgroundPrimary)
-        .overlay(alignment: .top, content: DetailHeader)
         .scaleEffect(scale)
+        .ignoresSafeArea()
+        .overlay(alignment: .top, content: DetailHeader)
         .sheet(isPresented: $isPresented) {
             EventEdit(event: event)
         }
