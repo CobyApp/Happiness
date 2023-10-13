@@ -26,7 +26,7 @@ struct Detail: View {
                             Image(uiImage: uiImage)
                                 .resizable()
                                 .scaledToFill()
-                                .matchedGeometryEffect(id: event.id.uuidString, in: animation)
+                                .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
                                 .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
                                 .clipped()
                         }
@@ -40,11 +40,10 @@ struct Detail: View {
                                 if 1 - scale > 0.75 && 1 - scale <= 1  {
                                     self.scale = 1 - scale
                                 }
-                                
+                            }
+                            .onEnded { value in
                                 if self.scale < 0.9 {
-                                    withAnimation(.easeInOut(duration: 0.2)) {
-                                        appModel.showDetailView = false
-                                    }
+                                    appModel.showDetailView = false
                                     self.scale = 1
                                 }
                             }
@@ -68,7 +67,7 @@ struct Detail: View {
     func DetailHeader() -> some View {
         HStack {
             Button {
-                withAnimation(.easeInOut(duration: 0.2)) {
+                withAnimation(.spring()) {
                     appModel.showDetailView = false
                 }
             } label: {

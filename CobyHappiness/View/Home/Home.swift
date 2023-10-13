@@ -41,7 +41,7 @@ struct Home: View {
                                     .opacity(phase.isIdentity ? 1.0 : 0.5)
                             }
                             .onTapGesture {
-                                withAnimation(.easeInOut) {
+                                withAnimation(.spring()) {
                                     appModel.currentActiveItem = event
                                     appModel.showDetailView = true
                                 }
