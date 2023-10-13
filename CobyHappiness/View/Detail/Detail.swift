@@ -18,15 +18,15 @@ struct Detail: View {
     var animation: Namespace.ID
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack(spacing: 0) {
                 if let uiImage = UIImage(data: event.photo) {
                     Image(uiImage: uiImage)
                         .resizable()
                         .scaledToFill()
                         .matchedGeometryEffect(id: event.id.uuidString, in: animation)
-                        .frame(width: BaseSize.fullWidth, height: BaseSize.fullHeight * (2/3))
-                        .clipShape(RoundedRectangle(cornerRadius: 30))
+                        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
+                        .clipped()
                 }
                 
                 DetailContent()
@@ -43,7 +43,6 @@ struct Detail: View {
             EventEdit(event: event)
         }
     }
-        
     
     @ViewBuilder
     func DetailHeader() -> some View {
@@ -97,7 +96,7 @@ struct Detail: View {
                             .font(.callout.bold())
                             .foregroundColor(Color.grayscale300)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .hAlign(.leading)
                 }
                 
                 Text(event.note)
@@ -112,16 +111,10 @@ struct Detail: View {
                 MapView(placeName: event.title, location: CLLocationCoordinate2D(latitude: lat, longitude: lon))
                     .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 0.7)
                     .clipShape(.rect(cornerRadius: 15))
-                    .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 5)
             }
         }
-        .padding(.top, 30)
-        .background {
-            RoundedRectangle(cornerRadius: 30, style: .continuous)
-                .fill(.white)
-                .ignoresSafeArea()
-        }
+        .padding(.vertical, 30)
+        .background(Color.backgroundPrimary)
         .opacity(showDetailContent ? 1 : 0)
-        .padding(.top, -100)
     }
 }
