@@ -145,14 +145,17 @@ struct EventEdit: View {
     private func setPhoto() {
         Task {
             if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
-                selectedImageData = data
+                if let originalImage = UIImage(data: data) {
+                    if let compressedImageData = compressImage(originalImage) {
+                        selectedImageData = compressedImageData
+                    }
+                }
             }
             
             if let localID = selectedItem?.itemIdentifier {
                 let result = PHAsset.fetchAssets(withLocalIdentifiers: [localID], options: nil)
                 
                 if let asset = result.firstObject {
-                    print("Got " + asset.debugDescription)
                     date = asset.creationDate ?? Date()
                     
                     if let location = asset.location?.coordinate {
@@ -161,6 +164,20 @@ struct EventEdit: View {
                     }
                 }
             }
+        }
+    }
+    
+    private func compressImage(_ image: UIImage) -> Data? {
+        let newSize = CGSize(width: image.size.width * 0.5, height: image.size.height * 0.5)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        let compressedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        if let compressedImageData = compressedImage?.jpegData(compressionQuality: 0.5) {
+            return compressedImageData
+        } else {
+            return nil
         }
     }
 }

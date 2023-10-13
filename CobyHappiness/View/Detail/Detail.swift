@@ -42,10 +42,10 @@ struct Detail: View {
                                 }
                             }
                             .onEnded { value in
-                                if self.scale < 0.9 {
+                                if scale < 0.9 {
                                     appModel.showDetailView = false
-                                    self.scale = 1
                                 }
+                                scale = 1
                             }
                     )
                 }
