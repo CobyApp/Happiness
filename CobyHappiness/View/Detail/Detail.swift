@@ -12,21 +12,24 @@ struct Detail: View {
     @EnvironmentObject private var appModel: AppViewModel
     
     @State private var isPresented: Bool = false
+    @State private var scale: CGFloat = 1
     
     var event: Event
     var animation: Namespace.ID
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
+        CustomScrollView(showDetailView: $appModel.showDetailView, scale: $scale) {
             VStack(spacing: 0) {
                 DetailPhoto()
-                    .overlay(alignment: .top, content: DetailHeader)
                 
                 DetailContent()
             }
         }
-        .ignoresSafeArea()
+        .overlay(alignment: .top, content: DetailHeader)
         .background(Color.backgroundPrimary)
+        .clipShape(RoundedRectangle(cornerRadius: scale == 1 ? 0 : 30))
+        .scaleEffect(scale)
+        .ignoresSafeArea()
         .sheet(isPresented: $isPresented) {
             EventEdit(event: event)
         }
