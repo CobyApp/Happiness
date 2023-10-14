@@ -73,7 +73,7 @@ struct Detail: View {
     func DetailPhoto() -> some View {
         GeometryReader { reader in
             ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
-                if let uiImage = UIImage(data: event.photo) {
+                if let uiImage = UIImage(data: event.photos[0].image) {
                     Image(uiImage: uiImage)
                         .resizable()
                         .scaledToFill()
@@ -125,11 +125,11 @@ struct Detail: View {
             .hAlign(.leading)
             .padding(BaseSize.horizantalPadding)
             
-            if let lat = event.lat, let lon = event.lon {
-                MapView(placeName: event.title, location: CLLocationCoordinate2D(latitude: lat, longitude: lon))
-                    .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 0.7)
-                    .clipShape(.rect(cornerRadius: 15))
-            }
+//            if let lat = event.lat, let lon = event.lon {
+//                MapView(placeName: event.title, location: CLLocationCoordinate2D(latitude: lat, longitude: lon))
+//                    .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 0.7)
+//                    .clipShape(.rect(cornerRadius: 15))
+//            }
         }
         .background(Color.backgroundPrimary)
     }

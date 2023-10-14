@@ -12,17 +12,19 @@ struct CardView: View {
     var animation: Namespace.ID
     
     var body: some View {
-        if let uiImage = UIImage(data: event.photo) {
-            Image(uiImage: uiImage)
-                .resizable()
-                .scaledToFill()
-                .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
-                .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 1.2)
-                .overlay {
-                    OverlayView()
-                }
-                .clipShape(.rect(cornerRadius: 15))
-                .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 5)
+        if let photo = event.photos.first {
+            if let uiImage = UIImage(data: photo.image) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFill()
+                    .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
+                    .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 1.2)
+                    .overlay {
+                        OverlayView()
+                    }
+                    .clipShape(.rect(cornerRadius: 15))
+                    .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 5)
+            }
         }
     }
     

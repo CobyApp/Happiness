@@ -13,24 +13,18 @@ struct EventEdit: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     
-    @State private var type: EventType
-    @State private var date: Date
-    @State private var title: String
-    @State private var note: String
-    @State private var lat: Double?
-    @State private var lon: Double?
+    @State private var type: EventType = EventType.moment
+    @State private var date: Date = Date()
+    @State private var title: String = ""
+    @State private var note: String = ""
+    @State private var photos: [Photo] = []
     
-    @State private var selectedItem: PhotosPickerItem? = nil
-    @State private var selectedImageData: Data? = nil
+    @State private var images: [UIImage] = []
+    @State private var selectedItems: [PhotosPickerItem] = []
     
     private var event: Event?
     
-    init() {
-        self._date = State(initialValue: Date())
-        self._type = State(initialValue: EventType.moment)
-        self._title = State(initialValue: "")
-        self._note = State(initialValue: "")
-    }
+    init() {}
     
     init(event: Event) {
         self.event = event
@@ -38,9 +32,7 @@ struct EventEdit: View {
         self._type = State(initialValue: event.type)
         self._title = State(initialValue: event.title)
         self._note = State(initialValue: event.note)
-        self._lat = State(initialValue: event.lat)
-        self._lon = State(initialValue: event.lon)
-        self._selectedImageData = State(initialValue: event.photo)
+        self._photos = State(initialValue: event.photos)
     }
     
     var body: some View {
@@ -79,14 +71,49 @@ struct EventEdit: View {
             TextField("내용", text: $note, axis: .vertical)
             
             PhotosPicker(
-                selection: $selectedItem,
+                selection: $selectedItems,
                 matching: .images,
                 photoLibrary: .shared()
             ) {
-                Text("Select a photo")
+                Text("Pick Photo")
             }
-            .onChange(of: selectedItem) {
-                setPhoto()
+            .onChange(of: selectedItems) {
+                Task {
+                    images = []
+                    photos = []
+                    
+                    for item in selectedItems {
+                        var image: Data?
+                        
+                        if let data = try? await item.loadTransferable(type: Data.self) {
+                            if let originalImage = UIImage(data: data) {
+                                if let compressedImageData = compressImage(originalImage) {
+                                    images.append(UIImage(data: compressedImageData)!)
+                                    image = compressedImageData
+                                }
+                            }
+                        }
+                        
+                        if let localID = item.itemIdentifier {
+                            let result = PHAsset.fetchAssets(withLocalIdentifiers: [localID], options: nil)
+                            
+                            if let asset = result.firstObject {
+                                if let date = asset.creationDate, let image = image {
+                                    print("이미지 저장")
+                                    photos.append(Photo(date: date, image: image))
+                                    
+                                    if let location = asset.location?.coordinate {
+                                        photos.last?.lat = location.latitude
+                                        photos.last?.lon = location.longitude
+                                    }
+                                }
+                            }
+                        }
+                        
+                        print("포토 저장")
+                    }
+                    date = photos.first?.date ?? Date()
+                }
             }
         }
         .padding(BaseSize.horizantalPadding)
@@ -94,77 +121,34 @@ struct EventEdit: View {
     
     @ViewBuilder
     func EventContentView() -> some View {
-        VStack(spacing: 10) {
-            if let selectedImageData,
-               let uiImage = UIImage(data: selectedImageData) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 1.2)
-                    .clipShape(.rect(cornerRadius: 15))
-                    .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 5)
-            }
-            
-            if let lat = lat, let lon = lon {
-                MapView(placeName: title, location: CLLocationCoordinate2D(latitude: lat, longitude: lon))
-                    .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 0.7)
-                    .clipShape(.rect(cornerRadius: 15))
-                    .shadow(color: .black.opacity(0.25), radius: 10, x: 0, y: 5)
-            }
+        ForEach(images, id:\.cgImage) { image in
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 250, height: 250)
         }
     }
     
     private func storeEvent() {
-        if let event, let data = selectedImageData {
+        if let event {
             event.date = date
             event.type = type
             event.title = title
             event.note = note
-            event.photo = data
-            event.lat = lat
-            event.lon = lon
+            event.photos = photos
             try? context.save()
         } else {
-            if let data = selectedImageData {
-                let item = Event(
-                    date: date,
-                    type: type,
-                    title: title,
-                    note: note,
-                    photo: data,
-                    lat: lat,
-                    lon: lon
-                )
-                context.insert(item)
-            }
+            let item = Event(
+                date: date,
+                type: type,
+                title: title,
+                note: note,
+                photos: photos
+            )
+            context.insert(item)
         }
 
         dismiss()
-    }
-    
-    private func setPhoto() {
-        Task {
-            if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
-                if let originalImage = UIImage(data: data) {
-                    if let compressedImageData = compressImage(originalImage) {
-                        selectedImageData = compressedImageData
-                    }
-                }
-            }
-            
-            if let localID = selectedItem?.itemIdentifier {
-                let result = PHAsset.fetchAssets(withLocalIdentifiers: [localID], options: nil)
-                
-                if let asset = result.firstObject {
-                    date = asset.creationDate ?? Date()
-                    
-                    if let location = asset.location?.coordinate {
-                        lat = location.latitude
-                        lon = location.longitude
-                    }
-                }
-            }
-        }
     }
     
     private func compressImage(_ image: UIImage) -> Data? {

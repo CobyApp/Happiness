@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CB08C0692AC27AD100FDB79B /* BaseSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08C0682AC27AD100FDB79B /* BaseSize.swift */; };
+		CB45BFB42ADA5FE800EDEBC2 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB45BFB32ADA5FE800EDEBC2 /* Photo.swift */; };
 		CB96DE372ABF593F00B01762 /* BMJUAOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB96DE362ABF58D800B01762 /* BMJUAOTF.otf */; };
 		CB96DE3A2ABF599B00B01762 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB96DE392ABF599B00B01762 /* Font+Extension.swift */; };
 		CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		CB08C0682AC27AD100FDB79B /* BaseSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSize.swift; sourceTree = "<group>"; };
+		CB45BFB32ADA5FE800EDEBC2 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		CB96DE362ABF58D800B01762 /* BMJUAOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMJUAOTF.otf; sourceTree = "<group>"; };
 		CB96DE382ABF597600B01762 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CB96DE392ABF599B00B01762 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				CBA038682ABF352F00BD74CF /* Event.swift */,
+				CB45BFB32ADA5FE800EDEBC2 /* Photo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				CBABE9322ACB379200103BB0 /* EventEdit.swift in Sources */,
 				CBAD08C02AC16B21000E2DD3 /* CommonTextfieldStyle.swift in Sources */,
 				CB9EF8E92ABC684200FDCE12 /* Date+Extensions.swift in Sources */,
+				CB45BFB42ADA5FE800EDEBC2 /* Photo.swift in Sources */,
 				CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */,
 				CBAB7F432ACD3D6A00257778 /* CustomMenu.swift in Sources */,
 				CBABE92F2ACB313C00103BB0 /* Home.swift in Sources */,
