@@ -23,7 +23,7 @@ struct Detail: View {
     var animation: Namespace.ID
     
     var body: some View {
-        GeometryReader { reader in
+        GeometryReader { geometry in
             VStack {
                 if let uiImage = UIImage(data: event.photos[0].image) {
                     Image(uiImage: uiImage)
@@ -36,26 +36,34 @@ struct Detail: View {
                 
                 DetailContent()
             }
-            .frame(width: reader.size.width)
+            .frame(width: geometry.size.width)
             .offset(y: offset + dragOffset)
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { value in
-                        let dragOffset = value.translation.height
-                        if self.offset + dragOffset > 0 {
+                        print("offset: \(offset)")
+                        print("dragOffset: \(dragOffset)")
+                        
+                        if scale == 1 {
+                            dragOffset = value.translation.height
+                        }
+                        
+                        if offset + dragOffset >= 0 {
                             let scale = value.translation.height / UIScreen.main.bounds.height
                             
                             if 1 - scale > 0.8 && 1 - scale <= 1  {
                                 self.scale = 1 - scale
-                            }
-                        } else {
-                            if self.scale == 1 {
-                                self.dragOffset = dragOffset
+                                dragOffset = 0
                             }
                         }
                     }
                     .onEnded { value in
                         offset += value.translation.height
+                        
+                        if offset > 0 {
+                            offset = 0
+                        }
+                        
                         dragOffset = 0
                         
                         if scale < 0.9 {
@@ -66,12 +74,13 @@ struct Detail: View {
             )
         }
         .background(Color.backgroundPrimary)
-        .clipShape(RoundedRectangle(cornerRadius: 30))
-        .scaleEffect(scale)
         .overlay(alignment: .top, content: DetailHeader)
+        .clipShape(RoundedRectangle(cornerRadius: scale == 1 ? 0 : 30))
+        .scaleEffect(scale)
         .sheet(isPresented: $isPresented) {
             EventEdit(event: event)
         }
+        .ignoresSafeArea()
     }
     
     @ViewBuilder
@@ -104,7 +113,7 @@ struct Detail: View {
             }
         }
         .padding(.horizontal, BaseSize.horizantalPadding)
-        .padding(.top, 10)
+        .padding(.top, BaseSize.topAreaPadding + 10)
         .opacity(scale == 1 ? 1 : 0)
     }
     
