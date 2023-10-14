@@ -50,8 +50,8 @@ struct CustomScrollView<Content: View>: View {
                         DragGesture()
                             .onChanged { value in
                                 withAnimation {
-                                    if offset + value.translation.height > 0 {
-                                        let scale = (value.translation.height - 80) / UIScreen.main.bounds.height
+                                    if offset + value.translation.height >= 0 {
+                                        let scale = value.translation.height / UIScreen.main.bounds.height
                                         
                                         if 1 - scale > 0.7 && 1 - scale <= 1  {
                                             self.scale = 1 - scale
@@ -76,7 +76,7 @@ struct CustomScrollView<Content: View>: View {
                                 withAnimation(.spring()) {
                                     offset += dragOffset
                                     
-                                    if offset > 0 {
+                                    if offset >= 0 {
                                         offset = 0
                                     }
                                     

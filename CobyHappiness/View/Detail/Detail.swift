@@ -150,6 +150,7 @@ struct Detail: View {
         .padding(.top, BaseSize.verticalPadding)
         .padding(.bottom, BaseSize.bottomAreaPadding + BaseSize.verticalPadding)
         .background(Color.backgroundPrimary)
+        .animation(nil, value: UUID())
     }
     
     private func getPlaces() -> [Place] {
