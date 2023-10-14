@@ -15,7 +15,7 @@ final class Event {
     var type: EventType
     var title: String
     var note: String
-    var photos: [Photo]
+    @Relationship(deleteRule: .cascade) var photos: [Photo]
 
     init(
         date: Date,

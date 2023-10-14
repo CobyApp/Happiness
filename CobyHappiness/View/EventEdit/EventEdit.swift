@@ -22,6 +22,8 @@ struct EventEdit: View {
     @State private var images: [UIImage] = []
     @State private var selectedItems: [PhotosPickerItem] = []
     
+    @State private var isDisabled: Bool = true
+    
     private var event: Event?
     
     init() {}
@@ -42,12 +44,19 @@ struct EventEdit: View {
                 
                 EventContentView()
                 
-                Button {
-                    storeEvent()
-                } label: {
-                    Text("저장")
-                }
-                .buttonStyle(.borderedProminent)
+                Text(NSLocalizedString("추억 저장하기", comment: ""))
+                    .font(.system(size: 16, weight: .regular))
+                    .foregroundColor(Color.white)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 58)
+                    .background(isDisabled ? Color.grayscale400 : Color.blueBase)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .padding(.horizontal, BaseSize.horizantalPadding)
+                    .onTapGesture {
+                        if !isDisabled {
+                            storeEvent()
+                        }
+                    }
             }
         }
         .onTapGesture {
@@ -113,6 +122,7 @@ struct EventEdit: View {
                     }
                     
                     date = photos.first?.date ?? Date()
+                    isDisabled = photos.isEmpty
                 }
             }
         }
@@ -123,7 +133,7 @@ struct EventEdit: View {
     func EventContentView() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                ForEach(images, id:\.cgImage) { image in
+                ForEach(images, id: \.cgImage) { image in
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFill()
@@ -136,10 +146,6 @@ struct EventEdit: View {
     }
     
     private func storeEvent() {
-        if title == "" || note == "" || photos.isEmpty {
-            return
-        }
-        
         if let event {
             event.date = date
             event.type = type

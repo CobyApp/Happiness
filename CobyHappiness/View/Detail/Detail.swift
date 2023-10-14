@@ -73,6 +73,21 @@ struct Detail: View {
     func DetailPhoto() -> some View {
         GeometryReader { reader in
             ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
+//                ScrollView(.horizontal, showsIndicators: false) {
+//                    HStack {
+//                        ForEach(event.photos) { photo in
+//                            if let uiImage = UIImage(data: photo.image) {
+//                                Image(uiImage: uiImage)
+//                                    .resizable()
+//                                    .scaledToFill()
+//                                    .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
+//                                    .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth)
+//                                    .clipped()
+//                            }
+//                        }
+//                    }
+//                }
+                
                 if let uiImage = UIImage(data: event.photos[0].image) {
                     Image(uiImage: uiImage)
                         .resizable()
