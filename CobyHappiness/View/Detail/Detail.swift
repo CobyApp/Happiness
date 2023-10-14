@@ -20,43 +20,13 @@ struct Detail: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 0) {
-                GeometryReader { reader in
-                    ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
-                        if let uiImage = UIImage(data: event.photo) {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .scaledToFill()
-                                .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
-                                .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
-                                .clipped()
-                        }
-                    }
-                    .offset(y: (reader.frame(in: .global).minY > 0 && scale == 1) ? -reader.frame(in: .global).minY : 0)
-                    .gesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged { value in
-                                let scale = value.translation.height / UIScreen.main.bounds.height
-                                
-                                if 1 - scale > 0.8 && 1 - scale <= 1  {
-                                    self.scale = 1 - scale
-                                }
-                            }
-                            .onEnded { value in
-                                if scale < 0.9 {
-                                    withAnimation(.spring()) {
-                                        appModel.showDetailView = false
-                                    }
-                                }
-                                scale = 1
-                            }
-                    )
-                }
-                .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
+                DetailPhoto()
                 
                 DetailContent()
             }
         }
         .background(Color.backgroundPrimary)
+        .clipShape(RoundedRectangle(cornerRadius: 30))
         .scaleEffect(scale)
         .ignoresSafeArea()
         .overlay(alignment: .top, content: DetailHeader)
@@ -100,29 +70,60 @@ struct Detail: View {
     }
     
     @ViewBuilder
+    func DetailPhoto() -> some View {
+        GeometryReader { reader in
+            ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
+                if let uiImage = UIImage(data: event.photo) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
+                        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
+                        .clipped()
+                }
+            }
+            .offset(y: (reader.frame(in: .global).minY > 0 && scale == 1) ? -reader.frame(in: .global).minY : 0)
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { value in
+                        let scale = value.translation.height / UIScreen.main.bounds.height
+                        
+                        if 1 - scale > 0.8 && 1 - scale <= 1  {
+                            self.scale = 1 - scale
+                        }
+                    }
+                    .onEnded { value in
+                        if scale < 0.9 {
+                            appModel.showDetailView = false
+                        }
+                        scale = 1
+                    }
+            )
+        }
+        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
+    }
+    
+    @ViewBuilder
     func DetailContent() -> some View {
         VStack {
-            VStack(alignment: .leading) {
-                HStack(spacing: 10) {
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text(event.title)
-                            .font(.title.bold())
-                            .foregroundColor(Color.grayscale100)
-                        
-                        Text(event.date.format("MMM d, yyyy"))
-                            .font(.callout.bold())
-                            .foregroundColor(Color.grayscale300)
-                    }
-                    .hAlign(.leading)
+            VStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(event.title)
+                        .font(.title.bold())
+                        .foregroundStyle(Color.grayscale100)
+                    
+                    Text(event.date.format("MMM d, yyyy"))
+                        .font(.callout.bold())
+                        .foregroundStyle(Color.grayscale300)
                 }
                 
                 Text(event.note)
                     .font(.callout)
                     .foregroundColor(Color.grayscale200)
                     .multilineTextAlignment(.leading)
-                    .padding(.vertical)
             }
-            .padding(.horizontal, BaseSize.horizantalPadding)
+            .hAlign(.leading)
+            .padding(BaseSize.horizantalPadding)
             
             if let lat = event.lat, let lon = event.lon {
                 MapView(placeName: event.title, location: CLLocationCoordinate2D(latitude: lat, longitude: lon))
@@ -130,7 +131,6 @@ struct Detail: View {
                     .clipShape(.rect(cornerRadius: 15))
             }
         }
-        .padding(.vertical, 30)
         .background(Color.backgroundPrimary)
     }
 }

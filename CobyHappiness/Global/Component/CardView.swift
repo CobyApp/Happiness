@@ -40,7 +40,7 @@ struct CardView: View {
                 .black
             ], startPoint: .top, endPoint: .bottom)
             
-            VStack(alignment: .leading, spacing: 4, content: {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(event.title)
                     .font(.title.bold())
                     .foregroundStyle(.white)
@@ -48,7 +48,7 @@ struct CardView: View {
                 Text(event.date.format("MMM d, yyyy"))
                     .font(.callout.bold())
                     .foregroundStyle(.white.opacity(0.8))
-            })
+            }
             .padding(20)
         })
     }

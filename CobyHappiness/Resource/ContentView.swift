@@ -13,18 +13,17 @@ struct ContentView: View {
     @Namespace var animation
     
     var body: some View {
-        ZStack{
+        ZStack {
             Home(animation: animation)
                 .opacity(appModel.showDetailView ? 0 : 1)
-                .environmentObject(appModel)
-                .modelContainer(for: Event.self)
             
             if let event = appModel.currentActiveItem, appModel.showDetailView {
                 Detail(event: event, animation: animation)
-                    .environmentObject(appModel)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.backgroundLightGray)
+        .environmentObject(appModel)
+        .modelContainer(for: Event.self)
     }
 }
