@@ -51,7 +51,7 @@ struct CustomScrollView<Content: View>: View {
                             .onChanged { value in
                                 withAnimation {
                                     if offset + value.translation.height >= 0 {
-                                        let scale = (value.translation.height - offset) / UIScreen.main.bounds.height
+                                        let scale = (offset + value.translation.height - 100) / UIScreen.main.bounds.height
                                         
                                         if 1 - scale > 0.7 && 1 - scale <= 1  {
                                             self.scale = 1 - scale

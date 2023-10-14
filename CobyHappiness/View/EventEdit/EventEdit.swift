@@ -61,7 +61,17 @@ struct EventEdit: View {
         .onTapGesture {
             closeKeyboard()
         }
-    } 
+        .onChange(of: photos) {
+            date = photos.first?.date ?? Date()
+            checkDisabled()
+        }
+        .onChange(of: title) {
+            checkDisabled()
+        }
+        .onChange(of: note) {
+            checkDisabled()
+        }
+    }
     
     @ViewBuilder
     func EventEditView() -> some View {
@@ -141,9 +151,6 @@ struct EventEdit: View {
                     }
                 }
             }
-            
-            date = photos.first?.date ?? Date()
-            isDisabled = photos.isEmpty
         }
     }
     
@@ -180,6 +187,14 @@ struct EventEdit: View {
             return compressedImageData
         } else {
             return nil
+        }
+    }
+    
+    private func checkDisabled() {
+        if title == "" || note == "" || photos.isEmpty {
+            isDisabled = true
+        } else {
+            isDisabled = false
         }
     }
 }
