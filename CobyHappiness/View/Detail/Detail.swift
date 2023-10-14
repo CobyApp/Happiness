@@ -11,6 +11,9 @@ import MapKit
 struct Detail: View {
     @EnvironmentObject private var appModel: AppViewModel
     
+    @State private var offset: CGFloat = 0.0
+    @State private var dragOffset: CGFloat = 0.0
+    
     @State private var scale: CGFloat = 1
     @State private var isPresented: Bool = false
     
@@ -20,17 +23,51 @@ struct Detail: View {
     var animation: Namespace.ID
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(spacing: 0) {
-                DetailPhoto()
+        GeometryReader { reader in
+            VStack {
+                if let uiImage = UIImage(data: event.photos[0].image) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
+                        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
+                        .clipped()
+                }
                 
                 DetailContent()
             }
+            .frame(width: reader.size.width)
+            .offset(y: offset + dragOffset)
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { value in
+                        let dragOffset = value.translation.height
+                        if self.offset + dragOffset > 0 {
+                            let scale = value.translation.height / UIScreen.main.bounds.height
+                            
+                            if 1 - scale > 0.8 && 1 - scale <= 1  {
+                                self.scale = 1 - scale
+                            }
+                        } else {
+                            if self.scale == 1 {
+                                self.dragOffset = dragOffset
+                            }
+                        }
+                    }
+                    .onEnded { value in
+                        offset += value.translation.height
+                        dragOffset = 0
+                        
+                        if scale < 0.9 {
+                            appModel.showDetailView = false
+                        }
+                        scale = 1
+                    }
+            )
         }
         .background(Color.backgroundPrimary)
         .clipShape(RoundedRectangle(cornerRadius: 30))
         .scaleEffect(scale)
-        .ignoresSafeArea()
         .overlay(alignment: .top, content: DetailHeader)
         .sheet(isPresented: $isPresented) {
             EventEdit(event: event)
@@ -69,40 +106,6 @@ struct Detail: View {
         .padding(.horizontal, BaseSize.horizantalPadding)
         .padding(.top, 10)
         .opacity(scale == 1 ? 1 : 0)
-    }
-    
-    @ViewBuilder
-    func DetailPhoto() -> some View {
-        GeometryReader { reader in
-            ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
-                if let uiImage = UIImage(data: event.photos[0].image) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFill()
-                        .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
-                        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
-                        .clipped()
-                }
-            }
-            .offset(y: (reader.frame(in: .global).minY > 0 && scale == 1) ? -reader.frame(in: .global).minY : 0)
-            .gesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged { value in
-                        let scale = value.translation.height / UIScreen.main.bounds.height
-                        
-                        if 1 - scale > 0.8 && 1 - scale <= 1  {
-                            self.scale = 1 - scale
-                        }
-                    }
-                    .onEnded { value in
-                        if scale < 0.9 {
-                            appModel.showDetailView = false
-                        }
-                        scale = 1
-                    }
-            )
-        }
-        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth)
     }
     
     @ViewBuilder
