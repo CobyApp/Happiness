@@ -105,6 +105,7 @@ struct Detail: View {
                     .font(.callout)
                     .foregroundColor(Color.grayscale200)
                     .multilineTextAlignment(.leading)
+                    .lineLimit(nil)
                     .padding(.top, 12)
             }
             .hAlign(.leading)
@@ -117,7 +118,8 @@ struct Detail: View {
                     .clipShape(.rect(cornerRadius: 15))
             }
         }
-        .padding(.vertical, BaseSize.verticalPadding)
+        .padding(.top, BaseSize.verticalPadding)
+        .padding(.bottom, BaseSize.bottomAreaPadding + BaseSize.verticalPadding)
         .background(Color.backgroundPrimary)
     }
     

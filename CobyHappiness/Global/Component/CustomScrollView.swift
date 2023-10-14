@@ -34,38 +34,31 @@ struct CustomScrollView<Content: View>: View {
                     .background(
                         GeometryReader { innerGeometry in
                             Color.clear
-                                .preference(
-                                    key: HeightPreferenceKey.self,
-                                    value: innerGeometry.size.height
-                                )
+                                .onAppear {
+                                    contentHeight = innerGeometry.size.height
+                                }
                         }
                     )
-                    .onPreferenceChange(HeightPreferenceKey.self) {
-                        contentHeight = $0
-                    }
                     .gesture(
                         DragGesture()
                             .onChanged { value in
-                                let maxOffset = contentHeight - geometry.size.height < 0 ? 0 : contentHeight - geometry.size.height
-                                print("contentHeight: \(contentHeight)")
-                                print("geometry.size.height: \(geometry.size.height)")
-                                print("maxOffset: \(maxOffset)")
-                                print("getOffset: \(offset + value.translation.height)")
-                                
-                                if offset + value.translation.height >= 0 {
+                                if offset + value.translation.height > 0 {
                                     let scale = value.translation.height / UIScreen.main.bounds.height
                                     
-                                    if 1 - scale > 0.8 && 1 - scale <= 1  {
+                                    if 1 - scale > 0.7 && 1 - scale <= 1  {
                                         self.scale = 1 - scale
                                         dragOffset = 0
                                     }
                                 } else if scale == 1 {
-//                                    if offset + value.translation.height > maxOffset {}
-                                    dragOffset = value.translation.height
+                                    let maxOffset = contentHeight - geometry.size.height < 0 ? 0 : contentHeight - geometry.size.height
+                                    
+                                    if offset + value.translation.height >= -maxOffset {
+                                        dragOffset = value.translation.height
+                                    }
                                 }
                             }
                             .onEnded { value in
-                                offset += value.translation.height
+                                offset += dragOffset
                                 
                                 if offset > 0 {
                                     offset = 0
@@ -75,19 +68,12 @@ struct CustomScrollView<Content: View>: View {
                                 
                                 if scale < 0.9 {
                                     showDetailView = false
+                                } else {
+                                    scale = 1
                                 }
-                                scale = 1
                             }
                     )
             }
         }
-    }
-}
-
-struct HeightPreferenceKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-    
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
     }
 }
