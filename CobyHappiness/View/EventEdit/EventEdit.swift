@@ -87,9 +87,11 @@ struct EventEdit: View {
                         
                         if let data = try? await item.loadTransferable(type: Data.self) {
                             if let originalImage = UIImage(data: data) {
-                                if let compressedImageData = compressImage(originalImage) {
-                                    images.append(UIImage(data: compressedImageData)!)
-                                    image = compressedImageData
+                                if let croppedImage = cropImageToSquare(originalImage) {
+                                    if let compressedImageData = compressImage(croppedImage) {
+                                        images.append(UIImage(data: compressedImageData)!)
+                                        image = compressedImageData
+                                    }
                                 }
                             }
                         }
@@ -99,7 +101,6 @@ struct EventEdit: View {
                             
                             if let asset = result.firstObject {
                                 if let date = asset.creationDate, let image = image {
-                                    print("이미지 저장")
                                     photos.append(Photo(date: date, image: image))
                                     
                                     if let location = asset.location?.coordinate {
@@ -109,9 +110,8 @@ struct EventEdit: View {
                                 }
                             }
                         }
-                        
-                        print("포토 저장")
                     }
+                    
                     date = photos.first?.date ?? Date()
                 }
             }
@@ -121,15 +121,25 @@ struct EventEdit: View {
     
     @ViewBuilder
     func EventContentView() -> some View {
-        ForEach(images, id:\.cgImage) { image in
-            Image(uiImage: image)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 250, height: 250)
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(images, id:\.cgImage) { image in
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 150, height: 150)
+                        .clipShape(.rect(cornerRadius: 15))
+                }
+            }
+            .padding(.horizontal, BaseSize.horizantalPadding)
         }
     }
     
     private func storeEvent() {
+        if title == "" || note == "" || photos.isEmpty {
+            return
+        }
+        
         if let event {
             event.date = date
             event.type = type
@@ -151,14 +161,30 @@ struct EventEdit: View {
         dismiss()
     }
     
+    private func cropImageToSquare(_ image: UIImage) -> UIImage? {
+        let originalSize = image.size
+        let sideLength = min(originalSize.width, originalSize.height)
+        
+        let cropRect = CGRect(x: (originalSize.width - sideLength) / 2.0,
+                              y: (originalSize.height - sideLength) / 2.0,
+                              width: sideLength,
+                              height: sideLength)
+
+        if let croppedCGImage = image.cgImage?.cropping(to: cropRect) {
+            return UIImage(cgImage: croppedCGImage)
+        } else {
+            return nil
+        }
+    }
+    
     private func compressImage(_ image: UIImage) -> Data? {
-        let newSize = CGSize(width: image.size.width * 0.5, height: image.size.height * 0.5)
+        let newSize = CGSize(width: image.size.width * 0.3, height: image.size.height * 0.3)
         UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
         image.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
         let compressedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
-        if let compressedImageData = compressedImage?.jpegData(compressionQuality: 0.5) {
+        if let compressedImageData = compressedImage?.jpegData(compressionQuality: 0.3) {
             return compressedImageData
         } else {
             return nil

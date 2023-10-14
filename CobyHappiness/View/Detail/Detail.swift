@@ -78,7 +78,7 @@ struct Detail: View {
                         .resizable()
                         .scaledToFill()
                         .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
-                        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
+                        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth)
                         .clipped()
                 }
             }
@@ -100,7 +100,7 @@ struct Detail: View {
                     }
             )
         }
-        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
+        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth)
     }
     
     @ViewBuilder
