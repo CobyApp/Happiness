@@ -13,12 +13,14 @@ struct Detail: View {
     
     @State private var isPresented: Bool = false
     @State private var scale: CGFloat = 1
+    @State private var isDown: Bool = false
     
     var event: Event
     var animation: Namespace.ID
+    var columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: BaseSize.cellSpacing), count: 2)
     
     var body: some View {
-        CustomScrollView(showDetailView: $appModel.showDetailView, scale: $scale) {
+        CustomScrollView(showDetailView: $appModel.showDetailView, scale: $scale, isDown: $isDown) {
             VStack(spacing: 0) {
                 DetailPhoto()
                 
@@ -44,9 +46,9 @@ struct Detail: View {
                 }
             } label: {
                 Image(systemName: "xmark")
-                    .foregroundColor(Color.black.opacity(0.7))
+                    .foregroundColor(isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
                     .padding()
-                    .background(Color.white.opacity(0.8))
+                    .background(isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
                     .clipShape(Circle())
             }
             
@@ -56,12 +58,10 @@ struct Detail: View {
                 isPresented = true
             } label: {
                 Image(systemName: "suit.heart.fill")
-                    .foregroundColor(Color.red)
-                    .padding(12)
-                    .background {
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .fill(.white)
-                    }
+                    .foregroundColor(isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
+                    .padding()
+                    .background(isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
+                    .clipShape(Circle())
             }
         }
         .padding(.horizontal, BaseSize.horizantalPadding)
@@ -70,28 +70,47 @@ struct Detail: View {
     
     @ViewBuilder
     func DetailPhoto() -> some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 0) {
-                ForEach(event.photos) { photo in
-                    if let uiImage = UIImage(data: photo.image) {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
-                            .clipped()
-                            .containerRelativeFrame(.horizontal)
-                    }
+//        ScrollView(.horizontal, showsIndicators: false) {
+//            HStack(spacing: 0) {
+//                ForEach(event.photos) { photo in
+//                    if let uiImage = UIImage(data: photo.image) {
+//                        Image(uiImage: uiImage)
+//                            .resizable()
+//                            .scaledToFill()
+//                            .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
+//                            .clipped()
+//                            .containerRelativeFrame(.horizontal)
+//                    }
+//                }
+//            }
+//            .scrollTargetLayout()
+//        }
+//        .scrollTargetBehavior(.viewAligned)
+//        .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
+        
+        TabView() {
+            ForEach(event.photos) { photo in
+                if let uiImage = UIImage(data: photo.image) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
+                        .clipped()
+                        .ignoresSafeArea()
                 }
             }
-            .scrollTargetLayout()
         }
-        .scrollTargetBehavior(.viewAligned)
-        .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
+        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
+        .tabViewStyle(PageTabViewStyle())
+        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+        .onAppear {
+            UIScrollView.appearance().bounces = false
+        }
     }
     
     @ViewBuilder
     func DetailContent() -> some View {
-        VStack {
+        VStack(alignment: .leading, spacing: BaseSize.verticalPadding) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(event.title)
                     .font(.title.bold())
@@ -100,24 +119,48 @@ struct Detail: View {
                 Text(event.date.format("MMM d, yyyy"))
                     .font(.callout.bold())
                     .foregroundStyle(Color.grayscale300)
-                
-                Text(event.note)
-                    .font(.callout)
-                    .foregroundColor(Color.grayscale200)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(nil)
-                    .padding(.top, 12)
             }
-            .hAlign(.leading)
-            .padding(.horizontal, BaseSize.horizantalPadding)
+            
+            Divider()
+                .frame(height: 1)
+                .foregroundColor(Color.borderDefault)
+            
+            Text(event.note)
+                .font(.callout)
+                .foregroundColor(Color.grayscale200)
+                .multilineTextAlignment(.leading)
+                .lineLimit(nil)
+                .fixedSize(horizontal: false, vertical: true)
+            
+            Divider()
+                .frame(height: 1)
+                .foregroundColor(Color.borderDefault)
+            
+            LazyVGrid(columns: columns, spacing: BaseSize.cellSpacing) {
+                ForEach(event.photos) { photo in
+                    if let uiImage = UIImage(data: photo.image) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: BaseSize.cellWidth, height: BaseSize.cellWidth)
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                    }
+                }
+            }
+            
+            Divider()
+                .frame(height: 1)
+                .foregroundColor(Color.borderDefault)
             
             let places = getPlaces()
             if !places.isEmpty {
                 MapView(places: places)
-                    .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 0.7)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: BaseSize.cardWidth * 0.7)
                     .clipShape(.rect(cornerRadius: 15))
             }
         }
+        .padding(.horizontal, BaseSize.horizantalPadding)
         .padding(.top, BaseSize.verticalPadding)
         .padding(.bottom, BaseSize.bottomAreaPadding + BaseSize.verticalPadding)
         .background(Color.backgroundPrimary)

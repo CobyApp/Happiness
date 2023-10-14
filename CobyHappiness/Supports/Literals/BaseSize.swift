@@ -10,9 +10,11 @@ import SwiftUI
 enum BaseSize {
     static let horizantalPadding: CGFloat = 20
     static let verticalPadding: CGFloat = 20
+    static let cellSpacing: CGFloat = 8
     static let fullWidth: CGFloat = UIScreen.main.bounds.size.width
     static let fullHeight: CGFloat = UIScreen.main.bounds.size.height
     static let cardWidth: CGFloat = UIScreen.main.bounds.size.width - horizantalPadding * 2
+    static let cellWidth: CGFloat = (UIScreen.main.bounds.size.width - horizantalPadding * 2 - cellSpacing) / 2
     static var topAreaPadding: CGFloat {
         let scenes = UIApplication.shared.connectedScenes
         let windowScene = scenes.first as? UIWindowScene

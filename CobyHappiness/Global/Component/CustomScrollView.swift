@@ -10,6 +10,7 @@ import SwiftUI
 struct CustomScrollView<Content: View>: View {
     @Binding var showDetailView: Bool
     @Binding var scale: CGFloat
+    @Binding var isDown: Bool
     
     @State private var offset: CGFloat = 0.0
     @State private var dragOffset: CGFloat = 0.0
@@ -17,9 +18,15 @@ struct CustomScrollView<Content: View>: View {
     
     let content: Content
     
-    init(showDetailView: Binding<Bool>, scale: Binding<CGFloat>, @ViewBuilder content: () -> Content) {
+    init(
+        showDetailView: Binding<Bool>,
+        scale: Binding<CGFloat>,
+        isDown: Binding<Bool>,
+        @ViewBuilder content: () -> Content
+    ) {
         self._showDetailView = showDetailView
         self._scale = scale
+        self._isDown = isDown
         self.content = content()
     }
     
@@ -43,7 +50,7 @@ struct CustomScrollView<Content: View>: View {
                         DragGesture()
                             .onChanged { value in
                                 if offset + value.translation.height > 0 {
-                                    let scale = value.translation.height / UIScreen.main.bounds.height
+                                    let scale = (value.translation.height - 40) / UIScreen.main.bounds.height
                                     
                                     if 1 - scale > 0.7 && 1 - scale <= 1  {
                                         self.scale = 1 - scale
@@ -56,6 +63,12 @@ struct CustomScrollView<Content: View>: View {
                                         dragOffset = value.translation.height
                                     }
                                 }
+                                
+                                if offset + value.translation.height - BaseSize.topAreaPadding - 10 < -BaseSize.fullWidth * 1.2 {
+                                    isDown = true
+                                } else {
+                                    isDown = false
+                                }
                             }
                             .onEnded { value in
                                 offset += dragOffset
@@ -66,7 +79,7 @@ struct CustomScrollView<Content: View>: View {
                                 
                                 dragOffset = 0
                                 
-                                if scale < 0.9 {
+                                if scale < 0.8 {
                                     showDetailView = false
                                 } else {
                                     scale = 1
