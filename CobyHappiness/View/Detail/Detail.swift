@@ -14,6 +14,8 @@ struct Detail: View {
     @State private var scale: CGFloat = 1
     @State private var isPresented: Bool = false
     
+    @State private var image: UIImage?
+    
     var event: Event
     var animation: Namespace.ID
     
@@ -73,27 +75,12 @@ struct Detail: View {
     func DetailPhoto() -> some View {
         GeometryReader { reader in
             ZStack(alignment: Alignment(horizontal: .center, vertical: .top)) {
-//                ScrollView(.horizontal, showsIndicators: false) {
-//                    HStack {
-//                        ForEach(event.photos) { photo in
-//                            if let uiImage = UIImage(data: photo.image) {
-//                                Image(uiImage: uiImage)
-//                                    .resizable()
-//                                    .scaledToFill()
-//                                    .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
-//                                    .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth)
-//                                    .clipped()
-//                            }
-//                        }
-//                    }
-//                }
-                
                 if let uiImage = UIImage(data: event.photos[0].image) {
                     Image(uiImage: uiImage)
                         .resizable()
                         .scaledToFill()
                         .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
-                        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth)
+                        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
                         .clipped()
                 }
             }
@@ -140,12 +127,29 @@ struct Detail: View {
             .hAlign(.leading)
             .padding(BaseSize.horizantalPadding)
             
-//            if let lat = event.lat, let lon = event.lon {
-//                MapView(placeName: event.title, location: CLLocationCoordinate2D(latitude: lat, longitude: lon))
-//                    .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 0.7)
-//                    .clipShape(.rect(cornerRadius: 15))
-//            }
+            let places = getPlaces()
+            if !places.isEmpty {
+                MapView(places: places)
+                    .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 0.7)
+                    .clipShape(.rect(cornerRadius: 15))
+            }
         }
         .background(Color.backgroundPrimary)
+        .clipShape(RoundedRectangle(cornerRadius: 30))
+    }
+    
+    private func getPlaces() -> [Place] {
+        var places = [Place]()
+        for photo in event.photos {
+            if let lat = event.photos.first?.lat, let lon = event.photos.first?.lon {
+                places.append(
+                    Place(
+                        name: photo.date.format("MMM d, yyyy"),
+                        location: CLLocationCoordinate2D(latitude: lat, longitude: lon)
+                    )
+                )
+            }
+        }
+        return places
     }
 }

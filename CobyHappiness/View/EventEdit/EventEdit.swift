@@ -96,11 +96,9 @@ struct EventEdit: View {
                         
                         if let data = try? await item.loadTransferable(type: Data.self) {
                             if let originalImage = UIImage(data: data) {
-                                if let croppedImage = cropImageToSquare(originalImage) {
-                                    if let compressedImageData = compressImage(croppedImage) {
-                                        images.append(UIImage(data: compressedImageData)!)
-                                        image = compressedImageData
-                                    }
+                                if let compressedImageData = compressImage(originalImage) {
+                                    images.append(UIImage(data: compressedImageData)!)
+                                    image = compressedImageData
                                 }
                             }
                         }
@@ -137,7 +135,7 @@ struct EventEdit: View {
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 150, height: 150)
+                        .frame(width: 200, height: 240)
                         .clipShape(.rect(cornerRadius: 15))
                 }
             }
@@ -165,22 +163,6 @@ struct EventEdit: View {
         }
 
         dismiss()
-    }
-    
-    private func cropImageToSquare(_ image: UIImage) -> UIImage? {
-        let originalSize = image.size
-        let sideLength = min(originalSize.width, originalSize.height)
-        
-        let cropRect = CGRect(x: (originalSize.width - sideLength) / 2.0,
-                              y: (originalSize.height - sideLength) / 2.0,
-                              width: sideLength,
-                              height: sideLength)
-
-        if let croppedCGImage = image.cgImage?.cropping(to: cropRect) {
-            return UIImage(cgImage: croppedCGImage)
-        } else {
-            return nil
-        }
     }
     
     private func compressImage(_ image: UIImage) -> Data? {

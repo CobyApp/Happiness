@@ -37,7 +37,7 @@ struct Home: View {
                             if appModel.showDetailView {
                                 Rectangle()
                                     .fill(Color.clear)
-                                    .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth)
+                                    .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 1.2)
                             } else {
                                 CardView(event: event, animation: animation)
                                     .onTapGesture {

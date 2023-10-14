@@ -11,21 +11,33 @@ import MapKit
 struct MapView: View {
     @State private var cameraPosition: MapCameraPosition
     
-    private var placeName: String
-    private var location: CLLocationCoordinate2D
-    private var myRegion: MKCoordinateRegion
+    private var places: [Place]
     
-    init(placeName: String, location: CLLocationCoordinate2D) {
-        self.placeName = placeName
-        self.location = location
-        self.myRegion = .init(center: location, latitudinalMeters: 1000, longitudinalMeters: 1000)
-        self._cameraPosition = State(wrappedValue: .region(myRegion))
+    init(places: [Place]) {
+        self.places = places
+        self._cameraPosition = State(
+            wrappedValue: .region(
+                MKCoordinateRegion(
+                    center: places[0].location,
+                    latitudinalMeters: 1000,
+                    longitudinalMeters: 1000
+                )
+            )
+        )
     }
     
     var body: some View {
         Map(position: $cameraPosition) {
-            Marker(placeName, coordinate: location)
-                .tint(.blue)
+            ForEach(places) { place in
+                Marker(place.name, coordinate: place.location)
+                    .tint(.blue)
+            }
         }
     }
+}
+
+struct Place: Identifiable {
+    var id = UUID()
+    var name: String
+    var location: CLLocationCoordinate2D
 }
