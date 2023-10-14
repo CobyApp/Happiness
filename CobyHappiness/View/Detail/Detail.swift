@@ -18,7 +18,6 @@ struct Detail: View {
     
     var event: Event
     var animation: Namespace.ID
-    var columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: BaseSize.cellSpacing), count: 2)
     
     init(event: Event, animation: Namespace.ID) {
         self.event = event
@@ -120,20 +119,6 @@ struct Detail: View {
                 .lineLimit(nil)
                 .fixedSize(horizontal: false, vertical: true)
             
-            Divider()
-                .frame(height: 1)
-                .foregroundColor(Color.borderDefault)
-            
-            LazyVGrid(columns: columns, spacing: BaseSize.cellSpacing) {
-                ForEach(photos, id: \.self) { photo in
-                    Image(uiImage: photo)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: BaseSize.cellWidth, height: BaseSize.cellWidth)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                }
-            }
-            
             let places = getPlaces()
             if !places.isEmpty {
                 Divider()
@@ -156,10 +141,10 @@ struct Detail: View {
     private func getPlaces() -> [Place] {
         var places = [Place]()
         for photo in event.photos {
-            if let lat = event.photos.first?.lat, let lon = event.photos.first?.lon {
+            if let lat = photo.lat, let lon = photo.lon {
                 places.append(
                     Place(
-                        name: photo.date.format("MMM d, yyyy"),
+                        name: event.title,
                         location: CLLocationCoordinate2D(latitude: lat, longitude: lon)
                     )
                 )
