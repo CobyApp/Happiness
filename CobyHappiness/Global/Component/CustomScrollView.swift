@@ -51,7 +51,7 @@ struct CustomScrollView<Content: View>: View {
                             .onChanged { value in
                                 withAnimation {
                                     if offset + value.translation.height >= 0 {
-                                        let scale = value.translation.height / UIScreen.main.bounds.height
+                                        let scale = (value.translation.height - offset) / UIScreen.main.bounds.height
                                         
                                         if 1 - scale > 0.7 && 1 - scale <= 1  {
                                             self.scale = 1 - scale
@@ -65,7 +65,7 @@ struct CustomScrollView<Content: View>: View {
                                         }
                                     }
                                     
-                                    if offset + value.translation.height - BaseSize.topAreaPadding - 10 < -BaseSize.fullWidth * 1.2 {
+                                    if offset + dragOffset - BaseSize.topAreaPadding - 10 < -BaseSize.fullWidth * 1.2 {
                                         isDown = true
                                     } else {
                                         isDown = false
