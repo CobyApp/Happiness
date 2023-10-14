@@ -14,10 +14,17 @@ struct Detail: View {
     @State private var isPresented: Bool = false
     @State private var scale: CGFloat = 1
     @State private var isDown: Bool = false
+    @State private var photos = [UIImage]()
     
     var event: Event
     var animation: Namespace.ID
     var columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: BaseSize.cellSpacing), count: 2)
+    
+    init(event: Event, animation: Namespace.ID) {
+        self.event = event
+        self.animation = animation
+        self._photos = State(wrappedValue: event.photos.map { UIImage(data: $0.image)! })
+    }
     
     var body: some View {
         CustomScrollView(showDetailView: $appModel.showDetailView, scale: $scale, isDown: $isDown) {
@@ -70,39 +77,20 @@ struct Detail: View {
     
     @ViewBuilder
     func DetailPhoto() -> some View {
-//        ScrollView(.horizontal, showsIndicators: false) {
-//            HStack(spacing: 0) {
-//                ForEach(event.photos) { photo in
-//                    if let uiImage = UIImage(data: photo.image) {
-//                        Image(uiImage: uiImage)
-//                            .resizable()
-//                            .scaledToFill()
-//                            .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
-//                            .clipped()
-//                            .containerRelativeFrame(.horizontal)
-//                    }
-//                }
-//            }
-//            .scrollTargetLayout()
-//        }
-//        .scrollTargetBehavior(.viewAligned)
-//        .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
-        
         TabView() {
-            ForEach(event.photos) { photo in
-                if let uiImage = UIImage(data: photo.image) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
-                        .clipped()
-                        .ignoresSafeArea()
-                }
+            ForEach(photos, id: \.self) { photo in
+                Image(uiImage: photo)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
+                    .clipped()
+                    .ignoresSafeArea()
             }
         }
         .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
         .tabViewStyle(PageTabViewStyle())
         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+        .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
         .onAppear {
             UIScrollView.appearance().bounces = false
         }
@@ -137,23 +125,21 @@ struct Detail: View {
                 .foregroundColor(Color.borderDefault)
             
             LazyVGrid(columns: columns, spacing: BaseSize.cellSpacing) {
-                ForEach(event.photos) { photo in
-                    if let uiImage = UIImage(data: photo.image) {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: BaseSize.cellWidth, height: BaseSize.cellWidth)
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
-                    }
+                ForEach(photos, id: \.self) { photo in
+                    Image(uiImage: photo)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: BaseSize.cellWidth, height: BaseSize.cellWidth)
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
                 }
             }
             
-            Divider()
-                .frame(height: 1)
-                .foregroundColor(Color.borderDefault)
-            
             let places = getPlaces()
             if !places.isEmpty {
+                Divider()
+                    .frame(height: 1)
+                    .foregroundColor(Color.borderDefault)
+                
                 MapView(places: places)
                     .frame(maxWidth: .infinity)
                     .frame(height: BaseSize.cardWidth * 0.7)
