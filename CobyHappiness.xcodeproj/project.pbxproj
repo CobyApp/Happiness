@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CB08C0692AC27AD100FDB79B /* BaseSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08C0682AC27AD100FDB79B /* BaseSize.swift */; };
+		CB2471012ADABBFC00EEA032 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2471002ADABBFC00EEA032 /* Place.swift */; };
 		CB45BFB42ADA5FE800EDEBC2 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB45BFB32ADA5FE800EDEBC2 /* Photo.swift */; };
 		CB96DE372ABF593F00B01762 /* BMJUAOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB96DE362ABF58D800B01762 /* BMJUAOTF.otf */; };
 		CB96DE3A2ABF599B00B01762 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB96DE392ABF599B00B01762 /* Font+Extension.swift */; };
@@ -33,6 +34,7 @@
 
 /* Begin PBXFileReference section */
 		CB08C0682AC27AD100FDB79B /* BaseSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSize.swift; sourceTree = "<group>"; };
+		CB2471002ADABBFC00EEA032 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		CB45BFB32ADA5FE800EDEBC2 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		CB96DE362ABF58D800B01762 /* BMJUAOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMJUAOTF.otf; sourceTree = "<group>"; };
 		CB96DE382ABF597600B01762 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			children = (
 				CBA038682ABF352F00BD74CF /* Event.swift */,
 				CB45BFB32ADA5FE800EDEBC2 /* Photo.swift */,
+				CB2471002ADABBFC00EEA032 /* Place.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				CBA371682ACC3DF100FF5F56 /* CardView.swift in Sources */,
 				CBAB7F4F2ACD402500257778 /* ContentView.swift in Sources */,
 				CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */,
+				CB2471012ADABBFC00EEA032 /* Place.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

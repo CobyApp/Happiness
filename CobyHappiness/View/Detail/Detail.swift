@@ -11,76 +11,25 @@ import MapKit
 struct Detail: View {
     @EnvironmentObject private var appModel: AppViewModel
     
-    @State private var offset: CGFloat = 0.0
-    @State private var dragOffset: CGFloat = 0.0
-    
-    @State private var scale: CGFloat = 1
     @State private var isPresented: Bool = false
-    
-    @State private var image: UIImage?
     
     var event: Event
     var animation: Namespace.ID
     
     var body: some View {
-        GeometryReader { geometry in
-            VStack {
-                if let uiImage = UIImage(data: event.photos[0].image) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFill()
-                        .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
-                        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
-                        .clipped()
-                }
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 0) {
+                DetailPhoto()
+                    .overlay(alignment: .top, content: DetailHeader)
                 
                 DetailContent()
             }
-            .frame(width: geometry.size.width)
-            .offset(y: offset + dragOffset)
-            .gesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged { value in
-                        print("offset: \(offset)")
-                        print("dragOffset: \(dragOffset)")
-                        
-                        if scale == 1 {
-                            dragOffset = value.translation.height
-                        }
-                        
-                        if offset + dragOffset >= 0 {
-                            let scale = value.translation.height / UIScreen.main.bounds.height
-                            
-                            if 1 - scale > 0.8 && 1 - scale <= 1  {
-                                self.scale = 1 - scale
-                                dragOffset = 0
-                            }
-                        }
-                    }
-                    .onEnded { value in
-                        offset += value.translation.height
-                        
-                        if offset > 0 {
-                            offset = 0
-                        }
-                        
-                        dragOffset = 0
-                        
-                        if scale < 0.9 {
-                            appModel.showDetailView = false
-                        }
-                        scale = 1
-                    }
-            )
         }
+        .ignoresSafeArea()
         .background(Color.backgroundPrimary)
-        .overlay(alignment: .top, content: DetailHeader)
-        .clipShape(RoundedRectangle(cornerRadius: scale == 1 ? 0 : 30))
-        .scaleEffect(scale)
         .sheet(isPresented: $isPresented) {
             EventEdit(event: event)
         }
-        .ignoresSafeArea()
     }
     
     @ViewBuilder
@@ -114,30 +63,49 @@ struct Detail: View {
         }
         .padding(.horizontal, BaseSize.horizantalPadding)
         .padding(.top, BaseSize.topAreaPadding + 10)
-        .opacity(scale == 1 ? 1 : 0)
+    }
+    
+    @ViewBuilder
+    func DetailPhoto() -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 0) {
+                ForEach(event.photos) { photo in
+                    if let uiImage = UIImage(data: photo.image) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
+                            .clipped()
+                            .containerRelativeFrame(.horizontal)
+                    }
+                }
+            }
+            .scrollTargetLayout()
+        }
+        .scrollTargetBehavior(.viewAligned)
+        .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
     }
     
     @ViewBuilder
     func DetailContent() -> some View {
         VStack {
-            VStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(event.title)
-                        .font(.title.bold())
-                        .foregroundStyle(Color.grayscale100)
-                    
-                    Text(event.date.format("MMM d, yyyy"))
-                        .font(.callout.bold())
-                        .foregroundStyle(Color.grayscale300)
-                }
+            VStack(alignment: .leading, spacing: 4) {
+                Text(event.title)
+                    .font(.title.bold())
+                    .foregroundStyle(Color.grayscale100)
+                
+                Text(event.date.format("MMM d, yyyy"))
+                    .font(.callout.bold())
+                    .foregroundStyle(Color.grayscale300)
                 
                 Text(event.note)
                     .font(.callout)
                     .foregroundColor(Color.grayscale200)
                     .multilineTextAlignment(.leading)
+                    .padding(.top, 12)
             }
             .hAlign(.leading)
-            .padding(BaseSize.horizantalPadding)
+            .padding(.horizontal, BaseSize.horizantalPadding)
             
             let places = getPlaces()
             if !places.isEmpty {
@@ -146,8 +114,8 @@ struct Detail: View {
                     .clipShape(.rect(cornerRadius: 15))
             }
         }
+        .padding(.vertical, BaseSize.verticalPadding)
         .background(Color.backgroundPrimary)
-        .clipShape(RoundedRectangle(cornerRadius: 30))
     }
     
     private func getPlaces() -> [Place] {

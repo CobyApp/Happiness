@@ -35,9 +35,3 @@ struct MapView: View {
         }
     }
 }
-
-struct Place: Identifiable {
-    var id = UUID()
-    var name: String
-    var location: CLLocationCoordinate2D
-}

@@ -19,9 +19,7 @@ struct EventEdit: View {
     @State private var note: String = ""
     @State private var photos: [Photo] = []
     
-    @State private var images: [UIImage] = []
     @State private var selectedItems: [PhotosPickerItem] = []
-    
     @State private var isDisabled: Bool = true
     
     private var event: Event?
@@ -35,6 +33,7 @@ struct EventEdit: View {
         self._title = State(initialValue: event.title)
         self._note = State(initialValue: event.note)
         self._photos = State(initialValue: event.photos)
+        self._isDisabled = State(initialValue: event.photos.isEmpty)
     }
     
     var body: some View {
@@ -62,7 +61,8 @@ struct EventEdit: View {
         .onTapGesture {
             closeKeyboard()
         }
-    }
+    } 
+    
     @ViewBuilder
     func EventEditView() -> some View {
         VStack(spacing: 4) {
@@ -87,41 +87,7 @@ struct EventEdit: View {
                 Text("Pick Photo")
             }
             .onChange(of: selectedItems) {
-                Task {
-                    images = []
-                    photos = []
-                    
-                    for item in selectedItems {
-                        var image: Data?
-                        
-                        if let data = try? await item.loadTransferable(type: Data.self) {
-                            if let originalImage = UIImage(data: data) {
-                                if let compressedImageData = compressImage(originalImage) {
-                                    images.append(UIImage(data: compressedImageData)!)
-                                    image = compressedImageData
-                                }
-                            }
-                        }
-                        
-                        if let localID = item.itemIdentifier {
-                            let result = PHAsset.fetchAssets(withLocalIdentifiers: [localID], options: nil)
-                            
-                            if let asset = result.firstObject {
-                                if let date = asset.creationDate, let image = image {
-                                    photos.append(Photo(date: date, image: image))
-                                    
-                                    if let location = asset.location?.coordinate {
-                                        photos.last?.lat = location.latitude
-                                        photos.last?.lon = location.longitude
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    
-                    date = photos.first?.date ?? Date()
-                    isDisabled = photos.isEmpty
-                }
+                setupPhotos()
             }
         }
         .padding(BaseSize.horizantalPadding)
@@ -131,15 +97,53 @@ struct EventEdit: View {
     func EventContentView() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                ForEach(images, id: \.cgImage) { image in
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 200, height: 240)
-                        .clipShape(.rect(cornerRadius: 15))
+                ForEach(photos) { photo in
+                    if let uiImage = UIImage(data: photo.image) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 200, height: 240)
+                            .clipShape(.rect(cornerRadius: 15))
+                    }
                 }
             }
             .padding(.horizontal, BaseSize.horizantalPadding)
+        }
+    }
+    
+    private func setupPhotos() {
+        Task {
+            photos = []
+            
+            for item in selectedItems {
+                var image: Data?
+                
+                if let data = try? await item.loadTransferable(type: Data.self) {
+                    if let originalImage = UIImage(data: data) {
+                        if let compressedImageData = compressImage(originalImage) {
+                            image = compressedImageData
+                        }
+                    }
+                }
+                
+                if let localID = item.itemIdentifier {
+                    let result = PHAsset.fetchAssets(withLocalIdentifiers: [localID], options: nil)
+                    
+                    if let asset = result.firstObject {
+                        if let date = asset.creationDate, let image = image {
+                            photos.append(Photo(date: date, image: image))
+                            
+                            if let location = asset.location?.coordinate {
+                                photos.last?.lat = location.latitude
+                                photos.last?.lon = location.longitude
+                            }
+                        }
+                    }
+                }
+            }
+            
+            date = photos.first?.date ?? Date()
+            isDisabled = photos.isEmpty
         }
     }
     

@@ -62,7 +62,6 @@ struct Home: View {
             .scrollIndicators(.hidden)
             .scrollTargetBehavior(.viewAligned)
             .scrollPosition(id: $activeID)
-            .padding(.bottom, 100)
             
             Spacer()
         }
