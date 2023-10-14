@@ -40,7 +40,6 @@ struct Home: View {
                                     .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 1.2)
                             } else {
                                 CardView(event: event, animation: animation)
-                                    .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
                                     .onTapGesture {
                                         withAnimation(.spring()) {
                                             appModel.currentActiveItem = event

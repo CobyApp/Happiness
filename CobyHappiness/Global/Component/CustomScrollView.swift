@@ -49,39 +49,43 @@ struct CustomScrollView<Content: View>: View {
                     .gesture(
                         DragGesture()
                             .onChanged { value in
-                                if offset + value.translation.height > 0 {
-                                    let scale = (value.translation.height - 40) / UIScreen.main.bounds.height
-                                    
-                                    if 1 - scale > 0.7 && 1 - scale <= 1  {
-                                        self.scale = 1 - scale
-                                        dragOffset = 0
+                                withAnimation {
+                                    if offset + value.translation.height > 0 {
+                                        let scale = (value.translation.height - 80) / UIScreen.main.bounds.height
+                                        
+                                        if 1 - scale > 0.7 && 1 - scale <= 1  {
+                                            self.scale = 1 - scale
+                                            dragOffset = 0
+                                        }
+                                    } else if scale == 1 {
+                                        let maxOffset = contentHeight - geometry.size.height < 0 ? 0 : contentHeight - geometry.size.height
+                                        
+                                        if offset + value.translation.height >= -maxOffset {
+                                            dragOffset = value.translation.height
+                                        }
                                     }
-                                } else if scale == 1 {
-                                    let maxOffset = contentHeight - geometry.size.height < 0 ? 0 : contentHeight - geometry.size.height
                                     
-                                    if offset + value.translation.height >= -maxOffset {
-                                        dragOffset = value.translation.height
+                                    if offset + value.translation.height - BaseSize.topAreaPadding - 10 < -BaseSize.fullWidth * 1.2 {
+                                        isDown = true
+                                    } else {
+                                        isDown = false
                                     }
-                                }
-                                
-                                if offset + value.translation.height - BaseSize.topAreaPadding - 10 < -BaseSize.fullWidth * 1.2 {
-                                    isDown = true
-                                } else {
-                                    isDown = false
                                 }
                             }
                             .onEnded { value in
-                                offset += dragOffset
-                                
-                                if offset > 0 {
-                                    offset = 0
-                                }
-                                
-                                dragOffset = 0
-                                
-                                if scale < 0.8 {
-                                    showDetailView = false
-                                } else {
+                                withAnimation(.spring()) {
+                                    offset += dragOffset
+                                    
+                                    if offset > 0 {
+                                        offset = 0
+                                    }
+                                    
+                                    dragOffset = 0
+                                    
+                                    if scale < 0.8 {
+                                        showDetailView = false
+                                    }
+                                    
                                     scale = 1
                                 }
                             }
