@@ -18,6 +18,7 @@ struct Detail: View {
     
     var event: Event
     var animation: Namespace.ID
+    var columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: BaseSize.cellSpacing), count: 2)
     
     init(event: Event, animation: Namespace.ID) {
         self.event = event
@@ -112,12 +113,18 @@ struct Detail: View {
                 .frame(height: 1)
                 .foregroundColor(Color.borderDefault)
             
-            Text(event.note)
-                .font(.callout)
-                .foregroundColor(Color.grayscale200)
-                .multilineTextAlignment(.leading)
-                .lineLimit(nil)
-                .fixedSize(horizontal: false, vertical: true)
+            VStack(alignment: .leading, spacing: 10) {
+                Text("기록")
+                    .font(.title3.bold())
+                    .foregroundStyle(Color.grayscale100)
+                
+                Text(event.note)
+                    .font(.callout)
+                    .foregroundColor(Color.grayscale200)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(nil)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
             
             let places = getPlaces()
             if !places.isEmpty {
@@ -125,10 +132,31 @@ struct Detail: View {
                     .frame(height: 1)
                     .foregroundColor(Color.borderDefault)
                 
-                MapView(places: places)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: BaseSize.cardWidth * 0.7)
-                    .clipShape(.rect(cornerRadius: 15))
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("위치")
+                        .font(.title3.bold())
+                        .foregroundStyle(Color.grayscale100)
+                    
+                    MapView(places: places)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: BaseSize.cardWidth * 0.7)
+                        .clipShape(.rect(cornerRadius: 15))
+                        .allowsHitTesting(false)
+                }
+            }
+            
+            Divider()
+                .frame(height: 1)
+                .foregroundColor(Color.borderDefault)
+            
+            LazyVGrid(columns: columns, spacing: BaseSize.cellSpacing) {
+                ForEach(photos, id: \.self) { photo in
+                    Image(uiImage: photo)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: BaseSize.cellWidth, height: BaseSize.cellWidth)
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                }
             }
         }
         .padding(.horizontal, BaseSize.horizantalPadding)

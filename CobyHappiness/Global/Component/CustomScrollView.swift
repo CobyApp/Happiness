@@ -12,9 +12,11 @@ struct CustomScrollView<Content: View>: View {
     @Binding var scale: CGFloat
     @Binding var isDown: Bool
     
+    @State private var contentHeight: CGFloat = 0
+    @State private var maxOffset: CGFloat = 0.0
     @State private var offset: CGFloat = 0.0
     @State private var dragOffset: CGFloat = 0.0
-    @State private var contentHeight: CGFloat = 0
+    @State private var deceleration: Double = 0.0
     
     let content: Content
     
@@ -43,6 +45,7 @@ struct CustomScrollView<Content: View>: View {
                             Color.clear
                                 .onAppear {
                                     contentHeight = innerGeometry.size.height
+                                    maxOffset = geometry.size.height - contentHeight < 0 ? geometry.size.height - contentHeight : 0
                                 }
                         }
                     )
@@ -50,17 +53,17 @@ struct CustomScrollView<Content: View>: View {
                         DragGesture()
                             .onChanged { value in
                                 withAnimation {
-                                    if offset + value.translation.height >= 0 {
-                                        let scale = (offset + value.translation.height - 100) / UIScreen.main.bounds.height
+                                    let nextOffset = offset + value.translation.height
+                                    
+                                    if nextOffset >= 0 {
+                                        let scale = value.translation.height / UIScreen.main.bounds.height
                                         
-                                        if 1 - scale > 0.7 && 1 - scale <= 1  {
+                                        if 1 - scale > 0.7 && scale > 0 {
                                             self.scale = 1 - scale
                                             dragOffset = 0
                                         }
                                     } else if scale == 1 {
-                                        let maxOffset = contentHeight - geometry.size.height < 0 ? 0 : contentHeight - geometry.size.height
-                                        
-                                        if offset + value.translation.height >= -maxOffset {
+                                        if nextOffset > maxOffset {
                                             dragOffset = value.translation.height
                                         }
                                     }
@@ -74,13 +77,9 @@ struct CustomScrollView<Content: View>: View {
                             }
                             .onEnded { value in
                                 withAnimation(.spring()) {
-                                    offset += dragOffset
-                                    
-                                    if offset >= 0 {
-                                        offset = 0
-                                    }
-                                    
-                                    dragOffset = 0
+                                    let gestureVelocity = value.predictedEndLocation.y - value.location.y
+                                    deceleration = Double(gestureVelocity)
+                                    continueAnimation()
                                     
                                     if scale < 0.8 {
                                         showDetailView = false
@@ -91,6 +90,18 @@ struct CustomScrollView<Content: View>: View {
                             }
                     )
             }
+        }
+    }
+    
+    private func continueAnimation() {
+        offset += dragOffset + CGFloat(deceleration * 30)
+        dragOffset = 0.0
+        deceleration = 0.0
+        
+        if offset >= 0 {
+            offset = 0
+        } else if offset < maxOffset {
+            offset = maxOffset
         }
     }
 }
