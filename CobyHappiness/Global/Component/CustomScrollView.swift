@@ -58,7 +58,7 @@ struct CustomScrollView<Content: View>: View {
                                     if nextOffset >= 0 {
                                         let scale = (value.translation.height - 100) / UIScreen.main.bounds.height
                                         
-                                        if 1 - scale > 0.7 && scale > 0 {
+                                        if 1 - scale > 0.75 && scale > 0 {
                                             self.scale = 1 - scale
                                             dragOffset = 0
                                         }
@@ -81,7 +81,7 @@ struct CustomScrollView<Content: View>: View {
                                     deceleration = Double(gestureVelocity)
                                     continueAnimation()
                                     
-                                    if scale < 0.8 {
+                                    if scale < 0.9 {
                                         showDetailView = false
                                     }
                                     

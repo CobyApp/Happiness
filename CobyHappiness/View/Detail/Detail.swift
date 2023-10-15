@@ -103,10 +103,12 @@ struct Detail: View {
                 Text(event.title)
                     .font(.title.bold())
                     .foregroundStyle(Color.grayscale100)
+                    .matchedGeometryEffect(id: "title" + event.id.uuidString, in: animation)
                 
                 Text(event.date.format("MMM d, yyyy"))
                     .font(.callout.bold())
                     .foregroundStyle(Color.grayscale300)
+                    .matchedGeometryEffect(id: "note" + event.id.uuidString, in: animation)
             }
             
             Divider()
@@ -126,6 +128,26 @@ struct Detail: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
             
+            Divider()
+                .frame(height: 1)
+                .foregroundColor(Color.borderDefault)
+            
+            VStack(alignment: .leading, spacing: 10) {
+                Text("목록")
+                    .font(.title3.bold())
+                    .foregroundStyle(Color.grayscale100)
+                
+                LazyVGrid(columns: columns, spacing: BaseSize.cellSpacing) {
+                    ForEach(photos, id: \.self) { photo in
+                        Image(uiImage: photo)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: BaseSize.cellWidth, height: BaseSize.cellWidth)
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+                    }
+                }
+            }
+            
             let places = getPlaces()
             if !places.isEmpty {
                 Divider()
@@ -142,20 +164,6 @@ struct Detail: View {
                         .frame(height: BaseSize.cardWidth * 0.7)
                         .clipShape(.rect(cornerRadius: 15))
                         .allowsHitTesting(false)
-                }
-            }
-            
-            Divider()
-                .frame(height: 1)
-                .foregroundColor(Color.borderDefault)
-            
-            LazyVGrid(columns: columns, spacing: BaseSize.cellSpacing) {
-                ForEach(photos, id: \.self) { photo in
-                    Image(uiImage: photo)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: BaseSize.cellWidth, height: BaseSize.cellWidth)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
                 }
             }
         }

@@ -46,10 +46,12 @@ struct CardView: View {
                 Text(event.title)
                     .font(.title.bold())
                     .foregroundStyle(.white)
+                    .matchedGeometryEffect(id: "title" + event.id.uuidString, in: animation)
                 
                 Text(event.date.format("MMM d, yyyy"))
                     .font(.callout.bold())
                     .foregroundStyle(.white.opacity(0.8))
+                    .matchedGeometryEffect(id: "note" + event.id.uuidString, in: animation)
             }
             .padding(20)
         })
