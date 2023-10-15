@@ -56,7 +56,7 @@ struct CustomScrollView<Content: View>: View {
                                     let nextOffset = offset + value.translation.height
                                     
                                     if nextOffset >= 0 {
-                                        let scale = value.translation.height / UIScreen.main.bounds.height
+                                        let scale = (value.translation.height - 100) / UIScreen.main.bounds.height
                                         
                                         if 1 - scale > 0.7 && scale > 0 {
                                             self.scale = 1 - scale
@@ -68,7 +68,7 @@ struct CustomScrollView<Content: View>: View {
                                         }
                                     }
                                     
-                                    if offset + dragOffset - BaseSize.topAreaPadding - 10 < -BaseSize.fullWidth * 1.2 {
+                                    if nextOffset - BaseSize.topAreaPadding - 10 < -BaseSize.fullWidth * 1.2 {
                                         isDown = true
                                     } else {
                                         isDown = false
@@ -94,7 +94,10 @@ struct CustomScrollView<Content: View>: View {
     }
     
     private func continueAnimation() {
-        offset += dragOffset + CGFloat(deceleration * 30)
+        if scale == 1 {
+            offset += dragOffset + CGFloat(deceleration * 2)
+        }
+        
         dragOffset = 0.0
         deceleration = 0.0
         
@@ -102,6 +105,12 @@ struct CustomScrollView<Content: View>: View {
             offset = 0
         } else if offset < maxOffset {
             offset = maxOffset
+        }
+        
+        if offset - BaseSize.topAreaPadding - 10 < -BaseSize.fullWidth * 1.2 {
+            isDown = true
+        } else {
+            isDown = false
         }
     }
 }
