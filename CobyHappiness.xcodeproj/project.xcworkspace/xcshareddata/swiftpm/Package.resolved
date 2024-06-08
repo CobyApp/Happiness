@@ -1,0 +1,15 @@
+{
+  "originHash" : "020505c006d486dff059f67c018e386044fbe707c176869ff5911a2f67ec5bc7",
+  "pins" : [
+    {
+      "identity" : "cobyds",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CobyLibrary/CobyDS.git",
+      "state" : {
+        "revision" : "97f1006066088bbf6d5cbf8937f7be3d1e15333d",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}

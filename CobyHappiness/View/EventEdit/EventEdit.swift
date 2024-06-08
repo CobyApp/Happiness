@@ -9,6 +9,8 @@ import SwiftUI
 import MapKit
 import PhotosUI
 
+import CobyDS
+
 struct EventEdit: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
@@ -48,7 +50,7 @@ struct EventEdit: View {
                     .foregroundColor(Color.white)
                     .frame(maxWidth: .infinity)
                     .frame(height: 58)
-                    .background(isDisabled ? Color.grayscale400 : Color.blueBase)
+                    .background(isDisabled ? Color.interactionDisable : Color.primaryNormal)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                     .padding(.horizontal, BaseSize.horizantalPadding)
                     .onTapGesture {

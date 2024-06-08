@@ -19,7 +19,7 @@ struct CustomHeader: View {
                     .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 25, height: 25)
-                    .foregroundColor(.grayscale100)
+                    .foregroundColor(.labelNormal)
                 
                 TextField("Search", text: .constant(""))
             }
@@ -37,7 +37,7 @@ struct CustomHeader: View {
                     .resizable()
                     .renderingMode(.template)
                     .aspectRatio(contentMode: .fit)
-                    .foregroundColor(.grayscale100)
+                    .foregroundColor(.labelNormal)
                     .frame(width: 25, height: 25)
                     .padding(12)
                     .background{

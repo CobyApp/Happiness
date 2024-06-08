@@ -7,7 +7,10 @@
 
 import SwiftUI
 
+import CobyDS
+
 struct ContentView: View {
+    
     @StateObject var appModel: AppViewModel = .init()
     
     @Namespace var animation
@@ -42,7 +45,7 @@ struct ContentView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.backgroundLightGray)
+        .background(Color.backgroundNormalNormal)
         .environmentObject(appModel)
         .modelContainer(for: Event.self)
     }

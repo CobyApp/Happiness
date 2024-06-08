@@ -12,13 +12,9 @@
 		CB314DF72ADAC1B9007B984A /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB314DF62ADAC1B9007B984A /* CustomScrollView.swift */; };
 		CB45BFB42ADA5FE800EDEBC2 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB45BFB32ADA5FE800EDEBC2 /* Photo.swift */; };
 		CB96DE372ABF593F00B01762 /* BMJUAOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB96DE362ABF58D800B01762 /* BMJUAOTF.otf */; };
-		CB96DE3A2ABF599B00B01762 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB96DE392ABF599B00B01762 /* Font+Extension.swift */; };
 		CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */; };
 		CB9EF8DB2ABC633B00FDCE12 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF8DA2ABC633B00FDCE12 /* Preview Assets.xcassets */; };
 		CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */; };
-		CB9EF8E92ABC684200FDCE12 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8E82ABC684200FDCE12 /* Date+Extensions.swift */; };
-		CB9EF8EC2ABC68E500FDCE12 /* UIImage+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8EB2ABC68E500FDCE12 /* UIImage+Assets.swift */; };
-		CB9EF8EE2ABC691000FDCE12 /* Color+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8ED2ABC691000FDCE12 /* Color+Additions.swift */; };
 		CB9EF9082ABC829F00FDCE12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */; };
 		CBA038692ABF352F00BD74CF /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA038682ABF352F00BD74CF /* Event.swift */; };
 		CBA371682ACC3DF100FF5F56 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA371672ACC3DF100FF5F56 /* CardView.swift */; };
@@ -29,7 +25,7 @@
 		CBAB7F542ACD455E00257778 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F532ACD455E00257778 /* Detail.swift */; };
 		CBABE92F2ACB313C00103BB0 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABE92E2ACB313C00103BB0 /* Home.swift */; };
 		CBABE9322ACB379200103BB0 /* EventEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABE9312ACB379200103BB0 /* EventEdit.swift */; };
-		CBAD08C02AC16B21000E2DD3 /* CommonTextfieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD08BF2AC16B21000E2DD3 /* CommonTextfieldStyle.swift */; };
+		CBAD45532C15197F009D4EFF /* CobyDS in Frameworks */ = {isa = PBXBuildFile; productRef = CBAD45522C15197F009D4EFF /* CobyDS */; };
 		CBED4DD22AD14E2D00B8AB68 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED4DD12AD14E2D00B8AB68 /* MapView.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,14 +36,10 @@
 		CB45BFB32ADA5FE800EDEBC2 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		CB96DE362ABF58D800B01762 /* BMJUAOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMJUAOTF.otf; sourceTree = "<group>"; };
 		CB96DE382ABF597600B01762 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		CB96DE392ABF599B00B01762 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		CB9EF8D02ABC633A00FDCE12 /* CobyHappiness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CobyHappiness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CobyHappinessApp.swift; sourceTree = "<group>"; };
 		CB9EF8DA2ABC633B00FDCE12 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
-		CB9EF8E82ABC684200FDCE12 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
-		CB9EF8EB2ABC68E500FDCE12 /* UIImage+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Assets.swift"; sourceTree = "<group>"; };
-		CB9EF8ED2ABC691000FDCE12 /* Color+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Additions.swift"; sourceTree = "<group>"; };
 		CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CBA038682ABF352F00BD74CF /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		CBA371672ACC3DF100FF5F56 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -58,7 +50,6 @@
 		CBAB7F532ACD455E00257778 /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
 		CBABE92E2ACB313C00103BB0 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		CBABE9312ACB379200103BB0 /* EventEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEdit.swift; sourceTree = "<group>"; };
-		CBAD08BF2AC16B21000E2DD3 /* CommonTextfieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTextfieldStyle.swift; sourceTree = "<group>"; };
 		CBED4DD12AD14E2D00B8AB68 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBAD45532C15197F009D4EFF /* CobyDS in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,7 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				CBA371662ACC3DE100FF5F56 /* Component */,
-				CBAD08BE2AC16B16000E2DD3 /* Style */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -172,7 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				CB08C0672AC27AC600FDB79B /* Literals */,
-				CB9EF8EA2ABC68D100FDCE12 /* Utils */,
 				CB9EF8E52ABC673100FDCE12 /* Extensions */,
 			);
 			path = Supports;
@@ -182,19 +172,8 @@
 			isa = PBXGroup;
 			children = (
 				CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */,
-				CB9EF8E82ABC684200FDCE12 /* Date+Extensions.swift */,
-				CB96DE392ABF599B00B01762 /* Font+Extension.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		CB9EF8EA2ABC68D100FDCE12 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				CB9EF8EB2ABC68E500FDCE12 /* UIImage+Assets.swift */,
-				CB9EF8ED2ABC691000FDCE12 /* Color+Additions.swift */,
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		CBA371662ACC3DE100FF5F56 /* Component */ = {
@@ -249,14 +228,6 @@
 			path = EventEdit;
 			sourceTree = "<group>";
 		};
-		CBAD08BE2AC16B16000E2DD3 /* Style */ = {
-			isa = PBXGroup;
-			children = (
-				CBAD08BF2AC16B21000E2DD3 /* CommonTextfieldStyle.swift */,
-			);
-			path = Style;
-			sourceTree = "<group>";
-		};
 		CBED4DD02AD14E2300B8AB68 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +252,9 @@
 			dependencies = (
 			);
 			name = CobyHappiness;
+			packageProductDependencies = (
+				CBAD45522C15197F009D4EFF /* CobyDS */,
+			);
 			productName = CobyHappiness;
 			productReference = CB9EF8D02ABC633A00FDCE12 /* CobyHappiness.app */;
 			productType = "com.apple.product-type.application";
@@ -309,6 +283,9 @@
 				Base,
 			);
 			mainGroup = CB9EF8C72ABC633A00FDCE12;
+			packageReferences = (
+				CBAD45512C15197F009D4EFF /* XCRemoteSwiftPackageReference "CobyDS" */,
+			);
 			productRefGroup = CB9EF8D12ABC633A00FDCE12 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -336,19 +313,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB9EF8EE2ABC691000FDCE12 /* Color+Additions.swift in Sources */,
 				CBAB7F452ACD3E7A00257778 /* CustomHeader.swift in Sources */,
 				CB314DF72ADAC1B9007B984A /* CustomScrollView.swift in Sources */,
 				CBA038692ABF352F00BD74CF /* Event.swift in Sources */,
 				CB08C0692AC27AD100FDB79B /* BaseSize.swift in Sources */,
 				CBAB7F542ACD455E00257778 /* Detail.swift in Sources */,
-				CB9EF8EC2ABC68E500FDCE12 /* UIImage+Assets.swift in Sources */,
 				CBAB7F482ACD3F7400257778 /* AppViewModel.swift in Sources */,
 				CBED4DD22AD14E2D00B8AB68 /* MapView.swift in Sources */,
-				CB96DE3A2ABF599B00B01762 /* Font+Extension.swift in Sources */,
 				CBABE9322ACB379200103BB0 /* EventEdit.swift in Sources */,
-				CBAD08C02AC16B21000E2DD3 /* CommonTextfieldStyle.swift in Sources */,
-				CB9EF8E92ABC684200FDCE12 /* Date+Extensions.swift in Sources */,
 				CB45BFB42ADA5FE800EDEBC2 /* Photo.swift in Sources */,
 				CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */,
 				CBAB7F432ACD3D6A00257778 /* CustomMenu.swift in Sources */,
@@ -574,6 +546,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CBAD45512C15197F009D4EFF /* XCRemoteSwiftPackageReference "CobyDS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CobyLibrary/CobyDS.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CBAD45522C15197F009D4EFF /* CobyDS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBAD45512C15197F009D4EFF /* XCRemoteSwiftPackageReference "CobyDS" */;
+			productName = CobyDS;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CB9EF8C82ABC633A00FDCE12 /* Project object */;
 }

@@ -8,6 +8,8 @@
 import SwiftUI
 import MapKit
 
+import CobyDS
+
 struct Detail: View {
     @EnvironmentObject private var appModel: AppViewModel
     
@@ -35,7 +37,7 @@ struct Detail: View {
             }
         }
         .overlay(alignment: .top, content: DetailHeader)
-        .background(Color.backgroundPrimary)
+        .background(Color.backgroundNormalNormal)
         .clipShape(RoundedRectangle(cornerRadius: scale == 1 ? 0 : 30))
         .scaleEffect(scale)
         .ignoresSafeArea()
@@ -102,27 +104,27 @@ struct Detail: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(event.title)
                     .font(.title.bold())
-                    .foregroundStyle(Color.grayscale100)
+                    .foregroundStyle(Color.labelNormal)
                     .matchedGeometryEffect(id: "title" + event.id.uuidString, in: animation)
                 
                 Text(event.date.format("MMM d, yyyy"))
                     .font(.callout.bold())
-                    .foregroundStyle(Color.grayscale300)
+                    .foregroundStyle(Color.labelAlternative)
                     .matchedGeometryEffect(id: "note" + event.id.uuidString, in: animation)
             }
             
             Divider()
                 .frame(height: 1)
-                .foregroundColor(Color.borderDefault)
+                .foregroundColor(Color.lineNormalNormal)
             
             VStack(alignment: .leading, spacing: 10) {
                 Text("기록")
                     .font(.title3.bold())
-                    .foregroundStyle(Color.grayscale100)
+                    .foregroundStyle(Color.labelNormal)
                 
                 Text(event.note)
                     .font(.callout)
-                    .foregroundColor(Color.grayscale200)
+                    .foregroundColor(Color.labelNormal)
                     .multilineTextAlignment(.leading)
                     .lineLimit(nil)
                     .fixedSize(horizontal: false, vertical: true)
@@ -130,12 +132,12 @@ struct Detail: View {
             
             Divider()
                 .frame(height: 1)
-                .foregroundColor(Color.borderDefault)
+                .foregroundColor(Color.lineNormalNormal)
             
             VStack(alignment: .leading, spacing: 10) {
                 Text("목록")
                     .font(.title3.bold())
-                    .foregroundStyle(Color.grayscale100)
+                    .foregroundStyle(Color.labelNormal)
                 
                 LazyVGrid(columns: columns, spacing: BaseSize.cellSpacing) {
                     ForEach(photos, id: \.self) { photo in
@@ -152,12 +154,12 @@ struct Detail: View {
             if !places.isEmpty {
                 Divider()
                     .frame(height: 1)
-                    .foregroundColor(Color.borderDefault)
+                    .foregroundColor(Color.lineNormalNormal)
                 
                 VStack(alignment: .leading, spacing: 10) {
                     Text("위치")
                         .font(.title3.bold())
-                        .foregroundStyle(Color.grayscale100)
+                        .foregroundStyle(Color.labelNormal)
                     
                     MapView(places: places)
                         .frame(maxWidth: .infinity)
@@ -170,7 +172,7 @@ struct Detail: View {
         .padding(.horizontal, BaseSize.horizantalPadding)
         .padding(.top, BaseSize.verticalPadding)
         .padding(.bottom, BaseSize.bottomAreaPadding + BaseSize.verticalPadding)
-        .background(Color.backgroundPrimary)
+        .background(Color.backgroundNormalNormal)
         .animation(nil, value: UUID())
     }
     
