@@ -14,8 +14,28 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            Home(animation: animation)
-                .opacity(appModel.showDetailView ? 0 : 1)
+            TabView {
+                Home(animation: animation)
+                    .tabItem {
+                        Label("홈", image: "home")
+                    }
+                
+                Home(animation: animation)
+                    .tabItem {
+                        Label("지도", image: "map")
+                    }
+                
+                Home(animation: animation)
+                    .tabItem {
+                        Label("여행", image: "travel")
+                    }
+                
+                Home(animation: animation)
+                    .tabItem {
+                        Label("정보", image: "person")
+                    }
+            }
+            .opacity(appModel.showDetailView ? 0 : 1)
             
             if let event = appModel.currentActiveItem, appModel.showDetailView {
                 Detail(event: event, animation: animation)
