@@ -32,34 +32,36 @@ struct Home: View {
             CustomMenu(currentMenu: $currentMenu, animation: animation)
                 .padding(.top, 20)
             
-            LazyVStack(spacing: 20) {
-                ForEach(self.events) { event in
-                    var image: Image? {
-                        if let data = event.photos.first?.image, let uiImage = UIImage(data: data) {
-                            Image(uiImage: uiImage)
-                        } else {
-                            nil
+            ScrollView {
+                LazyVStack(spacing: 20) {
+                    ForEach(self.events) { event in
+                        var image: Image? {
+                            if let data = event.photos.first?.image, let uiImage = UIImage(data: data) {
+                                Image(uiImage: uiImage)
+                            } else {
+                                nil
+                            }
                         }
-                    }
-                    
-                    ThumbnailCardView(
-                        image: image,
-                        title: event.title,
-                        discription: event.note
-                    )
-                    .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
-                    .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
-                    .onTapGesture {
-                        withAnimation(.spring()) {
-                            appModel.currentActiveItem = event
-                            appModel.showDetailView = true
+                        
+                        ThumbnailCardView(
+                            image: image,
+                            title: event.title,
+                            discription: event.note
+                        )
+                        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
+                        .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
+                        .onTapGesture {
+                            withAnimation(.spring()) {
+                                appModel.currentActiveItem = event
+                                appModel.showDetailView = true
+                            }
                         }
                     }
                 }
+                .padding(.vertical, 12)
             }
-            
-            Spacer()
         }
+        .loadCustomFonts()
         .sheet(isPresented: $isPresented) {
             EventEdit()
         }
