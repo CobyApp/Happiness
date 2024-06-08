@@ -21,7 +21,6 @@ struct Home: View {
     @State private var isPresented: Bool = false
     @State private var searchText: String = ""
     @State private var currentMenu: EventType = .music
-    @State private var activeID: UUID?
     
     var animation: Namespace.ID
     
@@ -33,47 +32,33 @@ struct Home: View {
             CustomMenu(currentMenu: $currentMenu, animation: animation)
                 .padding(.top, 20)
             
-            ScrollView(.horizontal) {
-                HStack {
-                    ForEach(events) { event in
-                        Group {
-                            if appModel.showDetailView {
-                                Rectangle()
-                                    .fill(Color.clear)
-                                    .frame(width: BaseSize.cardWidth, height: BaseSize.cardWidth * 1.2)
-                            } else {
-                                CardView(event: event, animation: animation)
-                                    .onTapGesture {
-                                        withAnimation(.spring()) {
-                                            appModel.currentActiveItem = event
-                                            appModel.showDetailView = true
-                                        }
-                                    }
-                            }
+            LazyVStack(spacing: 20) {
+                ForEach(self.events) { event in
+                    var image: Image? {
+                        if let data = event.photos.first?.image, let uiImage = UIImage(data: data) {
+                            Image(uiImage: uiImage)
+                        } else {
+                            nil
                         }
-                        .padding(.vertical, 20)
-                        .containerRelativeFrame(.horizontal)
-                        .scrollTransition { content, phase in
-                            content
-                                .opacity(phase.isIdentity ? 1.0 : 0.5)
+                    }
+                    
+                    ThumbnailCardView(
+                        image: image,
+                        title: event.title,
+                        discription: event.note
+                    )
+                    .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
+                    .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
+                    .onTapGesture {
+                        withAnimation(.spring()) {
+                            appModel.currentActiveItem = event
+                            appModel.showDetailView = true
                         }
                     }
                 }
-                .scrollTargetLayout()
             }
-            .contentMargins(.horizontal, BaseSize.horizantalPadding, for: .scrollContent)
-            .scrollIndicators(.hidden)
-            .scrollTargetBehavior(.viewAligned)
-            .scrollPosition(id: $activeID)
             
             Spacer()
-        }
-        .onChange(of: events.count) {
-            withAnimation {
-                if !events.isEmpty {
-                    activeID = events[0].id
-                }
-            }
         }
         .sheet(isPresented: $isPresented) {
             EventEdit()

@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import CobyDS
+
 struct CustomHeader: View {
     @Binding var isPresented: Bool
     @Binding var searchText: String

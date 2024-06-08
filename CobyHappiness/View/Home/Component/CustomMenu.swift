@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import CobyDS
+
 struct CustomMenu: View {
     @Binding var currentMenu: EventType
     

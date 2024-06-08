@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import CobyDS
+
 struct CustomScrollView<Content: View>: View {
     @Binding var showDetailView: Bool
     @Binding var scale: CGFloat
@@ -68,7 +70,7 @@ struct CustomScrollView<Content: View>: View {
                                         }
                                     }
                                     
-                                    if nextOffset - BaseSize.topAreaPadding - 10 < -BaseSize.fullWidth * 1.2 {
+                                    if nextOffset - BaseSize.topAreaPadding - 10 < -BaseSize.screenWidth * 1.2 {
                                         isDown = true
                                     } else {
                                         isDown = false
@@ -107,7 +109,7 @@ struct CustomScrollView<Content: View>: View {
             offset = maxOffset
         }
         
-        if offset - BaseSize.topAreaPadding - 10 < -BaseSize.fullWidth * 1.2 {
+        if offset - BaseSize.topAreaPadding - 10 < -BaseSize.screenWidth * 1.2 {
             isDown = true
         } else {
             isDown = false

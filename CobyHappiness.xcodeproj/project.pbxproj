@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CB08C0692AC27AD100FDB79B /* BaseSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB08C0682AC27AD100FDB79B /* BaseSize.swift */; };
 		CB2471012ADABBFC00EEA032 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2471002ADABBFC00EEA032 /* Place.swift */; };
 		CB314DF72ADAC1B9007B984A /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB314DF62ADAC1B9007B984A /* CustomScrollView.swift */; };
 		CB45BFB42ADA5FE800EDEBC2 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB45BFB32ADA5FE800EDEBC2 /* Photo.swift */; };
@@ -17,7 +16,6 @@
 		CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */; };
 		CB9EF9082ABC829F00FDCE12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */; };
 		CBA038692ABF352F00BD74CF /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA038682ABF352F00BD74CF /* Event.swift */; };
-		CBA371682ACC3DF100FF5F56 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA371672ACC3DF100FF5F56 /* CardView.swift */; };
 		CBAB7F432ACD3D6A00257778 /* CustomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F422ACD3D6A00257778 /* CustomMenu.swift */; };
 		CBAB7F452ACD3E7A00257778 /* CustomHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F442ACD3E7A00257778 /* CustomHeader.swift */; };
 		CBAB7F482ACD3F7400257778 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F472ACD3F7400257778 /* AppViewModel.swift */; };
@@ -25,12 +23,11 @@
 		CBAB7F542ACD455E00257778 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F532ACD455E00257778 /* Detail.swift */; };
 		CBABE92F2ACB313C00103BB0 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABE92E2ACB313C00103BB0 /* Home.swift */; };
 		CBABE9322ACB379200103BB0 /* EventEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABE9312ACB379200103BB0 /* EventEdit.swift */; };
-		CBAD45532C15197F009D4EFF /* CobyDS in Frameworks */ = {isa = PBXBuildFile; productRef = CBAD45522C15197F009D4EFF /* CobyDS */; };
+		CBAD45562C151D6E009D4EFF /* CobyDS in Frameworks */ = {isa = PBXBuildFile; productRef = CBAD45552C151D6E009D4EFF /* CobyDS */; };
 		CBED4DD22AD14E2D00B8AB68 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED4DD12AD14E2D00B8AB68 /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CB08C0682AC27AD100FDB79B /* BaseSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSize.swift; sourceTree = "<group>"; };
 		CB2471002ADABBFC00EEA032 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		CB314DF62ADAC1B9007B984A /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		CB45BFB32ADA5FE800EDEBC2 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -42,7 +39,6 @@
 		CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CBA038682ABF352F00BD74CF /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		CBA371672ACC3DF100FF5F56 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		CBAB7F422ACD3D6A00257778 /* CustomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenu.swift; sourceTree = "<group>"; };
 		CBAB7F442ACD3E7A00257778 /* CustomHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeader.swift; sourceTree = "<group>"; };
 		CBAB7F472ACD3F7400257778 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
@@ -58,21 +54,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBAD45532C15197F009D4EFF /* CobyDS in Frameworks */,
+				CBAD45562C151D6E009D4EFF /* CobyDS in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CB08C0672AC27AC600FDB79B /* Literals */ = {
-			isa = PBXGroup;
-			children = (
-				CB08C0682AC27AD100FDB79B /* BaseSize.swift */,
-			);
-			path = Literals;
-			sourceTree = "<group>";
-		};
 		CB96DE342ABF588900B01762 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,7 +150,6 @@
 		CB9EF8E42ABC672B00FDCE12 /* Supports */ = {
 			isa = PBXGroup;
 			children = (
-				CB08C0672AC27AC600FDB79B /* Literals */,
 				CB9EF8E52ABC673100FDCE12 /* Extensions */,
 			);
 			path = Supports;
@@ -179,7 +166,6 @@
 		CBA371662ACC3DE100FF5F56 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				CBA371672ACC3DF100FF5F56 /* CardView.swift */,
 				CB314DF62ADAC1B9007B984A /* CustomScrollView.swift */,
 			);
 			path = Component;
@@ -253,7 +239,7 @@
 			);
 			name = CobyHappiness;
 			packageProductDependencies = (
-				CBAD45522C15197F009D4EFF /* CobyDS */,
+				CBAD45552C151D6E009D4EFF /* CobyDS */,
 			);
 			productName = CobyHappiness;
 			productReference = CB9EF8D02ABC633A00FDCE12 /* CobyHappiness.app */;
@@ -284,7 +270,7 @@
 			);
 			mainGroup = CB9EF8C72ABC633A00FDCE12;
 			packageReferences = (
-				CBAD45512C15197F009D4EFF /* XCRemoteSwiftPackageReference "CobyDS" */,
+				CBAD45542C151D6E009D4EFF /* XCRemoteSwiftPackageReference "CobyDS" */,
 			);
 			productRefGroup = CB9EF8D12ABC633A00FDCE12 /* Products */;
 			projectDirPath = "";
@@ -316,7 +302,6 @@
 				CBAB7F452ACD3E7A00257778 /* CustomHeader.swift in Sources */,
 				CB314DF72ADAC1B9007B984A /* CustomScrollView.swift in Sources */,
 				CBA038692ABF352F00BD74CF /* Event.swift in Sources */,
-				CB08C0692AC27AD100FDB79B /* BaseSize.swift in Sources */,
 				CBAB7F542ACD455E00257778 /* Detail.swift in Sources */,
 				CBAB7F482ACD3F7400257778 /* AppViewModel.swift in Sources */,
 				CBED4DD22AD14E2D00B8AB68 /* MapView.swift in Sources */,
@@ -325,7 +310,6 @@
 				CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */,
 				CBAB7F432ACD3D6A00257778 /* CustomMenu.swift in Sources */,
 				CBABE92F2ACB313C00103BB0 /* Home.swift in Sources */,
-				CBA371682ACC3DF100FF5F56 /* CardView.swift in Sources */,
 				CBAB7F4F2ACD402500257778 /* ContentView.swift in Sources */,
 				CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */,
 				CB2471012ADABBFC00EEA032 /* Place.swift in Sources */,
@@ -548,20 +532,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CBAD45512C15197F009D4EFF /* XCRemoteSwiftPackageReference "CobyDS" */ = {
+		CBAD45542C151D6E009D4EFF /* XCRemoteSwiftPackageReference "CobyDS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CobyLibrary/CobyDS.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.0.0;
+				version = 1.0.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CBAD45522C15197F009D4EFF /* CobyDS */ = {
+		CBAD45552C151D6E009D4EFF /* CobyDS */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CBAD45512C15197F009D4EFF /* XCRemoteSwiftPackageReference "CobyDS" */;
+			package = CBAD45542C151D6E009D4EFF /* XCRemoteSwiftPackageReference "CobyDS" */;
 			productName = CobyDS;
 		};
 /* End XCSwiftPackageProductDependency section */

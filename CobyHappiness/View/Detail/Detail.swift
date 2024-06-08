@@ -20,7 +20,7 @@ struct Detail: View {
     
     var event: Event
     var animation: Namespace.ID
-    var columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: BaseSize.cellSpacing), count: 2)
+    var columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 20), count: 2)
     
     init(event: Event, animation: Namespace.ID) {
         self.event = event
@@ -84,12 +84,12 @@ struct Detail: View {
                 Image(uiImage: photo)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
+                    .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth * 1.2)
                     .clipped()
                     .ignoresSafeArea()
             }
         }
-        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 1.2)
+        .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth * 1.2)
         .tabViewStyle(PageTabViewStyle())
         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
         .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
@@ -100,7 +100,7 @@ struct Detail: View {
     
     @ViewBuilder
     func DetailContent() -> some View {
-        VStack(alignment: .leading, spacing: BaseSize.verticalPadding) {
+        VStack(alignment: .leading, spacing: 20) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(event.title)
                     .font(.title.bold())
@@ -139,12 +139,12 @@ struct Detail: View {
                     .font(.title3.bold())
                     .foregroundStyle(Color.labelNormal)
                 
-                LazyVGrid(columns: columns, spacing: BaseSize.cellSpacing) {
+                LazyVGrid(columns: columns, spacing: 8) {
                     ForEach(photos, id: \.self) { photo in
                         Image(uiImage: photo)
                             .resizable()
                             .scaledToFill()
-                            .frame(width: BaseSize.cellWidth, height: BaseSize.cellWidth)
+                            .frame(width: (BaseSize.fullWidth - 8)/2, height: (BaseSize.fullWidth - 8)/2)
                             .clipShape(RoundedRectangle(cornerRadius: 15))
                     }
                 }
@@ -163,15 +163,15 @@ struct Detail: View {
                     
                     MapView(places: places)
                         .frame(maxWidth: .infinity)
-                        .frame(height: BaseSize.cardWidth * 0.7)
+                        .frame(height: BaseSize.fullWidth * 0.7)
                         .clipShape(.rect(cornerRadius: 15))
                         .allowsHitTesting(false)
                 }
             }
         }
         .padding(.horizontal, BaseSize.horizantalPadding)
-        .padding(.top, BaseSize.verticalPadding)
-        .padding(.bottom, BaseSize.bottomAreaPadding + BaseSize.verticalPadding)
+        .padding(.top, 20)
+        .padding(.bottom, BaseSize.bottomAreaPadding + 20)
         .background(Color.backgroundNormalNormal)
         .animation(nil, value: UUID())
     }
