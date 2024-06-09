@@ -180,25 +180,32 @@ struct EditView: View {
     }
     
     private func storeEvent() {
-        if let event {
-            event.date = date
-            event.type = type
-            event.title = title
-            event.note = note
-            event.photos = photos
-            try? context.save()
-        } else {
-            let item = Event(
-                date: date,
-                type: type,
-                title: title,
-                note: note,
-                photos: photos
-            )
-            context.insert(item)
+        do {
+            if let event = event {
+                let item = Event(
+                    id: event.id,
+                    date: self.date,
+                    type: self.type,
+                    title: self.title,
+                    note: self.note,
+                    photos: self.photos
+                )
+                self.context.insert(item)
+                try self.context.save()
+            } else {
+                let item = Event(
+                    date: self.date,
+                    type: self.type,
+                    title: self.title,
+                    note: self.note,
+                    photos: self.photos
+                )
+                self.context.insert(item)
+                try self.context.save()
+            }
+        } catch {
+            print("error")
         }
-
-        dismiss()
     }
     
     private func compressImage(_ image: UIImage) -> Data? {

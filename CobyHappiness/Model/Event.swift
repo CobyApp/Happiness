@@ -10,6 +10,7 @@ import SwiftData
 
 @Model
 final class Event {
+    
     @Attribute(.unique) var id: UUID
     var date: Date
     var type: EventType
@@ -18,13 +19,14 @@ final class Event {
     @Relationship(deleteRule: .cascade) var photos: [Photo]
 
     init(
+        id: UUID = UUID(),
         date: Date,
         type: EventType,
         title: String,
         note: String,
         photos: [Photo]
     ) {
-        self.id = UUID()
+        self.id = id
         self.date = date
         self.type = type
         self.title = title
