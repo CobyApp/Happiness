@@ -21,7 +21,6 @@
 		CBAD455A2C1582A7009D4EFF /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD45592C1582A7009D4EFF /* MapView.swift */; };
 		CBAD455D2C158315009D4EFF /* TravelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD455C2C158315009D4EFF /* TravelView.swift */; };
 		CBAD45602C15841D009D4EFF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD455F2C15841D009D4EFF /* ProfileView.swift */; };
-		CBAD45652C159FFF009D4EFF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD45642C159FFF009D4EFF /* MapViewController.swift */; };
 		CBAD45672C15C1F1009D4EFF /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD45662C15C1F1009D4EFF /* Data+Extensions.swift */; };
 		CBAD45692C15EBB1009D4EFF /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD45682C15EBB1009D4EFF /* Location.swift */; };
 /* End PBXBuildFile section */
@@ -42,7 +41,6 @@
 		CBAD45592C1582A7009D4EFF /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		CBAD455C2C158315009D4EFF /* TravelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelView.swift; sourceTree = "<group>"; };
 		CBAD455F2C15841D009D4EFF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		CBAD45642C159FFF009D4EFF /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		CBAD45662C15C1F1009D4EFF /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		CBAD45682C15EBB1009D4EFF /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,7 +172,6 @@
 			isa = PBXGroup;
 			children = (
 				CBAD45592C1582A7009D4EFF /* MapView.swift */,
-				CBAD45642C159FFF009D4EFF /* MapViewController.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -284,7 +281,6 @@
 				CBAB7F4F2ACD402500257778 /* ContentView.swift in Sources */,
 				CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */,
 				CB2471012ADABBFC00EEA032 /* Place.swift in Sources */,
-				CBAD45652C159FFF009D4EFF /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

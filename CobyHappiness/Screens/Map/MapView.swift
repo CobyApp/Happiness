@@ -6,10 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
+import MapKit
 
 import CobyDS
 
 struct MapView: View {
+    
+    @Query
+    private var events: [Event]
+    
     var body: some View {
         VStack(spacing: 0) {
             TopBarView(
@@ -22,7 +28,13 @@ struct MapView: View {
                 }
             )
             
-            MapViewContainer()
+            Map() {
+                ForEach(self.events) { event in
+                    if let location = event.location {
+                        Marker(event.title, coordinate: location.coordinate)
+                    }
+                }
+            }
         }
         .background(Color.backgroundNormalNormal)
     }
