@@ -18,7 +18,7 @@ struct MapView: View {
                 leftSide: .text,
                 leftTitle: "지도",
                 rightSide: .icon,
-                rightIcon: Image("add"),
+                rightIcon: Image("plus"),
                 rightAction: {
                     print("추가")
                 }

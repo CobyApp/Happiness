@@ -30,7 +30,11 @@ struct DetailView: View {
     }
     
     var body: some View {
-        CustomScrollView(showDetailView: self.$appModel.showDetailView, scale: self.$scale, isDown: self.$isDown) {
+        CBScaleScrollView(
+            isPresented: self.$appModel.showDetailView,
+            scale: self.$scale,
+            isDown: self.$isDown
+        ) {
             VStack(spacing: 0) {
                 self.DetailPhoto()
                 self.DetailContent()
@@ -42,7 +46,7 @@ struct DetailView: View {
         .scaleEffect(self.scale)
         .ignoresSafeArea()
         .sheet(isPresented: self.$isPresented) {
-            EventEdit(event: self.event)
+            EventEditView(event: self.event)
         }
     }
     

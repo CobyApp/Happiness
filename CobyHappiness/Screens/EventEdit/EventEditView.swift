@@ -1,5 +1,5 @@
 //
-//  EventEdit.swift
+//  EventEditView.swift
 //  CobyHappiness
 //
 //  Created by COBY_PRO on 10/3/23.
@@ -11,7 +11,7 @@ import PhotosUI
 
 import CobyDS
 
-struct EventEdit: View {
+struct EventEditView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
     

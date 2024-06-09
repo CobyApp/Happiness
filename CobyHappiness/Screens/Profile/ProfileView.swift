@@ -17,7 +17,7 @@ struct ProfileView: View {
                 leftSide: .text,
                 leftTitle: "정보",
                 rightSide: .icon,
-                rightIcon: Image("add"),
+                rightIcon: Image("setting"),
                 rightAction: {
                     print("추가")
                 }

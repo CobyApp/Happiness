@@ -21,7 +21,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             TabView {
-                Home()
+                HomeView()
                     .tabItem {
                         Label("홈", image: "home")
                     }

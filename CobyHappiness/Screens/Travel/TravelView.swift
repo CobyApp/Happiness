@@ -17,7 +17,7 @@ struct TravelView: View {
                 leftSide: .text,
                 leftTitle: "여행",
                 rightSide: .icon,
-                rightIcon: Image("add"),
+                rightIcon: Image("plus"),
                 rightAction: {
                     print("추가")
                 }
