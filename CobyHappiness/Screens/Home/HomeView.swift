@@ -12,24 +12,34 @@ import CobyDS
 
 struct HomeView: View {
     
-    @Environment(\.namespace) private var animation
     @Environment(\.modelContext) private var context
-    @EnvironmentObject private var appModel: AppViewModel
     
     @Query(sort: \Event.date, order: .reverse)
     private var events: [Event]
     
-    @State private var isPresented: Bool = false
+    @State private var event: Event? = nil
+    @State private var isDetailPresented: Bool = false
+    @State private var isEditPresented: Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
             self.HomeTopBarView()
             
-            self.EventsListView()
+            self.EventListView()
         }
         .background(Color.backgroundNormalNormal)
-        .sheet(isPresented: self.$isPresented) {
-            EventEditView()
+        .fullScreenCover(isPresented: self.$isDetailPresented) {
+            if let event = self.event {
+                DetailView(
+                    isPresented: self.$isDetailPresented,
+                    event: event
+                )
+            }
+        }
+        .fullScreenCover(isPresented: self.$isEditPresented) {
+            EditView(
+                isPresented: self.$isEditPresented
+            )
         }
     }
     
@@ -40,7 +50,7 @@ struct HomeView: View {
             rightSide: .icon,
             rightIcon: Image("plus"),
             rightAction: {
-                self.isPresented = true
+                self.isEditPresented = true
             }
         )
         .overlay(alignment: .leading) {
@@ -56,7 +66,7 @@ struct HomeView: View {
     }
     
     @ViewBuilder
-    private func EventsListView() -> some View {
+    private func EventListView() -> some View {
         ScrollView {
             LazyVStack(spacing: 20) {
                 ForEach(self.events) { event in
@@ -69,26 +79,16 @@ struct HomeView: View {
     
     @ViewBuilder
     private func EventThumbnailView(for event: Event) -> some View {
-        var image: Image? {
-            if let data = event.photos.first?.image, let uiImage = UIImage(data: data) {
-                return Image(uiImage: uiImage)
-            } else {
-                return nil
-            }
-        }
-        
         ThumbnailCardView(
-            image: image,
+            image: event.photos.first?.image.image,
             title: event.title,
-            discription: event.note
+            discription: event.date.format("MMM d, yyyy")
         )
         .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
-        .matchedGeometryEffect(id: event.id, in: self.animation)
         .onTapGesture {
-            withAnimation(.spring()) {
-                self.appModel.currentActiveItem = event
-                self.appModel.showDetailView = true
-            }
+            print(event)
+            self.event = event
+            self.isDetailPresented = true
         }
     }
 }

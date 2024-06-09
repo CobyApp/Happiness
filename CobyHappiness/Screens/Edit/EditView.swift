@@ -1,19 +1,21 @@
 //
-//  EventEditView.swift
+//  EditView.swift
 //  CobyHappiness
 //
 //  Created by COBY_PRO on 10/3/23.
 //
 
 import SwiftUI
-import MapKit
 import PhotosUI
 
 import CobyDS
 
-struct EventEditView: View {
+struct EditView: View {
+    
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
+    
+    @Binding var isPresented: Bool
     
     @State private var type: EventType = EventType.moment
     @State private var date: Date = Date()
@@ -25,11 +27,22 @@ struct EventEditView: View {
     @State private var isDisabled: Bool = true
     
     private var event: Event?
+    private let screenTitle: String
     
-    init() {}
+    init(
+        isPresented: Binding<Bool>
+    ) {
+        self._isPresented = isPresented
+        self.screenTitle = "추억 만들기"
+    }
     
-    init(event: Event) {
+    init(
+        isPresented: Binding<Bool>,
+        event: Event
+    ) {
+        self._isPresented = isPresented
         self.event = event
+        self.screenTitle = "추억 수정하기"
         self._date = State(initialValue: event.date)
         self._type = State(initialValue: event.type)
         self._title = State(initialValue: event.title)
@@ -39,39 +52,49 @@ struct EventEditView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack {
-                EventEditView()
-                
-                EventContentView()
-                
-                Text(NSLocalizedString("추억 저장하기", comment: ""))
-                    .font(.system(size: 16, weight: .regular))
-                    .foregroundColor(Color.white)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 58)
-                    .background(isDisabled ? Color.interactionDisable : Color.redNormal)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                    .padding(.horizontal, BaseSize.horizantalPadding)
-                    .onTapGesture {
-                        if !isDisabled {
-                            storeEvent()
+        VStack(spacing: 0) {
+            TopBarView(
+                leftSide: .left,
+                leftAction: {
+                    self.isPresented = false
+                },
+                title: self.screenTitle
+            )
+            
+            ScrollView {
+                VStack {
+                    self.EventEditView()
+                    
+                    self.EventContentView()
+                    
+                    Text(NSLocalizedString("추억 저장하기", comment: ""))
+                        .font(.system(size: 16, weight: .regular))
+                        .foregroundColor(Color.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 58)
+                        .background(self.isDisabled ? Color.interactionDisable : Color.redNormal)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .padding(.horizontal, BaseSize.horizantalPadding)
+                        .onTapGesture {
+                            if !self.isDisabled {
+                                self.storeEvent()
+                            }
                         }
-                    }
+                }
             }
         }
         .onTapGesture {
-            closeKeyboard()
+            self.closeKeyboard()
         }
-        .onChange(of: photos) {
-            date = photos.first?.date ?? Date()
-            checkDisabled()
+        .onChange(of: self.photos) {
+            self.date = self.photos.first?.date ?? Date()
+            self.checkDisabled()
         }
-        .onChange(of: title) {
-            checkDisabled()
+        .onChange(of: self.title) {
+            self.checkDisabled()
         }
-        .onChange(of: note) {
-            checkDisabled()
+        .onChange(of: self.note) {
+            self.checkDisabled()
         }
     }
     
