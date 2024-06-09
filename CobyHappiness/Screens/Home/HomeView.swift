@@ -49,12 +49,11 @@ struct HomeView: View {
             Image("logo")
                 .resizable()
                 .scaledToFit()
-                .frame(height: 50)
+                .frame(height: 40)
                 .foregroundColor(Color.labelNormal)
-                .padding(.top, 10)
+                .padding(.top, 4)
                 .padding(.leading, 20)
         }
-        .padding(.bottom, 12)
     }
     
     @ViewBuilder

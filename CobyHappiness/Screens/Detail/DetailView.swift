@@ -12,7 +12,10 @@ import CobyDS
 struct DetailView: View {
     
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var context
     
+    @State private var showingSheet = false
+    @State private var showingAlert = false
     @State private var isPresented: Bool = false
     @State private var photos = [UIImage]()
     
@@ -29,6 +32,11 @@ struct DetailView: View {
                 leftSide: .left,
                 leftAction: {
                     self.dismiss()
+                },
+                rightSide: .icon,
+                rightIcon: Image("more"),
+                rightAction: {
+                    self.showingSheet = true
                 }
             )
             
@@ -43,6 +51,35 @@ struct DetailView: View {
         .padding(.bottom, BaseSize.bottomAreaPadding + 20)
         .background(Color.backgroundNormalNormal)
         .edgesIgnoringSafeArea(.bottom)
+        .actionSheet(isPresented: self.$showingSheet) {
+            ActionSheet(
+                title: Text("원하는 옵션을 선택해주세요."),
+                message: nil,
+                buttons: [
+                    .default(Text("추억 편집하기")) {
+                        self.isPresented = true
+                    },
+                    .destructive(Text("추억 삭제하기")) {
+                        self.showingAlert = true
+                    },
+                    .cancel(Text("취소"))
+                ]
+            )
+        }
+        .alert(isPresented: self.$showingAlert) {
+            Alert(
+                title: Text("추억을 삭제하시겠습니까?"),
+                message: nil,
+                primaryButton: .destructive(
+                    Text("삭제"),
+                    action: {
+                        self.context.delete(self.event)
+                        self.dismiss()
+                    }
+                ),
+                secondaryButton: .cancel(Text("취소"))
+            )
+        }
         .fullScreenCover(isPresented: self.$isPresented) {
             EditView(event: self.event)
         }
@@ -92,7 +129,7 @@ struct DetailView: View {
     }
     
     private func NoteView() -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 8) {
             Text("기록")
                 .font(.pretendard(size: 18, weight: .bold))
                 .foregroundStyle(Color.labelNormal)
