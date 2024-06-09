@@ -11,9 +11,8 @@ import CobyDS
 
 struct ContentView: View {
     
-    @StateObject var appModel: AppViewModel = .init()
-    
-    @Namespace private var animation
+    @EnvironmentObject private var appModel: AppViewModel
+    @Environment(\.namespace) var animation
     
     init() {
         self.setupTabBarStyle()
@@ -48,11 +47,7 @@ struct ContentView: View {
                 Detail(event: event, animation: self.animation)
             }
         }
-        .loadCustomFonts()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .environmentObject(self.appModel)
-        .namespace(self.animation)
-        .modelContainer(for: Event.self)
     }
 }
 
@@ -77,9 +72,4 @@ extension ContentView {
         UITabBar.appearance().standardAppearance = tabBarAppearance
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
     }
-}
-
-class AppViewModel: ObservableObject {
-    @Published var showDetailView: Bool = false
-    @Published var currentActiveItem: Event?
 }

@@ -26,6 +26,5 @@ struct TravelView: View {
             Spacer()
         }
         .background(Color.backgroundNormalNormal)
-        .loadCustomFonts()
     }
 }

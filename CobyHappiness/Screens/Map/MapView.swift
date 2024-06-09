@@ -27,6 +27,5 @@ struct MapView: View {
             Map()
         }
         .background(Color.backgroundNormalNormal)
-        .loadCustomFonts()
     }
 }

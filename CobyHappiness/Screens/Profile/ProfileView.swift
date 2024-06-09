@@ -26,7 +26,6 @@ struct ProfileView: View {
             Spacer()
         }
         .background(Color.backgroundNormalNormal)
-        .loadCustomFonts()
     }
 }
 
