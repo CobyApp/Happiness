@@ -94,7 +94,7 @@ struct DetailView: View {
         .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth * 1.2)
         .tabViewStyle(PageTabViewStyle())
         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-        .matchedGeometryEffect(id: "image" + self.event.id.uuidString, in: self.animation)
+        .matchedGeometryEffect(id: self.event.id, in: self.animation)
         .onAppear {
             UIScrollView.appearance().bounces = false
         }

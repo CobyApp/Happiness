@@ -83,7 +83,7 @@ struct HomeView: View {
             discription: event.note
         )
         .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
-        .matchedGeometryEffect(id: "image" + event.id.uuidString, in: self.animation)
+        .matchedGeometryEffect(id: event.id, in: self.animation)
         .onTapGesture {
             withAnimation(.spring()) {
                 self.appModel.currentActiveItem = event
