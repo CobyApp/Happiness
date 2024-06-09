@@ -12,9 +12,10 @@ import CobyDS
 
 struct Home: View {
     
-    @EnvironmentObject private var appModel: AppViewModel
+    @Environment(\.namespace) private var animation
     @Environment(\.modelContext) private var context
-    @Environment(\.namespace) var animation
+    
+    @EnvironmentObject private var appModel: AppViewModel
     
     @Query(sort: \Event.date, order: .reverse)
     private var events: [Event]
@@ -25,13 +26,22 @@ struct Home: View {
         VStack(spacing: 0) {
             TopBarView(
                 leftSide: .text,
-                leftTitle: "happy",
+                leftTitle: "",
                 rightSide: .icon,
                 rightIcon: Image("add"),
                 rightAction: {
                     self.isPresented = true
                 }
             )
+            .overlay(alignment: .leading) {
+                Image("logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 50)
+                    .padding(.top, 10)
+                    .padding(.leading, 20)
+            }
+            .padding(.bottom, 12)
         
             ScrollView {
                 LazyVStack(spacing: 20) {
@@ -59,7 +69,7 @@ struct Home: View {
                         }
                     }
                 }
-                .padding(.vertical, 12)
+                .padding(.bottom, 20)
             }
         }
         .background(Color.backgroundNormalNormal)

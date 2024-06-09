@@ -12,16 +12,16 @@ import CobyDS
 @main
 struct CobyHappinessApp: App {
     
-    @StateObject var appModel: AppViewModel = .init()
-    
     @Namespace private var animation
+    
+    @StateObject var appModel: AppViewModel = .init()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .loadCustomFonts()
-                .environmentObject(self.appModel)
                 .namespace(self.animation)
+                .environmentObject(self.appModel)
                 .modelContainer(for: Event.self)
         }
     }

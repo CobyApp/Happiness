@@ -11,8 +11,8 @@ import CobyDS
 
 struct ContentView: View {
     
-    @EnvironmentObject private var appModel: AppViewModel
     @Environment(\.namespace) var animation
+    @EnvironmentObject private var appModel: AppViewModel
     
     init() {
         self.setupTabBarStyle()
@@ -44,7 +44,7 @@ struct ContentView: View {
             .opacity(self.appModel.showDetailView ? 0 : 1)
             
             if let event = self.appModel.currentActiveItem, self.appModel.showDetailView {
-                Detail(event: event, animation: self.animation)
+                DetailView(event: event)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

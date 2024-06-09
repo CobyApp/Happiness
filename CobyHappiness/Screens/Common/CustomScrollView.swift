@@ -38,79 +38,78 @@ struct CustomScrollView<Content: View>: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                content
-                    .offset(y: offset + dragOffset)
+                self.content
+                    .offset(y: self.offset + self.dragOffset)
                     .background(
                         GeometryReader { innerGeometry in
                             Color.clear
                                 .onAppear {
-                                    contentHeight = innerGeometry.size.height
-                                    maxOffset = geometry.size.height - contentHeight < 0 ? geometry.size.height - contentHeight : 0
+                                    self.contentHeight = innerGeometry.size.height
+                                    self.maxOffset = min(geometry.size.height - self.contentHeight, 0)
                                 }
                         }
                     )
                     .gesture(
                         DragGesture()
                             .onChanged { value in
-                                withAnimation {
-                                    let nextOffset = offset + value.translation.height
-                                    
-                                    if nextOffset >= 0 {
-                                        let scale = (value.translation.height - 100) / UIScreen.main.bounds.height
-                                        
-                                        if 1 - scale > 0.75 && scale > 0 {
-                                            self.scale = 1 - scale
-                                            dragOffset = 0
-                                        }
-                                    } else if scale == 1 {
-                                        if nextOffset > maxOffset {
-                                            dragOffset = value.translation.height
-                                        }
-                                    }
-                                    
-                                    if nextOffset - BaseSize.topAreaPadding - 10 < -BaseSize.screenWidth * 1.2 {
-                                        isDown = true
-                                    } else {
-                                        isDown = false
-                                    }
-                                }
+                                self.handleDragChanged(value, geometry: geometry)
                             }
                             .onEnded { value in
-                                withAnimation(.spring()) {
-                                    let gestureVelocity = value.predictedEndLocation.y - value.location.y
-                                    deceleration = Double(gestureVelocity)
-                                    continueAnimation()
-                                    
-                                    if scale < 0.9 {
-                                        showDetailView = false
-                                    }
-                                    
-                                    scale = 1
-                                }
+                                self.handleDragEnded(value)
                             }
                     )
             }
         }
     }
     
+    private func handleDragChanged(_ value: DragGesture.Value, geometry: GeometryProxy) {
+        withAnimation {
+            let nextOffset = self.offset + value.translation.height
+            
+            if nextOffset >= 0 {
+                let scaleValue = (value.translation.height - 100) / UIScreen.main.bounds.height
+                if 1 - scaleValue > 0.75 && scaleValue > 0 {
+                    self.scale = 1 - scaleValue
+                    self.dragOffset = 0
+                }
+            } else if self.scale == 1 {
+                if nextOffset > self.maxOffset {
+                    self.dragOffset = value.translation.height
+                }
+            }
+            
+            self.isDown = nextOffset - BaseSize.topAreaPadding - 10 < -BaseSize.screenWidth * 1.2
+        }
+    }
+    
+    private func handleDragEnded(_ value: DragGesture.Value) {
+        withAnimation(.spring()) {
+            let gestureVelocity = value.predictedEndLocation.y - value.location.y
+            self.deceleration = Double(gestureVelocity)
+            self.continueAnimation()
+            
+            if self.scale < 0.9 {
+                self.showDetailView = false
+            }
+            
+            self.scale = 1
+        }
+    }
+    
     private func continueAnimation() {
-        if scale == 1 {
-            offset += dragOffset + CGFloat(deceleration * 2)
+        if self.scale == 1 {
+            self.offset += self.dragOffset + CGFloat(self.deceleration * 0.5)
         }
         
-        dragOffset = 0.0
-        deceleration = 0.0
+        self.dragOffset = 0.0
+        self.deceleration = 0.0
         
-        if offset >= 0 {
-            offset = 0
-        } else if offset < maxOffset {
-            offset = maxOffset
+        if self.offset >= 0 {
+            self.offset = 0
+        } else if self.offset < self.maxOffset {
+            self.offset = self.maxOffset
         }
         
-        if offset - BaseSize.topAreaPadding - 10 < -BaseSize.screenWidth * 1.2 {
-            isDown = true
-        } else {
-            isDown = false
-        }
+        self.isDown = self.offset - BaseSize.topAreaPadding - 10 < -BaseSize.screenWidth * 1.2
     }
 }
