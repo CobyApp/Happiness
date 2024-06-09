@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MapKit
 
 import CobyDS
 
@@ -22,7 +21,6 @@ struct DetailView: View {
     @State private var photos = [UIImage]()
     
     private var event: Event
-    private let columns: [GridItem] = Array(repeating: GridItem(.flexible(), spacing: 20), count: 2)
     
     init(event: Event) {
         self.event = event
@@ -107,18 +105,9 @@ struct DetailView: View {
         VStack(alignment: .leading, spacing: 20) {
             self.headerView()
             
-            self.dividerView()
+            CBDivider()
             
             self.noteView()
-            
-            self.dividerView()
-            
-            self.photoGridView()
-            
-            if !self.getPlaces().isEmpty {
-                self.dividerView()
-                self.locationView()
-            }
         }
         .padding(.horizontal, BaseSize.horizantalPadding)
         .padding(.top, 20)
@@ -154,58 +143,5 @@ struct DetailView: View {
                 .lineLimit(nil)
                 .fixedSize(horizontal: false, vertical: true)
         }
-    }
-    
-    private func photoGridView() -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("목록")
-                .font(.title3.bold())
-                .foregroundStyle(Color.labelNormal)
-            
-            LazyVGrid(columns: self.columns, spacing: 8) {
-                ForEach(self.photos, id: \.self) { photo in
-                    Image(uiImage: photo)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: (BaseSize.fullWidth - 8)/2, height: (BaseSize.fullWidth - 8)/2)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                }
-            }
-        }
-    }
-    
-    private func locationView() -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("위치")
-                .font(.title3.bold())
-                .foregroundStyle(Color.labelNormal)
-            
-            MapItemView(places: self.getPlaces())
-                .frame(maxWidth: .infinity)
-                .frame(height: BaseSize.fullWidth * 0.7)
-                .clipShape(RoundedRectangle(cornerRadius: 15))
-                .allowsHitTesting(false)
-        }
-    }
-    
-    private func dividerView() -> some View {
-        Divider()
-            .frame(height: 1)
-            .foregroundColor(Color.lineNormalNormal)
-    }
-    
-    private func getPlaces() -> [Place] {
-        var places = [Place]()
-        for photo in self.event.photos {
-            if let lat = photo.lat, let lon = photo.lon {
-                places.append(
-                    Place(
-                        name: self.event.title,
-                        location: CLLocationCoordinate2D(latitude: lat, longitude: lon)
-                    )
-                )
-            }
-        }
-        return places
     }
 }

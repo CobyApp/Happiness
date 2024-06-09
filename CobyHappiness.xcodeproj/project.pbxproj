@@ -22,6 +22,7 @@
 		CBAD455A2C1582A7009D4EFF /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD45592C1582A7009D4EFF /* MapView.swift */; };
 		CBAD455D2C158315009D4EFF /* TravelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD455C2C158315009D4EFF /* TravelView.swift */; };
 		CBAD45602C15841D009D4EFF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD455F2C15841D009D4EFF /* ProfileView.swift */; };
+		CBAD45652C159FFF009D4EFF /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD45642C159FFF009D4EFF /* MapViewController.swift */; };
 		CBED4DD22AD14E2D00B8AB68 /* MapItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBED4DD12AD14E2D00B8AB68 /* MapItemView.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		CBAD45592C1582A7009D4EFF /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		CBAD455C2C158315009D4EFF /* TravelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelView.swift; sourceTree = "<group>"; };
 		CBAD455F2C15841D009D4EFF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		CBAD45642C159FFF009D4EFF /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		CBED4DD12AD14E2D00B8AB68 /* MapItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				CBAD45592C1582A7009D4EFF /* MapView.swift */,
+				CBAD45642C159FFF009D4EFF /* MapViewController.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				CBAB7F4F2ACD402500257778 /* ContentView.swift in Sources */,
 				CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */,
 				CB2471012ADABBFC00EEA032 /* Place.swift in Sources */,
+				CBAD45652C159FFF009D4EFF /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

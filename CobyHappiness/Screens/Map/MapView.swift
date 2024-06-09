@@ -6,12 +6,10 @@
 //
 
 import SwiftUI
-import MapKit
 
 import CobyDS
 
 struct MapView: View {
-    
     var body: some View {
         VStack(spacing: 0) {
             TopBarView(
@@ -24,7 +22,7 @@ struct MapView: View {
                 }
             )
             
-            Map()
+            MapViewContainer()
         }
         .background(Color.backgroundNormalNormal)
     }

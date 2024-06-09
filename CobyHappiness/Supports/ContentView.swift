@@ -14,10 +14,6 @@ struct ContentView: View {
     @Environment(\.namespace) var animation
     @EnvironmentObject private var appModel: AppViewModel
     
-    init() {
-        self.setupTabBarStyle()
-    }
-    
     var body: some View {
         ZStack {
             TabView {
@@ -48,6 +44,9 @@ struct ContentView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onAppear {
+            self.setupTabBarStyle()
+        }
     }
 }
 
