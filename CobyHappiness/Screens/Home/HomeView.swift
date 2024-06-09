@@ -14,12 +14,13 @@ struct HomeView: View {
     
     @Environment(\.modelContext) private var context
     
+    @EnvironmentObject private var appModel: AppViewModel
+    
     @Query(sort: \Event.date, order: .reverse)
     private var events: [Event]
     
     @State private var event: Event? = nil
-    @State private var isDetailPresented: Bool = false
-    @State private var isEditPresented: Bool = false
+    @State private var isPresented: Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -28,17 +29,9 @@ struct HomeView: View {
             self.EventListView()
         }
         .background(Color.backgroundNormalNormal)
-        .fullScreenCover(isPresented: self.$isDetailPresented) {
-            if let event = self.event {
-                DetailView(
-                    isPresented: self.$isDetailPresented,
-                    event: event
-                )
-            }
-        }
-        .fullScreenCover(isPresented: self.$isEditPresented) {
+        .fullScreenCover(isPresented: self.$isPresented) {
             EditView(
-                isPresented: self.$isEditPresented
+                isPresented: self.$isPresented
             )
         }
     }
@@ -50,7 +43,7 @@ struct HomeView: View {
             rightSide: .icon,
             rightIcon: Image("plus"),
             rightAction: {
-                self.isEditPresented = true
+                self.isPresented = true
             }
         )
         .overlay(alignment: .leading) {
@@ -86,9 +79,10 @@ struct HomeView: View {
         )
         .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
         .onTapGesture {
-            print(event)
-            self.event = event
-            self.isDetailPresented = true
+            withAnimation(.spring()) {
+                self.appModel.showDetailView = true
+                self.appModel.currentActiveItem = event
+            }
         }
     }
 }

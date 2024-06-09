@@ -10,30 +10,39 @@ import SwiftUI
 import CobyDS
 
 struct ContentView: View {
+    
+    @EnvironmentObject private var appModel: AppViewModel
+    
     var body: some View {
-        TabView {
-            HomeView()
-                .tabItem {
-                    Label("홈", image: "home")
-                }
+        ZStack {
+            TabView {
+                HomeView()
+                    .tabItem {
+                        Label("홈", image: "home")
+                    }
+                
+                MapView()
+                    .tabItem {
+                        Label("지도", image: "map")
+                    }
+                
+                TravelView()
+                    .tabItem {
+                        Label("여행", image: "travel")
+                    }
+                
+                ProfileView()
+                    .tabItem {
+                        Label("정보", image: "person")
+                    }
+            }
+            .onAppear {
+                self.setupTabBarStyle()
+            }
             
-            MapView()
-                .tabItem {
-                    Label("지도", image: "map")
-                }
-            
-            TravelView()
-                .tabItem {
-                    Label("여행", image: "travel")
-                }
-            
-            ProfileView()
-                .tabItem {
-                    Label("정보", image: "person")
-                }
-        }
-        .onAppear {
-            self.setupTabBarStyle()
+            if let event = self.appModel.currentActiveItem, self.appModel.showDetailView {
+                DetailView(event: event)
+            }
         }
     }
 }

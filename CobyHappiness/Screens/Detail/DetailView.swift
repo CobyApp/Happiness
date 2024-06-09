@@ -11,18 +11,14 @@ import CobyDS
 
 struct DetailView: View {
     
-    @Binding var isPresented: Bool
+    @EnvironmentObject private var appModel: AppViewModel
     
-    @State private var isEditPresented: Bool = false
+    @State private var isPresented: Bool = false
     @State private var photos = [UIImage]()
     
     private var event: Event
     
-    init(
-        isPresented: Binding<Bool>,
-        event: Event
-    ) {
-        self._isPresented = isPresented
+    init(event: Event) {
         self.event = event
         self._photos = State(wrappedValue: event.photos.compactMap { UIImage(data: $0.image) })
     }
@@ -32,7 +28,8 @@ struct DetailView: View {
             TopBarView(
                 leftSide: .left,
                 leftAction: {
-                    self.isPresented = false
+                    self.appModel.showDetailView = false
+                    self.appModel.currentActiveItem = nil
                 }
             )
             
@@ -46,10 +43,10 @@ struct DetailView: View {
         }
         .padding(.bottom, BaseSize.bottomAreaPadding + 20)
         .background(Color.backgroundNormalNormal)
-        .edgesIgnoringSafeArea(.all)
-        .fullScreenCover(isPresented: self.$isEditPresented) {
+        .edgesIgnoringSafeArea(.bottom)
+        .fullScreenCover(isPresented: self.$isPresented) {
             EditView(
-                isPresented: self.$isEditPresented,
+                isPresented: self.$isPresented,
                 event: self.event
             )
         }
@@ -62,12 +59,11 @@ struct DetailView: View {
                 Image(uiImage: photo)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth * 1.2)
+                    .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth)
                     .clipped()
-                    .edgesIgnoringSafeArea(.all)
             }
         }
-        .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth * 1.2)
+        .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth)
         .tabViewStyle(PageTabViewStyle())
         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
         .onAppear {
