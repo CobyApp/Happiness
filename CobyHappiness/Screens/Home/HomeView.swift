@@ -71,7 +71,7 @@ struct HomeView: View {
     @ViewBuilder
     private func EventThumbnailView(for event: Event) -> some View {
         ThumbnailCardView(
-            image: event.photos.first?.image.image,
+            image: event.photos.first?.image,
             title: event.title,
             discription: event.date.format("MMM d, yyyy")
         )

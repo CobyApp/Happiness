@@ -19,7 +19,8 @@ struct EditView: View {
     @State private var date: Date = Date()
     @State private var title: String = ""
     @State private var note: String = ""
-    @State private var photos: [Photo] = []
+    @State private var location: Location?
+    @State private var photos: [Data] = []
     @State private var selectedItems: [PhotosPickerItem] = []
     @State private var isDisabled: Bool = true
     
@@ -77,13 +78,9 @@ struct EditView: View {
             self.closeKeyboard()
         }
         .onChange(of: self.photos) {
-            self.date = self.photos.first?.date ?? Date()
             self.checkDisabled()
         }
-        .onChange(of: self.title) {
-            self.checkDisabled()
-        }
-        .onChange(of: self.note) {
+        .onChange(of: [self.title, self.note]) {
             self.checkDisabled()
         }
     }
@@ -122,8 +119,8 @@ struct EditView: View {
     func EventContentView() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                ForEach(photos) { photo in
-                    if let uiImage = UIImage(data: photo.image) {
+                ForEach(self.photos, id: \.self) { photo in
+                    if let uiImage = UIImage(data: photo) {
                         Image(uiImage: uiImage)
                             .resizable()
                             .scaledToFill()
@@ -138,14 +135,14 @@ struct EditView: View {
     
     private func setupPhotos() {
         Task {
-            photos = []
+            self.photos = []
             
-            for item in selectedItems {
+            for item in self.selectedItems {
                 var image: Data?
                 
                 if let data = try? await item.loadTransferable(type: Data.self) {
                     if let originalImage = UIImage(data: data) {
-                        if let compressedImageData = compressImage(originalImage) {
+                        if let compressedImageData = self.compressImage(originalImage) {
                             image = compressedImageData
                         }
                     }
@@ -156,11 +153,11 @@ struct EditView: View {
                     
                     if let asset = result.firstObject {
                         if let date = asset.creationDate, let image = image {
-                            photos.append(Photo(date: date, image: image))
+                            self.date = date
+                            self.photos.append(image)
                             
                             if let location = asset.location?.coordinate {
-                                photos.last?.lat = location.latitude
-                                photos.last?.lon = location.longitude
+                                self.location = Location(lat: location.latitude, lon: location.longitude)
                             }
                         }
                     }
@@ -178,6 +175,7 @@ struct EditView: View {
                     type: self.type,
                     title: self.title,
                     note: self.note,
+                    location: self.location,
                     photos: self.photos
                 )
                 self.context.insert(item)
@@ -188,6 +186,7 @@ struct EditView: View {
                     type: self.type,
                     title: self.title,
                     note: self.note,
+                    location: self.location,
                     photos: self.photos
                 )
                 self.context.insert(item)
@@ -215,10 +214,10 @@ struct EditView: View {
     }
     
     private func checkDisabled() {
-        if title == "" || note == "" || photos.isEmpty {
-            isDisabled = true
+        if self.title == "" || self.note == "" || self.photos.isEmpty {
+            self.isDisabled = true
         } else {
-            isDisabled = false
+            self.isDisabled = false
         }
     }
 }

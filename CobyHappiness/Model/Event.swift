@@ -16,7 +16,8 @@ final class Event {
     var type: EventType
     var title: String
     var note: String
-    @Relationship(deleteRule: .cascade) var photos: [Photo]
+    var location: Location?
+    @Relationship(deleteRule: .cascade) var photos: [Data]
 
     init(
         id: UUID = UUID(),
@@ -24,13 +25,15 @@ final class Event {
         type: EventType,
         title: String,
         note: String,
-        photos: [Photo]
+        location: Location? = nil,
+        photos: [Data]
     ) {
         self.id = id
         self.date = date
         self.type = type
         self.title = title
         self.note = note
+        self.location = location
         self.photos = photos
     }
 }

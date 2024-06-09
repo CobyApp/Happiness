@@ -23,7 +23,7 @@ struct DetailView: View {
     
     init(event: Event) {
         self.event = event
-        self._photos = State(wrappedValue: event.photos.compactMap { UIImage(data: $0.image) })
+        self._photos = State(wrappedValue: event.photos.compactMap { UIImage(data: $0) })
     }
     
     var body: some View {
