@@ -162,7 +162,7 @@ struct Detail: View {
                         .font(.title3.bold())
                         .foregroundStyle(Color.labelNormal)
                     
-                    MapView(places: places)
+                    MapItemView(places: places)
                         .frame(maxWidth: .infinity)
                         .frame(height: BaseSize.fullWidth * 0.7)
                         .clipShape(.rect(cornerRadius: 15))

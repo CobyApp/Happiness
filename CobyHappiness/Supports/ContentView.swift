@@ -22,22 +22,22 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             TabView {
-                Home(animation: self.animation)
+                Home()
                     .tabItem {
                         Label("홈", image: "home")
                     }
                 
-                Home(animation: self.animation)
+                MapView()
                     .tabItem {
                         Label("지도", image: "map")
                     }
                 
-                Home(animation: self.animation)
+                TravelView()
                     .tabItem {
                         Label("여행", image: "travel")
                     }
                 
-                Home(animation: self.animation)
+                ProfileView()
                     .tabItem {
                         Label("정보", image: "person")
                     }
@@ -48,8 +48,10 @@ struct ContentView: View {
                 Detail(event: event, animation: self.animation)
             }
         }
+        .loadCustomFonts()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .environmentObject(self.appModel)
+        .namespace(self.animation)
         .modelContainer(for: Event.self)
     }
 }

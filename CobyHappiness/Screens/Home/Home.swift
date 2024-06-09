@@ -14,24 +14,25 @@ struct Home: View {
     
     @EnvironmentObject private var appModel: AppViewModel
     @Environment(\.modelContext) private var context
+    @Environment(\.namespace) var animation
     
     @Query(sort: \Event.date, order: .reverse)
     private var events: [Event]
     
     @State private var isPresented: Bool = false
-    @State private var searchText: String = ""
-    @State private var currentMenu: EventType = .music
-    
-    var animation: Namespace.ID
     
     var body: some View {
         VStack(spacing: 0) {
-            CustomHeader(isPresented: $isPresented, searchText: $searchText)
-                .padding(.top, 10)
-            
-            CustomMenu(currentMenu: $currentMenu, animation: animation)
-                .padding(.top, 20)
-            
+            TopBarView(
+                leftSide: .text,
+                leftTitle: "happy",
+                rightSide: .icon,
+                rightIcon: Image("add"),
+                rightAction: {
+                    self.isPresented = true
+                }
+            )
+        
             ScrollView {
                 LazyVStack(spacing: 20) {
                     ForEach(self.events) { event in
@@ -49,11 +50,11 @@ struct Home: View {
                             discription: event.note
                         )
                         .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
-                        .matchedGeometryEffect(id: "image" + event.id.uuidString, in: animation)
+                        .matchedGeometryEffect(id: "image" + event.id.uuidString, in: self.animation)
                         .onTapGesture {
                             withAnimation(.spring()) {
-                                appModel.currentActiveItem = event
-                                appModel.showDetailView = true
+                                self.appModel.currentActiveItem = event
+                                self.appModel.showDetailView = true
                             }
                         }
                     }
@@ -62,8 +63,7 @@ struct Home: View {
             }
         }
         .background(Color.backgroundNormalNormal)
-        .loadCustomFonts()
-        .sheet(isPresented: $isPresented) {
+        .sheet(isPresented: self.$isPresented) {
             EventEdit()
         }
     }

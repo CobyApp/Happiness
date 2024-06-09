@@ -1,5 +1,5 @@
 //
-//  MapView.swift
+//  MapItemView.swift
 //  CobyHappiness
 //
 //  Created by COBY_PRO on 10/7/23.
@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct MapView: View {
+struct MapItemView: View {
     @State private var cameraPosition: MapCameraPosition
     
     private var places: [Place]
