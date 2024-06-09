@@ -97,9 +97,17 @@ struct EditView: View {
                 }
             }
             
-            TextField("제목", text: $title, axis: .vertical)
+            CBTextFieldView(
+                text: self.$title,
+                title: "제목",
+                placeholder: "제목을 입력해주세요."
+            )
             
-            TextField("내용", text: $note, axis: .vertical)
+            CBTextFieldView(
+                text: self.$note,
+                title: "내용",
+                placeholder: "내용을 입력해주세요."
+            )
             
             PhotosPicker(
                 selection: $selectedItems,

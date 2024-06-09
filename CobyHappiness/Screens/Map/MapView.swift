@@ -16,6 +16,8 @@ struct MapView: View {
     @Query
     private var events: [Event]
     
+    @State private var isPresented: Bool = false
+    
     var body: some View {
         VStack(spacing: 0) {
             TopBarView(
@@ -24,7 +26,7 @@ struct MapView: View {
                 rightSide: .icon,
                 rightIcon: Image("plus"),
                 rightAction: {
-                    print("추가")
+                    self.isPresented = true
                 }
             )
             
@@ -37,5 +39,8 @@ struct MapView: View {
             }
         }
         .background(Color.backgroundNormalNormal)
+        .fullScreenCover(isPresented: self.$isPresented) {
+            EditView()
+        }
     }
 }
