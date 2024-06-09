@@ -11,6 +11,7 @@ import MapKit
 import CobyDS
 
 struct Detail: View {
+    
     @EnvironmentObject private var appModel: AppViewModel
     
     @State private var isPresented: Bool = false

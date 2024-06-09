@@ -61,6 +61,7 @@ struct Home: View {
                 .padding(.vertical, 12)
             }
         }
+        .background(Color.backgroundNormalNormal)
         .loadCustomFonts()
         .sheet(isPresented: $isPresented) {
             EventEdit()

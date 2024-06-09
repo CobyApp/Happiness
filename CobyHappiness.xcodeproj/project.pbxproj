@@ -10,7 +10,6 @@
 		CB2471012ADABBFC00EEA032 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2471002ADABBFC00EEA032 /* Place.swift */; };
 		CB314DF72ADAC1B9007B984A /* CustomScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB314DF62ADAC1B9007B984A /* CustomScrollView.swift */; };
 		CB45BFB42ADA5FE800EDEBC2 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB45BFB32ADA5FE800EDEBC2 /* Photo.swift */; };
-		CB96DE372ABF593F00B01762 /* BMJUAOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = CB96DE362ABF58D800B01762 /* BMJUAOTF.otf */; };
 		CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */; };
 		CB9EF8DB2ABC633B00FDCE12 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF8DA2ABC633B00FDCE12 /* Preview Assets.xcassets */; };
 		CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */; };
@@ -18,7 +17,6 @@
 		CBA038692ABF352F00BD74CF /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA038682ABF352F00BD74CF /* Event.swift */; };
 		CBAB7F432ACD3D6A00257778 /* CustomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F422ACD3D6A00257778 /* CustomMenu.swift */; };
 		CBAB7F452ACD3E7A00257778 /* CustomHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F442ACD3E7A00257778 /* CustomHeader.swift */; };
-		CBAB7F482ACD3F7400257778 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F472ACD3F7400257778 /* AppViewModel.swift */; };
 		CBAB7F4F2ACD402500257778 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F4E2ACD402500257778 /* ContentView.swift */; };
 		CBAB7F542ACD455E00257778 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F532ACD455E00257778 /* Detail.swift */; };
 		CBABE92F2ACB313C00103BB0 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABE92E2ACB313C00103BB0 /* Home.swift */; };
@@ -31,8 +29,7 @@
 		CB2471002ADABBFC00EEA032 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		CB314DF62ADAC1B9007B984A /* CustomScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollView.swift; sourceTree = "<group>"; };
 		CB45BFB32ADA5FE800EDEBC2 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
-		CB96DE362ABF58D800B01762 /* BMJUAOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMJUAOTF.otf; sourceTree = "<group>"; };
-		CB96DE382ABF597600B01762 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CB96DE382ABF597600B01762 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB9EF8D02ABC633A00FDCE12 /* CobyHappiness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CobyHappiness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CobyHappinessApp.swift; sourceTree = "<group>"; };
 		CB9EF8DA2ABC633B00FDCE12 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -41,7 +38,6 @@
 		CBA038682ABF352F00BD74CF /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		CBAB7F422ACD3D6A00257778 /* CustomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMenu.swift; sourceTree = "<group>"; };
 		CBAB7F442ACD3E7A00257778 /* CustomHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeader.swift; sourceTree = "<group>"; };
-		CBAB7F472ACD3F7400257778 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		CBAB7F4E2ACD402500257778 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CBAB7F532ACD455E00257778 /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
 		CBABE92E2ACB313C00103BB0 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
@@ -64,20 +60,9 @@
 		CB96DE342ABF588900B01762 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				CB96DE352ABF58C200B01762 /* Fonts */,
 				CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */,
-				CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */,
-				CBAB7F4E2ACD402500257778 /* ContentView.swift */,
 			);
 			path = Resource;
-			sourceTree = "<group>";
-		};
-		CB96DE352ABF58C200B01762 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				CB96DE362ABF58D800B01762 /* BMJUAOTF.otf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		CB9EF8C72ABC633A00FDCE12 = {
@@ -99,11 +84,8 @@
 		CB9EF8D22ABC633A00FDCE12 /* CobyHappiness */ = {
 			isa = PBXGroup;
 			children = (
-				CB96DE382ABF597600B01762 /* Info.plist */,
 				CB9EF8E12ABC670100FDCE12 /* Model */,
-				CBAB7F462ACD3F6200257778 /* ViewModel */,
-				CB9EF8E22ABC670E00FDCE12 /* View */,
-				CB9EF8E32ABC671C00FDCE12 /* Global */,
+				CB9EF8E22ABC670E00FDCE12 /* Screens */,
 				CB9EF8E42ABC672B00FDCE12 /* Supports */,
 				CB96DE342ABF588900B01762 /* Resource */,
 				CB9EF8D92ABC633B00FDCE12 /* Preview Content */,
@@ -129,28 +111,24 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		CB9EF8E22ABC670E00FDCE12 /* View */ = {
+		CB9EF8E22ABC670E00FDCE12 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				CBAD45572C15816E009D4EFF /* Common */,
 				CBABE92D2ACB313400103BB0 /* Home */,
 				CBAB7F522ACD455200257778 /* Detail */,
 				CBABE9302ACB378500103BB0 /* EventEdit */,
 			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		CB9EF8E32ABC671C00FDCE12 /* Global */ = {
-			isa = PBXGroup;
-			children = (
-				CBA371662ACC3DE100FF5F56 /* Component */,
-			);
-			path = Global;
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		CB9EF8E42ABC672B00FDCE12 /* Supports */ = {
 			isa = PBXGroup;
 			children = (
 				CB9EF8E52ABC673100FDCE12 /* Extensions */,
+				CB96DE382ABF597600B01762 /* Info.plist */,
+				CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */,
+				CBAB7F4E2ACD402500257778 /* ContentView.swift */,
 			);
 			path = Supports;
 			sourceTree = "<group>";
@@ -161,22 +139,6 @@
 				CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		CBA371662ACC3DE100FF5F56 /* Component */ = {
-			isa = PBXGroup;
-			children = (
-				CB314DF62ADAC1B9007B984A /* CustomScrollView.swift */,
-			);
-			path = Component;
-			sourceTree = "<group>";
-		};
-		CBAB7F462ACD3F6200257778 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				CBAB7F472ACD3F7400257778 /* AppViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		CBAB7F512ACD419E00257778 /* Component */ = {
@@ -212,6 +174,14 @@
 				CBABE9312ACB379200103BB0 /* EventEdit.swift */,
 			);
 			path = EventEdit;
+			sourceTree = "<group>";
+		};
+		CBAD45572C15816E009D4EFF /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				CB314DF62ADAC1B9007B984A /* CustomScrollView.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		CBED4DD02AD14E2300B8AB68 /* Component */ = {
@@ -287,7 +257,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB9EF9082ABC829F00FDCE12 /* Assets.xcassets in Resources */,
-				CB96DE372ABF593F00B01762 /* BMJUAOTF.otf in Resources */,
 				CB9EF8DB2ABC633B00FDCE12 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,7 +272,6 @@
 				CB314DF72ADAC1B9007B984A /* CustomScrollView.swift in Sources */,
 				CBA038692ABF352F00BD74CF /* Event.swift in Sources */,
 				CBAB7F542ACD455E00257778 /* Detail.swift in Sources */,
-				CBAB7F482ACD3F7400257778 /* AppViewModel.swift in Sources */,
 				CBED4DD22AD14E2D00B8AB68 /* MapView.swift in Sources */,
 				CBABE9322ACB379200103BB0 /* EventEdit.swift in Sources */,
 				CB45BFB42ADA5FE800EDEBC2 /* Photo.swift in Sources */,
@@ -451,7 +419,7 @@
 				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CobyHappiness/Info.plist;
+				INFOPLIST_FILE = CobyHappiness/Supports/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Happy;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need date and loacation";
@@ -485,7 +453,7 @@
 				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CobyHappiness/Info.plist;
+				INFOPLIST_FILE = CobyHappiness/Supports/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Happy;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need date and loacation";
@@ -537,7 +505,7 @@
 			repositoryURL = "https://github.com/CobyLibrary/CobyDS.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.0.1;
+				version = 1.0.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

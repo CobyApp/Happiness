@@ -10,6 +10,7 @@ import SwiftUI
 import CobyDS
 
 struct CustomScrollView<Content: View>: View {
+    
     @Binding var showDetailView: Bool
     @Binding var scale: CGFloat
     @Binding var isDown: Bool
@@ -20,7 +21,7 @@ struct CustomScrollView<Content: View>: View {
     @State private var dragOffset: CGFloat = 0.0
     @State private var deceleration: Double = 0.0
     
-    let content: Content
+    private let content: Content
     
     init(
         showDetailView: Binding<Bool>,
@@ -35,11 +36,8 @@ struct CustomScrollView<Content: View>: View {
     }
     
     var body: some View {
-        // GeometryReader를 사용하여 뷰의 크기 및 위치 정보를 가져옴
         GeometryReader { geometry in
-            // ZStack을 사용하여 여러 뷰를 겹치게 함
             ZStack {
-                // 내용을 표시하는 부분
                 content
                     .offset(y: offset + dragOffset)
                     .background(

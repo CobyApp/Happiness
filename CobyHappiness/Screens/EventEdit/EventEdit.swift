@@ -50,7 +50,7 @@ struct EventEdit: View {
                     .foregroundColor(Color.white)
                     .frame(maxWidth: .infinity)
                     .frame(height: 58)
-                    .background(isDisabled ? Color.interactionDisable : Color.primaryNormal)
+                    .background(isDisabled ? Color.interactionDisable : Color.redNormal)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                     .padding(.horizontal, BaseSize.horizantalPadding)
                     .onTapGesture {
