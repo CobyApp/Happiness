@@ -11,7 +11,7 @@ import CobyDS
 
 struct DetailView: View {
     
-    @EnvironmentObject private var appModel: AppViewModel
+    @Environment(\.dismiss) private var dismiss
     
     @State private var isPresented: Bool = false
     @State private var photos = [UIImage]()
@@ -28,8 +28,7 @@ struct DetailView: View {
             TopBarView(
                 leftSide: .left,
                 leftAction: {
-                    self.appModel.showDetailView = false
-                    self.appModel.currentActiveItem = nil
+                    self.dismiss()
                 }
             )
             
@@ -45,10 +44,7 @@ struct DetailView: View {
         .background(Color.backgroundNormalNormal)
         .edgesIgnoringSafeArea(.bottom)
         .fullScreenCover(isPresented: self.$isPresented) {
-            EditView(
-                isPresented: self.$isPresented,
-                event: self.event
-            )
+            EditView(event: self.event)
         }
     }
     

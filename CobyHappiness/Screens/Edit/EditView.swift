@@ -12,35 +12,25 @@ import CobyDS
 
 struct EditView: View {
     
-    @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
-    
-    @Binding var isPresented: Bool
+    @Environment(\.modelContext) private var context
     
     @State private var type: EventType = EventType.moment
     @State private var date: Date = Date()
     @State private var title: String = ""
     @State private var note: String = ""
     @State private var photos: [Photo] = []
-    
     @State private var selectedItems: [PhotosPickerItem] = []
     @State private var isDisabled: Bool = true
     
     private var event: Event?
     private let screenTitle: String
     
-    init(
-        isPresented: Binding<Bool>
-    ) {
-        self._isPresented = isPresented
+    init() {
         self.screenTitle = "추억 만들기"
     }
     
-    init(
-        isPresented: Binding<Bool>,
-        event: Event
-    ) {
-        self._isPresented = isPresented
+    init(event: Event) {
         self.event = event
         self.screenTitle = "추억 수정하기"
         self._date = State(initialValue: event.date)
@@ -56,7 +46,7 @@ struct EditView: View {
             TopBarView(
                 leftSide: .left,
                 leftAction: {
-                    self.isPresented = false
+                    self.dismiss()
                 },
                 title: self.screenTitle
             )
@@ -203,6 +193,8 @@ struct EditView: View {
                 self.context.insert(item)
                 try self.context.save()
             }
+            
+            self.dismiss()
         } catch {
             print("error")
         }

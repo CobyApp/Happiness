@@ -14,8 +14,6 @@ struct HomeView: View {
     
     @Environment(\.modelContext) private var context
     
-    @EnvironmentObject private var appModel: AppViewModel
-    
     @Query(sort: \Event.date, order: .reverse)
     private var events: [Event]
     
@@ -29,10 +27,11 @@ struct HomeView: View {
             self.EventListView()
         }
         .background(Color.backgroundNormalNormal)
+        .fullScreenCover(item: self.$event, onDismiss: { self.event = nil }) { item in
+            DetailView(event: item)
+        }
         .fullScreenCover(isPresented: self.$isPresented) {
-            EditView(
-                isPresented: self.$isPresented
-            )
+            EditView()
         }
     }
     
@@ -79,10 +78,7 @@ struct HomeView: View {
         )
         .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
         .onTapGesture {
-            withAnimation(.spring()) {
-                self.appModel.showDetailView = true
-                self.appModel.currentActiveItem = event
-            }
+            self.event = event
         }
     }
 }

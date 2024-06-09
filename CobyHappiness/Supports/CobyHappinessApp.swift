@@ -11,20 +11,11 @@ import CobyDS
 
 @main
 struct CobyHappinessApp: App {
-    
-    @StateObject var appModel: AppViewModel = .init()
-    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .loadCustomFonts()
-                .environmentObject(self.appModel)
                 .modelContainer(for: Event.self)
         }
     }
-}
-
-class AppViewModel: ObservableObject {
-    @Published var showDetailView: Bool = false
-    @Published var currentActiveItem: Event?
 }
