@@ -73,7 +73,8 @@ struct HomeView: View {
         ThumbnailCardView(
             image: event.photos.first?.image,
             title: event.title,
-            discription: event.date.format("MMM d, yyyy")
+            description: event.date.format("MMM d, yyyy"),
+            isShadowing: true
         )
         .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
         .onTapGesture {

@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import MapKit
 
 import CobyDS
 
@@ -30,13 +29,17 @@ struct MapView: View {
                 }
             )
             
-            Map() {
-                ForEach(self.events) { event in
-                    if let location = event.location {
-                        Marker(event.title, coordinate: location.coordinate)
-                    }
-                }
-            }
+            MapRepresentableView(
+                events: self.events
+            )
+            
+//            Map() {
+//                ForEach(self.events) { event in
+//                    if let location = event.location {
+//                        Marker(event.title, coordinate: location.coordinate)
+//                    }
+//                }
+//            }
         }
         .background(Color.backgroundNormalNormal)
         .fullScreenCover(isPresented: self.$isPresented) {

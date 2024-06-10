@@ -23,6 +23,7 @@
 		CBAD45602C15841D009D4EFF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD455F2C15841D009D4EFF /* ProfileView.swift */; };
 		CBAD45672C15C1F1009D4EFF /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD45662C15C1F1009D4EFF /* Data+Extensions.swift */; };
 		CBAD45692C15EBB1009D4EFF /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD45682C15EBB1009D4EFF /* Location.swift */; };
+		CBB21C982C16F273007E6AA2 /* MapRepresentableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB21C972C16F273007E6AA2 /* MapRepresentableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		CBAD455F2C15841D009D4EFF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		CBAD45662C15C1F1009D4EFF /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		CBAD45682C15EBB1009D4EFF /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		CBB21C972C16F273007E6AA2 /* MapRepresentableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepresentableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,7 +173,9 @@
 		CBAD45582C15829C009D4EFF /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				CBB21C992C16F29B007E6AA2 /* Component */,
 				CBAD45592C1582A7009D4EFF /* MapView.swift */,
+				CBB21C972C16F273007E6AA2 /* MapRepresentableView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -190,6 +194,13 @@
 				CBAD455F2C15841D009D4EFF /* ProfileView.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		CBB21C992C16F29B007E6AA2 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBB21C982C16F273007E6AA2 /* MapRepresentableView.swift in Sources */,
 				CBA038692ABF352F00BD74CF /* Event.swift in Sources */,
 				CBAD45672C15C1F1009D4EFF /* Data+Extensions.swift in Sources */,
 				CBAB7F542ACD455E00257778 /* DetailView.swift in Sources */,
@@ -505,7 +517,7 @@
 			repositoryURL = "https://github.com/CobyLibrary/CobyDS.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.0.7;
+				version = 1.0.8;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
