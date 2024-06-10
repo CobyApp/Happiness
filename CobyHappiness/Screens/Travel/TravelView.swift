@@ -32,21 +32,21 @@ struct TravelView: View {
                 }
             )
             
-            LazyVGrid(columns: self.columns, spacing: 20) {
-                ForEach(self.events, id: \.self) { event in
-                    ThumbnailTitleView(
-                        image: event.photos.first?.image,
-                        title: event.title,
-                        description: event.note
-                    )
-                    .frame(width: BaseSize.cellWidth)
+            ScrollView {
+                LazyVGrid(columns: self.columns, spacing: 20) {
+                    ForEach(self.events, id: \.self) { event in
+                        ThumbnailTitleView(
+                            image: event.photos.first?.image,
+                            title: event.title,
+                            description: event.note
+                        )
+                        .frame(width: BaseSize.cellWidth)
+                    }
                 }
+                .padding(.horizontal, BaseSize.horizantalPadding)
+                .padding(.top, 8)
+                .padding(.bottom, 20)
             }
-            .padding(.horizontal, BaseSize.horizantalPadding)
-            .padding(.top, 8)
-            .padding(.bottom, 20)
-            
-            Spacer()
         }
         .background(Color.backgroundNormalNormal)
     }
