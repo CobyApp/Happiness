@@ -40,22 +40,21 @@ struct EditEventView: View {
                     self.PhotosView()
                     
                     self.ContentView()
-                    
-                    Text(NSLocalizedString("저장", comment: ""))
-                        .font(.system(size: 16, weight: .regular))
-                        .foregroundColor(Color.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 58)
-                        .background(self.isDisabled ? Color.interactionDisable : Color.redNormal)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                        .padding(.horizontal, BaseSize.horizantalPadding)
-                        .onTapGesture {
-                            if !self.isDisabled {
-                                self.storeEvent()
-                            }
-                        }
                 }
             }
+            
+            Button {
+                self.storeEvent()
+            } label: {
+                Text("저장")
+            }
+            .buttonStyle(
+                CBButtonStyle(
+                    buttonColor: Color.redNormal,
+                    disable: self.isDisabled
+                )
+            )
+            .padding(.horizontal, BaseSize.horizantalPadding)
         }
         .background(Color.backgroundNormalNormal)
         .onTapGesture {
@@ -71,11 +70,8 @@ struct EditEventView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
                 ForEach(self.selectedImages, id: \.self) { image in
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 200, height: 240)
-                        .clipShape(.rect(cornerRadius: 15))
+                    ThumbnailView(image: Image(uiImage: image))
+                        .frame(width: 100, height: 100)
                 }
             }
             .padding(.horizontal, BaseSize.horizantalPadding)
@@ -84,15 +80,8 @@ struct EditEventView: View {
     
     @ViewBuilder
     func ContentView() -> some View {
-        VStack(spacing: 4) {
+        VStack(spacing: 20) {
             DatePicker("날짜", selection: $date)
-            
-            Picker("분야", selection: $type) {
-                ForEach(EventType.allCases) { eventType in
-                    Text(eventType.icon + " " + eventType.id.capitalized)
-                        .tag(eventType)
-                }
-            }
             
             CBTextFieldView(
                 text: self.$title,

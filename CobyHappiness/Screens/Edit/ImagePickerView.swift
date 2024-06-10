@@ -45,20 +45,16 @@ struct ImagePickerView: UIViewControllerRepresentable {
                     }
                     
                     group.enter()
-                    if provider.hasItemConformingToTypeIdentifier(UTType.image.identifier) {
-                        provider.loadFileRepresentation(forTypeIdentifier: UTType.image.identifier) { url, error in
-                            if url != nil {
-                                let assetResults = PHAsset.fetchAssets(with: .image, options: nil)
-                                if let asset = assetResults.firstObject {
-                                    let creationDate = asset.creationDate
-                                    let location = asset.location
-                                    if let image = tempImage {
-                                        imagesWithMetadata.append((image, creationDate, location))
-                                    }
-                                }
+                    if let identifier = result.assetIdentifier {
+                        let assetResult = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: nil)
+                        if let asset = assetResult.firstObject {
+                            let creationDate = asset.creationDate
+                            let location = asset.location
+                            if let image = tempImage {
+                                imagesWithMetadata.append((image, creationDate, location))
                             }
-                            group.leave()
                         }
+                        group.leave()
                     } else {
                         group.leave()
                     }

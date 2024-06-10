@@ -15,7 +15,7 @@ struct PageView: View {
     @State private var selectionMade = false
     
     @State private var selectedImages: [UIImage] = []
-    @State private var date: Date = Date()
+    @State private var date: Date = Date.now
     @State private var location: Location? = nil
 
     var body: some View {
@@ -30,6 +30,7 @@ struct PageView: View {
                             self.location = Location(lat: coordinate.latitude, lon: coordinate.longitude)
                         }
                     }
+                    
                     selectionMade = true
                 },
                 didCancel: {
@@ -47,7 +48,7 @@ struct PageView: View {
             )
             .tag(true)
         }
-        .tabViewStyle(PageTabViewStyle())
+        .tabViewStyle(.page(indexDisplayMode: .never))
     }
 }
 
