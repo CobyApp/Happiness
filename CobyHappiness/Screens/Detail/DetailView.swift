@@ -56,10 +56,10 @@ struct DetailView: View {
                 title: Text("원하는 옵션을 선택해주세요."),
                 message: nil,
                 buttons: [
-                    .default(Text("추억 편집하기")) {
+                    .default(Text("편집")) {
                         self.isPresented = true
                     },
-                    .destructive(Text("추억 삭제하기")) {
+                    .destructive(Text("삭제")) {
                         self.showingAlert = true
                     },
                     .cancel(Text("취소"))
@@ -131,7 +131,7 @@ struct DetailView: View {
     private func NoteView() -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("기록")
-                .font(.pretendard(size: 18, weight: .bold))
+                .font(.pretendard(size: 18, weight: .semibold))
                 .foregroundStyle(Color.labelNormal)
             
             Text(self.event.note)
