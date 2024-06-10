@@ -32,14 +32,6 @@ struct MapView: View {
             MapRepresentableView(
                 events: self.events
             )
-            
-//            Map() {
-//                ForEach(self.events) { event in
-//                    if let location = event.location {
-//                        Marker(event.title, coordinate: location.coordinate)
-//                    }
-//                }
-//            }
         }
         .background(Color.backgroundNormalNormal)
         .fullScreenCover(isPresented: self.$isPresented) {

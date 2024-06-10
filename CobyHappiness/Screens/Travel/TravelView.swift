@@ -6,10 +6,19 @@
 //
 
 import SwiftUI
+import SwiftData
 
 import CobyDS
 
 struct TravelView: View {
+    
+    @Query
+    private var events: [Event]
+    
+    private let columns: [GridItem] = Array(
+        repeating: GridItem(.flexible(), spacing: 20),
+        count: 2
+    )
     
     var body: some View {
         VStack(spacing: 0) {
@@ -22,6 +31,20 @@ struct TravelView: View {
                     print("추가")
                 }
             )
+            
+            LazyVGrid(columns: self.columns, spacing: 20) {
+                ForEach(self.events, id: \.self) { event in
+                    ThumbnailTitleView(
+                        image: event.photos.first?.image,
+                        title: event.title,
+                        description: event.note
+                    )
+                    .frame(width: BaseSize.cellWidth)
+                }
+            }
+            .padding(.horizontal, BaseSize.horizantalPadding)
+            .padding(.top, 8)
+            .padding(.bottom, 20)
             
             Spacer()
         }

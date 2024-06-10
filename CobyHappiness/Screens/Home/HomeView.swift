@@ -64,6 +64,7 @@ struct HomeView: View {
                     self.EventThumbnailView(for: event)
                 }
             }
+            .padding(.top, 8)
             .padding(.bottom, 20)
         }
     }

@@ -173,9 +173,8 @@
 		CBAD45582C15829C009D4EFF /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				CBB21C992C16F29B007E6AA2 /* Component */,
+				CBBB793C2C174CD00003FD80 /* Component */,
 				CBAD45592C1582A7009D4EFF /* MapView.swift */,
-				CBB21C972C16F273007E6AA2 /* MapRepresentableView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -196,9 +195,10 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		CBB21C992C16F29B007E6AA2 /* Component */ = {
+		CBBB793C2C174CD00003FD80 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				CBB21C972C16F273007E6AA2 /* MapRepresentableView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -517,7 +517,7 @@
 			repositoryURL = "https://github.com/CobyLibrary/CobyDS.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.0.8;
+				version = 1.1.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

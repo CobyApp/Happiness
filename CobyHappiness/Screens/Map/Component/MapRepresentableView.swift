@@ -10,7 +10,13 @@ import MapKit
 
 struct MapRepresentableView: UIViewRepresentable {
     
-    var events: [Event]
+    private var events: [Event]
+    
+    init(
+        events: [Event]
+    ) {
+        self.events = events
+    }
     
     class Coordinator: NSObject, MKMapViewDelegate {
         var parent: MapRepresentableView
