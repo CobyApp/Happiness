@@ -31,7 +31,8 @@ struct HomeView: View {
             DetailView(event: item)
         }
         .fullScreenCover(isPresented: self.$isPresented) {
-            EditView()
+//            EditView()
+            PageView()
         }
     }
     
