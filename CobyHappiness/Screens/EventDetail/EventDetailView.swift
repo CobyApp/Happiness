@@ -98,12 +98,10 @@ struct EventDetailView: View {
                     .clipped()
             }
         }
+        .background(Color.backgroundNormalAlternative)
         .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth)
         .tabViewStyle(PageTabViewStyle())
         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-        .onAppear {
-            UIScrollView.appearance().bounces = false
-        }
     }
     
     @ViewBuilder
