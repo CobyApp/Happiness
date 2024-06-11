@@ -1,5 +1,5 @@
 //
-//  TravelView.swift
+//  BunchView.swift
 //  CobyHappiness
 //
 //  Created by Coby on 6/9/24.
@@ -10,10 +10,10 @@ import SwiftData
 
 import CobyDS
 
-struct TravelView: View {
+struct BunchView: View {
     
-    @Query
-    private var events: [Event]
+    @Query(sort: \Bunch.date, order: .reverse)
+    private var bunchs: [Bunch]
     
     private let columns: [GridItem] = Array(
         repeating: GridItem(.flexible(), spacing: 20),
@@ -24,7 +24,7 @@ struct TravelView: View {
         VStack(spacing: 0) {
             TopBarView(
                 leftSide: .text,
-                leftTitle: "여행",
+                leftTitle: "뭉치",
                 rightSide: .icon,
                 rightIcon: Image("plus"),
                 rightAction: {
@@ -34,11 +34,11 @@ struct TravelView: View {
             
             ScrollView {
                 LazyVGrid(columns: self.columns, spacing: 20) {
-                    ForEach(self.events, id: \.self) { event in
+                    ForEach(self.bunchs, id: \.self) { bunch in
                         ThumbnailTitleView(
-                            image: event.photos.first?.image,
-                            title: event.title,
-                            description: event.note
+                            image: bunch.image,
+                            title: bunch.title,
+                            description: bunch.note
                         )
                         .frame(width: BaseSize.cellWidth)
                     }

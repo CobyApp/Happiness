@@ -20,7 +20,7 @@ struct CobyHappinessApp: App {
         WindowGroup {
             ContentView()
                 .loadCustomFonts()
-                .modelContainer(for: Event.self)
+                .modelContainer(for: Bunch.self)
         }
     }
 }

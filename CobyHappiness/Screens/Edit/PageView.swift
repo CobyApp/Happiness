@@ -8,6 +8,8 @@
 import SwiftUI
 import MapKit
 
+import CobyDS
+
 struct PageView: View {
     
     @Environment(\.dismiss) private var dismiss
@@ -49,6 +51,7 @@ struct PageView: View {
             .tag(true)
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
+        .background(Color.backgroundNormalNormal)
     }
 }
 

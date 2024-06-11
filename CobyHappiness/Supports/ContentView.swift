@@ -23,9 +23,9 @@ struct ContentView: View {
                     Label("지도", image: "map")
                 }
             
-            TravelView()
+            BunchView()
                 .tabItem {
-                    Label("여행", image: "travel")
+                    Label("뭉치", image: "travel")
                 }
             
             ProfileView()
