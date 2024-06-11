@@ -31,7 +31,7 @@ struct SelectMemorysView: View {
             )
             
             ScrollView {
-                LazyVStack(spacing: 20) {
+                LazyVStack(spacing: 8) {
                     ForEach(self.memorys) { memory in
                         MemoryTileView(
                             memory: memory,

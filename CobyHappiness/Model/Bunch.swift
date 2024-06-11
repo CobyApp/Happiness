@@ -16,14 +16,14 @@ final class Bunch {
     var date: Date
     var title: String
     var note: String
-    @Relationship(deleteRule: .cascade)
+    @Relationship
     var memorys: [Memory]
     
     init(
         id: UUID = UUID(),
         date: Date,
         title: String,
-        note: String, 
+        note: String,
         memorys: [Memory]
     ) {
         self.id = id
