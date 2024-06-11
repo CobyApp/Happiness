@@ -15,8 +15,8 @@ struct HomeView: View {
     @Query(sort: \Memory.date, order: .reverse)
     private var memories: [Memory]
     
-    @State private var memory: Memory? = nil
     @State private var isPresented: Bool = false
+    @State private var memory: Memory? = nil
     
     var body: some View {
         VStack(spacing: 0) {
@@ -26,7 +26,7 @@ struct HomeView: View {
         }
         .background(Color.backgroundNormalNormal)
         .fullScreenCover(item: self.$memory, onDismiss: { self.memory = nil }) { item in
-            DetailView(memory: item)
+            EventDetailView(memory: item)
         }
         .fullScreenCover(isPresented: self.$isPresented) {
             EditMemoryPageView()

@@ -52,7 +52,7 @@ struct MapView: View {
             EditView()
         }
         .fullScreenCover(item: self.$memory, onDismiss: { self.memory = nil }) { item in
-            DetailView(memory: item)
+            EventDetailView(memory: item)
         }
     }
 }

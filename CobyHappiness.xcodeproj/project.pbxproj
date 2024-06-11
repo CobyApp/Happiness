@@ -14,13 +14,14 @@
 		CB4063B32C189B4B00654F89 /* Bunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063B22C189B4B00654F89 /* Bunch.swift */; };
 		CB4063B72C18A1C200654F89 /* MemoryTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063B62C18A1C200654F89 /* MemoryTileView.swift */; };
 		CB4063BC2C18A66200654F89 /* SelectMemorysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063BB2C18A66200654F89 /* SelectMemorysView.swift */; };
+		CB4196012C18B83E003D958C /* BunchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4196002C18B83E003D958C /* BunchDetailView.swift */; };
 		CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */; };
 		CB9EF8DB2ABC633B00FDCE12 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF8DA2ABC633B00FDCE12 /* Preview Assets.xcassets */; };
 		CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */; };
 		CB9EF9082ABC829F00FDCE12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */; };
 		CBA038692ABF352F00BD74CF /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA038682ABF352F00BD74CF /* Memory.swift */; };
 		CBAB7F4F2ACD402500257778 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F4E2ACD402500257778 /* ContentView.swift */; };
-		CBAB7F542ACD455E00257778 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F532ACD455E00257778 /* DetailView.swift */; };
+		CBAB7F542ACD455E00257778 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F532ACD455E00257778 /* EventDetailView.swift */; };
 		CBABE92F2ACB313C00103BB0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABE92E2ACB313C00103BB0 /* HomeView.swift */; };
 		CBABE9322ACB379200103BB0 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABE9312ACB379200103BB0 /* EditView.swift */; };
 		CBAD45562C151D6E009D4EFF /* CobyDS in Frameworks */ = {isa = PBXBuildFile; productRef = CBAD45552C151D6E009D4EFF /* CobyDS */; };
@@ -40,6 +41,7 @@
 		CB4063B22C189B4B00654F89 /* Bunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bunch.swift; sourceTree = "<group>"; };
 		CB4063B62C18A1C200654F89 /* MemoryTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryTileView.swift; sourceTree = "<group>"; };
 		CB4063BB2C18A66200654F89 /* SelectMemorysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMemorysView.swift; sourceTree = "<group>"; };
+		CB4196002C18B83E003D958C /* BunchDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchDetailView.swift; sourceTree = "<group>"; };
 		CB96DE382ABF597600B01762 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB9EF8D02ABC633A00FDCE12 /* CobyHappiness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CobyHappiness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CobyHappinessApp.swift; sourceTree = "<group>"; };
@@ -48,7 +50,7 @@
 		CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CBA038682ABF352F00BD74CF /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 		CBAB7F4E2ACD402500257778 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		CBAB7F532ACD455E00257778 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		CBAB7F532ACD455E00257778 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		CBABE92E2ACB313C00103BB0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CBABE9312ACB379200103BB0 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		CBAD45592C1582A7009D4EFF /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -85,6 +87,14 @@
 				CB4063BB2C18A66200654F89 /* SelectMemorysView.swift */,
 			);
 			path = EditBunch;
+			sourceTree = "<group>";
+		};
+		CB4195FF2C18B800003D958C /* BunchDetail */ = {
+			isa = PBXGroup;
+			children = (
+				CB4196002C18B83E003D958C /* BunchDetailView.swift */,
+			);
+			path = BunchDetail;
 			sourceTree = "<group>";
 		};
 		CB96DE342ABF588900B01762 /* Resource */ = {
@@ -150,7 +160,8 @@
 				CBAD45582C15829C009D4EFF /* Map */,
 				CBAD455B2C158308009D4EFF /* Bunch */,
 				CBAD455E2C158416009D4EFF /* Profile */,
-				CBAB7F522ACD455200257778 /* Detail */,
+				CBAB7F522ACD455200257778 /* EventDetail */,
+				CB4195FF2C18B800003D958C /* BunchDetail */,
 				CBABE9302ACB378500103BB0 /* EditEvent */,
 				CB4063B82C18A61200654F89 /* EditBunch */,
 			);
@@ -177,12 +188,12 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		CBAB7F522ACD455200257778 /* Detail */ = {
+		CBAB7F522ACD455200257778 /* EventDetail */ = {
 			isa = PBXGroup;
 			children = (
-				CBAB7F532ACD455E00257778 /* DetailView.swift */,
+				CBAB7F532ACD455E00257778 /* EventDetailView.swift */,
 			);
-			path = Detail;
+			path = EventDetail;
 			sourceTree = "<group>";
 		};
 		CBABE92D2ACB313400103BB0 /* Home */ = {
@@ -318,7 +329,7 @@
 				CB4063B32C189B4B00654F89 /* Bunch.swift in Sources */,
 				CBA038692ABF352F00BD74CF /* Memory.swift in Sources */,
 				CBAD45672C15C1F1009D4EFF /* Data+Extensions.swift in Sources */,
-				CBAB7F542ACD455E00257778 /* DetailView.swift in Sources */,
+				CBAB7F542ACD455E00257778 /* EventDetailView.swift in Sources */,
 				CBAD455D2C158315009D4EFF /* BunchView.swift in Sources */,
 				CBABE9322ACB379200103BB0 /* EditView.swift in Sources */,
 				CBAD45602C15841D009D4EFF /* ProfileView.swift in Sources */,
@@ -327,6 +338,7 @@
 				CB4063BC2C18A66200654F89 /* SelectMemorysView.swift in Sources */,
 				CBAD455A2C1582A7009D4EFF /* MapView.swift in Sources */,
 				CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */,
+				CB4196012C18B83E003D958C /* BunchDetailView.swift in Sources */,
 				CBABE92F2ACB313C00103BB0 /* HomeView.swift in Sources */,
 				CBAB7F4F2ACD402500257778 /* ContentView.swift in Sources */,
 				CB4063B72C18A1C200654F89 /* MemoryTileView.swift in Sources */,

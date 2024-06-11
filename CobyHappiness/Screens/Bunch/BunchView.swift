@@ -16,6 +16,7 @@ struct BunchView: View {
     private var bunchs: [Bunch]
     
     @State private var isPresented: Bool = false
+    @State private var bunch: Bunch? = nil
     
     private let columns: [GridItem] = Array(
         repeating: GridItem(.flexible(), spacing: 20),
@@ -43,6 +44,9 @@ struct BunchView: View {
                             description: bunch.note
                         )
                         .frame(width: BaseSize.cellWidth)
+                        .onTapGesture {
+                            self.bunch = bunch
+                        }
                     }
                 }
                 .padding(.horizontal, BaseSize.horizantalPadding)
@@ -53,6 +57,9 @@ struct BunchView: View {
         .background(Color.backgroundNormalNormal)
         .fullScreenCover(isPresented: self.$isPresented) {
             SelectMemoriesView()
+        }
+        .fullScreenCover(item: self.$bunch, onDismiss: { self.bunch = nil }) { item in
+            BunchDetailView(bunch: item)
         }
     }
 }

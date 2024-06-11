@@ -1,5 +1,5 @@
 //
-//  DetailView.swift
+//  EventDetailView.swift
 //  CobyHappiness
 //
 //  Created by COBY_PRO on 10/4/23.
@@ -9,7 +9,7 @@ import SwiftUI
 
 import CobyDS
 
-struct DetailView: View {
+struct EventDetailView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
@@ -21,7 +21,9 @@ struct DetailView: View {
     
     private var memory: Memory
     
-    init(memory: Memory) {
+    init(
+        memory: Memory
+    ) {
         self.memory = memory
         self._photos = State(wrappedValue: memory.photos.compactMap { UIImage(data: $0) })
     }
