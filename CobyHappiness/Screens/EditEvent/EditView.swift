@@ -15,7 +15,7 @@ struct EditView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
     
-    @State private var type: EventType = EventType.moment
+    @State private var type: MemoryType = MemoryType.moment
     @State private var date: Date = Date()
     @State private var title: String = ""
     @State private var note: String = ""
@@ -24,22 +24,22 @@ struct EditView: View {
     @State private var selectedItems: [PhotosPickerItem] = []
     @State private var isDisabled: Bool = true
     
-    private var event: Event?
+    private var memory: Memory?
     private let screenTitle: String
     
     init() {
         self.screenTitle = "추억 만들기"
     }
     
-    init(event: Event) {
-        self.event = event
+    init(memory: Memory) {
+        self.memory = memory
         self.screenTitle = "추억 수정하기"
-        self._date = State(initialValue: event.date)
-        self._type = State(initialValue: event.type)
-        self._title = State(initialValue: event.title)
-        self._note = State(initialValue: event.note)
-        self._photos = State(initialValue: event.photos)
-        self._isDisabled = State(initialValue: event.photos.isEmpty)
+        self._date = State(initialValue: memory.date)
+        self._type = State(initialValue: memory.type)
+        self._title = State(initialValue: memory.title)
+        self._note = State(initialValue: memory.note)
+        self._photos = State(initialValue: memory.photos)
+        self._isDisabled = State(initialValue: memory.photos.isEmpty)
     }
     
     var body: some View {
@@ -54,9 +54,9 @@ struct EditView: View {
             
             ScrollView {
                 VStack {
-                    self.EventEditView()
+                    self.MemoryEditView()
                     
-                    self.EventContentView()
+                    self.MemoryContentView()
                     
                     Text(NSLocalizedString("추억 저장하기", comment: ""))
                         .font(.system(size: 16, weight: .regular))
@@ -68,7 +68,7 @@ struct EditView: View {
                         .padding(.horizontal, BaseSize.horizantalPadding)
                         .onTapGesture {
                             if !self.isDisabled {
-                                self.storeEvent()
+                                self.storeMemory()
                             }
                         }
                 }
@@ -86,14 +86,14 @@ struct EditView: View {
     }
     
     @ViewBuilder
-    func EventEditView() -> some View {
+    func MemoryEditView() -> some View {
         VStack(spacing: 4) {
             DatePicker("날짜", selection: $date)
             
             Picker("분야", selection: $type) {
-                ForEach(EventType.allCases) { eventType in
-                    Text(eventType.icon + " " + eventType.id.capitalized)
-                        .tag(eventType)
+                ForEach(MemoryType.allCases) { memoryType in
+                    Text(memoryType.icon + " " + memoryType.id.capitalized)
+                        .tag(memoryType)
                 }
             }
             
@@ -124,7 +124,7 @@ struct EditView: View {
     }
     
     @ViewBuilder
-    func EventContentView() -> some View {
+    func MemoryContentView() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
                 ForEach(self.photos, id: \.self) { photo in
@@ -174,11 +174,11 @@ struct EditView: View {
         }
     }
     
-    private func storeEvent() {
+    private func storeMemory() {
         do {
-            if let event = event {
-                let item = Event(
-                    id: event.id,
+            if let memory = memory {
+                let item = Memory(
+                    id: memory.id,
                     date: self.date,
                     type: self.type,
                     title: self.title,
@@ -189,7 +189,7 @@ struct EditView: View {
                 self.context.insert(item)
                 try self.context.save()
             } else {
-                let item = Event(
+                let item = Memory(
                     date: self.date,
                     type: self.type,
                     title: self.title,

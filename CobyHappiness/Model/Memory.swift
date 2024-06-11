@@ -1,5 +1,5 @@
 //
-//  Event.swift
+//  Memory.swift
 //  CobyHappiness
 //
 //  Created by COBY_PRO on 2023/09/24.
@@ -9,12 +9,12 @@ import SwiftUI
 import SwiftData
 
 @Model
-final class Event {
+final class Memory {
     
     @Attribute(.unique)
     var id: UUID
     var date: Date
-    var type: EventType
+    var type: MemoryType
     var title: String
     var note: String
     var location: Location?
@@ -23,7 +23,7 @@ final class Event {
     init(
         id: UUID = UUID(),
         date: Date,
-        type: EventType,
+        type: MemoryType,
         title: String,
         note: String,
         location: Location? = nil,
@@ -39,7 +39,7 @@ final class Event {
     }
 }
 
-enum EventType: String, Identifiable, CaseIterable, Codable {
+enum MemoryType: String, Identifiable, CaseIterable, Codable {
     case music, video, food, flex, moment
     
     var id: String {

@@ -10,12 +10,12 @@ import MapKit
 
 struct MapRepresentableView: UIViewRepresentable {
     
-    private var events: [Event]
+    private var memorys: [Memory]
     
     init(
-        events: [Event]
+        memorys: [Memory]
     ) {
-        self.events = events
+        self.memorys = memorys
     }
     
     class Coordinator: NSObject, MKMapViewDelegate {
@@ -52,11 +52,11 @@ struct MapRepresentableView: UIViewRepresentable {
         let allAnnotations = uiView.annotations
         uiView.removeAnnotations(allAnnotations)
         
-        for event in events {
-            if let coordinate = event.location?.coordinate {
+        for memory in memorys {
+            if let coordinate = memory.location?.coordinate {
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = coordinate
-                annotation.title = event.title
+                annotation.title = memory.title
                 uiView.addAnnotation(annotation)
             }
         }

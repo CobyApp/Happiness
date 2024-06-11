@@ -19,11 +19,11 @@ struct DetailView: View {
     @State private var isPresented: Bool = false
     @State private var photos = [UIImage]()
     
-    private var event: Event
+    private var memory: Memory
     
-    init(event: Event) {
-        self.event = event
-        self._photos = State(wrappedValue: event.photos.compactMap { UIImage(data: $0) })
+    init(memory: Memory) {
+        self.memory = memory
+        self._photos = State(wrappedValue: memory.photos.compactMap { UIImage(data: $0) })
     }
     
     var body: some View {
@@ -73,7 +73,7 @@ struct DetailView: View {
                 primaryButton: .destructive(
                     Text("삭제"),
                     action: {
-                        self.context.delete(self.event)
+                        self.context.delete(self.memory)
                         self.dismiss()
                     }
                 ),
@@ -81,7 +81,7 @@ struct DetailView: View {
             )
         }
         .fullScreenCover(isPresented: self.$isPresented) {
-            EditView(event: self.event)
+            EditView(memory: self.memory)
         }
     }
     
@@ -118,11 +118,11 @@ struct DetailView: View {
     
     private func TitleView() -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(self.event.title)
+            Text(self.memory.title)
                 .font(.pretendard(size: 20, weight: .bold))
                 .foregroundStyle(Color.labelNormal)
             
-            Text(self.event.date.format("MMM d, yyyy"))
+            Text(self.memory.date.format("MMM d, yyyy"))
                 .font(.pretendard(size: 14, weight: .medium))
                 .foregroundStyle(Color.labelAlternative)
         }
@@ -134,7 +134,7 @@ struct DetailView: View {
                 .font(.pretendard(size: 18, weight: .semibold))
                 .foregroundStyle(Color.labelNormal)
             
-            Text(self.event.note)
+            Text(self.memory.note)
                 .font(.pretendard(size: 14, weight: .regular))
                 .foregroundColor(Color.labelNormal)
                 .multilineTextAlignment(.leading)

@@ -1,5 +1,5 @@
 //
-//  EditEventView.swift
+//  EditMemoryView.swift
 //  CobyHappiness
 //
 //  Created by Coby on 6/11/24.
@@ -9,7 +9,7 @@ import SwiftUI
 
 import CobyDS
 
-struct EditEventView: View {
+struct EditMemoryView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
@@ -19,7 +19,7 @@ struct EditEventView: View {
     @Binding var date: Date
     @Binding var location: Location?
     
-    @State private var type: EventType = EventType.moment
+    @State private var type: MemoryType = MemoryType.moment
     @State private var title: String = ""
     @State private var note: String = ""
     
@@ -44,7 +44,7 @@ struct EditEventView: View {
             }
             
             Button {
-                self.storeEvent()
+                self.storeMemory()
             } label: {
                 Text("저장")
             }
@@ -98,9 +98,9 @@ struct EditEventView: View {
         .padding(BaseSize.horizantalPadding)
     }
     
-    private func storeEvent() {
+    private func storeMemory() {
         do {
-            let item = Event(
+            let item = Memory(
                 date: self.date,
                 type: self.type,
                 title: self.title,

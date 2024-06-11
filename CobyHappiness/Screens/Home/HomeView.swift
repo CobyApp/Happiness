@@ -12,27 +12,24 @@ import CobyDS
 
 struct HomeView: View {
     
-    @Environment(\.modelContext) private var context
+    @Query(sort: \Memory.date, order: .reverse)
+    private var memorys: [Memory]
     
-    @Query(sort: \Event.date, order: .reverse)
-    private var events: [Event]
-    
-    @State private var event: Event? = nil
+    @State private var memory: Memory? = nil
     @State private var isPresented: Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
             self.HomeTopBarView()
             
-            self.EventListView()
+            self.MemoryListView()
         }
         .background(Color.backgroundNormalNormal)
-        .fullScreenCover(item: self.$event, onDismiss: { self.event = nil }) { item in
-            DetailView(event: item)
+        .fullScreenCover(item: self.$memory, onDismiss: { self.memory = nil }) { item in
+            DetailView(memory: item)
         }
         .fullScreenCover(isPresented: self.$isPresented) {
-//            EditView()
-            PageView()
+            EditMemoryPageView()
         }
     }
     
@@ -58,11 +55,11 @@ struct HomeView: View {
     }
     
     @ViewBuilder
-    private func EventListView() -> some View {
+    private func MemoryListView() -> some View {
         ScrollView {
             LazyVStack(spacing: 20) {
-                ForEach(self.events) { event in
-                    self.EventThumbnailView(for: event)
+                ForEach(self.memorys) { memory in
+                    self.MemoryThumbnailView(for: memory)
                 }
             }
             .padding(.top, 8)
@@ -71,16 +68,16 @@ struct HomeView: View {
     }
     
     @ViewBuilder
-    private func EventThumbnailView(for event: Event) -> some View {
+    private func MemoryThumbnailView(for memory: Memory) -> some View {
         ThumbnailCardView(
-            image: event.photos.first?.image,
-            title: event.title,
-            description: event.date.format("MMM d, yyyy"),
+            image: memory.photos.first?.image,
+            title: memory.title,
+            description: memory.date.format("MMM d, yyyy"),
             isShadowing: true
         )
         .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
         .onTapGesture {
-            self.event = event
+            self.memory = memory
         }
     }
 }

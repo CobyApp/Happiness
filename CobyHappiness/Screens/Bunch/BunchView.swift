@@ -15,6 +15,8 @@ struct BunchView: View {
     @Query(sort: \Bunch.date, order: .reverse)
     private var bunchs: [Bunch]
     
+    @State private var isPresented: Bool = false
+    
     private let columns: [GridItem] = Array(
         repeating: GridItem(.flexible(), spacing: 20),
         count: 2
@@ -28,7 +30,7 @@ struct BunchView: View {
                 rightSide: .icon,
                 rightIcon: Image("plus"),
                 rightAction: {
-                    print("추가")
+                    self.isPresented = true
                 }
             )
             
@@ -49,5 +51,8 @@ struct BunchView: View {
             }
         }
         .background(Color.backgroundNormalNormal)
+        .fullScreenCover(isPresented: self.$isPresented) {
+            SelectMemorysView()
+        }
     }
 }

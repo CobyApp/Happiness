@@ -1,5 +1,5 @@
 //
-//  PageView.swift
+//  EditMemoryPageView.swift
 //  CobyHappiness
 //
 //  Created by Coby on 6/11/24.
@@ -10,7 +10,7 @@ import MapKit
 
 import CobyDS
 
-struct PageView: View {
+struct EditMemoryPageView: View {
     
     @Environment(\.dismiss) private var dismiss
     
@@ -42,7 +42,7 @@ struct PageView: View {
             .edgesIgnoringSafeArea(.all)
             .tag(false)
 
-            EditEventView(
+            EditMemoryView(
                 selectionMade: $selectionMade,
                 selectedImages: $selectedImages,
                 date: $date,
@@ -56,5 +56,5 @@ struct PageView: View {
 }
 
 #Preview {
-    PageView()
+    EditMemoryPageView()
 }

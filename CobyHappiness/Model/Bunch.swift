@@ -17,23 +17,23 @@ final class Bunch {
     var title: String
     var note: String
     @Relationship(deleteRule: .cascade)
-    var events: [Event]
+    var memorys: [Memory]
     
     init(
         id: UUID = UUID(),
         date: Date,
         title: String,
         note: String, 
-        events: [Event]
+        memorys: [Memory]
     ) {
         self.id = id
         self.date = date
         self.title = title
         self.note = note
-        self.events = events
+        self.memorys = memorys
     }
     
     var image: Image? {
-        self.events.first?.photos.first?.image
+        self.memorys.first?.photos.first?.image
     }
 }

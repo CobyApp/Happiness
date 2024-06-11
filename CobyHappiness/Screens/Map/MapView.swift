@@ -13,9 +13,10 @@ import CobyDS
 struct MapView: View {
     
     @Query
-    private var events: [Event]
+    private var memorys: [Memory]
     
     @State private var isPresented: Bool = false
+    @State private var memory: Memory? = nil
     
     var body: some View {
         VStack(spacing: 0) {
@@ -29,13 +30,29 @@ struct MapView: View {
                 }
             )
             
-            MapRepresentableView(
-                events: self.events
-            )
+            ZStack(alignment: .bottom) {
+                MapRepresentableView(
+                    memorys: self.memorys
+                )
+                
+                if let memory = self.memorys.first {
+                    MemoryTileView(
+                        memory: memory,
+                        isShadowing: true
+                    )
+                    .padding(20)
+                    .onTapGesture {
+                        self.memory = memory
+                    }
+                }
+            }
         }
         .background(Color.backgroundNormalNormal)
         .fullScreenCover(isPresented: self.$isPresented) {
             EditView()
+        }
+        .fullScreenCover(item: self.$memory, onDismiss: { self.memory = nil }) { item in
+            DetailView(memory: item)
         }
     }
 }
