@@ -52,7 +52,7 @@ struct BunchView: View {
         }
         .background(Color.backgroundNormalNormal)
         .fullScreenCover(isPresented: self.$isPresented) {
-            SelectMemorysView()
+            SelectMemoriesView()
         }
     }
 }

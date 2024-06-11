@@ -1,5 +1,5 @@
 //
-//  SelectMemorysView.swift
+//  SelectMemoriesView.swift
 //  CobyHappiness
 //
 //  Created by Coby on 6/12/24.
@@ -10,15 +10,15 @@ import SwiftData
 
 import CobyDS
 
-struct SelectMemorysView: View {
+struct SelectMemoriesView: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
     
     @Query(sort: \Memory.date, order: .reverse)
-    private var memorys: [Memory]
+    private var memories: [Memory]
     
-    @State private var selectedMemorys: [Memory] = []
+    @State private var selectedMemories: [Memory] = []
     
     var body: some View {
         VStack(spacing: 0) {
@@ -32,16 +32,16 @@ struct SelectMemorysView: View {
             
             ScrollView {
                 LazyVStack(spacing: 8) {
-                    ForEach(self.memorys) { memory in
+                    ForEach(self.memories) { memory in
                         MemoryTileView(
                             memory: memory,
-                            isSelected: self.selectedMemorys.contains(memory)
+                            isSelected: self.selectedMemories.contains(memory)
                         )
                         .onTapGesture {
-                            if self.selectedMemorys.contains(memory) {
-                                self.selectedMemorys = self.selectedMemorys.filter { $0 != memory }
+                            if self.selectedMemories.contains(memory) {
+                                self.selectedMemories = self.selectedMemories.filter { $0 != memory }
                             } else {
-                                self.selectedMemorys.append(memory)
+                                self.selectedMemories.append(memory)
                             }
                         }
                     }
@@ -59,7 +59,7 @@ struct SelectMemorysView: View {
             .buttonStyle(
                 CBButtonStyle(
                     buttonColor: Color.redNormal,
-                    disable: self.selectedMemorys.isEmpty
+                    disable: self.selectedMemories.isEmpty
                 )
             )
             .padding(.horizontal, BaseSize.horizantalPadding)
@@ -67,17 +67,19 @@ struct SelectMemorysView: View {
     }
 }
 
-extension SelectMemorysView {
+extension SelectMemoriesView {
     private func storeBunch() {
         do {
             let item = Bunch(
-                date: self.selectedMemorys.first?.date ?? Date.now,
-                title: self.selectedMemorys.first?.title ?? "제목",
-                note: self.selectedMemorys.first?.note ?? "내용",
-                memorys: self.selectedMemorys
+                date: self.selectedMemories.first?.date ?? Date.now,
+                title: self.selectedMemories.first?.title ?? "제목",
+                note: self.selectedMemories.first?.note ?? "내용",
+                memories: []
             )
+            item.memories = self.selectedMemories
             self.context.insert(item)
             try self.context.save()
+            
             self.dismiss()
         } catch {
             print("error")
@@ -86,5 +88,5 @@ extension SelectMemorysView {
 }
 
 #Preview {
-    SelectMemorysView()
+    SelectMemoriesView()
 }

@@ -16,24 +16,24 @@ final class Bunch {
     var date: Date
     var title: String
     var note: String
-    @Relationship
-    var memorys: [Memory]
+    @Relationship(deleteRule: .nullify)
+    var memories: [Memory]
     
     init(
         id: UUID = UUID(),
         date: Date,
         title: String,
         note: String,
-        memorys: [Memory]
+        memories: [Memory]
     ) {
         self.id = id
         self.date = date
         self.title = title
         self.note = note
-        self.memorys = memorys
+        self.memories = memories
     }
     
     var image: Image? {
-        self.memorys.first?.photos.first?.image
+        self.memories.first?.photos.first?.image
     }
 }

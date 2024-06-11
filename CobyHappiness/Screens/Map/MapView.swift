@@ -13,7 +13,7 @@ import CobyDS
 struct MapView: View {
     
     @Query
-    private var memorys: [Memory]
+    private var memories: [Memory]
     
     @State private var isPresented: Bool = false
     @State private var memory: Memory? = nil
@@ -32,10 +32,10 @@ struct MapView: View {
             
             ZStack(alignment: .bottom) {
                 MapRepresentableView(
-                    memorys: self.memorys
+                    memories: self.memories
                 )
                 
-                if let memory = self.memorys.first {
+                if let memory = self.memories.first {
                     MemoryTileView(
                         memory: memory,
                         isShadowing: true

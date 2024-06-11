@@ -13,7 +13,7 @@ import CobyDS
 struct HomeView: View {
     
     @Query(sort: \Memory.date, order: .reverse)
-    private var memorys: [Memory]
+    private var memories: [Memory]
     
     @State private var memory: Memory? = nil
     @State private var isPresented: Bool = false
@@ -58,7 +58,7 @@ struct HomeView: View {
     private func MemoryListView() -> some View {
         ScrollView {
             LazyVStack(spacing: 12) {
-                ForEach(self.memorys) { memory in
+                ForEach(self.memories) { memory in
                     self.MemoryThumbnailView(for: memory)
                 }
             }
