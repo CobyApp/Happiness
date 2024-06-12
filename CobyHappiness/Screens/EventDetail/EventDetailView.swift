@@ -36,7 +36,7 @@ struct EventDetailView: View {
                     self.dismiss()
                 },
                 rightSide: .icon,
-                rightIcon: Image("more"),
+                rightIcon: UIImage.icMore,
                 rightAction: {
                     self.showingSheet = true
                 }
@@ -106,16 +106,22 @@ struct EventDetailView: View {
     
     @ViewBuilder
     private func ContentView() -> some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: 16) {
             self.TitleView()
             
             CBDivider()
             
-            self.NoteView()
+            Text(self.memory.note)
+                .font(.pretendard(size: 14, weight: .regular))
+                .foregroundColor(Color.labelNormal)
+                .multilineTextAlignment(.leading)
+                .lineLimit(nil)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .padding(.horizontal, BaseSize.horizantalPadding)
     }
     
+    @ViewBuilder
     private func TitleView() -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(self.memory.title)
@@ -125,21 +131,6 @@ struct EventDetailView: View {
             Text(self.memory.date.format("MMM d, yyyy"))
                 .font(.pretendard(size: 14, weight: .medium))
                 .foregroundStyle(Color.labelAlternative)
-        }
-    }
-    
-    private func NoteView() -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("기록")
-                .font(.pretendard(size: 18, weight: .semibold))
-                .foregroundStyle(Color.labelNormal)
-            
-            Text(self.memory.note)
-                .font(.pretendard(size: 14, weight: .regular))
-                .foregroundColor(Color.labelNormal)
-                .multilineTextAlignment(.leading)
-                .lineLimit(nil)
-                .fixedSize(horizontal: false, vertical: true)
         }
     }
 }

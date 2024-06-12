@@ -70,7 +70,7 @@ struct EditMemoryView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
                 ForEach(self.selectedImages, id: \.self) { image in
-                    ThumbnailView(image: Image(uiImage: image))
+                    ThumbnailView(image: image)
                         .frame(width: 100, height: 100)
                 }
             }

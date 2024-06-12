@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-
-import SwiftUI
 import SwiftData
 
 import CobyDS
@@ -38,7 +36,7 @@ struct BunchDetailView: View {
                     self.dismiss()
                 },
                 rightSide: .icon,
-                rightIcon: Image("more"),
+                rightIcon: UIImage.icMore,
                 rightAction: {
                     self.showingSheet = true
                 }

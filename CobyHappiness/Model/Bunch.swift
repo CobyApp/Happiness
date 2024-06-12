@@ -33,7 +33,7 @@ final class Bunch {
         self.memories = memories
     }
     
-    var image: Image? {
+    var image: UIImage? {
         self.memories.first?.photos.first?.image
     }
 }

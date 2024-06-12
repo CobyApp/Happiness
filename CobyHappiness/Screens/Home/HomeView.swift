@@ -38,7 +38,7 @@ struct HomeView: View {
         TopBarView(
             leftSide: .none,
             rightSide: .icon,
-            rightIcon: Image("plus"),
+            rightIcon: UIImage.icPlus,
             rightAction: {
                 self.isPresented = true
             }

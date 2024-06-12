@@ -15,6 +15,8 @@
 		CB4063B72C18A1C200654F89 /* MemoryTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063B62C18A1C200654F89 /* MemoryTileView.swift */; };
 		CB4063BC2C18A66200654F89 /* SelectMemorysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063BB2C18A66200654F89 /* SelectMemorysView.swift */; };
 		CB4196012C18B83E003D958C /* BunchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4196002C18B83E003D958C /* BunchDetailView.swift */; };
+		CB4196092C19CF00003D958C /* UIImage+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4196082C19CF00003D958C /* UIImage+Assets.swift */; };
+		CB41960B2C19D19B003D958C /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB41960A2C19D19B003D958C /* Data+Extensions.swift */; };
 		CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */; };
 		CB9EF8DB2ABC633B00FDCE12 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF8DA2ABC633B00FDCE12 /* Preview Assets.xcassets */; };
 		CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */; };
@@ -28,7 +30,6 @@
 		CBAD455A2C1582A7009D4EFF /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD45592C1582A7009D4EFF /* MapView.swift */; };
 		CBAD455D2C158315009D4EFF /* BunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD455C2C158315009D4EFF /* BunchView.swift */; };
 		CBAD45602C15841D009D4EFF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD455F2C15841D009D4EFF /* ProfileView.swift */; };
-		CBAD45672C15C1F1009D4EFF /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD45662C15C1F1009D4EFF /* Data+Extensions.swift */; };
 		CBAD45692C15EBB1009D4EFF /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD45682C15EBB1009D4EFF /* Location.swift */; };
 		CBB21C982C16F273007E6AA2 /* MapRepresentableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB21C972C16F273007E6AA2 /* MapRepresentableView.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,8 @@
 		CB4063B62C18A1C200654F89 /* MemoryTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryTileView.swift; sourceTree = "<group>"; };
 		CB4063BB2C18A66200654F89 /* SelectMemorysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMemorysView.swift; sourceTree = "<group>"; };
 		CB4196002C18B83E003D958C /* BunchDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchDetailView.swift; sourceTree = "<group>"; };
+		CB4196082C19CF00003D958C /* UIImage+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Assets.swift"; sourceTree = "<group>"; };
+		CB41960A2C19D19B003D958C /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		CB96DE382ABF597600B01762 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB9EF8D02ABC633A00FDCE12 /* CobyHappiness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CobyHappiness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CobyHappinessApp.swift; sourceTree = "<group>"; };
@@ -56,7 +59,6 @@
 		CBAD45592C1582A7009D4EFF /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		CBAD455C2C158315009D4EFF /* BunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchView.swift; sourceTree = "<group>"; };
 		CBAD455F2C15841D009D4EFF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		CBAD45662C15C1F1009D4EFF /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		CBAD45682C15EBB1009D4EFF /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		CBB21C972C16F273007E6AA2 /* MapRepresentableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepresentableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */,
+				CB4196082C19CF00003D958C /* UIImage+Assets.swift */,
+				CB41960A2C19D19B003D958C /* Data+Extensions.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -183,7 +187,6 @@
 			isa = PBXGroup;
 			children = (
 				CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */,
-				CBAD45662C15C1F1009D4EFF /* Data+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -328,8 +331,8 @@
 				CB4063AF2C1762EB00654F89 /* EditMemoryPageView.swift in Sources */,
 				CB4063B32C189B4B00654F89 /* Bunch.swift in Sources */,
 				CBA038692ABF352F00BD74CF /* Memory.swift in Sources */,
-				CBAD45672C15C1F1009D4EFF /* Data+Extensions.swift in Sources */,
 				CBAB7F542ACD455E00257778 /* EventDetailView.swift in Sources */,
+				CB4196092C19CF00003D958C /* UIImage+Assets.swift in Sources */,
 				CBAD455D2C158315009D4EFF /* BunchView.swift in Sources */,
 				CBABE9322ACB379200103BB0 /* EditView.swift in Sources */,
 				CBAD45602C15841D009D4EFF /* ProfileView.swift in Sources */,
@@ -343,6 +346,7 @@
 				CBAB7F4F2ACD402500257778 /* ContentView.swift in Sources */,
 				CB4063B72C18A1C200654F89 /* MemoryTileView.swift in Sources */,
 				CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */,
+				CB41960B2C19D19B003D958C /* Data+Extensions.swift in Sources */,
 				CB2471012ADABBFC00EEA032 /* Place.swift in Sources */,
 				CB4063B12C1763EA00654F89 /* EditMemoryView.swift in Sources */,
 			);
@@ -569,7 +573,7 @@
 			repositoryURL = "https://github.com/CobyLibrary/CobyDS.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.1.3;
+				version = 1.1.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

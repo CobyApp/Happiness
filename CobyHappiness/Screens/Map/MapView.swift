@@ -24,7 +24,7 @@ struct MapView: View {
                 leftSide: .text,
                 leftTitle: "지도",
                 rightSide: .icon,
-                rightIcon: Image("plus"),
+                rightIcon: UIImage.icPlus,
                 rightAction: {
                     self.isPresented = true
                 }

@@ -29,7 +29,7 @@ struct BunchView: View {
                 leftSide: .text,
                 leftTitle: "뭉치",
                 rightSide: .icon,
-                rightIcon: Image("plus"),
+                rightIcon: UIImage.icPlus,
                 rightAction: {
                     self.isPresented = true
                 }
