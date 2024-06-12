@@ -19,7 +19,7 @@ struct BunchView: View {
     @State private var bunch: Bunch? = nil
     
     private let columns: [GridItem] = Array(
-        repeating: GridItem(.flexible(), spacing: 20),
+        repeating: GridItem(.flexible(), spacing: 8),
         count: 2
     )
     
@@ -43,7 +43,7 @@ struct BunchView: View {
                             title: bunch.title,
                             description: bunch.note
                         )
-                        .frame(width: BaseSize.cellWidth)
+                        .frame(width: (BaseSize.fullWidth - 12) / 2)
                         .onTapGesture {
                             self.bunch = bunch
                         }
