@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import MapKit
 
 import CobyDS
 
@@ -18,8 +17,8 @@ struct MapView: View {
     
     @State private var isPresented: Bool = false
     @State private var memory: Memory? = nil
-    @State private var topLeft: CLLocationCoordinate2D = .init()
-    @State private var bottomRight: CLLocationCoordinate2D = .init()
+    
+    @State private var filteredMemories: [Memory] = []
     
     var body: some View {
         VStack(spacing: 0) {
@@ -35,12 +34,11 @@ struct MapView: View {
             
             ZStack(alignment: .bottom) {
                 MapRepresentableView(
-                    topLeft: self.$topLeft,
-                    bottomRight: self.$bottomRight,
+                    filteredMemories: self.$filteredMemories,
                     memories: self.memories
                 )
                 
-                if let memory = self.memories.first {
+                if let memory = self.filteredMemories.first {
                     MemoryTileView(
                         memory: memory,
                         isShadowing: true

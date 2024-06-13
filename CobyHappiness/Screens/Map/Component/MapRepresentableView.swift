@@ -11,18 +11,15 @@ import CoreLocation
 
 struct MapRepresentableView: UIViewRepresentable {
     
-    @Binding var topLeft: CLLocationCoordinate2D
-    @Binding var bottomRight: CLLocationCoordinate2D
+    @Binding var filteredMemories: [Memory]
     
     private var memories: [Memory]
     
     init(
-        topLeft: Binding<CLLocationCoordinate2D>,
-        bottomRight: Binding<CLLocationCoordinate2D>,
+        filteredMemories: Binding<[Memory]>,
         memories: [Memory]
     ) {
-        self._topLeft = topLeft
-        self._bottomRight = bottomRight
+        self._filteredMemories = filteredMemories
         self.memories = memories
     }
     
@@ -53,10 +50,18 @@ struct MapRepresentableView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-            self.parent.topLeft = mapView.convert(CGPoint(x: 0, y: 0), toCoordinateFrom: mapView)
-            self.parent.bottomRight = mapView.convert(CGPoint(x: mapView.frame.width, y: mapView.frame.height), toCoordinateFrom: mapView)
-            print("Top Left: \(parent.topLeft)")
-            print("Bottom Right: \(parent.bottomRight)")
+            let topLeft = mapView.convert(CGPoint(x: 0, y: 0), toCoordinateFrom: mapView)
+            let bottomRight = mapView.convert(CGPoint(x: mapView.frame.width, y: mapView.frame.height), toCoordinateFrom: mapView)
+            
+            self.parent.filteredMemories = self.parent.memories.compactMap { memory in
+                if let location = memory.location?.coordinate {
+                    if location.latitude <= topLeft.latitude && location.latitude >= bottomRight.latitude &&
+                        location.longitude >= topLeft.longitude && location.longitude <= bottomRight.longitude {
+                        return memory
+                    }
+                }
+                return nil
+            }
         }
         
         func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -69,11 +74,11 @@ struct MapRepresentableView: UIViewRepresentable {
             DispatchQueue.main.async {
                 self.mapView?.setRegion(region, animated: true)
                 
-                self.parent.topLeft = CLLocationCoordinate2D(
+                let topLeft = CLLocationCoordinate2D(
                     latitude: center.latitude + region.span.latitudeDelta / 2,
                     longitude: center.longitude - region.span.longitudeDelta / 2
                 )
-                self.parent.bottomRight = CLLocationCoordinate2D(
+                let bottomRight = CLLocationCoordinate2D(
                     latitude: center.latitude - region.span.latitudeDelta / 2,
                     longitude: center.longitude + region.span.longitudeDelta / 2
                 )
@@ -96,7 +101,7 @@ struct MapRepresentableView: UIViewRepresentable {
         let allAnnotations = uiView.annotations
         uiView.removeAnnotations(allAnnotations)
         
-        for memory in memories {
+        for memory in filteredMemories {
             if let coordinate = memory.location?.coordinate {
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = coordinate
