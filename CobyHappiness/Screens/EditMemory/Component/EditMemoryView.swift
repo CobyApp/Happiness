@@ -14,7 +14,7 @@ struct EditMemoryView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var context
     
-    @Binding var selectionMade: Bool
+    @Binding var selection: Int
     @Binding var selectedImages: [UIImage]
     @Binding var date: Date
     @Binding var location: Location?
@@ -30,7 +30,7 @@ struct EditMemoryView: View {
             TopBarView(
                 leftSide: .left,
                 leftAction: {
-                    self.selectionMade = false
+                    self.selection = 0
                 },
                 title: "추억 만들기"
             )

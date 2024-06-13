@@ -14,41 +14,41 @@ struct EditMemoryPageView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @State private var selectionMade = false
-    
+    @State private var selection = 0
     @State private var selectedImages: [UIImage] = []
     @State private var date: Date = Date.now
     @State private var location: Location? = nil
 
     var body: some View {
-        TabView(selection: $selectionMade) {
+        TabView(selection: self.$selection) {
             ImagePickerView(
                 didFinishPicking: { imagesWithMetadata in
-                    for (image, date, location) in imagesWithMetadata {
-                        self.selectedImages.append(image)
-                        
-                        if let date = date, let coordinate = location?.coordinate {
-                            self.date = date
-                            self.location = Location(lat: coordinate.latitude, lon: coordinate.longitude)
+                    self.selectedImages = imagesWithMetadata.map { $0.0 }
+                    self.date = imagesWithMetadata.map { $0.1 ?? .now }.first ?? .now
+                    self.location = imagesWithMetadata.map {
+                        if let coordinate = $0.2?.coordinate {
+                            Location(lat: coordinate.latitude, lon: coordinate.longitude)
+                        } else {
+                            nil
                         }
-                    }
+                    }.first ?? nil
                     
-                    selectionMade = true
+                    self.selection = 1
                 },
                 didCancel: {
                     self.dismiss()
                 }
             )
             .edgesIgnoringSafeArea(.all)
-            .tag(false)
+            .tag(0)
 
             EditMemoryView(
-                selectionMade: $selectionMade,
+                selection: $selection,
                 selectedImages: $selectedImages,
                 date: $date,
                 location: $location
             )
-            .tag(true)
+            .tag(1)
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
         .background(Color.backgroundNormalNormal)
