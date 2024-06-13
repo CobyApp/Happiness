@@ -42,12 +42,12 @@ struct ProfileView: View {
         HStack(spacing: 8) {
             BoxView(
                 title: "추억",
-                description: "\(self.bunches.count)개"
+                description: "\(self.memories.count)개"
             )
             
             BoxView(
                 title: "뭉치",
-                description: "\(self.memories.count)개"
+                description: "\(self.bunches.count)개"
             )
         }
         .padding(.horizontal, BaseSize.horizantalPadding)
