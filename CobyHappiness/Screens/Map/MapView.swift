@@ -12,13 +12,9 @@ import CobyDS
 
 struct MapView: View {
     
-    @Query
-    private var memories: [Memory]
-    
+    @State private var viewModel: MapViewModel = MapViewModel()
     @State private var isPresented: Bool = false
     @State private var memory: Memory? = nil
-    
-    @State private var filteredMemories: [Memory] = []
     
     var body: some View {
         VStack(spacing: 0) {
@@ -34,16 +30,17 @@ struct MapView: View {
             
             ZStack(alignment: .bottom) {
                 MapRepresentableView(
-                    filteredMemories: self.$filteredMemories,
-                    memories: self.memories
+                    filteredMemories: self.$viewModel.filteredMemories,
+                    memories: self.viewModel.memories
                 )
                 
-                if let memory = self.filteredMemories.first {
+                if let memory = self.viewModel.filteredMemories.first {
                     MemoryTileView(
                         memory: memory,
                         isShadowing: true
                     )
-                    .padding(20)
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 30)
                     .onTapGesture {
                         self.memory = memory
                     }
@@ -51,11 +48,24 @@ struct MapView: View {
             }
         }
         .background(Color.backgroundNormalNormal)
-        .fullScreenCover(isPresented: self.$isPresented) {
+        .fullScreenCover(
+            isPresented: self.$isPresented,
+            onDismiss: {
+                self.viewModel.fetchMemories()
+            }
+        ) {
             EditView()
         }
-        .fullScreenCover(item: self.$memory, onDismiss: { self.memory = nil }) { item in
-            EventDetailView(memory: item)
+        .fullScreenCover(
+            item: self.$memory,
+            onDismiss: {
+                self.memory = nil
+                self.viewModel.fetchMemories()
+            }
+        ) { item in
+            MemoryDetailView(
+                memory: item
+            )
         }
     }
 }

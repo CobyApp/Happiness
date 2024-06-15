@@ -101,7 +101,7 @@ struct MapRepresentableView: UIViewRepresentable {
         let allAnnotations = uiView.annotations
         uiView.removeAnnotations(allAnnotations)
         
-        for memory in filteredMemories {
+        for memory in self.memories {
             if let coordinate = memory.location?.coordinate {
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = coordinate

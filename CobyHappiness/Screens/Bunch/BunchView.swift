@@ -11,10 +11,8 @@ import SwiftData
 import CobyDS
 
 struct BunchView: View {
-    
-    @Query(sort: \Bunch.date, order: .reverse)
-    private var bunchs: [Bunch]
-    
+
+    @State private var viewModel: BunchViewModel = BunchViewModel()
     @State private var isPresented: Bool = false
     @State private var bunch: Bunch? = nil
     
@@ -37,7 +35,7 @@ struct BunchView: View {
             
             ScrollView {
                 LazyVGrid(columns: self.columns, spacing: 20) {
-                    ForEach(self.bunchs, id: \.self) { bunch in
+                    ForEach(self.viewModel.bunches, id: \.self) { bunch in
                         ThumbnailTitleView(
                             image: bunch.image,
                             title: bunch.title,
@@ -55,10 +53,21 @@ struct BunchView: View {
             }
         }
         .background(Color.backgroundNormalNormal)
-        .fullScreenCover(isPresented: self.$isPresented) {
+        .fullScreenCover(
+            isPresented: self.$isPresented,
+            onDismiss: {
+                self.viewModel.fetchBunches()
+            }
+        ) {
             SelectMemoriesView()
         }
-        .fullScreenCover(item: self.$bunch, onDismiss: { self.bunch = nil }) { item in
+        .fullScreenCover(
+            item: self.$bunch,
+            onDismiss: {
+                self.bunch = nil
+                self.viewModel.fetchBunches()
+            }
+        ) { item in
             BunchDetailView(bunch: item)
         }
     }

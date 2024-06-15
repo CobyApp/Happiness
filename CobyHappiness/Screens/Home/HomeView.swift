@@ -12,9 +12,7 @@ import CobyDS
 
 struct HomeView: View {
     
-    @Query(sort: \Memory.date, order: .reverse)
-    private var memories: [Memory]
-    
+    @State private var viewModel: HomeViewModel = HomeViewModel()
     @State private var isPresented: Bool = false
     @State private var memory: Memory? = nil
     
@@ -25,10 +23,21 @@ struct HomeView: View {
             self.MemoryListView()
         }
         .background(Color.backgroundNormalNormal)
-        .fullScreenCover(item: self.$memory, onDismiss: { self.memory = nil }) { item in
-            EventDetailView(memory: item)
+        .fullScreenCover(
+            item: self.$memory,
+            onDismiss: {
+                self.memory = nil
+                self.viewModel.fetchMemories()
+            }
+        ) { item in
+            MemoryDetailView(memory: item)
         }
-        .fullScreenCover(isPresented: self.$isPresented) {
+        .fullScreenCover(
+            isPresented: self.$isPresented,
+            onDismiss: {
+                self.viewModel.fetchMemories()
+            }
+        ) {
             EditMemoryPageView()
         }
     }
@@ -58,7 +67,7 @@ struct HomeView: View {
     private func MemoryListView() -> some View {
         ScrollView {
             LazyVStack(spacing: 12) {
-                ForEach(self.memories) { memory in
+                ForEach(self.viewModel.memories) { memory in
                     self.MemoryThumbnailView(for: memory)
                 }
             }

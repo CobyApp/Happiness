@@ -1,19 +1,20 @@
 //
-//  EventDetailView.swift
+//  MemoryDetailView.swift
 //  CobyHappiness
 //
 //  Created by COBY_PRO on 10/4/23.
 //
 
 import SwiftUI
+import SwiftData
 
 import CobyDS
 
-struct EventDetailView: View {
+struct MemoryDetailView: View {
     
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.modelContext) private var context
     
+    @State private var viewModel: MemoryDetailViewModel = MemoryDetailViewModel()
     @State private var showingSheet = false
     @State private var showingAlert = false
     @State private var isPresented: Bool = false
@@ -75,7 +76,7 @@ struct EventDetailView: View {
                 primaryButton: .destructive(
                     Text("삭제"),
                     action: {
-                        self.context.delete(self.memory)
+                        self.viewModel.removeMemory(memory: self.memory)
                         self.dismiss()
                     }
                 ),

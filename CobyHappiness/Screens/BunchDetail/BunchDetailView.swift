@@ -89,7 +89,7 @@ struct BunchDetailView: View {
             )
         }
         .fullScreenCover(item: self.$memory, onDismiss: { self.memory = nil }) { item in
-            EventDetailView(memory: item)
+            MemoryDetailView(memory: item)
         }
     }
 }
