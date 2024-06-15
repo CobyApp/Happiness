@@ -16,7 +16,7 @@ final class Bunch {
     var date: Date
     var title: String
     var note: String
-    @Relationship(deleteRule: .nullify)
+    @Relationship(deleteRule: .nullify, inverse: \Memory.bunches)
     var memories: [Memory]
     
     init(

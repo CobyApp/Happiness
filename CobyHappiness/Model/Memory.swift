@@ -19,6 +19,7 @@ final class Memory {
     var note: String
     var location: Location?
     var photos: [Data]
+    var bunches: [Bunch]
 
     init(
         id: UUID = UUID(),
@@ -27,7 +28,8 @@ final class Memory {
         title: String,
         note: String,
         location: Location? = nil,
-        photos: [Data]
+        photos: [Data],
+        bunches: [Bunch] = []
     ) {
         self.id = id
         self.date = date
@@ -36,6 +38,7 @@ final class Memory {
         self.note = note
         self.location = location
         self.photos = photos
+        self.bunches = bunches
     }
 }
 
