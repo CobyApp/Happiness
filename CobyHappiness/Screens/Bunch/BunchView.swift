@@ -14,7 +14,7 @@ struct BunchView: View {
 
     @State private var viewModel: BunchViewModel = BunchViewModel()
     @State private var isPresented: Bool = false
-    @State private var bunch: Bunch? = nil
+    @State private var selection: String? = nil
     
     private let columns: [GridItem] = Array(
         repeating: GridItem(.flexible(), spacing: 8),
@@ -36,14 +36,13 @@ struct BunchView: View {
             ScrollView {
                 LazyVGrid(columns: self.columns, spacing: 20) {
                     ForEach(self.viewModel.bunches, id: \.self) { bunch in
-                        ThumbnailTitleView(
-                            image: bunch.image,
-                            title: bunch.title,
-                            description: bunch.note
-                        )
-                        .frame(width: (BaseSize.fullWidth - 12) / 2)
-                        .onTapGesture {
-                            self.bunch = bunch
+                        NavigationLink(value: bunch) {
+                            ThumbnailTitleView(
+                                image: bunch.image,
+                                title: bunch.title,
+                                description: bunch.note
+                            )
+                            .frame(width: (BaseSize.fullWidth - 12) / 2)
                         }
                     }
                 }
@@ -53,6 +52,9 @@ struct BunchView: View {
             }
         }
         .background(Color.backgroundNormalNormal)
+        .navigationDestination(for: Bunch.self) { bunch in
+            BunchDetailView(bunch: bunch).navigationBarHidden(true)
+        }
         .fullScreenCover(
             isPresented: self.$isPresented,
             onDismiss: {
@@ -60,15 +62,6 @@ struct BunchView: View {
             }
         ) {
             SelectMemoriesView()
-        }
-        .fullScreenCover(
-            item: self.$bunch,
-            onDismiss: {
-                self.bunch = nil
-                self.viewModel.fetchBunches()
-            }
-        ) { item in
-            BunchDetailView(bunch: item)
         }
     }
 }

@@ -58,6 +58,7 @@ struct EditMemoryView: View {
                 )
             )
             .padding(.horizontal, BaseSize.horizantalPadding)
+            .padding(.bottom, 20)
         }
         .background(Color.backgroundNormalNormal)
         .onTapGesture {
