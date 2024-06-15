@@ -13,11 +13,8 @@ import CobyDS
 struct SelectMemoriesView: View {
     
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.modelContext) private var context
     
-    @Query(sort: \Memory.date, order: .reverse)
-    private var memories: [Memory]
-    
+    @State private var viewModel: EditBunchViewModel = EditBunchViewModel()
     @State private var selectedMemories: [Memory] = []
     
     var body: some View {
@@ -32,7 +29,7 @@ struct SelectMemoriesView: View {
             
             ScrollView {
                 LazyVStack(spacing: 8) {
-                    ForEach(self.memories) { memory in
+                    ForEach(self.viewModel.memories) { memory in
                         MemoryTileView(
                             memory: memory,
                             isSelected: self.selectedMemories.contains(memory)
@@ -52,7 +49,8 @@ struct SelectMemoriesView: View {
             }
             
             Button {
-                self.storeBunch()
+                self.viewModel.appendBunch(selectedMemories: self.selectedMemories)
+                self.dismiss()
             } label: {
                 Text("저장")
             }
@@ -63,26 +61,6 @@ struct SelectMemoriesView: View {
                 )
             )
             .padding(.horizontal, BaseSize.horizantalPadding)
-        }
-    }
-}
-
-extension SelectMemoriesView {
-    private func storeBunch() {
-        do {
-            let item = Bunch(
-                date: self.selectedMemories.first?.date ?? Date.now,
-                title: self.selectedMemories.first?.title ?? "제목",
-                note: self.selectedMemories.first?.note ?? "내용",
-                memories: []
-            )
-            item.memories = self.selectedMemories
-            self.context.insert(item)
-            try self.context.save()
-            
-            self.dismiss()
-        } catch {
-            print("error")
         }
     }
 }
