@@ -55,7 +55,7 @@ struct MapView: View {
                 self.viewModel.fetchMemories()
             }
         ) {
-            EditView()
+            EditMemoryPageView()
         }
         .fullScreenCover(
             item: self.$memory,

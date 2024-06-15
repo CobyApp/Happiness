@@ -20,12 +20,11 @@ struct EditMemoryView: View {
     @State private var isDisabled: Bool = true
     
     init(
-        selection: Binding<Int>,
+        selection: Binding<Int> = .constant(1),
         memory: Memory
     ) {
         self._selection = selection
         self._memory = State(wrappedValue: memory)
-        print(memory.date)
     }
     
     var body: some View {
@@ -63,6 +62,9 @@ struct EditMemoryView: View {
         .background(Color.backgroundNormalNormal)
         .onTapGesture {
             self.closeKeyboard()
+        }
+        .onAppear {
+            self.checkDisabled()
         }
         .onChange(of: [self.memory.title, self.memory.note]) {
             self.checkDisabled()
