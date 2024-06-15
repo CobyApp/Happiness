@@ -23,17 +23,7 @@ struct EditMemoryPageView: View {
         TabView(selection: self.$selection) {
             ImagePickerView(
                 didFinishPicking: { imagesWithMetadata in
-                    self.photos = imagesWithMetadata.compactMap { self.compressImage($0.0) }
-                    self.date = imagesWithMetadata.map { $0.1 ?? .now }.first ?? .now
-                    self.location = imagesWithMetadata.map {
-                        if let coordinate = $0.2?.coordinate {
-                            Location(lat: coordinate.latitude, lon: coordinate.longitude)
-                        } else {
-                            nil
-                        }
-                    }.first ?? nil
-                    
-                    self.selection = 1
+                    self.didFinishPicking(imagesWithMetadata)
                 },
                 didCancel: {
                     self.dismiss()
@@ -58,6 +48,20 @@ struct EditMemoryPageView: View {
 }
 
 extension EditMemoryPageView {
+    private func didFinishPicking(_ imagesWithMetadata: [(UIImage, Date?, CLLocation?)]) {
+        self.photos = imagesWithMetadata.compactMap { self.compressImage($0.0) }
+        self.date = imagesWithMetadata.map { $0.1 ?? .now }.first ?? .now
+        self.location = imagesWithMetadata.map {
+            if let coordinate = $0.2?.coordinate {
+                Location(lat: coordinate.latitude, lon: coordinate.longitude)
+            } else {
+                nil
+            }
+        }.first ?? nil
+        
+        self.selection = 1
+    }
+    
     private func compressImage(_ image: UIImage) -> Data? {
         let newSize = CGSize(width: image.size.width * 0.3, height: image.size.height * 0.3)
         UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)

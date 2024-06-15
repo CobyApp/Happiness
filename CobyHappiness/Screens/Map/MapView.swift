@@ -15,6 +15,7 @@ struct MapView: View {
     @State private var viewModel: MapViewModel = MapViewModel()
     @State private var isPresented: Bool = false
     @State private var memory: Memory? = nil
+    @State private var filteredMemories: [Memory] = []
     
     var body: some View {
         VStack(spacing: 0) {
@@ -30,11 +31,11 @@ struct MapView: View {
             
             ZStack(alignment: .bottom) {
                 MapRepresentableView(
-                    filteredMemories: self.$viewModel.filteredMemories,
+                    filteredMemories: self.$filteredMemories,
                     memories: self.viewModel.memories
                 )
                 
-                if let memory = self.viewModel.filteredMemories.first {
+                if let memory = self.filteredMemories.first {
                     MemoryTileView(
                         memory: memory,
                         isShadowing: true

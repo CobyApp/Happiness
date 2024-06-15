@@ -13,15 +13,11 @@ final class EditMemoryViewModel {
     @ObservationIgnored
     private let dataSource: ItemDataSource
     
-    var memories: [Memory] = []
-    var filteredMemories: [Memory] = []
-    
     init(dataSource: ItemDataSource = ItemDataSource.shared) {
         self.dataSource = dataSource
-        self.fetchMemories()
     }
     
-    func fetchMemories() {
-        self.memories = self.dataSource.fetchMemories()
+    func appendMemory(memory: Memory) {
+        self.dataSource.appendMemory(memory: memory)
     }
 }

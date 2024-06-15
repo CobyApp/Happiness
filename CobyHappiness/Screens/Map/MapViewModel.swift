@@ -14,7 +14,6 @@ final class MapViewModel {
     private let dataSource: ItemDataSource
     
     var memories: [Memory] = []
-    var filteredMemories: [Memory] = []
     
     init(dataSource: ItemDataSource = ItemDataSource.shared) {
         self.dataSource = dataSource

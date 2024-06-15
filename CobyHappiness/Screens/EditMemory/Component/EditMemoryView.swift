@@ -12,10 +12,10 @@ import CobyDS
 struct EditMemoryView: View {
     
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.modelContext) private var context
     
     @Binding var selection: Int
-
+    
+    @State private var viewModel: EditMemoryViewModel = EditMemoryViewModel()
     @State private var memory: Memory
     @State private var isDisabled: Bool = true
     
@@ -25,6 +25,7 @@ struct EditMemoryView: View {
     ) {
         self._selection = selection
         self._memory = State(wrappedValue: memory)
+        print(memory.date)
     }
     
     var body: some View {
@@ -46,7 +47,8 @@ struct EditMemoryView: View {
             }
             
             Button {
-                self.storeMemory()
+                self.viewModel.appendMemory(memory: self.memory)
+                self.dismiss()
             } label: {
                 Text("저장")
             }
@@ -62,7 +64,7 @@ struct EditMemoryView: View {
         .onTapGesture {
             self.closeKeyboard()
         }
-        .onChange(of: self.memory) {
+        .onChange(of: [self.memory.title, self.memory.note]) {
             self.checkDisabled()
         }
     }
@@ -83,7 +85,10 @@ struct EditMemoryView: View {
     @ViewBuilder
     func ContentView() -> some View {
         VStack(spacing: 20) {
-            DatePicker("날짜", selection: self.$memory.date)
+            DatePicker(
+                "날짜",
+                selection: self.$memory.date
+            )
             
             CBTextFieldView(
                 text: self.$memory.title,
@@ -99,37 +104,14 @@ struct EditMemoryView: View {
         }
         .padding(BaseSize.horizantalPadding)
     }
-    
-    private func storeMemory() {
-        do {
-            self.context.insert(self.memory)
-            try self.context.save()
-            
-            self.dismiss()
-        } catch {
-            print("error")
-        }
-    }
-    
+}
+ 
+extension EditMemoryView {
     private func checkDisabled() {
         if self.memory.title == "" || self.memory.note == "" {
             self.isDisabled = true
         } else {
             self.isDisabled = false
-        }
-    }
-    
-    private func compressImage(_ image: UIImage) -> Data? {
-        let newSize = CGSize(width: image.size.width * 0.3, height: image.size.height * 0.3)
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-        let compressedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-
-        if let compressedImageData = compressedImage?.jpegData(compressionQuality: 0.3) {
-            return compressedImageData
-        } else {
-            return nil
         }
     }
 }
