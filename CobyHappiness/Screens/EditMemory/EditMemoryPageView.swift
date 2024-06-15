@@ -15,15 +15,15 @@ struct EditMemoryPageView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var selection = 0
-    @State private var selectedImages: [UIImage] = []
     @State private var date: Date = Date.now
     @State private var location: Location? = nil
+    @State private var photos: [Data] = []
 
     var body: some View {
         TabView(selection: self.$selection) {
             ImagePickerView(
                 didFinishPicking: { imagesWithMetadata in
-                    self.selectedImages = imagesWithMetadata.map { $0.0 }
+                    self.photos = imagesWithMetadata.compactMap { self.compressImage($0.0) }
                     self.date = imagesWithMetadata.map { $0.1 ?? .now }.first ?? .now
                     self.location = imagesWithMetadata.map {
                         if let coordinate = $0.2?.coordinate {
@@ -44,14 +44,32 @@ struct EditMemoryPageView: View {
 
             EditMemoryView(
                 selection: $selection,
-                selectedImages: $selectedImages,
-                date: $date,
-                location: $location
+                memory: Memory(
+                    date: self.date,
+                    location: self.location,
+                    photos: self.photos
+                )
             )
             .tag(1)
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
         .background(Color.backgroundNormalNormal)
+    }
+}
+
+extension EditMemoryPageView {
+    private func compressImage(_ image: UIImage) -> Data? {
+        let newSize = CGSize(width: image.size.width * 0.3, height: image.size.height * 0.3)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        let compressedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        if let compressedImageData = compressedImage?.jpegData(compressionQuality: 0.3) {
+            return compressedImageData
+        } else {
+            return nil
+        }
     }
 }
 

@@ -15,15 +15,17 @@ struct EditMemoryView: View {
     @Environment(\.modelContext) private var context
     
     @Binding var selection: Int
-    @Binding var selectedImages: [UIImage]
-    @Binding var date: Date
-    @Binding var location: Location?
-    
-    @State private var type: MemoryType = MemoryType.moment
-    @State private var title: String = ""
-    @State private var note: String = ""
-    
+
+    @State private var memory: Memory
     @State private var isDisabled: Bool = true
+    
+    init(
+        selection: Binding<Int>,
+        memory: Memory
+    ) {
+        self._selection = selection
+        self._memory = State(wrappedValue: memory)
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -60,7 +62,7 @@ struct EditMemoryView: View {
         .onTapGesture {
             self.closeKeyboard()
         }
-        .onChange(of: [self.title, self.note]) {
+        .onChange(of: self.memory) {
             self.checkDisabled()
         }
     }
@@ -69,7 +71,7 @@ struct EditMemoryView: View {
     func PhotosView() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
-                ForEach(self.selectedImages, id: \.self) { image in
+                ForEach(self.memory.photos.compactMap { UIImage(data: $0) }, id: \.self) { image in
                     ThumbnailView(image: image)
                         .frame(width: 100, height: 100)
                 }
@@ -81,16 +83,16 @@ struct EditMemoryView: View {
     @ViewBuilder
     func ContentView() -> some View {
         VStack(spacing: 20) {
-            DatePicker("날짜", selection: $date)
+            DatePicker("날짜", selection: self.$memory.date)
             
             CBTextFieldView(
-                text: self.$title,
+                text: self.$memory.title,
                 title: "제목",
                 placeholder: "제목을 입력해주세요."
             )
             
             CBTextFieldView(
-                text: self.$note,
+                text: self.$memory.note,
                 title: "내용",
                 placeholder: "내용을 입력해주세요."
             )
@@ -100,15 +102,7 @@ struct EditMemoryView: View {
     
     private func storeMemory() {
         do {
-            let item = Memory(
-                date: self.date,
-                type: self.type,
-                title: self.title,
-                note: self.note,
-                location: self.location,
-                photos: self.selectedImages.compactMap { self.compressImage($0) }
-            )
-            self.context.insert(item)
+            self.context.insert(self.memory)
             try self.context.save()
             
             self.dismiss()
@@ -118,7 +112,7 @@ struct EditMemoryView: View {
     }
     
     private func checkDisabled() {
-        if self.title == "" || self.note == "" {
+        if self.memory.title == "" || self.memory.note == "" {
             self.isDisabled = true
         } else {
             self.isDisabled = false

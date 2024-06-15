@@ -1,5 +1,5 @@
 //
-//  MemoryDetailViewModel.swift
+//  BunchDetailViewModel.swift
 //  CobyHappiness
 //
 //  Created by Coby on 6/16/24.
@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-final class MemoryDetailViewModel {
+final class BunchDetailViewModel {
     
     @ObservationIgnored
     private let dataSource: ItemDataSource
@@ -17,7 +17,7 @@ final class MemoryDetailViewModel {
         self.dataSource = dataSource
     }
     
-    func removeMemory(memory: Memory) {
-        self.dataSource.removeMemory(memory)
+    func removeBunch(bunch: Bunch) {
+        self.dataSource.removeBunch(bunch)
     }
 }

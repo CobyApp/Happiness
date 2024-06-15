@@ -18,7 +18,6 @@ struct MemoryDetailView: View {
     @State private var showingSheet = false
     @State private var showingAlert = false
     @State private var isPresented: Bool = false
-    @State private var photos = [UIImage]()
     
     private var memory: Memory
     
@@ -26,7 +25,6 @@ struct MemoryDetailView: View {
         memory: Memory
     ) {
         self.memory = memory
-        self._photos = State(wrappedValue: memory.photos.compactMap { UIImage(data: $0) })
     }
     
     var body: some View {
@@ -91,7 +89,7 @@ struct MemoryDetailView: View {
     @ViewBuilder
     private func PhotoView() -> some View {
         TabView {
-            ForEach(self.photos, id: \.self) { photo in
+            ForEach(self.memory.photos.compactMap { UIImage(data: $0) }, id: \.self) { photo in
                 Image(uiImage: photo)
                     .resizable()
                     .scaledToFill()

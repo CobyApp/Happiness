@@ -23,12 +23,12 @@ final class Memory {
 
     init(
         id: UUID = UUID(),
-        date: Date,
-        type: MemoryType,
-        title: String,
-        note: String,
+        date: Date = .now,
+        type: MemoryType = .moment,
+        title: String = "",
+        note: String = "",
         location: Location? = nil,
-        photos: [Data],
+        photos: [Data] = [],
         bunches: [Bunch] = []
     ) {
         self.id = id

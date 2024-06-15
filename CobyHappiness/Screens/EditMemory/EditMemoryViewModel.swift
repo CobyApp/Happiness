@@ -1,5 +1,5 @@
 //
-//  MemoryDetailViewModel.swift
+//  EditMemoryViewModel.swift
 //  CobyHappiness
 //
 //  Created by Coby on 6/16/24.
@@ -8,16 +8,20 @@
 import Foundation
 
 @Observable
-final class MemoryDetailViewModel {
+final class EditMemoryViewModel {
     
     @ObservationIgnored
     private let dataSource: ItemDataSource
     
+    var memories: [Memory] = []
+    var filteredMemories: [Memory] = []
+    
     init(dataSource: ItemDataSource = ItemDataSource.shared) {
         self.dataSource = dataSource
+        self.fetchMemories()
     }
     
-    func removeMemory(memory: Memory) {
-        self.dataSource.removeMemory(memory)
+    func fetchMemories() {
+        self.memories = self.dataSource.fetchMemories()
     }
 }

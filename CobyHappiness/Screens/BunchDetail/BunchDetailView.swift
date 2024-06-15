@@ -13,8 +13,8 @@ import CobyDS
 struct BunchDetailView: View {
     
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.modelContext) private var context
     
+    @State private var viewModel: BunchDetailViewModel = BunchDetailViewModel()
     @State private var showingSheet = false
     @State private var showingAlert = false
     @State private var isPresented: Bool = false
@@ -81,7 +81,7 @@ struct BunchDetailView: View {
                 primaryButton: .destructive(
                     Text("삭제"),
                     action: {
-                        self.context.delete(self.bunch)
+                        self.viewModel.removeBunch(bunch: self.bunch)
                         self.dismiss()
                     }
                 ),
