@@ -1,5 +1,5 @@
 //
-//  EditMemoryView.swift
+//  EditMemoryContentView.swift
 //  CobyHappiness
 //
 //  Created by Coby on 6/11/24.
@@ -9,7 +9,7 @@ import SwiftUI
 
 import CobyDS
 
-struct EditMemoryView: View {
+struct EditMemoryContentView: View {
     
     @Environment(\.dismiss) private var dismiss
     
@@ -109,7 +109,7 @@ struct EditMemoryView: View {
     }
 }
  
-extension EditMemoryView {
+extension EditMemoryContentView {
     private func checkDisabled() {
         if self.memory.title == "" || self.memory.note == "" {
             self.isDisabled = true

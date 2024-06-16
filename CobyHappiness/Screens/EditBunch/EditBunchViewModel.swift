@@ -14,6 +14,7 @@ final class EditBunchViewModel {
     private let dataSource: ItemDataSource
     
     var memories: [Memory] = []
+    var selectedMemories: [Memory] = []
     
     init(dataSource: ItemDataSource = ItemDataSource.shared) {
         self.dataSource = dataSource
@@ -24,14 +25,7 @@ final class EditBunchViewModel {
         self.memories = self.dataSource.fetchMemories()
     }
     
-    func appendBunch(selectedMemories: [Memory]) {
-        let bunch = Bunch(
-            date: selectedMemories.first?.date ?? Date.now,
-            title: selectedMemories.first?.title ?? "제목",
-            note: selectedMemories.first?.note ?? "내용",
-            memories: []
-        )
-        bunch.memories = selectedMemories
+    func appendBunch(bunch: Bunch) {
         self.dataSource.appendBunch(bunch: bunch)
     }
 }

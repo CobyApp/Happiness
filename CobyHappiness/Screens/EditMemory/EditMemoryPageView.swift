@@ -14,7 +14,7 @@ struct EditMemoryPageView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @State private var selection = 0
+    @State private var selection: Int = 0
     @State private var date: Date = Date.now
     @State private var location: Location? = nil
     @State private var photos: [Data] = []
@@ -32,7 +32,7 @@ struct EditMemoryPageView: View {
             .edgesIgnoringSafeArea(.all)
             .tag(0)
 
-            EditMemoryView(
+            EditMemoryContentView(
                 selection: $selection,
                 memory: Memory(
                     date: self.date,

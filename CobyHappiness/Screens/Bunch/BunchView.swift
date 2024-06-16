@@ -61,7 +61,7 @@ struct BunchView: View {
                 self.viewModel.fetchBunches()
             }
         ) {
-            SelectMemoriesView()
+            EditBunchPageView()
         }
     }
 }

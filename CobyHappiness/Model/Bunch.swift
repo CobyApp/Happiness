@@ -21,10 +21,10 @@ final class Bunch {
     
     init(
         id: UUID = UUID(),
-        date: Date,
-        title: String,
-        note: String,
-        memories: [Memory]
+        date: Date = .now,
+        title: String = "",
+        note: String = "",
+        memories: [Memory] = []
     ) {
         self.id = id
         self.date = date
