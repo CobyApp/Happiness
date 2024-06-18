@@ -12,13 +12,14 @@ import CobyDS
 
 struct BunchDetailView: View {
     
+    @EnvironmentObject private var appModel: AppViewModel
+    @Environment(\.animationNamespace) var animation
     @Environment(\.dismiss) private var dismiss
     
     @State private var viewModel: BunchDetailViewModel = BunchDetailViewModel()
     @State private var showingSheet = false
     @State private var showingAlert = false
     @State private var isPresented: Bool = false
-    @State private var memory: Memory? = nil
     
     private var bunch: Bunch
     
@@ -49,7 +50,10 @@ struct BunchDetailView: View {
                             memory: memory
                         )
                         .onTapGesture {
-                            self.memory = memory
+                            withAnimation(.spring()) {
+                                self.appModel.currentActiveItem = memory
+                                self.appModel.showDetailView = true
+                            }
                         }
                     }
                 }

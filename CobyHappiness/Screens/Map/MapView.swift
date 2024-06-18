@@ -12,18 +12,12 @@ import CobyDS
 
 struct MapView: View {
     
+    @EnvironmentObject private var appModel: AppViewModel
+    @Environment(\.animationNamespace) var animation
+    
     @State private var viewModel: MapViewModel = MapViewModel()
     @State private var isPresented: Bool = false
-    @State private var memory: Memory? = nil
     @State private var filteredMemories: [Memory] = []
-    
-    private var animation: Namespace.ID
-    
-    init(
-        animation: Namespace.ID
-    ) {
-        self.animation = animation
-    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -51,7 +45,10 @@ struct MapView: View {
                     .padding(.horizontal, 20)
                     .padding(.bottom, 30)
                     .onTapGesture {
-                        self.memory = memory
+                        withAnimation(.spring()) {
+                            self.appModel.currentActiveItem = memory
+                            self.appModel.showDetailView = true
+                        }
                     }
                 }
             }

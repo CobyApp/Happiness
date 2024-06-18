@@ -11,6 +11,8 @@ import SwiftData
 import CobyDS
 
 struct BunchView: View {
+    
+    @Environment(\.animationNamespace) var animation
 
     @State private var viewModel: BunchViewModel = BunchViewModel()
     @State private var isPresented: Bool = false
@@ -20,14 +22,6 @@ struct BunchView: View {
         repeating: GridItem(.flexible(), spacing: 8),
         count: 2
     )
-    
-    private var animation: Namespace.ID
-    
-    init(
-        animation: Namespace.ID
-    ) {
-        self.animation = animation
-    }
     
     var body: some View {
         VStack(spacing: 0) {

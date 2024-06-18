@@ -13,6 +13,7 @@ import CobyDS
 struct MemoryDetailView: View {
     
     @EnvironmentObject private var appModel: AppViewModel
+    @Environment(\.animationNamespace) var animation
     
     @State private var viewModel: MemoryDetailViewModel = MemoryDetailViewModel()
     @State private var scale: CGFloat = 1
@@ -23,14 +24,11 @@ struct MemoryDetailView: View {
     
     @State private var photos = [UIImage]()
     
-    private var animation: Namespace.ID
     private var memory: Memory
     
     init(
-        animation: Namespace.ID,
         memory: Memory
     ) {
-        self.animation = animation
         self.memory = memory
         self._photos = State(wrappedValue: memory.photos.compactMap { $0.image })
     }
@@ -134,7 +132,7 @@ struct MemoryDetailView: View {
         .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth)
         .tabViewStyle(PageTabViewStyle())
         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-        .matchedGeometryEffect(id: self.memory.id, in: self.animation)
+        .matchedGeometryEffect(id: self.memory.id, in: self.animation!)
     }
     
     @ViewBuilder

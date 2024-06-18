@@ -23,22 +23,22 @@ struct ContentView: View {
         ZStack {
             NavigationStack {
                 TabView {
-                    HomeView(animation: self.animation)
+                    HomeView()
                         .tabItem {
                             Label("홈", image: "home")
                         }
                     
-                    MapView(animation: self.animation)
+                    MapView()
                         .tabItem {
                             Label("지도", image: "map")
                         }
                     
-                    BunchView(animation: self.animation)
+                    BunchView()
                         .tabItem {
                             Label("뭉치", image: "travel")
                         }
                     
-                    ProfileView(animation: self.animation)
+                    ProfileView()
                         .tabItem {
                             Label("정보", image: "person")
                         }
@@ -48,13 +48,12 @@ struct ContentView: View {
             
             if let memory = self.appModel.currentActiveItem, self.appModel.showDetailView {
                 MemoryDetailView(
-                    animation: self.animation,
                     memory: memory
                 )
             }
         }
-        .background(Color.backgroundNormalAlternative)
         .environmentObject(self.appModel)
+        .environment(\.animationNamespace, self.animation)
     }
 }
 

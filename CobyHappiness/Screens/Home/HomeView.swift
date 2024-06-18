@@ -13,17 +13,10 @@ import CobyDS
 struct HomeView: View {
     
     @EnvironmentObject private var appModel: AppViewModel
+    @Environment(\.animationNamespace) var animation
     
     @State private var viewModel: HomeViewModel = HomeViewModel()
     @State private var isPresented: Bool = false
-    
-    private var animation: Namespace.ID
-    
-    init(
-        animation: Namespace.ID
-    ) {
-        self.animation = animation
-    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -87,7 +80,7 @@ struct HomeView: View {
             )
             .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
             .frame(maxWidth: .infinity)
-            .matchedGeometryEffect(id: memory.id, in: self.animation)
+            .matchedGeometryEffect(id: memory.id, in: self.animation!)
             .onTapGesture {
                 withAnimation(.spring()) {
                     self.appModel.currentActiveItem = memory
