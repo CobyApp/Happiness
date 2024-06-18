@@ -78,19 +78,31 @@ struct HomeView: View {
     
     @ViewBuilder
     private func MemoryThumbnailView(for memory: Memory) -> some View {
-        ThumbnailCardView(
-            image: memory.photos.first?.image,
-            title: memory.title,
-            description: memory.date.format("MMM d, yyyy"),
-            isShadowing: true
-        )
-        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
-        .matchedGeometryEffect(id: memory.id.uuidString, in: self.animation)
-        .onTapGesture {
-            withAnimation(.spring()) {
-                self.appModel.currentActiveItem = memory
-                self.appModel.showDetailView = true
+        if !self.appModel.showDetailView {
+            ThumbnailCardView(
+                image: memory.photos.first?.image,
+                title: memory.title,
+                description: memory.date.format("MMM d, yyyy"),
+                isShadowing: true
+            )
+            .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
+            .frame(maxWidth: .infinity)
+            .matchedGeometryEffect(id: memory.id, in: self.animation)
+            .onTapGesture {
+                withAnimation(.spring()) {
+                    self.appModel.currentActiveItem = memory
+                    self.appModel.showDetailView = true
+                }
             }
+        } else {
+            ThumbnailCardView(
+                image: memory.photos.first?.image,
+                title: memory.title,
+                description: memory.date.format("MMM d, yyyy"),
+                isShadowing: true
+            )
+            .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
+            .frame(maxWidth: .infinity)
         }
     }
 }

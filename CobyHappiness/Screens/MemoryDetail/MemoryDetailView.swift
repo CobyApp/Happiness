@@ -134,7 +134,7 @@ struct MemoryDetailView: View {
         .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth)
         .tabViewStyle(PageTabViewStyle())
         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-        .matchedGeometryEffect(id: memory.id.uuidString, in: self.animation)
+        .matchedGeometryEffect(id: self.memory.id, in: self.animation)
     }
     
     @ViewBuilder
