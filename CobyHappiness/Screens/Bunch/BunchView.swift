@@ -11,8 +11,6 @@ import SwiftData
 import CobyDS
 
 struct BunchView: View {
-    
-    @Environment(\.animationNamespace) var animation
 
     @State private var viewModel: BunchViewModel = BunchViewModel()
     @State private var isPresented: Bool = false

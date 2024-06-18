@@ -12,7 +12,6 @@ import CobyDS
 struct MemoryTileView: View {
     
     @EnvironmentObject private var appModel: AppViewModel
-    @Environment(\.animationNamespace) var animation
     
     private let memory: Memory
     private let isShadowing: Bool
@@ -30,18 +29,10 @@ struct MemoryTileView: View {
     
     var body: some View {
         HStack(spacing: 16) {
-            if !self.appModel.showDetailView {
-                ThumbnailView(
-                    image: self.memory.photos.first?.image
-                )
-                .frame(width: 80, height: 80)
-                .matchedGeometryEffect(id: self.memory.id, in: self.animation!)
-            } else {
-                ThumbnailView(
-                    image: self.memory.photos.first?.image
-                )
-                .frame(width: 80, height: 80)
-            }
+            ThumbnailView(
+                image: self.memory.photos.first?.image
+            )
+            .frame(width: 80, height: 80)
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(self.memory.title)

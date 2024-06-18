@@ -13,7 +13,6 @@ import CobyDS
 struct BunchDetailView: View {
     
     @EnvironmentObject private var appModel: AppViewModel
-    @Environment(\.animationNamespace) var animation
     @Environment(\.dismiss) private var dismiss
     
     @State private var viewModel: BunchDetailViewModel = BunchDetailViewModel()
@@ -50,10 +49,8 @@ struct BunchDetailView: View {
                             memory: memory
                         )
                         .onTapGesture {
-                            withAnimation(.spring()) {
-                                self.appModel.currentActiveItem = memory
-                                self.appModel.showDetailView = true
-                            }
+                            self.appModel.currentActiveItem = memory
+                            self.appModel.showDetailView = true
                         }
                     }
                 }

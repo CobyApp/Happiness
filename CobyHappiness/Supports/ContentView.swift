@@ -13,8 +13,6 @@ struct ContentView: View {
     
     @StateObject var appModel: AppViewModel = .init()
     
-    @Namespace var animation
-    
     init() {
         self.setupTabBarStyle()
     }
@@ -53,7 +51,7 @@ struct ContentView: View {
             }
         }
         .environmentObject(self.appModel)
-        .environment(\.animationNamespace, self.animation)
+        .animation(.easeInOut(duration: 0.1), value: self.appModel.showDetailView)
     }
 }
 

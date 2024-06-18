@@ -13,7 +13,6 @@ import CobyDS
 struct HomeView: View {
     
     @EnvironmentObject private var appModel: AppViewModel
-    @Environment(\.animationNamespace) var animation
     
     @State private var viewModel: HomeViewModel = HomeViewModel()
     @State private var isPresented: Bool = false
@@ -71,31 +70,17 @@ struct HomeView: View {
     
     @ViewBuilder
     private func MemoryThumbnailView(for memory: Memory) -> some View {
-        if !self.appModel.showDetailView {
-            ThumbnailCardView(
-                image: memory.photos.first?.image,
-                title: memory.title,
-                description: memory.date.format("MMM d, yyyy"),
-                isShadowing: true
-            )
-            .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
-            .frame(maxWidth: .infinity)
-            .matchedGeometryEffect(id: memory.id, in: self.animation!)
-            .onTapGesture {
-                withAnimation(.spring()) {
-                    self.appModel.currentActiveItem = memory
-                    self.appModel.showDetailView = true
-                }
-            }
-        } else {
-            ThumbnailCardView(
-                image: memory.photos.first?.image,
-                title: memory.title,
-                description: memory.date.format("MMM d, yyyy"),
-                isShadowing: true
-            )
-            .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
-            .frame(maxWidth: .infinity)
+        ThumbnailCardView(
+            image: memory.photos.first?.image,
+            title: memory.title,
+            description: memory.date.format("MMM d, yyyy"),
+            isShadowing: true
+        )
+        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
+        .frame(maxWidth: .infinity)
+        .onTapGesture {
+            self.appModel.currentActiveItem = memory
+            self.appModel.showDetailView = true
         }
     }
 }

@@ -11,9 +11,7 @@ import SwiftData
 import CobyDS
 
 struct ProfileView: View {
-    
-    @Environment(\.animationNamespace) var animation
-    
+   
     @State private var viewModel: ProfileViewModel = ProfileViewModel()
     
     var body: some View {

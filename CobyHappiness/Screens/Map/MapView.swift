@@ -13,7 +13,6 @@ import CobyDS
 struct MapView: View {
     
     @EnvironmentObject private var appModel: AppViewModel
-    @Environment(\.animationNamespace) var animation
     
     @State private var viewModel: MapViewModel = MapViewModel()
     @State private var isPresented: Bool = false
@@ -45,10 +44,8 @@ struct MapView: View {
                     .padding(.horizontal, 20)
                     .padding(.bottom, 30)
                     .onTapGesture {
-                        withAnimation(.spring()) {
-                            self.appModel.currentActiveItem = memory
-                            self.appModel.showDetailView = true
-                        }
+                        self.appModel.currentActiveItem = memory
+                        self.appModel.showDetailView = true
                     }
                 }
             }

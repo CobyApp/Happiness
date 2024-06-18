@@ -13,7 +13,6 @@ import CobyDS
 struct MemoryDetailView: View {
     
     @EnvironmentObject private var appModel: AppViewModel
-    @Environment(\.animationNamespace) var animation
     
     @State private var viewModel: MemoryDetailViewModel = MemoryDetailViewModel()
     @State private var scale: CGFloat = 1
@@ -72,9 +71,7 @@ struct MemoryDetailView: View {
                     Text("삭제"),
                     action: {
                         self.viewModel.removeMemory(memory: self.memory)
-                        withAnimation(.spring()) {
-                            self.appModel.showDetailView = false
-                        }
+                        self.appModel.showDetailView = false
                     }
                 ),
                 secondaryButton: .cancel(Text("취소"))
@@ -89,26 +86,24 @@ struct MemoryDetailView: View {
     func DetailHeaderView() -> some View {
         HStack {
             Button {
-                withAnimation(.spring()) {
-                    self.appModel.showDetailView = false
-                }
+                self.appModel.showDetailView = false
             } label: {
-                Image(systemName: "xmark")
-                    .foregroundColor(isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
+                Image(uiImage: UIImage.icBack)
+                    .foregroundColor(self.isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
                     .padding()
-                    .background(isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
+                    .background(self.isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
                     .clipShape(Circle())
             }
             
             Spacer()
             
             Button {
-                isPresented = true
+                self.showingSheet = true
             } label: {
-                Image(systemName: "suit.heart.fill")
-                    .foregroundColor(isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
+                Image(uiImage: UIImage.icMore)
+                    .foregroundColor(self.isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
                     .padding()
-                    .background(isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
+                    .background(self.isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
                     .clipShape(Circle())
             }
         }
@@ -132,7 +127,6 @@ struct MemoryDetailView: View {
         .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth)
         .tabViewStyle(PageTabViewStyle())
         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-        .matchedGeometryEffect(id: self.memory.id, in: self.animation!)
     }
     
     @ViewBuilder
