@@ -14,7 +14,6 @@ final class EditBunchViewModel {
     private let dataSource: ItemDataSource
     
     var memories: [Memory] = []
-    var selectedMemories: [Memory] = []
     
     init(dataSource: ItemDataSource = ItemDataSource.shared) {
         self.dataSource = dataSource

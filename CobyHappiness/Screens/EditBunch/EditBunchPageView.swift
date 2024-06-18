@@ -15,7 +15,6 @@ struct EditBunchPageView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var selection = 0
-    @State private var selectedMemories: [Memory] = []
     @State private var bunch: Bunch = Bunch()
     
     @State private var viewModel: EditBunchViewModel = EditBunchViewModel()
@@ -36,13 +35,13 @@ struct EditBunchPageView: View {
                         ForEach(self.viewModel.memories) { memory in
                             MemoryTileView(
                                 memory: memory,
-                                isSelected: self.viewModel.selectedMemories.contains(memory)
+                                isSelected: self.bunch.memories.contains(memory)
                             )
                             .onTapGesture {
-                                if self.viewModel.selectedMemories.contains(memory) {
-                                    self.viewModel.selectedMemories = self.viewModel.selectedMemories.filter { $0 != memory }
+                                if self.bunch.memories.contains(memory) {
+                                    self.bunch.memories = self.bunch.memories.filter { $0 != memory }
                                 } else {
-                                    self.viewModel.selectedMemories.append(memory)
+                                    self.bunch.memories.append(memory)
                                 }
                             }
                         }
@@ -65,22 +64,18 @@ struct EditBunchPageView: View {
             
             Button {
                 if self.selection == 0 {
-                    self.bunch.date = selectedMemories.first?.date ?? Date.now
-                    self.bunch.title = selectedMemories.first?.title ?? ""
-                    self.bunch.note = selectedMemories.first?.note ?? ""
-                    self.bunch.memories = selectedMemories
                     self.selection = 1
                 } else {
                     self.viewModel.appendBunch(bunch: self.bunch)
                     self.dismiss()
                 }
             } label: {
-                Text("저장")
+                Text(self.selection == 0 ? "선택" : "저장")
             }
             .buttonStyle(
                 CBButtonStyle(
                     buttonColor: Color.redNormal,
-                    disable: self.viewModel.selectedMemories.isEmpty
+                    disable: self.bunch.memories.isEmpty
                 )
             )
             .padding(.horizontal, BaseSize.horizantalPadding)

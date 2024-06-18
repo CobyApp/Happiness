@@ -16,8 +16,16 @@ struct EditMemoryContentView: View {
     @Binding var selection: Int
     
     @State private var viewModel: EditMemoryViewModel = EditMemoryViewModel()
-    @State private var memory: Memory
     @State private var isDisabled: Bool = true
+    @State private var memory: Memory
+    
+    init(
+        selection: Binding<Int>,
+        memory: Binding<Memory>
+    ) {
+        self._selection = selection
+        self._memory = State(wrappedValue: memory.wrappedValue)
+    }
     
     init(
         selection: Binding<Int> = .constant(1),

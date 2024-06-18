@@ -15,10 +15,8 @@ struct EditMemoryPageView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var selection: Int = 0
-    @State private var date: Date = Date.now
-    @State private var location: Location? = nil
-    @State private var photos: [Data] = []
-
+    @State private var memory: Memory = Memory()
+    
     var body: some View {
         TabView(selection: self.$selection) {
             ImagePickerView(
@@ -34,11 +32,7 @@ struct EditMemoryPageView: View {
 
             EditMemoryContentView(
                 selection: $selection,
-                memory: Memory(
-                    date: self.date,
-                    location: self.location,
-                    photos: self.photos
-                )
+                memory: self.$memory
             )
             .tag(1)
         }
@@ -49,9 +43,9 @@ struct EditMemoryPageView: View {
 
 extension EditMemoryPageView {
     private func didFinishPicking(_ imagesWithMetadata: [(UIImage, Date?, CLLocation?)]) {
-        self.photos = imagesWithMetadata.compactMap { self.compressImage($0.0) }
-        self.date = imagesWithMetadata.map { $0.1 ?? .now }.first ?? .now
-        self.location = imagesWithMetadata.map {
+        self.memory.photos = imagesWithMetadata.compactMap { self.compressImage($0.0) }
+        self.memory.date = imagesWithMetadata.map { $0.1 ?? .now }.first ?? .now
+        self.memory.location = imagesWithMetadata.map {
             if let coordinate = $0.2?.coordinate {
                 Location(lat: coordinate.latitude, lon: coordinate.longitude)
             } else {
