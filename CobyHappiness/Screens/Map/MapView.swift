@@ -17,6 +17,14 @@ struct MapView: View {
     @State private var memory: Memory? = nil
     @State private var filteredMemories: [Memory] = []
     
+    private var animation: Namespace.ID
+    
+    init(
+        animation: Namespace.ID
+    ) {
+        self.animation = animation
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             TopBarView(

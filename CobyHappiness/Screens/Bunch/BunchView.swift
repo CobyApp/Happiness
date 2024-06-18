@@ -21,6 +21,14 @@ struct BunchView: View {
         count: 2
     )
     
+    private var animation: Namespace.ID
+    
+    init(
+        animation: Namespace.ID
+    ) {
+        self.animation = animation
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             TopBarView(

@@ -21,11 +21,14 @@ struct MemoryDetailView: View {
     @State private var showingAlert = false
     @State private var isPresented: Bool = false
     
+    private var animation: Namespace.ID
     private var memory: Memory
     
     init(
+        animation: Namespace.ID,
         memory: Memory
     ) {
+        self.animation = animation
         self.memory = memory
     }
     
@@ -121,12 +124,14 @@ struct MemoryDetailView: View {
                     .scaledToFill()
                     .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth)
                     .clipped()
+                    .ignoresSafeArea()
             }
         }
         .background(Color.backgroundNormalAlternative)
         .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth)
         .tabViewStyle(PageTabViewStyle())
         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+        .matchedGeometryEffect(id: memory.id.uuidString, in: self.animation)
     }
     
     @ViewBuilder

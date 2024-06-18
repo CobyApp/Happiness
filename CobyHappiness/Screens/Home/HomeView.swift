@@ -17,6 +17,14 @@ struct HomeView: View {
     @State private var viewModel: HomeViewModel = HomeViewModel()
     @State private var isPresented: Bool = false
     
+    private var animation: Namespace.ID
+    
+    init(
+        animation: Namespace.ID
+    ) {
+        self.animation = animation
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             self.HomeTopBarView()
@@ -77,6 +85,7 @@ struct HomeView: View {
             isShadowing: true
         )
         .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
+        .matchedGeometryEffect(id: memory.id.uuidString, in: self.animation)
         .onTapGesture {
             withAnimation(.spring()) {
                 self.appModel.currentActiveItem = memory

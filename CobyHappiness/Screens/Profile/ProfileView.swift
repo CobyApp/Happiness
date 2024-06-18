@@ -14,6 +14,14 @@ struct ProfileView: View {
     
     @State private var viewModel: ProfileViewModel = ProfileViewModel()
     
+    private var animation: Namespace.ID
+    
+    init(
+        animation: Namespace.ID
+    ) {
+        self.animation = animation
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             TopBarView(
@@ -74,9 +82,4 @@ struct ProfileView: View {
             }
         }
     }
-}
-
-#Preview {
-    ProfileView()
-        .loadCustomFonts()
 }

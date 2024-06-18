@@ -13,6 +13,8 @@ struct ContentView: View {
     
     @StateObject var appModel: AppViewModel = .init()
     
+    @Namespace var animation
+    
     init() {
         self.setupTabBarStyle()
     }
@@ -21,22 +23,22 @@ struct ContentView: View {
         ZStack {
             NavigationStack {
                 TabView {
-                    HomeView()
+                    HomeView(animation: self.animation)
                         .tabItem {
                             Label("홈", image: "home")
                         }
                     
-                    MapView()
+                    MapView(animation: self.animation)
                         .tabItem {
                             Label("지도", image: "map")
                         }
                     
-                    BunchView()
+                    BunchView(animation: self.animation)
                         .tabItem {
                             Label("뭉치", image: "travel")
                         }
                     
-                    ProfileView()
+                    ProfileView(animation: self.animation)
                         .tabItem {
                             Label("정보", image: "person")
                         }
@@ -45,7 +47,10 @@ struct ContentView: View {
             }
             
             if let memory = self.appModel.currentActiveItem, self.appModel.showDetailView {
-                MemoryDetailView(memory: memory)
+                MemoryDetailView(
+                    animation: self.animation,
+                    memory: memory
+                )
             }
         }
         .environmentObject(self.appModel)
