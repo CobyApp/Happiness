@@ -12,9 +12,11 @@ import CobyDS
 
 struct MemoryDetailView: View {
     
-    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var appModel: AppViewModel
     
     @State private var viewModel: MemoryDetailViewModel = MemoryDetailViewModel()
+    @State private var scale: CGFloat = 1
+    @State private var isDown: Bool = false
     @State private var showingSheet = false
     @State private var showingAlert = false
     @State private var isPresented: Bool = false
@@ -28,30 +30,21 @@ struct MemoryDetailView: View {
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            TopBarView(
-                leftSide: .left,
-                leftAction: {
-                    self.dismiss()
-                },
-                rightSide: .icon,
-                rightIcon: UIImage.icMore,
-                rightAction: {
-                    self.showingSheet = true
-                }
-            )
-            
-            ScrollView {
-                VStack(spacing: 20) {
-                    self.PhotoView()
-                    
-                    self.ContentView()
-                }
+        CBScaleScrollView(
+            isPresented: self.$appModel.showDetailView,
+            scale: self.$scale,
+            isDown: self.$isDown
+        ) {
+            VStack(spacing: 20) {
+                self.PhotoView()
+                self.ContentView()
             }
         }
-        .padding(.bottom, BaseSize.bottomAreaPadding + 20)
+        .overlay(alignment: .top, content: DetailHeaderView)
         .background(Color.backgroundNormalNormal)
-        .edgesIgnoringSafeArea(.bottom)
+        .clipShape(RoundedRectangle(cornerRadius: scale == 1 ? 0 : 30))
+        .scaleEffect(self.scale)
+        .ignoresSafeArea()
         .actionSheet(isPresented: self.$showingSheet) {
             ActionSheet(
                 title: Text("원하는 옵션을 선택해주세요."),
@@ -75,7 +68,9 @@ struct MemoryDetailView: View {
                     Text("삭제"),
                     action: {
                         self.viewModel.removeMemory(memory: self.memory)
-                        self.dismiss()
+                        withAnimation(.spring()) {
+                            self.appModel.showDetailView = false
+                        }
                     }
                 ),
                 secondaryButton: .cancel(Text("취소"))
@@ -87,9 +82,40 @@ struct MemoryDetailView: View {
     }
     
     @ViewBuilder
+    func DetailHeaderView() -> some View {
+        HStack {
+            Button {
+                withAnimation(.spring()) {
+                    self.appModel.showDetailView = false
+                }
+            } label: {
+                Image(systemName: "xmark")
+                    .foregroundColor(isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
+                    .padding()
+                    .background(isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
+                    .clipShape(Circle())
+            }
+            
+            Spacer()
+            
+            Button {
+                isPresented = true
+            } label: {
+                Image(systemName: "suit.heart.fill")
+                    .foregroundColor(isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
+                    .padding()
+                    .background(isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
+                    .clipShape(Circle())
+            }
+        }
+        .padding(.horizontal, BaseSize.horizantalPadding)
+        .padding(.top, BaseSize.topAreaPadding + 10)
+    }
+    
+    @ViewBuilder
     private func PhotoView() -> some View {
         TabView {
-            ForEach(self.memory.photos.compactMap { UIImage(data: $0) }, id: \.self) { photo in
+            ForEach(self.memory.photos.compactMap { $0.image }, id: \.self) { photo in
                 Image(uiImage: photo)
                     .resizable()
                     .scaledToFill()
@@ -106,7 +132,15 @@ struct MemoryDetailView: View {
     @ViewBuilder
     private func ContentView() -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            self.TitleView()
+            VStack(alignment: .leading, spacing: 4) {
+                Text(self.memory.title)
+                    .font(.pretendard(size: 20, weight: .bold))
+                    .foregroundStyle(Color.labelNormal)
+                
+                Text(self.memory.date.format("MMM d, yyyy"))
+                    .font(.pretendard(size: 14, weight: .medium))
+                    .foregroundStyle(Color.labelAlternative)
+            }
             
             CBDivider()
             
@@ -118,18 +152,5 @@ struct MemoryDetailView: View {
                 .fixedSize(horizontal: false, vertical: true)
         }
         .padding(.horizontal, BaseSize.horizantalPadding)
-    }
-    
-    @ViewBuilder
-    private func TitleView() -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(self.memory.title)
-                .font(.pretendard(size: 20, weight: .bold))
-                .foregroundStyle(Color.labelNormal)
-            
-            Text(self.memory.date.format("MMM d, yyyy"))
-                .font(.pretendard(size: 14, weight: .medium))
-                .foregroundStyle(Color.labelAlternative)
-        }
     }
 }

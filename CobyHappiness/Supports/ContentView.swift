@@ -11,34 +11,44 @@ import CobyDS
 
 struct ContentView: View {
     
+    @StateObject var appModel: AppViewModel = .init()
+    
     init() {
         self.setupTabBarStyle()
     }
     
     var body: some View {
-        NavigationStack {
-            TabView {
-                HomeView()
-                    .tabItem {
-                        Label("홈", image: "home")
-                    }
-                
-                MapView()
-                    .tabItem {
-                        Label("지도", image: "map")
-                    }
-                
-                BunchView()
-                    .tabItem {
-                        Label("뭉치", image: "travel")
-                    }
-                
-                ProfileView()
-                    .tabItem {
-                        Label("정보", image: "person")
-                    }
+        ZStack {
+            NavigationStack {
+                TabView {
+                    HomeView()
+                        .tabItem {
+                            Label("홈", image: "home")
+                        }
+                    
+                    MapView()
+                        .tabItem {
+                            Label("지도", image: "map")
+                        }
+                    
+                    BunchView()
+                        .tabItem {
+                            Label("뭉치", image: "travel")
+                        }
+                    
+                    ProfileView()
+                        .tabItem {
+                            Label("정보", image: "person")
+                        }
+                }
+                .opacity(self.appModel.showDetailView ? 0 : 1)
+            }
+            
+            if let memory = self.appModel.currentActiveItem, self.appModel.showDetailView {
+                MemoryDetailView(memory: memory)
             }
         }
+        .environmentObject(self.appModel)
     }
 }
 

@@ -12,9 +12,10 @@ import CobyDS
 
 struct HomeView: View {
     
+    @EnvironmentObject private var appModel: AppViewModel
+    
     @State private var viewModel: HomeViewModel = HomeViewModel()
     @State private var isPresented: Bool = false
-    @State private var memory: Memory? = nil
     
     var body: some View {
         VStack(spacing: 0) {
@@ -23,15 +24,6 @@ struct HomeView: View {
             self.MemoryListView()
         }
         .background(Color.backgroundNormalNormal)
-        .fullScreenCover(
-            item: self.$memory,
-            onDismiss: {
-                self.memory = nil
-                self.viewModel.fetchMemories()
-            }
-        ) { item in
-            MemoryDetailView(memory: item)
-        }
         .fullScreenCover(
             isPresented: self.$isPresented,
             onDismiss: {
@@ -86,7 +78,10 @@ struct HomeView: View {
         )
         .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
         .onTapGesture {
-            self.memory = memory
+            withAnimation(.spring()) {
+                self.appModel.currentActiveItem = memory
+                self.appModel.showDetailView = true
+            }
         }
     }
 }

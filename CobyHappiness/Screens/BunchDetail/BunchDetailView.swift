@@ -88,8 +88,5 @@ struct BunchDetailView: View {
                 secondaryButton: .cancel(Text("취소"))
             )
         }
-        .fullScreenCover(item: self.$memory, onDismiss: { self.memory = nil }) { item in
-            MemoryDetailView(memory: item)
-        }
     }
 }
