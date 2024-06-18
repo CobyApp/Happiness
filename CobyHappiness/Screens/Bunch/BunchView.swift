@@ -42,7 +42,7 @@ struct BunchView: View {
                                 title: bunch.title,
                                 description: bunch.note
                             )
-                            .frame(width: (BaseSize.fullWidth - 12) / 2)
+                            .frame(width: BaseSize.cellWidth)
                         }
                     }
                 }

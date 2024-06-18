@@ -66,7 +66,7 @@ struct HomeView: View {
     @ViewBuilder
     private func MemoryListView() -> some View {
         ScrollView {
-            LazyVStack(spacing: 12) {
+            LazyVStack(spacing: BaseSize.cellVerticalSpacing) {
                 ForEach(self.viewModel.memories) { memory in
                     self.MemoryThumbnailView(for: memory)
                 }

@@ -10,6 +10,7 @@
 		CB0D58E52C1E183300EFE3D3 /* EditBunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E42C1E183300EFE3D3 /* EditBunchViewModel.swift */; };
 		CB0D58E82C1EE83000EFE3D3 /* EditBunchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E72C1EE83000EFE3D3 /* EditBunchContentView.swift */; };
 		CB0D58EA2C1EE83B00EFE3D3 /* EditBunchPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E92C1EE83B00EFE3D3 /* EditBunchPageView.swift */; };
+		CB0D58EC2C21C5A400EFE3D3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58EB2C21C5A400EFE3D3 /* ProfileViewModel.swift */; };
 		CB2471012ADABBFC00EEA032 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2471002ADABBFC00EEA032 /* Place.swift */; };
 		CB4063AD2C1761A300654F89 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063AC2C1761A300654F89 /* ImagePickerView.swift */; };
 		CB4063AF2C1762EB00654F89 /* EditMemoryPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063AE2C1762EB00654F89 /* EditMemoryPageView.swift */; };
@@ -47,6 +48,7 @@
 		CB0D58E42C1E183300EFE3D3 /* EditBunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchViewModel.swift; sourceTree = "<group>"; };
 		CB0D58E72C1EE83000EFE3D3 /* EditBunchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchContentView.swift; sourceTree = "<group>"; };
 		CB0D58E92C1EE83B00EFE3D3 /* EditBunchPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchPageView.swift; sourceTree = "<group>"; };
+		CB0D58EB2C21C5A400EFE3D3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		CB2471002ADABBFC00EEA032 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		CB4063AC2C1761A300654F89 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		CB4063AE2C1762EB00654F89 /* EditMemoryPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoryPageView.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				CBAD455F2C15841D009D4EFF /* ProfileView.swift */,
+				CB0D58EB2C21C5A400EFE3D3 /* ProfileViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				CBAD45602C15841D009D4EFF /* ProfileView.swift in Sources */,
 				CB4063AD2C1761A300654F89 /* ImagePickerView.swift in Sources */,
 				CB0D58E52C1E183300EFE3D3 /* EditBunchViewModel.swift in Sources */,
+				CB0D58EC2C21C5A400EFE3D3 /* ProfileViewModel.swift in Sources */,
 				CBFE3C4B2C1E0022000E3351 /* BunchDetailViewModel.swift in Sources */,
 				CBAD45692C15EBB1009D4EFF /* Location.swift in Sources */,
 				CB4063BC2C18A66200654F89 /* SelectMemoriesView.swift in Sources */,
@@ -633,7 +637,7 @@
 			repositoryURL = "https://github.com/CobyLibrary/CobyDS.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.1.4;
+				version = 1.1.7;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

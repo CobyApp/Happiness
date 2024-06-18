@@ -12,11 +12,7 @@ import CobyDS
 
 struct ProfileView: View {
     
-    @Query(sort: \Bunch.date, order: .reverse)
-    private var bunches: [Bunch]
-    
-    @Query(sort: \Memory.date, order: .reverse)
-    private var memories: [Memory]
+    @State private var viewModel: ProfileViewModel = ProfileViewModel()
     
     var body: some View {
         VStack(spacing: 0) {
@@ -42,12 +38,12 @@ struct ProfileView: View {
         HStack(spacing: 8) {
             BoxView(
                 title: "추억",
-                description: "\(self.memories.count)개"
+                description: "\(self.viewModel.memories.count)개"
             )
             
             BoxView(
                 title: "뭉치",
-                description: "\(self.bunches.count)개"
+                description: "\(self.viewModel.bunches.count)개"
             )
         }
         .padding(.horizontal, BaseSize.horizantalPadding)

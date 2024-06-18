@@ -107,7 +107,7 @@ struct EditMemoryContentView: View {
                 placeholder: "제목을 입력해주세요."
             )
             
-            CBTextFieldView(
+            CBTextAreaView(
                 text: self.$memory.note,
                 title: "내용",
                 placeholder: "내용을 입력해주세요."
