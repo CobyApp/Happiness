@@ -63,27 +63,6 @@ struct MapRepresentableView: UIViewRepresentable {
                 return nil
             }
         }
-        
-        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            guard let location = locations.first, !isInitialLocationSet else { return }
-            isInitialLocationSet = true
-            
-            let center = location.coordinate
-            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
-            
-            DispatchQueue.main.async {
-                self.mapView?.setRegion(region, animated: true)
-                
-                let topLeft = CLLocationCoordinate2D(
-                    latitude: center.latitude + region.span.latitudeDelta / 2,
-                    longitude: center.longitude - region.span.longitudeDelta / 2
-                )
-                let bottomRight = CLLocationCoordinate2D(
-                    latitude: center.latitude - region.span.latitudeDelta / 2,
-                    longitude: center.longitude + region.span.longitudeDelta / 2
-                )
-            }
-        }
     }
     
     func makeCoordinator() -> Coordinator {

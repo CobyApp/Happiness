@@ -53,6 +53,7 @@ struct ContentView: View {
                 )
             }
         }
+        .background(Color.backgroundNormalAlternative)
         .environmentObject(self.appModel)
     }
 }
