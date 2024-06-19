@@ -28,7 +28,7 @@ struct EditMemoryContentView: View {
     }
     
     init(
-        selection: Binding<Int> = .constant(1),
+        selection: Binding<Int> = .constant(0),
         memory: Memory
     ) {
         self._selection = selection
@@ -40,7 +40,11 @@ struct EditMemoryContentView: View {
             TopBarView(
                 leftSide: .left,
                 leftAction: {
-                    self.selection = 0
+                    if self.selection == 1 {
+                        self.selection = 0
+                    } else {
+                        self.dismiss()
+                    }
                 },
                 title: "추억 만들기"
             )

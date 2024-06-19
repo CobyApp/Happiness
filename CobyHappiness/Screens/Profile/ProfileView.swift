@@ -55,7 +55,7 @@ struct ProfileView: View {
         title: String,
         description: String
     ) -> some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 4) {
             HStack {
                 Text(title)
                     .font(.pretendard(size: 18, weight: .bold))
@@ -73,5 +73,13 @@ struct ProfileView: View {
                 Spacer()
             }
         }
+        .padding(12)
+        .background(Color.backgroundNormalNormal)
+        .clipShape(.rect(cornerRadius: 12))
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.lineNormalNeutral, lineWidth: 1)
+        )
+        .frame(maxWidth: .infinity)
     }
 }

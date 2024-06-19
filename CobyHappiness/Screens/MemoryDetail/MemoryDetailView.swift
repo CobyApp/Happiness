@@ -89,6 +89,8 @@ struct MemoryDetailView: View {
                 self.appModel.showDetailView = false
             } label: {
                 Image(uiImage: UIImage.icBack)
+                    .resizable()
+                    .frame(width: 24, height: 24)
                     .foregroundColor(self.isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
                     .padding()
                     .background(self.isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
@@ -101,12 +103,15 @@ struct MemoryDetailView: View {
                 self.showingSheet = true
             } label: {
                 Image(uiImage: UIImage.icMore)
+                    .resizable()
+                    .frame(width: 24, height: 24)
                     .foregroundColor(self.isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
                     .padding()
                     .background(self.isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
                     .clipShape(Circle())
             }
         }
+        .frame(maxWidth: .infinity)
         .padding(.horizontal, BaseSize.horizantalPadding)
         .padding(.top, BaseSize.topAreaPadding + 10)
     }
@@ -145,12 +150,13 @@ struct MemoryDetailView: View {
             CBDivider()
             
             Text(self.memory.note)
-                .font(.pretendard(size: 14, weight: .regular))
+                .font(.pretendard(size: 16, weight: .regular))
                 .foregroundColor(Color.labelNormal)
                 .multilineTextAlignment(.leading)
                 .lineLimit(nil)
                 .fixedSize(horizontal: false, vertical: true)
         }
+        .frame(maxWidth: .infinity)
         .padding(.horizontal, BaseSize.horizantalPadding)
     }
 }
