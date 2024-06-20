@@ -36,18 +36,29 @@ struct MapView: View {
                     memories: self.viewModel.memories
                 )
                 
-                if let memory = self.filteredMemories.first {
-                    MemoryTileView(
-                        memory: memory,
-                        isShadowing: true
-                    )
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 30)
-                    .onTapGesture {
-                        self.appModel.currentActiveItem = memory
-                        self.appModel.showDetailView = true
+                ScrollView(.horizontal) {
+                    LazyHStack(spacing: 8) {
+                        ForEach(self.filteredMemories, id: \.self) { memory in
+                            MemoryTileView(
+                                memory: memory,
+                                isShadowing: true
+                            )
+                            .frame(width: BaseSize.fullWidth, height: 100)
+                            .padding(.horizontal, 20)
+                            .containerRelativeFrame(.horizontal)
+                            .onTapGesture {
+                                self.appModel.currentActiveItem = memory
+                                self.appModel.showDetailView = true
+                            }
+                        }
                     }
+                    .scrollTargetLayout()
                 }
+                .contentMargins(.horizontal, BaseSize.horizantalPadding, for: .scrollContent)
+                .scrollIndicators(.hidden)
+                .scrollTargetBehavior(.viewAligned)
+                .frame(height: 100)
+                .padding(.bottom, 30)
             }
         }
         .background(Color.backgroundNormalNormal)
