@@ -42,22 +42,7 @@ struct BunchDetailView: View {
                 }
             )
             
-            ScrollView {
-                LazyVStack(spacing: 8) {
-                    ForEach(self.bunch.memories) { memory in
-                        MemoryTileView(
-                            memory: memory
-                        )
-                        .onTapGesture {
-                            self.appModel.currentActiveItem = memory
-                            self.appModel.showDetailView = true
-                        }
-                    }
-                }
-                .padding(.horizontal, BaseSize.horizantalPadding)
-                .padding(.top, 8)
-                .padding(.bottom, 20)
-            }
+            MemoryListView()
         }
         .edgesIgnoringSafeArea(.bottom)
         .actionSheet(isPresented: self.$showingSheet) {
@@ -88,6 +73,26 @@ struct BunchDetailView: View {
                 ),
                 secondaryButton: .cancel(Text("취소"))
             )
+        }
+    }
+    
+    @ViewBuilder
+    private func MemoryListView() -> some View {
+        ScrollView {
+            LazyVStack(spacing: 8) {
+                ForEach(self.bunch.memories) { memory in
+                    MemoryTileView(
+                        memory: memory
+                    )
+                    .onTapGesture {
+                        self.appModel.currentActiveItem = memory
+                        self.appModel.showDetailView = true
+                    }
+                }
+            }
+            .padding(.horizontal, BaseSize.horizantalPadding)
+            .padding(.top, 8)
+            .padding(.bottom, 20)
         }
     }
 }

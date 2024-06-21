@@ -12,8 +12,12 @@ import CobyDS
 
 struct ProfileView: View {
    
-    @State private var viewModel: ProfileViewModel = ProfileViewModel()
+    @EnvironmentObject private var appModel: AppViewModel
     
+    @State private var viewModel: ProfileViewModel = ProfileViewModel()
+    @State private var selection: String? = nil
+    @State private var selectedMemoryType: MemoryType? = nil
+
     var body: some View {
         VStack(spacing: 0) {
             TopBarView(
@@ -22,64 +26,97 @@ struct ProfileView: View {
                 rightSide: .icon,
                 rightIcon: UIImage.icSetting,
                 rightAction: {
-                    print("추가")
+                    print("설정")
                 }
             )
             
-            ScrollView {
-                NoteView()
-            }
+            NoteView()
+            
+            MemoryListView()
         }
         .background(Color.backgroundNormalNormal)
     }
     
     @ViewBuilder
     private func NoteView() -> some View {
-        HStack(spacing: 8) {
-            BoxView(
-                title: "추억",
-                description: "\(self.viewModel.memories.count)개"
-            )
-            
-            BoxView(
-                title: "뭉치",
-                description: "\(self.viewModel.bunches.count)개"
-            )
+        ScrollView(.horizontal) {
+            HStack(spacing: 8) {
+                BoxView(
+                    isSelected: self.selectedMemoryType == nil,
+                    title: "모두",
+                    description: "\(self.viewModel.getMemoryCount(nil))개"
+                )
+                .onTapGesture {
+                    self.selectedMemoryType = nil
+                }
+                
+                ForEach(MemoryType.allCases, id: \.self) { memoryType in
+                    BoxView(
+                        isSelected: self.selectedMemoryType == memoryType,
+                        title: memoryType.title,
+                        description: "\(self.viewModel.getMemoryCount(memoryType))개"
+                    )
+                    .onTapGesture {
+                        self.selectedMemoryType = memoryType
+                    }
+                }
+            }
         }
-        .padding(.horizontal, BaseSize.horizantalPadding)
-        .padding(.top, 8)
+        .contentMargins(.horizontal, BaseSize.horizantalPadding, for: .scrollContent)
+        .contentMargins(.vertical, 8, for: .scrollContent)
+        .scrollIndicators(.hidden)
     }
     
     @ViewBuilder
     private func BoxView(
+        isSelected: Bool,
         title: String,
         description: String
     ) -> some View {
         VStack(spacing: 4) {
             HStack {
                 Text(title)
-                    .font(.pretendard(size: 18, weight: .bold))
+                    .font(.pretendard(size: 16, weight: .medium))
                     .foregroundStyle(Color.labelNormal)
                 
                 Spacer()
             }
             
             HStack {
+                Spacer()
+                
                 Text(description)
                     .font(.pretendard(size: 14, weight: .regular))
                     .foregroundStyle(Color.labelNeutral)
-                    .multilineTextAlignment(.leading)
-                
-                Spacer()
             }
         }
         .padding(12)
-        .background(Color.backgroundNormalNormal)
+        .background(isSelected ? Color.fillStrong : Color.backgroundNormalNormal)
         .clipShape(.rect(cornerRadius: 12))
         .overlay(
             RoundedRectangle(cornerRadius: 12)
                 .stroke(Color.lineNormalNeutral, lineWidth: 1)
         )
-        .frame(maxWidth: .infinity)
+        .frame(width: 100)
+    }
+    
+    @ViewBuilder
+    private func MemoryListView() -> some View {
+        ScrollView {
+            LazyVStack(spacing: 8) {
+                ForEach(self.viewModel.getFilteredMemory(self.selectedMemoryType)) { memory in
+                    MemoryTileView(
+                        memory: memory
+                    )
+                    .onTapGesture {
+                        self.appModel.currentActiveItem = memory
+                        self.appModel.showDetailView = true
+                    }
+                }
+            }
+            .padding(.horizontal, BaseSize.horizantalPadding)
+            .padding(.top, 8)
+            .padding(.bottom, 20)
+        }
     }
 }

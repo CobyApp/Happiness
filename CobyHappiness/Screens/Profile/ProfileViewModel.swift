@@ -14,19 +14,25 @@ final class ProfileViewModel {
     private let dataSource: ItemDataSource
     
     var memories: [Memory] = []
-    var bunches: [Bunch] = []
     
     init(dataSource: ItemDataSource = ItemDataSource.shared) {
         self.dataSource = dataSource
         self.fetchMemories()
-        self.fetchBunches()
     }
     
     func fetchMemories() {
         self.memories = self.dataSource.fetchMemories()
     }
     
-    func fetchBunches() {
-        self.bunches = self.dataSource.fetchBunches()
+    func getFilteredMemory(_ type: MemoryType?) -> [Memory] {
+        if let type = type {
+            self.memories.filter { $0.type == type }
+        } else {
+            self.memories
+        }
+    }
+    
+    func getMemoryCount(_ type: MemoryType?) -> Int {
+        self.getFilteredMemory(type).count
     }
 }

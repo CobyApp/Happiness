@@ -43,39 +43,26 @@ final class Memory {
 }
 
 enum MemoryType: String, Identifiable, CaseIterable, Codable {
-    case music, video, food, flex, moment
+    case trip, food, hobby, concert, flex, moment
     
     var id: String {
         self.rawValue
     }
     
-    var description: String {
+    var title: String {
         switch self {
-        case .music:
-            return "기분이 좋아지는 음악"
-        case .video:
-            return "보기만 해도 힐링되는 영상"
+        case .trip:
+            return "여행"
         case .food:
-            return "나를 행복하게 하는 음식"
+            return "음식"
+        case .hobby:
+            return "취미"
+        case .concert:
+            return "공연"
         case .flex:
-            return "스트레스가 풀리는 플렉스"
+            return "소비"
         case .moment:
-            return "오늘 가장 행복했던 순간"
-        }
-    }
-
-    var icon: String {
-        switch self {
-        case .music:
-            return "🏦"
-        case .video:
-            return "🏡"
-        case .food:
-            return "🎉"
-        case .flex:
-            return "🏟"
-        case .moment:
-            return "📌"
+            return "순간"
         }
     }
 }
