@@ -36,15 +36,15 @@ struct MemoryTileView: View {
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(self.memory.title)
-                    .font(.pretendard(size: 15, weight: .semibold))
+                    .font(.pretendard(size: 16, weight: .semibold))
                     .foregroundColor(Color.labelNormal)
                     .lineLimit(1)
                     .truncationMode(.tail)
                 
                 Text(self.memory.note)
-                    .font(.pretendard(size: 13, weight: .medium))
+                    .font(.pretendard(size: 14, weight: .regular))
                     .foregroundColor(Color.labelAlternative)
-                    .lineLimit(3)
+                    .lineLimit(2)
                     .truncationMode(.tail)
                 
                 Spacer()

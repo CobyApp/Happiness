@@ -139,11 +139,11 @@ struct MemoryDetailView: View {
         VStack(alignment: .leading, spacing: 16) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(self.memory.title)
-                    .font(.pretendard(size: 20, weight: .bold))
+                    .font(.pretendard(size: 20, weight: .semibold))
                     .foregroundStyle(Color.labelNormal)
                 
                 Text(self.memory.date.format("MMM d, yyyy"))
-                    .font(.pretendard(size: 14, weight: .medium))
+                    .font(.pretendard(size: 14, weight: .regular))
                     .foregroundStyle(Color.labelAlternative)
             }
             
