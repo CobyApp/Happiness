@@ -64,6 +64,8 @@ struct EditBunchPageView: View {
             
             Button {
                 if self.selection == 0 {
+                    self.bunch.startDate = self.bunch.memories.map { $0.date }.min() ?? .now
+                    self.bunch.endDate = self.bunch.memories.map { $0.date }.max() ?? .now
                     self.selection = 1
                 } else {
                     self.viewModel.appendBunch(bunch: self.bunch)
@@ -75,10 +77,11 @@ struct EditBunchPageView: View {
             .buttonStyle(
                 CBButtonStyle(
                     buttonColor: Color.redNormal,
-                    disable: self.bunch.memories.isEmpty
+                    disable: (self.selection == 0 && self.bunch.memories.isEmpty) || (self.selection == 1 && self.bunch.title.count == 0)
                 )
             )
             .padding(.horizontal, BaseSize.horizantalPadding)
+            .padding(.bottom, 20)
         }
     }
 }

@@ -43,7 +43,7 @@ struct MemoryTileView: View {
                 
                 Text(self.memory.note)
                     .font(.pretendard(size: 14, weight: .regular))
-                    .foregroundColor(Color.labelAlternative)
+                    .foregroundColor(Color.labelNeutral)
                     .lineLimit(2)
                     .truncationMode(.tail)
                 

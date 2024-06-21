@@ -40,7 +40,7 @@ struct BunchView: View {
                             ThumbnailTitleView(
                                 image: bunch.image,
                                 title: bunch.title,
-                                description: bunch.note
+                                description: bunch.term
                             )
                             .frame(width: BaseSize.cellWidth)
                         }

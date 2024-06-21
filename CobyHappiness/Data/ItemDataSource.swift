@@ -57,7 +57,7 @@ final class ItemDataSource {
 
     func fetchBunches() -> [Bunch] {
         do {
-            let descriptor = FetchDescriptor<Bunch>(sortBy: [SortDescriptor(\.date, order: .reverse)])
+            let descriptor = FetchDescriptor<Bunch>(sortBy: [SortDescriptor(\.startDate, order: .reverse)])
             return try self.modelContext.fetch(descriptor)
         } catch {
             fatalError(error.localizedDescription)

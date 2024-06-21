@@ -13,27 +13,38 @@ final class Bunch {
     
     @Attribute(.unique)
     var id: UUID
-    var date: Date
+    var startDate: Date
+    var endDate: Date
     var title: String
-    var note: String
     @Relationship(deleteRule: .nullify, inverse: \Memory.bunches)
     var memories: [Memory]
     
     init(
         id: UUID = UUID(),
-        date: Date = .now,
+        startDate: Date = .now,
+        endDate: Date = .now,
         title: String = "",
-        note: String = "",
         memories: [Memory] = []
     ) {
         self.id = id
-        self.date = date
+        self.startDate = startDate
+        self.endDate = endDate
         self.title = title
-        self.note = note
         self.memories = memories
     }
     
     var image: UIImage? {
         self.memories.first?.photos.first?.image
+    }
+    
+    var term: String {
+        let startDate = self.startDate.format("MMM d, yyyy")
+        let endDate = self.endDate.format("MMM d, yyyy")
+        
+        if startDate == endDate {
+            return startDate
+        } else {
+            return "\(startDate) ~ \(endDate)"
+        }
     }
 }
