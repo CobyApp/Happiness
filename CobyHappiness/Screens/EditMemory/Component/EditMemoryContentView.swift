@@ -58,8 +58,10 @@ struct EditMemoryContentView: View {
             }
             
             Button {
-                self.viewModel.appendMemory(memory: self.memory)
-                self.dismiss()
+                if !self.isDisabled {
+                    self.viewModel.appendMemory(memory: self.memory)
+                    self.dismiss()
+                }
             } label: {
                 Text("저장")
             }

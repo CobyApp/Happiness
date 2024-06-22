@@ -30,26 +30,11 @@ struct EditBunchPageView: View {
             )
             
             TabView(selection: self.$selection) {
-                ScrollView {
-                    LazyVStack(spacing: 8) {
-                        ForEach(self.viewModel.memories) { memory in
-                            MemoryTileView(
-                                memory: memory,
-                                isSelected: self.bunch.memories.contains(memory)
-                            )
-                            .onTapGesture {
-                                if self.bunch.memories.contains(memory) {
-                                    self.bunch.memories = self.bunch.memories.filter { $0 != memory }
-                                } else {
-                                    self.bunch.memories.append(memory)
-                                }
-                            }
-                        }
-                    }
-                    .padding(.horizontal, BaseSize.horizantalPadding)
-                    .padding(.top, 8)
-                    .padding(.bottom, 20)
-                }
+                SelectMemoriesView(
+                    selection: self.$selection,
+                    bunch: self.$bunch,
+                    memories: self.viewModel.memories
+                )
                 .tag(0)
                 
                 EditBunchContentView(
@@ -62,14 +47,18 @@ struct EditBunchPageView: View {
             .background(Color.backgroundNormalNormal)
             
             
+            let isDisabled = (self.selection == 0 && self.bunch.memories.isEmpty) || (self.selection == 1 && self.bunch.title.count == 0)
+            
             Button {
-                if self.selection == 0 {
-                    self.bunch.startDate = self.bunch.memories.map { $0.date }.min() ?? .now
-                    self.bunch.endDate = self.bunch.memories.map { $0.date }.max() ?? .now
-                    self.selection = 1
-                } else {
-                    self.viewModel.appendBunch(bunch: self.bunch)
-                    self.dismiss()
+                if !isDisabled {
+                    if self.selection == 0 {
+                        self.bunch.startDate = self.bunch.memories.map { $0.date }.min() ?? .now
+                        self.bunch.endDate = self.bunch.memories.map { $0.date }.max() ?? .now
+                        self.selection = 1
+                    } else {
+                        self.viewModel.appendBunch(bunch: self.bunch)
+                        self.dismiss()
+                    }
                 }
             } label: {
                 Text(self.selection == 0 ? "선택" : "저장")
@@ -77,7 +66,7 @@ struct EditBunchPageView: View {
             .buttonStyle(
                 CBButtonStyle(
                     buttonColor: Color.redNormal,
-                    disable: (self.selection == 0 && self.bunch.memories.isEmpty) || (self.selection == 1 && self.bunch.title.count == 0)
+                    disable: isDisabled
                 )
             )
             .padding(.horizontal, BaseSize.horizantalPadding)
