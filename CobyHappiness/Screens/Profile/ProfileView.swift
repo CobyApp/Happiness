@@ -103,7 +103,9 @@ struct ProfileView: View {
     @ViewBuilder
     private func MemoryListView() -> some View {
         if self.viewModel.getFilteredMemory(self.selectedMemoryType).isEmpty {
-            EmptyMemoryView { }
+            EmptyMemoryView(
+                showingButton: false
+            )
         } else {
             ScrollView {
                 LazyVStack(spacing: 8) {

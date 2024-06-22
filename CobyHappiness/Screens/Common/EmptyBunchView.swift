@@ -23,7 +23,7 @@ struct EmptyBunchView: View {
         VStack(spacing: 8) {
             Spacer()
             
-            Text("추억을 담아 뭉치로 만들어보세요.")
+            Text("추억을 모아 뭉치로 만들어보세요.")
                 .font(.pretendard(size: 16, weight: .regular))
                 .foregroundStyle(Color.labelNormal)
             
