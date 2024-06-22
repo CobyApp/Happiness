@@ -102,21 +102,25 @@ struct ProfileView: View {
     
     @ViewBuilder
     private func MemoryListView() -> some View {
-        ScrollView {
-            LazyVStack(spacing: 8) {
-                ForEach(self.viewModel.getFilteredMemory(self.selectedMemoryType)) { memory in
-                    MemoryTileView(
-                        memory: memory
-                    )
-                    .onTapGesture {
-                        self.appModel.currentActiveItem = memory
-                        self.appModel.showDetailView = true
+        if self.viewModel.getFilteredMemory(self.selectedMemoryType).isEmpty {
+            EmptyMemoryView { }
+        } else {
+            ScrollView {
+                LazyVStack(spacing: 8) {
+                    ForEach(self.viewModel.getFilteredMemory(self.selectedMemoryType)) { memory in
+                        MemoryTileView(
+                            memory: memory
+                        )
+                        .onTapGesture {
+                            self.appModel.currentActiveItem = memory
+                            self.appModel.showDetailView = true
+                        }
                     }
                 }
+                .padding(.horizontal, BaseSize.horizantalPadding)
+                .padding(.top, 8)
+                .padding(.bottom, 20)
             }
-            .padding(.horizontal, BaseSize.horizantalPadding)
-            .padding(.top, 8)
-            .padding(.bottom, 20)
         }
     }
 }

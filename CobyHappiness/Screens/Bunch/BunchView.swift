@@ -33,6 +33,29 @@ struct BunchView: View {
                 }
             )
             
+            BunchGridView()
+        }
+        .background(Color.backgroundNormalNormal)
+        .navigationDestination(for: Bunch.self) { bunch in
+            BunchDetailView(bunch: bunch).navigationBarHidden(true)
+        }
+        .fullScreenCover(
+            isPresented: self.$isPresented,
+            onDismiss: {
+                self.viewModel.fetchBunches()
+            }
+        ) {
+            EditBunchPageView()
+        }
+    }
+    
+    @ViewBuilder
+    private func BunchGridView() -> some View {
+        if self.viewModel.bunches.isEmpty {
+            EmptyBunchView {
+                self.isPresented = true
+            }
+        } else {
             ScrollView {
                 LazyVGrid(columns: self.columns, spacing: 20) {
                     ForEach(self.viewModel.bunches, id: \.self) { bunch in
@@ -50,18 +73,6 @@ struct BunchView: View {
                 .padding(.top, 8)
                 .padding(.bottom, 20)
             }
-        }
-        .background(Color.backgroundNormalNormal)
-        .navigationDestination(for: Bunch.self) { bunch in
-            BunchDetailView(bunch: bunch).navigationBarHidden(true)
-        }
-        .fullScreenCover(
-            isPresented: self.$isPresented,
-            onDismiss: {
-                self.viewModel.fetchBunches()
-            }
-        ) {
-            EditBunchPageView()
         }
     }
 }

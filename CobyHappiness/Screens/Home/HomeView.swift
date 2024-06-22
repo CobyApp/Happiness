@@ -57,14 +57,20 @@ struct HomeView: View {
     
     @ViewBuilder
     private func MemoryListView() -> some View {
-        ScrollView {
-            LazyVStack(spacing: BaseSize.cellVerticalSpacing) {
-                ForEach(self.viewModel.memories) { memory in
-                    self.MemoryThumbnailView(for: memory)
-                }
+        if self.viewModel.memories.isEmpty {
+            EmptyMemoryView {
+                self.isPresented = true
             }
-            .padding(.top, 8)
-            .padding(.bottom, 20)
+        } else {
+            ScrollView {
+                LazyVStack(spacing: BaseSize.cellVerticalSpacing) {
+                    ForEach(self.viewModel.memories) { memory in
+                        self.MemoryThumbnailView(for: memory)
+                    }
+                }
+                .padding(.top, 8)
+                .padding(.bottom, 20)
+            }
         }
     }
     
