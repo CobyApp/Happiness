@@ -27,7 +27,7 @@ final class MemoryDetailViewModel: ObservableObject {
     func removeMemory(memory: MemoryModel) {
         Task {
             do {
-                try self.usecase.removeMemory(memory: memory)
+                try await self.usecase.removeMemory(memory: memory)
             } catch(let error) {
                 await self.showErrorMessage(error.localizedDescription)
             }

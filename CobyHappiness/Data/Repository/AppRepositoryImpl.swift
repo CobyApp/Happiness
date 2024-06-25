@@ -22,20 +22,40 @@ final class AppRepositoryImpl: AppRepository {
     }
     
     @MainActor
+    func getMemoryById(id: UUID) async throws -> MemoryModel? {
+        do {
+            let descriptor = FetchDescriptor<MemoryModel>(predicate: #Predicate { $0.id == id })
+            return try self.container.mainContext.fetch(descriptor).first
+        } catch {
+            return nil
+        }
+    }
+    
+    @MainActor
     func getMemories() async throws -> [MemoryModel] {
         let descriptor = FetchDescriptor<MemoryModel>(sortBy: [SortDescriptor(\.date, order: .reverse)])
         return try self.container.mainContext.fetch(descriptor)
     }
     
     @MainActor
-    func saveMemory(memory: MemoryModel) throws {
+    func saveMemory(memory: MemoryModel) async throws {
         self.container.mainContext.insert(memory)
         return try self.container.mainContext.save()
     }
     
     @MainActor
-    func removeMemory(memory: MemoryModel) throws {
+    func removeMemory(memory: MemoryModel) async throws {
         self.container.mainContext.delete(memory)
+    }
+    
+    @MainActor
+    func getBunchById(id: UUID) async throws -> BunchModel? {
+        do {
+            let descriptor = FetchDescriptor<BunchModel>(predicate: #Predicate { $0.id == id })
+            return try self.container.mainContext.fetch(descriptor).first
+        } catch {
+            return nil
+        }
     }
     
     @MainActor
@@ -45,13 +65,13 @@ final class AppRepositoryImpl: AppRepository {
     }
     
     @MainActor
-    func saveBunch(bunch: BunchModel) throws {
+    func saveBunch(bunch: BunchModel) async throws {
         self.container.mainContext.insert(bunch)
         return try self.container.mainContext.save()
     }
     
     @MainActor
-    func removeBunch(bunch: BunchModel) throws {
+    func removeBunch(bunch: BunchModel) async throws {
         self.container.mainContext.delete(bunch)
     }
 }

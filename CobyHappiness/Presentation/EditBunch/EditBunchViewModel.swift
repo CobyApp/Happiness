@@ -44,7 +44,7 @@ final class EditBunchViewModel: ObservableObject {
     func saveBunch(bunch: BunchModel) {
         Task {
             do {
-                try self.usecase.saveBunch(bunch: bunch)
+                try await self.usecase.saveBunch(bunch: bunch)
             } catch(let error) {
                 await self.showErrorMessage(error.localizedDescription)
             }

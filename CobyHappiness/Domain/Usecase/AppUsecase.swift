@@ -15,6 +15,14 @@ final class AppUsecase {
         self.repository = repository
     }
     
+    func getMemoryById(id: UUID) async throws -> MemoryModel? {
+        do {
+            return try await self.repository.getMemoryById(id: id)
+        } catch(let error) {
+            throw error
+        }
+    }
+    
     func getMemories() async throws -> [MemoryModel] {
         do {
             return try await self.repository.getMemories()
@@ -23,17 +31,25 @@ final class AppUsecase {
         }
     }
     
-    func saveMemory(memory: MemoryModel) throws {
+    func saveMemory(memory: MemoryModel) async throws {
         do {
-            return try self.repository.saveMemory(memory: memory)
+            return try await self.repository.saveMemory(memory: memory)
         } catch(let error) {
             throw error
         }
     }
     
-    func removeMemory(memory: MemoryModel) throws {
+    func removeMemory(memory: MemoryModel) async throws {
         do {
-            return try self.repository.removeMemory(memory: memory)
+            return try await self.repository.removeMemory(memory: memory)
+        } catch(let error) {
+            throw error
+        }
+    }
+    
+    func getBunchById(id: UUID) async throws -> BunchModel? {
+        do {
+            return try await self.repository.getBunchById(id: id)
         } catch(let error) {
             throw error
         }
@@ -47,17 +63,17 @@ final class AppUsecase {
         }
     }
     
-    func saveBunch(bunch: BunchModel) throws {
+    func saveBunch(bunch: BunchModel) async throws {
         do {
-            return try self.repository.saveBunch(bunch: bunch)
+            return try await self.repository.saveBunch(bunch: bunch)
         } catch(let error) {
             throw error
         }
     }
     
-    func removeBunch(bunch: BunchModel) throws {
+    func removeBunch(bunch: BunchModel) async throws {
         do {
-            return try self.repository.removeBunch(bunch: bunch)
+            return try await self.repository.removeBunch(bunch: bunch)
         } catch(let error) {
             throw error
         }

@@ -55,7 +55,7 @@ final class EditMemoryViewModel: ObservableObject {
                         photos: photos,
                         bunches: memory.bunches
                     )
-                    try self.usecase.saveMemory(memory: item)
+                    try await self.usecase.saveMemory(memory: item)
                 } else {
                     let item = MemoryModel(
                         date: date,
@@ -65,7 +65,7 @@ final class EditMemoryViewModel: ObservableObject {
                         location: location,
                         photos: photos
                     )
-                    try self.usecase.saveMemory(memory: item)
+                    try await self.usecase.saveMemory(memory: item)
                 }
             } catch(let error) {
                 await self.showErrorMessage(error.localizedDescription)
