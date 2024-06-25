@@ -46,11 +46,11 @@ struct EditMemoryContentView: View {
                         self.dismiss()
                     }
                 },
-                title: "추억 만들기"
+                title: "추억 기록"
             )
             
             ScrollView {
-                VStack {
+                VStack(spacing: 8) {
                     self.PhotosView()
                     
                     self.ContentView()
@@ -89,24 +89,20 @@ struct EditMemoryContentView: View {
     @ViewBuilder
     func PhotosView() -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
+            HStack(spacing: 6) {
                 ForEach(self.memory.photos.compactMap { UIImage(data: $0) }, id: \.self) { image in
                     ThumbnailView(image: image)
-                        .frame(width: 100, height: 100)
+                        .frame(width: 80, height: 80)
                 }
             }
             .padding(.horizontal, BaseSize.horizantalPadding)
+            .padding(.vertical, 12)
         }
     }
     
     @ViewBuilder
     func ContentView() -> some View {
         VStack(spacing: 20) {
-            DatePicker(
-                "날짜",
-                selection: self.$memory.date
-            )
-            
             CBTextFieldView(
                 text: self.$memory.title,
                 title: "제목",
@@ -119,7 +115,7 @@ struct EditMemoryContentView: View {
                 placeholder: "내용을 입력해주세요."
             )
         }
-        .padding(BaseSize.horizantalPadding)
+        .padding(.horizontal, BaseSize.horizantalPadding)
     }
 }
  

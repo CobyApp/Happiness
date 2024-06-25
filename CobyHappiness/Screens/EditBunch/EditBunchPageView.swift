@@ -32,7 +32,7 @@ struct EditBunchPageView: View {
                 leftAction: {
                     self.dismiss()
                 },
-                title: self.selection == 0 ? "추억 선택하기" : "추억 뭉치 기록하기"
+                title: self.selection == 0 ? "추억 선택" : "뭉치 기록"
             )
             
             TabView(selection: self.$selection) {
