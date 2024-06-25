@@ -22,17 +22,13 @@ struct MemoryDetailView: View {
     @State private var showingAlert = false
     @State private var isPresented: Bool = false
     
+    @State private var memory: MemoryModel = MemoryModel()
     @State private var photos = [UIImage]()
     
-    @State private var memory: MemoryModel
-    
     init(
-        viewModel: MemoryDetailViewModel,
-        memory: MemoryModel
+        viewModel: MemoryDetailViewModel
     ) {
         self._viewModel = StateObject(wrappedValue: viewModel)
-        self._photos = State(wrappedValue: memory.photos.compactMap { $0.image })
-        self._memory = State(wrappedValue: memory)
     }
     
     var body: some View {
@@ -84,9 +80,8 @@ struct MemoryDetailView: View {
             EditMemoryView(viewModel: EditMemoryViewModel(memory: self.memory))
         }
         .onAppear {
-            self.viewModel.getMemoryById(id: self.memory.id) { memory in
-                self.memory = memory
-            }
+            self.memory = self.viewModel.memory
+            self.photos = self.viewModel.memory.photos.compactMap { $0.image }
         }
     }
     

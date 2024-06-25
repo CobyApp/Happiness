@@ -12,10 +12,16 @@ final class MemoryDetailViewModel: ObservableObject {
     @Published private(set) var isError: Bool = false
     @Published private(set) var errorMessage: String = ""
     
+    @Published private(set) var memory: MemoryModel
+    
     private let usecase: AppUsecase
     
-    init(usecase: AppUsecase = AppUsecase(AppRepositoryImpl())) {
+    init(
+        usecase: AppUsecase = AppUsecase(AppRepositoryImpl()),
+        memory: MemoryModel
+    ) {
         self.usecase = usecase
+        self.memory = memory
     }
     
     @MainActor
@@ -24,23 +30,24 @@ final class MemoryDetailViewModel: ObservableObject {
         self.errorMessage = message
     }
     
-    func removeMemory(memory: MemoryModel) {
+    func getMemoryById(id: UUID) {
         Task {
             do {
-                try await self.usecase.removeMemory(memory: memory)
+                let memory = try await self.usecase.getMemoryById(id: id)
+                await MainActor.run { [weak self] in
+                    guard let self else { return }
+                    self.memory = memory
+                }
             } catch(let error) {
                 await self.showErrorMessage(error.localizedDescription)
             }
         }
     }
     
-    func getMemoryById(id: UUID, completion: @escaping (MemoryModel) -> Void) {
+    func removeMemory(memory: MemoryModel) {
         Task {
             do {
-                let memory = try await self.usecase.getMemoryById(id: id)
-                await MainActor.run {
-                    completion(memory)
-                }
+                try await self.usecase.removeMemory(memory: memory)
             } catch(let error) {
                 await self.showErrorMessage(error.localizedDescription)
             }

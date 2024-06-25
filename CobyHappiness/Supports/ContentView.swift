@@ -46,8 +46,7 @@ struct ContentView: View {
             
             if let memory = self.appModel.currentActiveItem, self.appModel.showDetailView {
                 MemoryDetailView(
-                    viewModel: MemoryDetailViewModel(),
-                    memory: memory
+                    viewModel: MemoryDetailViewModel(memory: memory)
                 )
             }
         }
