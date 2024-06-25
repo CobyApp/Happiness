@@ -12,18 +12,15 @@ import CobyDS
 
 struct SelectMemoriesView: View {
     
-    @Binding var selection: Int
-    @Binding var bunch: Bunch
+    @Binding var selectedMemories: [Memory]
     
     private let memories: [Memory]
     
     init(
-        selection: Binding<Int>,
-        bunch: Binding<Bunch>,
+        selectedMemories: Binding<[Memory]>,
         memories: [Memory]
     ) {
-        self._selection = selection
-        self._bunch = bunch
+        self._selectedMemories = selectedMemories
         self.memories = memories
     }
     
@@ -38,13 +35,13 @@ struct SelectMemoriesView: View {
                     ForEach(self.memories) { memory in
                         MemoryTileView(
                             memory: memory,
-                            isSelected: self.bunch.memories.contains(memory)
+                            isSelected: self.selectedMemories.contains(memory)
                         )
                         .onTapGesture {
-                            if self.bunch.memories.contains(memory) {
-                                self.bunch.memories = self.bunch.memories.filter { $0 != memory }
+                            if self.selectedMemories.contains(memory) {
+                                self.selectedMemories = self.selectedMemories.filter { $0 != memory }
                             } else {
-                                self.bunch.memories.append(memory)
+                                self.selectedMemories.append(memory)
                             }
                         }
                     }

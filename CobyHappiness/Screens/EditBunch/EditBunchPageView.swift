@@ -14,7 +14,7 @@ struct EditBunchPageView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @State private var selection = 0
+    @State private var showAlert = false
     @State private var bunch: Bunch
     
     @State private var viewModel: EditBunchViewModel = EditBunchViewModel()
@@ -32,51 +32,41 @@ struct EditBunchPageView: View {
                 leftAction: {
                     self.dismiss()
                 },
-                title: self.selection == 0 ? "추억 선택" : "뭉치 기록"
+                title: "추억 선택"
             )
             
-            TabView(selection: self.$selection) {
-                SelectMemoriesView(
-                    selection: self.$selection,
-                    bunch: self.$bunch,
-                    memories: self.viewModel.memories
-                )
-                .tag(0)
-                
-                EditBunchContentView(
-                    selection: self.$selection,
-                    bunch: self.$bunch
-                )
-                .tag(1)
-            }
-            .tabViewStyle(.page(indexDisplayMode: .never))
-            .background(Color.backgroundNormalNormal)
-            
-            
-            let isDisabled = (self.selection == 0 && self.bunch.memories.isEmpty) || (self.selection == 1 && self.bunch.title.count == 0)
+            SelectMemoriesView(
+                selectedMemories: self.$bunch.memories,
+                memories: self.viewModel.memories
+            )
             
             Button {
-                if !isDisabled {
-                    if self.selection == 0 {
-                        self.bunch.startDate = self.bunch.memories.map { $0.date }.min() ?? .now
-                        self.bunch.endDate = self.bunch.memories.map { $0.date }.max() ?? .now
-                        self.selection = 1
-                    } else {
-                        self.viewModel.appendBunch(bunch: self.bunch)
-                        self.dismiss()
-                    }
+                if !self.bunch.memories.isEmpty {
+                    self.bunch.startDate = self.bunch.memories.map { $0.date }.min() ?? .now
+                    self.bunch.endDate = self.bunch.memories.map { $0.date }.max() ?? .now
+                    self.showAlert = true
                 }
             } label: {
-                Text(self.selection == 0 ? "선택" : "저장")
+                Text("뭉치 만들기")
             }
             .buttonStyle(
                 CBButtonStyle(
                     buttonColor: Color.redNormal,
-                    disable: isDisabled
+                    disable: self.bunch.memories.isEmpty
                 )
             )
             .padding(.horizontal, BaseSize.horizantalPadding)
             .padding(.bottom, 20)
+        }
+        .background(Color.backgroundNormalNormal)
+        .alert("뭉치 만들기", isPresented: self.$showAlert) {
+            TextField(self.bunch.title, text: self.$bunch.title)
+            Button("확인", action: {
+                self.viewModel.appendBunch(bunch: self.bunch)
+                self.dismiss()
+            })
+        } message: {
+            Text("뭉치 이름을 입력해주세요")
         }
     }
 }

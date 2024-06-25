@@ -63,7 +63,7 @@ struct EditMemoryContentView: View {
                     self.dismiss()
                 }
             } label: {
-                Text("저장")
+                Text("추억 만들기")
             }
             .buttonStyle(
                 CBButtonStyle(
