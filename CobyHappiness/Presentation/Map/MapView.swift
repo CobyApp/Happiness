@@ -73,7 +73,7 @@ struct MapView: View {
                 self.viewModel.getMemories()
             }
         ) {
-            EditMemoryPageView()
+            EditMemoryView(viewModel: EditMemoryViewModel())
         }
     }
 }

@@ -35,7 +35,7 @@ struct HomeView: View {
                 self.viewModel.getMemories()
             }
         ) {
-            EditMemoryPageView()
+            EditMemoryView(viewModel: EditMemoryViewModel())
         }
     }
     

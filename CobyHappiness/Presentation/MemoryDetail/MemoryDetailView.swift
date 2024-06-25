@@ -81,7 +81,7 @@ struct MemoryDetailView: View {
             )
         }
         .fullScreenCover(isPresented: self.$isPresented) {
-            EditMemoryContentView(viewModel: EditMemoryViewModel(), memory: self.memory)
+            EditMemoryView(viewModel: EditMemoryViewModel(), memory: self.memory)
         }
     }
     
