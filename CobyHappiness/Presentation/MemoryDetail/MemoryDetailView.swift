@@ -24,7 +24,7 @@ struct MemoryDetailView: View {
     
     @State private var photos = [UIImage]()
     
-    private var memory: MemoryModel
+    @State private var memory: MemoryModel
     
     init(
         viewModel: MemoryDetailViewModel,
@@ -32,7 +32,7 @@ struct MemoryDetailView: View {
     ) {
         self._viewModel = StateObject(wrappedValue: viewModel)
         self._photos = State(wrappedValue: memory.photos.compactMap { $0.image })
-        self.memory = memory
+        self._memory = State(wrappedValue: memory)
     }
     
     var body: some View {
@@ -82,6 +82,11 @@ struct MemoryDetailView: View {
         }
         .fullScreenCover(isPresented: self.$isPresented) {
             EditMemoryView(viewModel: EditMemoryViewModel(memory: self.memory))
+        }
+        .onAppear {
+            self.viewModel.getMemoryById(id: self.memory.id) { memory in
+                self.memory = memory
+            }
         }
     }
     

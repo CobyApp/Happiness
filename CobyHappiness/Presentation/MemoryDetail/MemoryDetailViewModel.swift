@@ -33,4 +33,17 @@ final class MemoryDetailViewModel: ObservableObject {
             }
         }
     }
+    
+    func getMemoryById(id: UUID, completion: @escaping (MemoryModel) -> Void) {
+        Task {
+            do {
+                let memory = try await self.usecase.getMemoryById(id: id)
+                await MainActor.run {
+                    completion(memory)
+                }
+            } catch(let error) {
+                await self.showErrorMessage(error.localizedDescription)
+            }
+        }
+    }
 }
