@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		CB09A5422C27EBB900CB8485 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB09A5412C27EBB900CB8485 /* SettingView.swift */; };
+		CB09A5492C2B115800CB8485 /* MemoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB09A5482C2B115800CB8485 /* MemoryType.swift */; };
+		CB09A54C2C2B11C300CB8485 /* AppRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB09A54B2C2B11C300CB8485 /* AppRepositoryImpl.swift */; };
+		CB09A54F2C2B120200CB8485 /* AppRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB09A54E2C2B120200CB8485 /* AppRepository.swift */; };
+		CB09A5522C2B146700CB8485 /* AppUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB09A5512C2B146700CB8485 /* AppUsecase.swift */; };
 		CB0D58E52C1E183300EFE3D3 /* EditBunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E42C1E183300EFE3D3 /* EditBunchViewModel.swift */; };
 		CB0D58E82C1EE83000EFE3D3 /* EditBunchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E72C1EE83000EFE3D3 /* EditBunchContentView.swift */; };
 		CB0D58EA2C1EE83B00EFE3D3 /* EditBunchPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E92C1EE83B00EFE3D3 /* EditBunchPageView.swift */; };
@@ -43,13 +47,16 @@
 		CBAD45602C15841D009D4EFF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD455F2C15841D009D4EFF /* ProfileView.swift */; };
 		CBAD45692C15EBB1009D4EFF /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD45682C15EBB1009D4EFF /* Location.swift */; };
 		CBB21C982C16F273007E6AA2 /* MapRepresentableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB21C972C16F273007E6AA2 /* MapRepresentableView.swift */; };
-		CBFE3C492C1DFC15000E3351 /* ItemDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFE3C482C1DFC15000E3351 /* ItemDataSource.swift */; };
 		CBFE3C4B2C1E0022000E3351 /* BunchDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFE3C4A2C1E0022000E3351 /* BunchDetailViewModel.swift */; };
 		CBFE3C4D2C1E00BD000E3351 /* EditMemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFE3C4C2C1E00BD000E3351 /* EditMemoryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CB09A5412C27EBB900CB8485 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		CB09A5482C2B115800CB8485 /* MemoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryType.swift; sourceTree = "<group>"; };
+		CB09A54B2C2B11C300CB8485 /* AppRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRepositoryImpl.swift; sourceTree = "<group>"; };
+		CB09A54E2C2B120200CB8485 /* AppRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRepository.swift; sourceTree = "<group>"; };
+		CB09A5512C2B146700CB8485 /* AppUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUsecase.swift; sourceTree = "<group>"; };
 		CB0D58E42C1E183300EFE3D3 /* EditBunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchViewModel.swift; sourceTree = "<group>"; };
 		CB0D58E72C1EE83000EFE3D3 /* EditBunchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchContentView.swift; sourceTree = "<group>"; };
 		CB0D58E92C1EE83B00EFE3D3 /* EditBunchPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchPageView.swift; sourceTree = "<group>"; };
@@ -86,7 +93,6 @@
 		CBAD455F2C15841D009D4EFF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		CBAD45682C15EBB1009D4EFF /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		CBB21C972C16F273007E6AA2 /* MapRepresentableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepresentableView.swift; sourceTree = "<group>"; };
-		CBFE3C482C1DFC15000E3351 /* ItemDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDataSource.swift; sourceTree = "<group>"; };
 		CBFE3C4A2C1E0022000E3351 /* BunchDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchDetailViewModel.swift; sourceTree = "<group>"; };
 		CBFE3C4C2C1E00BD000E3351 /* EditMemoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,6 +115,66 @@
 				CB09A5412C27EBB900CB8485 /* SettingView.swift */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		CB09A5442C2B10A600CB8485 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				CB09A5472C2B114C00CB8485 /* Type */,
+				CB9EF8E12ABC670100FDCE12 /* Model */,
+				CB09A5502C2B143300CB8485 /* Usecase */,
+				CB09A54D2C2B11F000CB8485 /* Repository */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		CB09A5452C2B10D900CB8485 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				CB0D58ED2C21CB7200EFE3D3 /* AppViewModel.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		CB09A5462C2B113200CB8485 /* SwiftData */ = {
+			isa = PBXGroup;
+			children = (
+				CB4063B22C189B4B00654F89 /* Bunch.swift */,
+				CBA038682ABF352F00BD74CF /* Memory.swift */,
+			);
+			path = SwiftData;
+			sourceTree = "<group>";
+		};
+		CB09A5472C2B114C00CB8485 /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				CB09A5482C2B115800CB8485 /* MemoryType.swift */,
+			);
+			path = Type;
+			sourceTree = "<group>";
+		};
+		CB09A54A2C2B119C00CB8485 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				CB09A54B2C2B11C300CB8485 /* AppRepositoryImpl.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		CB09A54D2C2B11F000CB8485 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				CB09A54E2C2B120200CB8485 /* AppRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		CB09A5502C2B143300CB8485 /* Usecase */ = {
+			isa = PBXGroup;
+			children = (
+				CB09A5512C2B146700CB8485 /* AppUsecase.swift */,
+			);
+			path = Usecase;
 			sourceTree = "<group>";
 		};
 		CB0D58E62C1EE82100EFE3D3 /* Component */ = {
@@ -179,8 +245,8 @@
 			isa = PBXGroup;
 			children = (
 				CBFE3C472C1DFC0A000E3351 /* Data */,
-				CB9EF8E12ABC670100FDCE12 /* Model */,
-				CB9EF8E22ABC670E00FDCE12 /* Screens */,
+				CB09A5442C2B10A600CB8485 /* Domain */,
+				CB9EF8E22ABC670E00FDCE12 /* Presentation */,
 				CB9EF8E42ABC672B00FDCE12 /* Supports */,
 				CB96DE342ABF588900B01762 /* Resource */,
 				CB9EF8D92ABC633B00FDCE12 /* Preview Content */,
@@ -199,15 +265,13 @@
 		CB9EF8E12ABC670100FDCE12 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CB4063B22C189B4B00654F89 /* Bunch.swift */,
-				CBA038682ABF352F00BD74CF /* Memory.swift */,
 				CBAD45682C15EBB1009D4EFF /* Location.swift */,
 				CB2471002ADABBFC00EEA032 /* Place.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		CB9EF8E22ABC670E00FDCE12 /* Screens */ = {
+		CB9EF8E22ABC670E00FDCE12 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
 				CB4063B52C18A1AD00654F89 /* Common */,
@@ -220,8 +284,9 @@
 				CB4195FF2C18B800003D958C /* BunchDetail */,
 				CBABE9302ACB378500103BB0 /* EditMemory */,
 				CB4063B82C18A61200654F89 /* EditBunch */,
+				CB09A5452C2B10D900CB8485 /* Util */,
 			);
-			path = Screens;
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		CB9EF8E42ABC672B00FDCE12 /* Supports */ = {
@@ -319,8 +384,8 @@
 		CBFE3C472C1DFC0A000E3351 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				CBFE3C482C1DFC15000E3351 /* ItemDataSource.swift */,
-				CB0D58ED2C21CB7200EFE3D3 /* AppViewModel.swift */,
+				CB09A5462C2B113200CB8485 /* SwiftData */,
+				CB09A54A2C2B119C00CB8485 /* Repository */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -406,10 +471,12 @@
 				CB4063AF2C1762EB00654F89 /* EditMemoryPageView.swift in Sources */,
 				CB4063B32C189B4B00654F89 /* Bunch.swift in Sources */,
 				CBA038692ABF352F00BD74CF /* Memory.swift in Sources */,
+				CB09A5522C2B146700CB8485 /* AppUsecase.swift in Sources */,
 				CBAB7F542ACD455E00257778 /* MemoryDetailView.swift in Sources */,
 				CB0D58EE2C21CB7200EFE3D3 /* AppViewModel.swift in Sources */,
 				CB41960D2C1DF10E003D958C /* HomeViewModel.swift in Sources */,
 				CB76292C2C26898A00138186 /* EmptyBunchView.swift in Sources */,
+				CB09A54C2C2B11C300CB8485 /* AppRepositoryImpl.swift in Sources */,
 				CB0D58E82C1EE83000EFE3D3 /* EditBunchContentView.swift in Sources */,
 				CB4196092C19CF00003D958C /* UIImage+Assets.swift in Sources */,
 				CBAD455D2C158315009D4EFF /* BunchView.swift in Sources */,
@@ -420,6 +487,7 @@
 				CB0D58E52C1E183300EFE3D3 /* EditBunchViewModel.swift in Sources */,
 				CB0D58EC2C21C5A400EFE3D3 /* ProfileViewModel.swift in Sources */,
 				CBFE3C4B2C1E0022000E3351 /* BunchDetailViewModel.swift in Sources */,
+				CB09A5492C2B115800CB8485 /* MemoryType.swift in Sources */,
 				CBAD45692C15EBB1009D4EFF /* Location.swift in Sources */,
 				CB4063BC2C18A66200654F89 /* SelectMemoriesView.swift in Sources */,
 				CBAD455A2C1582A7009D4EFF /* MapView.swift in Sources */,
@@ -429,7 +497,7 @@
 				CBABE92F2ACB313C00103BB0 /* HomeView.swift in Sources */,
 				CBAB7F4F2ACD402500257778 /* ContentView.swift in Sources */,
 				CB4063B72C18A1C200654F89 /* MemoryTileView.swift in Sources */,
-				CBFE3C492C1DFC15000E3351 /* ItemDataSource.swift in Sources */,
+				CB09A54F2C2B120200CB8485 /* AppRepository.swift in Sources */,
 				CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */,
 				CB41960B2C19D19B003D958C /* Data+Extensions.swift in Sources */,
 				CB2471012ADABBFC00EEA032 /* Place.swift in Sources */,

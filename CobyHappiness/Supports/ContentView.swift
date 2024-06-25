@@ -21,22 +21,22 @@ struct ContentView: View {
         ZStack {
             NavigationStack {
                 TabView {
-                    HomeView()
+                    HomeView(viewModel: HomeViewModel())
                         .tabItem {
                             Label("홈", image: "home")
                         }
                     
-                    MapView()
+                    MapView(viewModel: MapViewModel())
                         .tabItem {
                             Label("지도", image: "map")
                         }
                     
-                    BunchView()
+                    BunchView(viewModel: BunchViewModel())
                         .tabItem {
                             Label("뭉치", image: "travel")
                         }
                     
-                    ProfileView()
+                    ProfileView(viewModel: ProfileViewModel())
                         .tabItem {
                             Label("정보", image: "person")
                         }
@@ -46,6 +46,7 @@ struct ContentView: View {
             
             if let memory = self.appModel.currentActiveItem, self.appModel.showDetailView {
                 MemoryDetailView(
+                    viewModel: MemoryDetailViewModel(),
                     memory: memory
                 )
             }
