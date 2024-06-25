@@ -49,7 +49,10 @@ struct BunchView: View {
                 self.viewModel.getBunches()
             }
         ) {
-            EditBunchPageView()
+            EditBunchView()
+        }
+        .onAppear {
+            self.viewModel.getBunches()
         }
     }
     

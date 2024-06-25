@@ -13,8 +13,7 @@
 		CB09A54F2C2B120200CB8485 /* AppRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB09A54E2C2B120200CB8485 /* AppRepository.swift */; };
 		CB09A5522C2B146700CB8485 /* AppUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB09A5512C2B146700CB8485 /* AppUsecase.swift */; };
 		CB0D58E52C1E183300EFE3D3 /* EditBunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E42C1E183300EFE3D3 /* EditBunchViewModel.swift */; };
-		CB0D58E82C1EE83000EFE3D3 /* EditBunchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E72C1EE83000EFE3D3 /* EditBunchContentView.swift */; };
-		CB0D58EA2C1EE83B00EFE3D3 /* EditBunchPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E92C1EE83B00EFE3D3 /* EditBunchPageView.swift */; };
+		CB0D58EA2C1EE83B00EFE3D3 /* EditBunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E92C1EE83B00EFE3D3 /* EditBunchView.swift */; };
 		CB0D58EC2C21C5A400EFE3D3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58EB2C21C5A400EFE3D3 /* ProfileViewModel.swift */; };
 		CB0D58EE2C21CB7200EFE3D3 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58ED2C21CB7200EFE3D3 /* AppViewModel.swift */; };
 		CB2471012ADABBFC00EEA032 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2471002ADABBFC00EEA032 /* PlaceModel.swift */; };
@@ -58,8 +57,7 @@
 		CB09A54E2C2B120200CB8485 /* AppRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRepository.swift; sourceTree = "<group>"; };
 		CB09A5512C2B146700CB8485 /* AppUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUsecase.swift; sourceTree = "<group>"; };
 		CB0D58E42C1E183300EFE3D3 /* EditBunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchViewModel.swift; sourceTree = "<group>"; };
-		CB0D58E72C1EE83000EFE3D3 /* EditBunchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchContentView.swift; sourceTree = "<group>"; };
-		CB0D58E92C1EE83B00EFE3D3 /* EditBunchPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchPageView.swift; sourceTree = "<group>"; };
+		CB0D58E92C1EE83B00EFE3D3 /* EditBunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchView.swift; sourceTree = "<group>"; };
 		CB0D58EB2C21C5A400EFE3D3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		CB0D58ED2C21CB7200EFE3D3 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		CB2471002ADABBFC00EEA032 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
@@ -181,7 +179,6 @@
 			isa = PBXGroup;
 			children = (
 				CB4063BB2C18A66200654F89 /* SelectMemoriesView.swift */,
-				CB0D58E72C1EE83000EFE3D3 /* EditBunchContentView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -200,7 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				CB0D58E62C1EE82100EFE3D3 /* Component */,
-				CB0D58E92C1EE83B00EFE3D3 /* EditBunchPageView.swift */,
+				CB0D58E92C1EE83B00EFE3D3 /* EditBunchView.swift */,
 				CB0D58E42C1E183300EFE3D3 /* EditBunchViewModel.swift */,
 			);
 			path = EditBunch;
@@ -477,7 +474,6 @@
 				CB41960D2C1DF10E003D958C /* HomeViewModel.swift in Sources */,
 				CB76292C2C26898A00138186 /* EmptyBunchView.swift in Sources */,
 				CB09A54C2C2B11C300CB8485 /* AppRepositoryImpl.swift in Sources */,
-				CB0D58E82C1EE83000EFE3D3 /* EditBunchContentView.swift in Sources */,
 				CB4196092C19CF00003D958C /* UIImage+Assets.swift in Sources */,
 				CBAD455D2C158315009D4EFF /* BunchView.swift in Sources */,
 				CB76292A2C267DF700138186 /* EmptyMemoryView.swift in Sources */,
@@ -501,7 +497,7 @@
 				CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */,
 				CB41960B2C19D19B003D958C /* Data+Extensions.swift in Sources */,
 				CB2471012ADABBFC00EEA032 /* PlaceModel.swift in Sources */,
-				CB0D58EA2C1EE83B00EFE3D3 /* EditBunchPageView.swift in Sources */,
+				CB0D58EA2C1EE83B00EFE3D3 /* EditBunchView.swift in Sources */,
 				CB09A5422C27EBB900CB8485 /* SettingView.swift in Sources */,
 				CB4063B12C1763EA00654F89 /* EditMemoryContentView.swift in Sources */,
 				CB41960F2C1DF2F7003D958C /* MapViewModel.swift in Sources */,

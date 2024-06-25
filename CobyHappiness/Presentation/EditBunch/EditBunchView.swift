@@ -1,5 +1,5 @@
 //
-//  EditBunchPageView.swift
+//  EditBunchView.swift
 //  CobyHappiness
 //
 //  Created by Coby on 6/16/24.
@@ -10,7 +10,7 @@ import SwiftData
 
 import CobyDS
 
-struct EditBunchPageView: View {
+struct EditBunchView: View {
     
     @Environment(\.dismiss) private var dismiss
     
@@ -61,6 +61,7 @@ struct EditBunchPageView: View {
         .background(Color.backgroundNormalNormal)
         .alert("뭉치 만들기", isPresented: self.$showAlert) {
             TextField(self.bunch.title, text: self.$bunch.title)
+            
             Button("확인", action: {
                 self.viewModel.saveBunch(bunch: self.bunch)
                 self.dismiss()

@@ -13,7 +13,7 @@ final class AppRepositoryImpl: AppRepository {
     private let container: ModelContainer
     
     init() {
-        self.container = try! ModelContainer(for: BunchModel.self)
+        self.container = try! ModelContainer(for: BunchModel.self, MemoryModel.self)
     }
     
     @MainActor
@@ -23,13 +23,13 @@ final class AppRepositoryImpl: AppRepository {
     }
     
     @MainActor
-    func saveMemory(memory: MemoryModel) async throws {
+    func saveMemory(memory: MemoryModel) throws {
         self.container.mainContext.insert(memory)
         return try self.container.mainContext.save()
     }
     
     @MainActor
-    func removeMemory(memory: MemoryModel) async throws {
+    func removeMemory(memory: MemoryModel) throws {
         self.container.mainContext.delete(memory)
     }
     
@@ -40,13 +40,13 @@ final class AppRepositoryImpl: AppRepository {
     }
     
     @MainActor
-    func saveBunch(bunch: BunchModel) async throws {
+    func saveBunch(bunch: BunchModel) throws {
         self.container.mainContext.insert(bunch)
         return try self.container.mainContext.save()
     }
     
     @MainActor
-    func removeBunch(bunch: BunchModel) async throws {
+    func removeBunch(bunch: BunchModel) throws {
         self.container.mainContext.delete(bunch)
     }
 }

@@ -21,7 +21,7 @@ final class BunchDetailViewModel: ObservableObject {
     func removeBunch(bunch: BunchModel) {
         Task {
             do {
-                try await self.usecase.removeBunch(bunch: bunch)
+                try self.usecase.removeBunch(bunch: bunch)
             } catch(let error) {
                 await MainActor.run { [weak self] in
                     guard let self else { return }

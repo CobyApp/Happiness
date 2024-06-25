@@ -42,7 +42,7 @@ final class EditBunchViewModel: ObservableObject {
     func saveBunch(bunch: BunchModel) {
         Task {
             do {
-                try await self.usecase.saveBunch(bunch: bunch)
+                try self.usecase.saveBunch(bunch: bunch)
             } catch(let error) {
                 await MainActor.run { [weak self] in
                     guard let self else { return }

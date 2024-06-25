@@ -21,7 +21,7 @@ final class EditMemoryViewModel: ObservableObject {
     func appendMemory(memory: MemoryModel) {
         Task {
             do {
-                try await self.usecase.saveMemory(memory: memory)
+                try self.usecase.saveMemory(memory: memory)
             } catch(let error) {
                 await MainActor.run { [weak self] in
                     guard let self else { return }

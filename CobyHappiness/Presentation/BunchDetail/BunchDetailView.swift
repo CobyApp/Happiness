@@ -80,7 +80,7 @@ struct BunchDetailView: View {
         .fullScreenCover(
             isPresented: self.$isPresented
         ) {
-            EditBunchPageView(bunch: self.bunch)
+            EditBunchView(bunch: self.bunch)
         }
     }
     
