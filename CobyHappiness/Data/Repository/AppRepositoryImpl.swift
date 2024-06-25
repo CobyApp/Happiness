@@ -13,7 +13,12 @@ final class AppRepositoryImpl: AppRepository {
     private let container: ModelContainer
     
     init() {
-        self.container = try! ModelContainer(for: BunchModel.self, MemoryModel.self)
+        do {
+            let config = ModelConfiguration(for: BunchModel.self, MemoryModel.self)
+            self.container = try ModelContainer(for: BunchModel.self, MemoryModel.self, configurations: config)
+        } catch {
+            fatalError("Failed to configure SwiftData container.")
+        }
     }
     
     @MainActor
