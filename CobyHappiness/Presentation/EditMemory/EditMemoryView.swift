@@ -17,23 +17,23 @@ struct EditMemoryView: View {
     
     @StateObject private var viewModel: EditMemoryViewModel
     
-    @State private var isDisabled: Bool = true
-    @State private var memory: MemoryModel
     @State private var selectedItems: [PhotosPickerItem] = []
+    
+    @State private var type: MemoryType = MemoryType.moment
+    @State private var date: Date = Date()
+    @State private var title: String = ""
+    @State private var note: String = ""
+    @State private var location: LocationModel? = nil
+    @State private var photos: [Data] = []
+    
+    var isDisabled: Bool {
+        self.photos.isEmpty || self.title == "" || self.note == ""
+    }
     
     init(
         viewModel: EditMemoryViewModel
     ) {
         self._viewModel = StateObject(wrappedValue: viewModel)
-        self.memory = MemoryModel()
-    }
-    
-    init(
-        viewModel: EditMemoryViewModel,
-        memory: MemoryModel
-    ) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
-        self._memory = State(wrappedValue: memory)
     }
     
     var body: some View {
@@ -56,7 +56,14 @@ struct EditMemoryView: View {
             
             Button {
                 if !self.isDisabled {
-                    self.viewModel.appendMemory(memory: self.memory)
+                    self.viewModel.appendMemory(
+                        type: self.type,
+                        date: self.date,
+                        title: self.title,
+                        note: self.note,
+                        location: self.location,
+                        photos: self.photos
+                    )
                     self.dismiss()
                 }
             } label: {
@@ -76,10 +83,12 @@ struct EditMemoryView: View {
             self.closeKeyboard()
         }
         .onAppear {
-            self.checkDisabled()
-        }
-        .onChange(of: [self.memory.title, self.memory.note]) {
-            self.checkDisabled()
+            if let memory = self.viewModel.getMemory() {
+                self.type = memory.type
+                self.title = memory.title
+                self.note = memory.note
+                self.photos = memory.photos
+            }
         }
     }
     
@@ -116,10 +125,14 @@ struct EditMemoryView: View {
                             )
                     }
                     .onChange(of: self.selectedItems) {
-                        self.setPhotos()
+                        self.viewModel.setPhotos(items: self.selectedItems) { photos, date, location in
+                            self.photos = photos
+                            self.date = date
+                            self.location = location
+                        }
                     }
                     
-                    ForEach(self.memory.photos.compactMap { UIImage(data: $0) }, id: \.self) { image in
+                    ForEach(self.photos.compactMap { UIImage(data: $0) }, id: \.self) { image in
                         ThumbnailView(image: image)
                             .frame(width: 80, height: 80)
                     }
@@ -133,77 +146,17 @@ struct EditMemoryView: View {
     func ContentView() -> some View {
         VStack(spacing: 20) {
             CBTextFieldView(
-                text: self.$memory.title,
+                text: self.$title,
                 title: "제목",
                 placeholder: "제목을 입력해주세요."
             )
             
             CBTextAreaView(
-                text: self.$memory.note,
+                text: self.$note,
                 title: "내용",
                 placeholder: "내용을 입력해주세요."
             )
         }
         .padding(.horizontal, BaseSize.horizantalPadding)
-    }
-}
- 
-extension EditMemoryView {
-    private func checkDisabled() {
-        if self.memory.photos.isEmpty || self.memory.title == "" || self.memory.note == "" {
-            self.isDisabled = true
-        } else {
-            self.isDisabled = false
-        }
-    }
-}
- 
-// MARK: Photo
-extension EditMemoryView {
-    private func setPhotos() {
-        Task {
-            self.memory.photos = []
-            
-            for item in selectedItems {
-                if let data = try? await item.loadTransferable(type: Data.self) {
-                    if let originalImage = UIImage(data: data) {
-                        if let compressedImageData = compressImage(originalImage) {
-                            self.memory.photos.append(compressedImageData)
-                        }
-                    }
-                }
-                
-                if let localID = item.itemIdentifier {
-                    let result = PHAsset.fetchAssets(withLocalIdentifiers: [localID], options: nil)
-                    
-                    if let asset = result.firstObject {
-                        if let date = asset.creationDate {
-                            self.memory.date = date
-                        }
-                            
-                        if let location = asset.location?.coordinate {
-                            self.memory.location = LocationModel(
-                                lat: location.latitude,
-                                lon: location.longitude
-                            )
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    private func compressImage(_ image: UIImage) -> Data? {
-        let newSize = CGSize(width: image.size.width * 0.3, height: image.size.height * 0.3)
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-        let compressedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        if let compressedImageData = compressedImage?.jpegData(compressionQuality: 0.3) {
-            return compressedImageData
-        } else {
-            return nil
-        }
     }
 }
