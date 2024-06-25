@@ -21,7 +21,7 @@ struct MapView: View {
     var body: some View {
         VStack(spacing: 0) {
             TopBarView(
-                leftSide: .text,
+                leftSide: .title,
                 leftTitle: "지도",
                 rightSide: .icon,
                 rightIcon: UIImage.icPlus,

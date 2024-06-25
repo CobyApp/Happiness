@@ -21,7 +21,7 @@ struct ProfileView: View {
     var body: some View {
         VStack(spacing: 0) {
             TopBarView(
-                leftSide: .text,
+                leftSide: .title,
                 leftTitle: "정보",
                 rightSide: .icon,
                 rightIcon: UIImage.icSetting,

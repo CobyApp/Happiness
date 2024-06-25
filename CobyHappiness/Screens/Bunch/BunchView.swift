@@ -23,7 +23,7 @@ struct BunchView: View {
     var body: some View {
         VStack(spacing: 0) {
             TopBarView(
-                leftSide: .text,
+                leftSide: .title,
                 leftTitle: "뭉치",
                 rightSide: .icon,
                 rightIcon: UIImage.icPlus,
