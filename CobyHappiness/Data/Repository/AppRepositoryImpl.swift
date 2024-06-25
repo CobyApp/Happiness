@@ -22,13 +22,9 @@ final class AppRepositoryImpl: AppRepository {
     }
     
     @MainActor
-    func getMemoryById(id: UUID) async throws -> MemoryModel? {
-        do {
-            let descriptor = FetchDescriptor<MemoryModel>(predicate: #Predicate { $0.id == id })
-            return try self.container.mainContext.fetch(descriptor).first
-        } catch {
-            return nil
-        }
+    func getMemoryById(id: UUID) async throws -> MemoryModel {
+        let descriptor = FetchDescriptor<MemoryModel>(predicate: #Predicate { $0.id == id })
+        return try self.container.mainContext.fetch(descriptor).first!
     }
     
     @MainActor
@@ -49,13 +45,9 @@ final class AppRepositoryImpl: AppRepository {
     }
     
     @MainActor
-    func getBunchById(id: UUID) async throws -> BunchModel? {
-        do {
-            let descriptor = FetchDescriptor<BunchModel>(predicate: #Predicate { $0.id == id })
-            return try self.container.mainContext.fetch(descriptor).first
-        } catch {
-            return nil
-        }
+    func getBunchById(id: UUID) async throws -> BunchModel {
+        let descriptor = FetchDescriptor<BunchModel>(predicate: #Predicate { $0.id == id })
+        return try self.container.mainContext.fetch(descriptor).first!
     }
     
     @MainActor

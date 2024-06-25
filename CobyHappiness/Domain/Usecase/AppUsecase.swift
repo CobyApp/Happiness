@@ -15,7 +15,7 @@ final class AppUsecase {
         self.repository = repository
     }
     
-    func getMemoryById(id: UUID) async throws -> MemoryModel? {
+    func getMemoryById(id: UUID) async throws -> MemoryModel {
         do {
             return try await self.repository.getMemoryById(id: id)
         } catch(let error) {
@@ -47,7 +47,7 @@ final class AppUsecase {
         }
     }
     
-    func getBunchById(id: UUID) async throws -> BunchModel? {
+    func getBunchById(id: UUID) async throws -> BunchModel {
         do {
             return try await self.repository.getBunchById(id: id)
         } catch(let error) {
