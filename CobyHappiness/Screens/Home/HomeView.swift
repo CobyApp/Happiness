@@ -38,8 +38,8 @@ struct HomeView: View {
     private func HomeTopBarView() -> some View {
         TopBarView(
             leftSide: .none,
-            rightSide: .icon,
-            rightIcon: UIImage.icPlus,
+            rightSide: .text,
+            rightTitle: "추억 추가",
             rightAction: {
                 self.isPresented = true
             }

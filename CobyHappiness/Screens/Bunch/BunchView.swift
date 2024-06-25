@@ -25,8 +25,8 @@ struct BunchView: View {
             TopBarView(
                 leftSide: .title,
                 leftTitle: "뭉치",
-                rightSide: .icon,
-                rightIcon: UIImage.icPlus,
+                rightSide: .text,
+                rightTitle: "뭉치 추가",
                 rightAction: {
                     self.isPresented = true
                 }

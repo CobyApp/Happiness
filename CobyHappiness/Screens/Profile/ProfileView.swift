@@ -23,8 +23,8 @@ struct ProfileView: View {
             TopBarView(
                 leftSide: .title,
                 leftTitle: "정보",
-                rightSide: .icon,
-                rightIcon: UIImage.icSetting,
+                rightSide: .text,
+                rightTitle: "설정",
                 rightAction: {
                     print("설정")
                 }

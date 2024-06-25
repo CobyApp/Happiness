@@ -23,8 +23,8 @@ struct MapView: View {
             TopBarView(
                 leftSide: .title,
                 leftTitle: "지도",
-                rightSide: .icon,
-                rightIcon: UIImage.icPlus,
+                rightSide: .text,
+                rightTitle: "추억 추가",
                 rightAction: {
                     self.isPresented = true
                 }
