@@ -15,9 +15,15 @@ struct EditBunchPageView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var selection = 0
-    @State private var bunch: Bunch = Bunch()
+    @State private var bunch: Bunch
     
     @State private var viewModel: EditBunchViewModel = EditBunchViewModel()
+    
+    init(
+        bunch: Bunch = Bunch()
+    ) {
+        self._bunch = State(wrappedValue: bunch)
+    }
     
     var body: some View {
         VStack(spacing: 0) {

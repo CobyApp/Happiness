@@ -74,6 +74,11 @@ struct BunchDetailView: View {
                 secondaryButton: .cancel(Text("취소"))
             )
         }
+        .fullScreenCover(
+            isPresented: self.$isPresented
+        ) {
+            EditBunchPageView(bunch: self.bunch)
+        }
     }
     
     @ViewBuilder

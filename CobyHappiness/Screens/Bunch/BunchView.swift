@@ -14,7 +14,6 @@ struct BunchView: View {
 
     @State private var viewModel: BunchViewModel = BunchViewModel()
     @State private var isPresented: Bool = false
-    @State private var selection: String? = nil
     
     private let columns: [GridItem] = Array(
         repeating: GridItem(.flexible(), spacing: 8),

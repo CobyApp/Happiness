@@ -71,6 +71,9 @@ struct HomeView: View {
                 .padding(.top, 8)
                 .padding(.bottom, 20)
             }
+            .refreshable {
+                self.viewModel.fetchMemories()
+            }
         }
     }
     

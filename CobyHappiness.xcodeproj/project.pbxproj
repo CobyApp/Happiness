@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB09A5422C27EBB900CB8485 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB09A5412C27EBB900CB8485 /* SettingView.swift */; };
 		CB0D58E52C1E183300EFE3D3 /* EditBunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E42C1E183300EFE3D3 /* EditBunchViewModel.swift */; };
 		CB0D58E82C1EE83000EFE3D3 /* EditBunchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E72C1EE83000EFE3D3 /* EditBunchContentView.swift */; };
 		CB0D58EA2C1EE83B00EFE3D3 /* EditBunchPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E92C1EE83B00EFE3D3 /* EditBunchPageView.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB09A5412C27EBB900CB8485 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		CB0D58E42C1E183300EFE3D3 /* EditBunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchViewModel.swift; sourceTree = "<group>"; };
 		CB0D58E72C1EE83000EFE3D3 /* EditBunchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchContentView.swift; sourceTree = "<group>"; };
 		CB0D58E92C1EE83B00EFE3D3 /* EditBunchPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchPageView.swift; sourceTree = "<group>"; };
@@ -101,6 +103,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CB09A5402C27EB1000CB8485 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				CB09A5412C27EBB900CB8485 /* SettingView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		CB0D58E62C1EE82100EFE3D3 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +215,7 @@
 				CBAD45582C15829C009D4EFF /* Map */,
 				CBAD455B2C158308009D4EFF /* Bunch */,
 				CBAD455E2C158416009D4EFF /* Profile */,
+				CB09A5402C27EB1000CB8485 /* Setting */,
 				CBAB7F522ACD455200257778 /* MemoryDetail */,
 				CB4195FF2C18B800003D958C /* BunchDetail */,
 				CBABE9302ACB378500103BB0 /* EditMemory */,
@@ -423,6 +434,7 @@
 				CB41960B2C19D19B003D958C /* Data+Extensions.swift in Sources */,
 				CB2471012ADABBFC00EEA032 /* Place.swift in Sources */,
 				CB0D58EA2C1EE83B00EFE3D3 /* EditBunchPageView.swift in Sources */,
+				CB09A5422C27EBB900CB8485 /* SettingView.swift in Sources */,
 				CB4063B12C1763EA00654F89 /* EditMemoryContentView.swift in Sources */,
 				CB41960F2C1DF2F7003D958C /* MapViewModel.swift in Sources */,
 			);
