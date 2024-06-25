@@ -18,12 +18,12 @@ struct EditMemoryContentView: View {
     @StateObject private var viewModel: EditMemoryViewModel
     
     @State private var isDisabled: Bool = true
-    @State private var memory: Memory
+    @State private var memory: MemoryModel
     
     init(
         viewModel: EditMemoryViewModel,
         selection: Binding<Int>,
-        memory: Binding<Memory>
+        memory: Binding<MemoryModel>
     ) {
         self._viewModel = StateObject(wrappedValue: viewModel)
         self._selection = selection
@@ -33,7 +33,7 @@ struct EditMemoryContentView: View {
     init(
         viewModel: EditMemoryViewModel,
         selection: Binding<Int> = .constant(0),
-        memory: Memory
+        memory: MemoryModel
     ) {
         self._viewModel = StateObject(wrappedValue: viewModel)
         self._selection = selection

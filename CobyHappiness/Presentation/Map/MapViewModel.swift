@@ -12,7 +12,7 @@ final class MapViewModel: ObservableObject {
     @Published var isError: Bool = false
     @Published var errorMessage: String = ""
     
-    @Published var memories: [Memory] = []
+    @Published var memories: [MemoryModel] = []
     
     private let usecase: AppUsecase
     

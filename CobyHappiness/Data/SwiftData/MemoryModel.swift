@@ -1,5 +1,5 @@
 //
-//  Memory.swift
+//  MemoryModel.swift
 //  CobyHappiness
 //
 //  Created by COBY_PRO on 2023/09/24.
@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @Model
-final class Memory {
+final class MemoryModel {
     
     @Attribute(.unique)
     var id: UUID
@@ -17,9 +17,9 @@ final class Memory {
     var type: MemoryType
     var title: String
     var note: String
-    var location: Location?
+    var location: LocationModel?
     var photos: [Data]
-    var bunches: [Bunch]
+    var bunches: [BunchModel]
 
     init(
         id: UUID = UUID(),
@@ -27,9 +27,9 @@ final class Memory {
         type: MemoryType = .moment,
         title: String = "",
         note: String = "",
-        location: Location? = nil,
+        location: LocationModel? = nil,
         photos: [Data] = [],
-        bunches: [Bunch] = []
+        bunches: [BunchModel] = []
     ) {
         self.id = id
         self.date = date

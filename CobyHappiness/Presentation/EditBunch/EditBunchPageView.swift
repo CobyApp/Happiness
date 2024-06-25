@@ -15,12 +15,12 @@ struct EditBunchPageView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var showAlert = false
-    @State private var bunch: Bunch
+    @State private var bunch: BunchModel
     
     @State private var viewModel: EditBunchViewModel = EditBunchViewModel()
     
     init(
-        bunch: Bunch = Bunch()
+        bunch: BunchModel = BunchModel()
     ) {
         self._bunch = State(wrappedValue: bunch)
     }

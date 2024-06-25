@@ -18,7 +18,7 @@ final class BunchDetailViewModel: ObservableObject {
         self.usecase = usecase
     }
     
-    func removeBunch(bunch: Bunch) {
+    func removeBunch(bunch: BunchModel) {
         Task {
             do {
                 try await self.usecase.removeBunch(bunch: bunch)

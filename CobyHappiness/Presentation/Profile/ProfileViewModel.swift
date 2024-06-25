@@ -12,7 +12,7 @@ final class ProfileViewModel: ObservableObject {
     @Published var isError: Bool = false
     @Published var errorMessage: String = ""
     
-    @Published var memories: [Memory] = []
+    @Published var memories: [MemoryModel] = []
     
     private let usecase: AppUsecase
     
@@ -39,7 +39,7 @@ final class ProfileViewModel: ObservableObject {
         }
     }
     
-    func getFilteredMemory(_ type: MemoryType?) -> [Memory] {
+    func getFilteredMemory(_ type: MemoryType?) -> [MemoryModel] {
         if let type = type {
             self.memories.filter { $0.type == type }
         } else {

@@ -12,13 +12,13 @@ import CobyDS
 
 struct SelectMemoriesView: View {
     
-    @Binding var selectedMemories: [Memory]
+    @Binding var selectedMemories: [MemoryModel]
     
-    private let memories: [Memory]
+    private let memories: [MemoryModel]
     
     init(
-        selectedMemories: Binding<[Memory]>,
-        memories: [Memory]
+        selectedMemories: Binding<[MemoryModel]>,
+        memories: [MemoryModel]
     ) {
         self._selectedMemories = selectedMemories
         self.memories = memories

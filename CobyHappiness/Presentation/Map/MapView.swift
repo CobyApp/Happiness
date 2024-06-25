@@ -17,7 +17,7 @@ struct MapView: View {
     @StateObject private var viewModel: MapViewModel
     
     @State private var isPresented: Bool = false
-    @State private var filteredMemories: [Memory] = []
+    @State private var filteredMemories: [MemoryModel] = []
     
     init(viewModel: MapViewModel) {
         self._viewModel = StateObject(wrappedValue: viewModel)

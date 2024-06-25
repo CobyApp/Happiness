@@ -15,7 +15,7 @@ final class AppUsecase {
         self.repository = repository
     }
     
-    func getMemories() async throws -> [Memory] {
+    func getMemories() async throws -> [MemoryModel] {
         do {
             return try await self.repository.getMemories()
         } catch(let error) {
@@ -23,7 +23,7 @@ final class AppUsecase {
         }
     }
     
-    func saveMemory(memory: Memory) async throws {
+    func saveMemory(memory: MemoryModel) async throws {
         do {
             return try await self.repository.saveMemory(memory: memory)
         } catch(let error) {
@@ -31,7 +31,7 @@ final class AppUsecase {
         }
     }
     
-    func removeMemory(memory: Memory) async throws {
+    func removeMemory(memory: MemoryModel) async throws {
         do {
             return try await self.repository.removeMemory(memory: memory)
         } catch(let error) {
@@ -39,7 +39,7 @@ final class AppUsecase {
         }
     }
     
-    func getBunches() async throws -> [Bunch] {
+    func getBunches() async throws -> [BunchModel] {
         do {
             return try await self.repository.getBunches()
         } catch(let error) {
@@ -47,7 +47,7 @@ final class AppUsecase {
         }
     }
     
-    func saveBunch(bunch: Bunch) async throws {
+    func saveBunch(bunch: BunchModel) async throws {
         do {
             return try await self.repository.saveBunch(bunch: bunch)
         } catch(let error) {
@@ -55,7 +55,7 @@ final class AppUsecase {
         }
     }
     
-    func removeBunch(bunch: Bunch) async throws {
+    func removeBunch(bunch: BunchModel) async throws {
         do {
             return try await self.repository.removeBunch(bunch: bunch)
         } catch(let error) {

@@ -12,7 +12,7 @@ final class BunchViewModel: ObservableObject {
     @Published var isError: Bool = false
     @Published var errorMessage: String = ""
     
-    @Published var bunches: [Bunch] = []
+    @Published var bunches: [BunchModel] = []
     
     private let usecase: AppUsecase
     

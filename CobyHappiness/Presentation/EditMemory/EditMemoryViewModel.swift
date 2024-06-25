@@ -18,7 +18,7 @@ final class EditMemoryViewModel: ObservableObject {
         self.usecase = usecase
     }
     
-    func appendMemory(memory: Memory) {
+    func appendMemory(memory: MemoryModel) {
         Task {
             do {
                 try await self.usecase.saveMemory(memory: memory)

@@ -9,5 +9,5 @@ import SwiftUI
 
 class AppViewModel: ObservableObject {
     @Published var showDetailView: Bool = false
-    @Published var currentActiveItem: Memory? = nil
+    @Published var currentActiveItem: MemoryModel? = nil
 }

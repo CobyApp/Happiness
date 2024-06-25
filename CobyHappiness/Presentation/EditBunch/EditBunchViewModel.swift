@@ -12,7 +12,7 @@ final class EditBunchViewModel: ObservableObject {
     @Published var isError: Bool = false
     @Published var errorMessage: String = ""
     
-    @Published var memories: [Memory] = []
+    @Published var memories: [MemoryModel] = []
     
     private let usecase: AppUsecase
     
@@ -39,7 +39,7 @@ final class EditBunchViewModel: ObservableObject {
         }
     }
     
-    func saveBunch(bunch: Bunch) {
+    func saveBunch(bunch: BunchModel) {
         Task {
             do {
                 try await self.usecase.saveBunch(bunch: bunch)

@@ -21,11 +21,11 @@ struct BunchDetailView: View {
     @State private var showingAlert = false
     @State private var isPresented: Bool = false
     
-    private var bunch: Bunch
+    private var bunch: BunchModel
     
     init(
         viewModel: BunchDetailViewModel,
-        bunch: Bunch
+        bunch: BunchModel
     ) {
         self._viewModel = StateObject(wrappedValue: viewModel)
         self.bunch = bunch

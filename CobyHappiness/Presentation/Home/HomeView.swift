@@ -80,7 +80,7 @@ struct HomeView: View {
     }
     
     @ViewBuilder
-    private func MemoryThumbnailView(for memory: Memory) -> some View {
+    private func MemoryThumbnailView(for memory: MemoryModel) -> some View {
         ThumbnailCardView(
             image: memory.photos.first?.image,
             title: memory.title,

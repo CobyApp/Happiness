@@ -24,11 +24,11 @@ struct MemoryDetailView: View {
     
     @State private var photos = [UIImage]()
     
-    private var memory: Memory
+    private var memory: MemoryModel
     
     init(
         viewModel: MemoryDetailViewModel,
-        memory: Memory
+        memory: MemoryModel
     ) {
         self._viewModel = StateObject(wrappedValue: viewModel)
         self._photos = State(wrappedValue: memory.photos.compactMap { $0.image })

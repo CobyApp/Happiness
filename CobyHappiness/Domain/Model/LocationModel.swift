@@ -1,5 +1,5 @@
 //
-//  Location.swift
+//  LocationModel.swift
 //  CobyHappiness
 //
 //  Created by Coby on 6/9/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct Location: Codable {
+struct LocationModel: Codable {
     var lat: Double
     var lon: Double
     

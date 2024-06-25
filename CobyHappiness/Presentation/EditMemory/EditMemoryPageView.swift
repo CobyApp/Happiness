@@ -15,7 +15,7 @@ struct EditMemoryPageView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var selection: Int = 0
-    @State private var memory: Memory = Memory()
+    @State private var memory: MemoryModel = MemoryModel()
     
     var body: some View {
         TabView(selection: self.$selection) {
@@ -48,7 +48,7 @@ extension EditMemoryPageView {
         self.memory.date = imagesWithMetadata.map { $0.1 ?? .now }.first ?? .now
         self.memory.location = imagesWithMetadata.map {
             if let coordinate = $0.2?.coordinate {
-                Location(lat: coordinate.latitude, lon: coordinate.longitude)
+                LocationModel(lat: coordinate.latitude, lon: coordinate.longitude)
             } else {
                 nil
             }

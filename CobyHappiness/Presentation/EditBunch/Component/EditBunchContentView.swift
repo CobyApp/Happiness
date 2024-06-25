@@ -12,7 +12,7 @@ import CobyDS
 struct EditBunchContentView: View {
     
     @Binding var selection: Int
-    @Binding var bunch: Bunch
+    @Binding var bunch: BunchModel
     
     var body: some View {
         VStack {
