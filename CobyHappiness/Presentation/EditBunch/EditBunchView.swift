@@ -17,7 +17,7 @@ struct EditBunchView: View {
     @State private var showAlert = false
     @State private var bunch: BunchModel
     
-    @State private var viewModel: EditBunchViewModel = EditBunchViewModel()
+    @StateObject private var viewModel: EditBunchViewModel = EditBunchViewModel()
     
     init(
         bunch: BunchModel = BunchModel()

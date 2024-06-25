@@ -9,8 +9,8 @@ import Foundation
 
 final class BunchDetailViewModel: ObservableObject {
     
-    @Published var isError: Bool = false
-    @Published var errorMessage: String = ""
+    @Published private(set) var isError: Bool = false
+    @Published private(set) var errorMessage: String = ""
     
     private let usecase: AppUsecase
     
@@ -18,16 +18,18 @@ final class BunchDetailViewModel: ObservableObject {
         self.usecase = usecase
     }
     
+    @MainActor
+    func showErrorMessage(_ message: String) async {
+        self.isError = true
+        self.errorMessage = message
+    }
+    
     func removeBunch(bunch: BunchModel) {
         Task {
             do {
                 try self.usecase.removeBunch(bunch: bunch)
             } catch(let error) {
-                await MainActor.run { [weak self] in
-                    guard let self else { return }
-                    self.isError = true
-                    self.errorMessage = error.localizedDescription
-                }
+                await self.showErrorMessage(error.localizedDescription)
             }
         }
     }

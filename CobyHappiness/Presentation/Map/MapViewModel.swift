@@ -9,16 +9,22 @@ import Foundation
 
 final class MapViewModel: ObservableObject {
     
-    @Published var isError: Bool = false
-    @Published var errorMessage: String = ""
+    @Published private(set) var isError: Bool = false
+    @Published private(set) var errorMessage: String = ""
     
-    @Published var memories: [MemoryModel] = []
+    @Published private(set) var memories: [MemoryModel] = []
     
     private let usecase: AppUsecase
     
     init(usecase: AppUsecase = AppUsecase(AppRepositoryImpl())) {
         self.usecase = usecase
         self.getMemories()
+    }
+    
+    @MainActor
+    func showErrorMessage(_ message: String) async {
+        self.isError = true
+        self.errorMessage = message
     }
     
     func getMemories() {
@@ -30,11 +36,7 @@ final class MapViewModel: ObservableObject {
                     self.memories = memories
                 }
             } catch(let error) {
-                await MainActor.run { [weak self] in
-                    guard let self else { return }
-                    self.isError = true
-                    self.errorMessage = error.localizedDescription
-                }
+                await self.showErrorMessage(error.localizedDescription)
             }
         }
     }

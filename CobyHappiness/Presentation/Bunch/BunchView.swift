@@ -40,9 +40,6 @@ struct BunchView: View {
             BunchGridView()
         }
         .background(Color.backgroundNormalNormal)
-        .navigationDestination(for: BunchModel.self) { bunch in
-            BunchDetailView(viewModel: BunchDetailViewModel(), bunch: bunch).navigationBarHidden(true)
-        }
         .fullScreenCover(
             isPresented: self.$isPresented,
             onDismiss: {
@@ -79,6 +76,9 @@ struct BunchView: View {
                 .padding(.horizontal, BaseSize.horizantalPadding)
                 .padding(.top, 8)
                 .padding(.bottom, 20)
+            }
+            .navigationDestination(for: BunchModel.self) { bunch in
+                BunchDetailView(viewModel: BunchDetailViewModel(), bunch: bunch).navigationBarHidden(true)
             }
         }
     }
