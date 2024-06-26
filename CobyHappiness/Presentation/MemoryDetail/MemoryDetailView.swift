@@ -6,15 +6,15 @@
 //
 
 import SwiftUI
-import SwiftData
 
 import CobyDS
+import ComposableArchitecture
 
 struct MemoryDetailView: View {
     
     @EnvironmentObject private var appModel: AppViewModel
     
-    @StateObject private var viewModel: MemoryDetailViewModel
+    private let store: StoreOf<MemoryDetailStore>
     
     @State private var scale: CGFloat = 1
     @State private var isDown: Bool = false
@@ -25,63 +25,63 @@ struct MemoryDetailView: View {
     @State private var memory: MemoryModel = MemoryModel()
     @State private var photos = [UIImage]()
     
-    init(
-        viewModel: MemoryDetailViewModel
-    ) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
+    init(store: StoreOf<MemoryDetailStore>) {
+        self.store = store
     }
     
     var body: some View {
-        CBScaleScrollView(
-            isPresented: self.$appModel.showDetailView,
-            scale: self.$scale,
-            isDown: self.$isDown
-        ) {
-            VStack(spacing: 20) {
-                self.PhotoView()
-                self.ContentView()
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            CBScaleScrollView(
+                isPresented: self.$appModel.showDetailView,
+                scale: self.$scale,
+                isDown: self.$isDown
+            ) {
+                VStack(spacing: 20) {
+                    self.PhotoView()
+                    self.ContentView()
+                }
             }
-        }
-        .overlay(alignment: .top, content: DetailHeaderView)
-        .background(Color.backgroundNormalNormal)
-        .clipShape(RoundedRectangle(cornerRadius: scale == 1 ? 0 : 30))
-        .scaleEffect(self.scale)
-        .ignoresSafeArea()
-        .actionSheet(isPresented: self.$showingSheet) {
-            ActionSheet(
-                title: Text("원하는 옵션을 선택해주세요."),
-                message: nil,
-                buttons: [
-                    .default(Text("편집")) {
-                        self.isPresented = true
-                    },
-                    .destructive(Text("삭제")) {
-                        self.showingAlert = true
-                    },
-                    .cancel(Text("취소"))
-                ]
-            )
-        }
-        .alert(isPresented: self.$showingAlert) {
-            Alert(
-                title: Text("추억을 삭제하시겠습니까?"),
-                message: nil,
-                primaryButton: .destructive(
-                    Text("삭제"),
-                    action: {
-                        self.viewModel.removeMemory(memory: self.memory)
-                        self.appModel.showDetailView = false
-                    }
-                ),
-                secondaryButton: .cancel(Text("취소"))
-            )
-        }
-        .fullScreenCover(isPresented: self.$isPresented) {
-            EditMemoryView(viewModel: EditMemoryViewModel(memory: self.memory))
-        }
-        .onAppear {
-            self.memory = self.viewModel.memory
-            self.photos = self.viewModel.memory.photos.compactMap { $0.image }
+            .overlay(alignment: .top, content: DetailHeaderView)
+            .background(Color.backgroundNormalNormal)
+            .clipShape(RoundedRectangle(cornerRadius: scale == 1 ? 0 : 30))
+            .scaleEffect(self.scale)
+            .ignoresSafeArea()
+            .actionSheet(isPresented: self.$showingSheet) {
+                ActionSheet(
+                    title: Text("원하는 옵션을 선택해주세요."),
+                    message: nil,
+                    buttons: [
+                        .default(Text("편집")) {
+                            self.isPresented = true
+                        },
+                        .destructive(Text("삭제")) {
+                            self.showingAlert = true
+                        },
+                        .cancel(Text("취소"))
+                    ]
+                )
+            }
+            .alert(isPresented: self.$showingAlert) {
+                Alert(
+                    title: Text("추억을 삭제하시겠습니까?"),
+                    message: nil,
+                    primaryButton: .destructive(
+                        Text("삭제"),
+                        action: {
+//                            self.viewModel.removeMemory(memory: self.memory)
+//                            self.appModel.showDetailView = false
+                        }
+                    ),
+                    secondaryButton: .cancel(Text("취소"))
+                )
+            }
+            .fullScreenCover(isPresented: self.$isPresented) {
+                EditMemoryView(viewModel: EditMemoryViewModel(memory: self.memory))
+            }
+            .onAppear {
+//                self.memory = self.viewModel.memory
+//                self.photos = self.viewModel.memory.photos.compactMap { $0.image }
+            }
         }
     }
     

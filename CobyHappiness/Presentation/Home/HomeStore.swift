@@ -12,7 +12,7 @@ import ComposableArchitecture
 struct HomeStore: Reducer {
     
     struct State: Equatable {
-        @BindingState var showingEditMemoryView = false
+        @BindingState var showingEditMemoryView: Bool = false
         
         var memories: [MemoryModel] = []
         var appModel: AppViewModel = .init()

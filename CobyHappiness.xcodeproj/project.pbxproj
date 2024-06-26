@@ -33,6 +33,8 @@
 		CB8836AE2C2BE6B10037CEC7 /* MemoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8836AD2C2BE6B10037CEC7 /* MemoryModel.swift */; };
 		CB8836B12C2BE7B90037CEC7 /* BunchMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8836B02C2BE7B90037CEC7 /* BunchMapper.swift */; };
 		CB8836B32C2BE80A0037CEC7 /* MemoryMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8836B22C2BE80A0037CEC7 /* MemoryMapper.swift */; };
+		CB8836B52C2BF6FE0037CEC7 /* MemoryDetailClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8836B42C2BF6FE0037CEC7 /* MemoryDetailClient.swift */; };
+		CB8836B72C2BF76E0037CEC7 /* MemoryDetailStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8836B62C2BF76D0037CEC7 /* MemoryDetailStore.swift */; };
 		CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */; };
 		CB9EF8DB2ABC633B00FDCE12 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF8DA2ABC633B00FDCE12 /* Preview Assets.xcassets */; };
 		CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */; };
@@ -81,6 +83,8 @@
 		CB8836AD2C2BE6B10037CEC7 /* MemoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryModel.swift; sourceTree = "<group>"; };
 		CB8836B02C2BE7B90037CEC7 /* BunchMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchMapper.swift; sourceTree = "<group>"; };
 		CB8836B22C2BE80A0037CEC7 /* MemoryMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryMapper.swift; sourceTree = "<group>"; };
+		CB8836B42C2BF6FE0037CEC7 /* MemoryDetailClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDetailClient.swift; sourceTree = "<group>"; };
+		CB8836B62C2BF76D0037CEC7 /* MemoryDetailStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDetailStore.swift; sourceTree = "<group>"; };
 		CB96DE382ABF597600B01762 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB9EF8D02ABC633A00FDCE12 /* CobyHappiness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CobyHappiness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CobyHappinessApp.swift; sourceTree = "<group>"; };
@@ -328,6 +332,8 @@
 			isa = PBXGroup;
 			children = (
 				CBAB7F532ACD455E00257778 /* MemoryDetailView.swift */,
+				CB8836B62C2BF76D0037CEC7 /* MemoryDetailStore.swift */,
+				CB8836B42C2BF6FE0037CEC7 /* MemoryDetailClient.swift */,
 				CB4196142C1DF821003D958C /* MemoryDetailViewModel.swift */,
 			);
 			path = MemoryDetail;
@@ -337,8 +343,8 @@
 			isa = PBXGroup;
 			children = (
 				CBABE92E2ACB313C00103BB0 /* HomeView.swift */,
-				CBC3A4132C2BE5F300B62F82 /* HomeClient.swift */,
 				CBC3A4152C2BE5F900B62F82 /* HomeStore.swift */,
+				CBC3A4132C2BE5F300B62F82 /* HomeClient.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -481,6 +487,7 @@
 				CBB21C982C16F273007E6AA2 /* MapRepresentableView.swift in Sources */,
 				CB4063B32C189B4B00654F89 /* Bunch.swift in Sources */,
 				CBA038692ABF352F00BD74CF /* Memory.swift in Sources */,
+				CB8836B72C2BF76E0037CEC7 /* MemoryDetailStore.swift in Sources */,
 				CB09A5522C2B146700CB8485 /* AppUsecase.swift in Sources */,
 				CBAB7F542ACD455E00257778 /* MemoryDetailView.swift in Sources */,
 				CB0D58EE2C21CB7200EFE3D3 /* AppViewModel.swift in Sources */,
@@ -514,6 +521,7 @@
 				CBC3A4142C2BE5F300B62F82 /* HomeClient.swift in Sources */,
 				CB0D58EA2C1EE83B00EFE3D3 /* EditBunchView.swift in Sources */,
 				CB09A5422C27EBB900CB8485 /* SettingView.swift in Sources */,
+				CB8836B52C2BF6FE0037CEC7 /* MemoryDetailClient.swift in Sources */,
 				CB8836B32C2BE80A0037CEC7 /* MemoryMapper.swift in Sources */,
 				CB4063B12C1763EA00654F89 /* EditMemoryView.swift in Sources */,
 				CB41960F2C1DF2F7003D958C /* MapViewModel.swift in Sources */,
