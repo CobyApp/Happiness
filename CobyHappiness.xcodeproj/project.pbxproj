@@ -24,7 +24,6 @@
 		CB4196012C18B83E003D958C /* BunchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4196002C18B83E003D958C /* BunchDetailView.swift */; };
 		CB4196092C19CF00003D958C /* UIImage+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4196082C19CF00003D958C /* UIImage+Assets.swift */; };
 		CB41960B2C19D19B003D958C /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB41960A2C19D19B003D958C /* Data+Extensions.swift */; };
-		CB41960D2C1DF10E003D958C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB41960C2C1DF10E003D958C /* HomeViewModel.swift */; };
 		CB41960F2C1DF2F7003D958C /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB41960E2C1DF2F7003D958C /* MapViewModel.swift */; };
 		CB4196112C1DF685003D958C /* BunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4196102C1DF685003D958C /* BunchViewModel.swift */; };
 		CB4196152C1DF821003D958C /* MemoryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4196142C1DF821003D958C /* MemoryDetailViewModel.swift */; };
@@ -73,7 +72,6 @@
 		CB4196002C18B83E003D958C /* BunchDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchDetailView.swift; sourceTree = "<group>"; };
 		CB4196082C19CF00003D958C /* UIImage+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Assets.swift"; sourceTree = "<group>"; };
 		CB41960A2C19D19B003D958C /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
-		CB41960C2C1DF10E003D958C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		CB41960E2C1DF2F7003D958C /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		CB4196102C1DF685003D958C /* BunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchViewModel.swift; sourceTree = "<group>"; };
 		CB4196142C1DF821003D958C /* MemoryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDetailViewModel.swift; sourceTree = "<group>"; };
@@ -341,7 +339,6 @@
 				CBABE92E2ACB313C00103BB0 /* HomeView.swift */,
 				CBC3A4132C2BE5F300B62F82 /* HomeClient.swift */,
 				CBC3A4152C2BE5F900B62F82 /* HomeStore.swift */,
-				CB41960C2C1DF10E003D958C /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -487,7 +484,6 @@
 				CB09A5522C2B146700CB8485 /* AppUsecase.swift in Sources */,
 				CBAB7F542ACD455E00257778 /* MemoryDetailView.swift in Sources */,
 				CB0D58EE2C21CB7200EFE3D3 /* AppViewModel.swift in Sources */,
-				CB41960D2C1DF10E003D958C /* HomeViewModel.swift in Sources */,
 				CB76292C2C26898A00138186 /* EmptyBunchView.swift in Sources */,
 				CB09A54C2C2B11C300CB8485 /* AppRepositoryImpl.swift in Sources */,
 				CB4196092C19CF00003D958C /* UIImage+Assets.swift in Sources */,

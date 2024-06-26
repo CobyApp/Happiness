@@ -9,44 +9,48 @@ import SwiftUI
 import SwiftData
 
 import CobyDS
+import ComposableArchitecture
 
 struct HomeView: View {
     
     @EnvironmentObject private var appModel: AppViewModel
+
+    private let store: StoreOf<HomeStore>
     
-    @StateObject private var viewModel: HomeViewModel
-    
-    @State private var isPresented: Bool = false
-    
-    init(viewModel: HomeViewModel) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
+    init(store: StoreOf<HomeStore>) {
+        self.store = store
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            self.HomeTopBarView()
-            
-            self.MemoryListView()
-        }
-        .background(Color.backgroundNormalNormal)
-        .fullScreenCover(
-            isPresented: self.$isPresented,
-            onDismiss: {
-                self.viewModel.getMemories()
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
+            VStack(spacing: 0) {
+                self.HomeTopBarView(viewStore: viewStore)
+                
+                self.MemoryListView(viewStore: viewStore)
             }
-        ) {
-            EditMemoryView(viewModel: EditMemoryViewModel())
+            .background(Color.backgroundNormalNormal)
+            .fullScreenCover(
+                isPresented: viewStore.$showingEditMemoryView,
+                onDismiss: {
+                    viewStore.send(.getMemories)
+                }
+            ) {
+                EditMemoryView(viewModel: EditMemoryViewModel())
+            }
+            .onAppear {
+                viewStore.send(.onAppear(self.appModel))
+            }
         }
     }
     
     @ViewBuilder
-    private func HomeTopBarView() -> some View {
+    private func HomeTopBarView(viewStore: ViewStore<HomeStore.State, HomeStore.Action>) -> some View {
         TopBarView(
             leftSide: .none,
             rightSide: .text,
             rightTitle: "추억 추가",
             rightAction: {
-                self.isPresented = true
+                viewStore.send(.showEditMemory)
             }
         )
         .overlay(alignment: .leading) {
@@ -61,16 +65,21 @@ struct HomeView: View {
     }
     
     @ViewBuilder
-    private func MemoryListView() -> some View {
-        if self.viewModel.memories.isEmpty {
+    private func MemoryListView(viewStore: ViewStore<HomeStore.State, HomeStore.Action>) -> some View {
+        if viewStore.memories.isEmpty {
             EmptyMemoryView {
-                self.isPresented = true
+                viewStore.send(.showEditMemory)
             }
         } else {
             ScrollView {
                 LazyVStack(spacing: BaseSize.cellVerticalSpacing) {
-                    ForEach(self.viewModel.memories) { memory in
-                        self.MemoryThumbnailView(for: memory)
+                    ForEach(viewStore.memories) { memory in
+                        self.MemoryThumbnailView(
+                            memory: memory
+                        )
+                        .onTapGesture {
+                            viewStore.send(.showMemoryDetail(memory))
+                        }
                     }
                 }
                 .padding(.top, 8)
@@ -80,7 +89,7 @@ struct HomeView: View {
     }
     
     @ViewBuilder
-    private func MemoryThumbnailView(for memory: MemoryModel) -> some View {
+    private func MemoryThumbnailView(memory: MemoryModel) -> some View {
         ThumbnailCardView(
             image: memory.photos.first?.image,
             title: memory.title,
@@ -89,9 +98,5 @@ struct HomeView: View {
         )
         .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
         .frame(maxWidth: .infinity)
-        .onTapGesture {
-            self.appModel.currentActiveItem = memory
-            self.appModel.showDetailView = true
-        }
     }
 }

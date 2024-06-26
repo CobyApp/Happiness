@@ -10,7 +10,7 @@ import Foundation
 import ComposableArchitecture
 
 struct HomeClient {
-    var memories: @Sendable ([MemoryModel]) async throws -> [MemoryModel]
+    var memories: @Sendable () async throws -> [MemoryModel]
 }
 
 extension DependencyValues {
@@ -22,7 +22,7 @@ extension DependencyValues {
 
 extension HomeClient: DependencyKey {
     static let liveValue = HomeClient(
-        memories: { _ in
+        memories: {
             do {
                 return try await AppUsecase(AppRepositoryImpl()).getMemories()
             } catch(let error) {
@@ -34,7 +34,7 @@ extension HomeClient: DependencyKey {
 
 extension HomeClient: TestDependencyKey {
     static let previewValue = Self(
-        memories: { _ in .init() }
+        memories: { .init() }
     )
 
     static let testValue = Self(

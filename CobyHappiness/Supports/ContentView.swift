@@ -8,6 +8,7 @@
 import SwiftUI
 
 import CobyDS
+import ComposableArchitecture
 
 struct ContentView: View {
     
@@ -21,10 +22,12 @@ struct ContentView: View {
         ZStack {
             NavigationStack {
                 TabView {
-                    HomeView(viewModel: HomeViewModel())
-                        .tabItem {
-                            Label("홈", image: "home")
-                        }
+                    HomeView(store: Store(initialState: HomeStore.State()) {
+                        HomeStore()
+                    })
+                    .tabItem {
+                        Label("홈", image: "home")
+                    }
                     
                     MapView(viewModel: MapViewModel())
                         .tabItem {
