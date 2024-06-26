@@ -11,6 +11,7 @@ import ComposableArchitecture
 
 struct MemoryDetailClient {
     var memory: @Sendable (UUID) async throws -> MemoryModel
+    var removeMemory: @Sendable (MemoryModel) async throws -> ()
 }
 
 extension DependencyValues {
@@ -28,16 +29,25 @@ extension MemoryDetailClient: DependencyKey {
             } catch(let error) {
                 throw error
             }
+        },
+        removeMemory: { memory in
+            do {
+                return try await AppUsecase(AppRepositoryImpl()).removeMemory(memory: memory)
+            } catch(let error) {
+                throw error
+            }
         }
     )
 }
 
 extension MemoryDetailClient: TestDependencyKey {
     static let previewValue = Self(
-        memory: { _ in .init() }
+        memory: { _ in .init() },
+        removeMemory: { _ in }
     )
 
     static let testValue = Self(
-        memory: unimplemented("\(Self.self)")
+        memory: unimplemented("\(Self.self)"),
+        removeMemory: unimplemented("\(Self.self)")
     )
 }

@@ -67,7 +67,7 @@ struct MemoryDetailView: View {
                     primaryButton: .destructive(
                         Text("삭제"),
                         action: {
-//                            viewStore.removeMemory(memory: self.memory)
+                            viewStore.send(.removeMemory(viewStore.memory ?? .init()))
                             viewStore.send(.closeMemoryDetail)
                         }
                     ),
