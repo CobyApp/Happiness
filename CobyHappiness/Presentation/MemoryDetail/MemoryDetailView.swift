@@ -14,16 +14,10 @@ struct MemoryDetailView: View {
     
     @EnvironmentObject private var appModel: AppViewModel
     
-    private let store: StoreOf<MemoryDetailStore>
-    
     @State private var scale: CGFloat = 1
     @State private var isDown: Bool = false
-    @State private var showingSheet = false
-    @State private var showingAlert = false
-    @State private var isPresented: Bool = false
     
-    @State private var memory: MemoryModel = MemoryModel()
-    @State private var photos = [UIImage]()
+    private let store: StoreOf<MemoryDetailStore>
     
     init(store: StoreOf<MemoryDetailStore>) {
         self.store = store
@@ -37,59 +31,63 @@ struct MemoryDetailView: View {
                 isDown: self.$isDown
             ) {
                 VStack(spacing: 20) {
-                    self.PhotoView()
-                    self.ContentView()
+                    self.PhotoView(photos: viewStore.photos)
+                    self.ContentView(memory: viewStore.memory ?? .init())
                 }
             }
-            .overlay(alignment: .top, content: DetailHeaderView)
+            .overlay(
+                alignment: .top,
+                content: {
+                    DetailHeaderView(viewStore: viewStore)
+                }
+            )
             .background(Color.backgroundNormalNormal)
             .clipShape(RoundedRectangle(cornerRadius: scale == 1 ? 0 : 30))
             .scaleEffect(self.scale)
             .ignoresSafeArea()
-            .actionSheet(isPresented: self.$showingSheet) {
+            .actionSheet(isPresented: viewStore.$showingSheet) {
                 ActionSheet(
                     title: Text("원하는 옵션을 선택해주세요."),
                     message: nil,
                     buttons: [
                         .default(Text("편집")) {
-                            self.isPresented = true
+                            viewStore.send(.showEditMemory)
                         },
                         .destructive(Text("삭제")) {
-                            self.showingAlert = true
+                            viewStore.send(.showDeleteAlert)
                         },
                         .cancel(Text("취소"))
                     ]
                 )
             }
-            .alert(isPresented: self.$showingAlert) {
+            .alert(isPresented: viewStore.$showingAlert) {
                 Alert(
                     title: Text("추억을 삭제하시겠습니까?"),
                     message: nil,
                     primaryButton: .destructive(
                         Text("삭제"),
                         action: {
-//                            self.viewModel.removeMemory(memory: self.memory)
-//                            self.appModel.showDetailView = false
+//                            viewStore.removeMemory(memory: self.memory)
+                            viewStore.send(.closeMemoryDetail)
                         }
                     ),
                     secondaryButton: .cancel(Text("취소"))
                 )
             }
-            .fullScreenCover(isPresented: self.$isPresented) {
-                EditMemoryView(viewModel: EditMemoryViewModel(memory: self.memory))
+            .fullScreenCover(isPresented: viewStore.$showingEditMemoryView) {
+                EditMemoryView(viewModel: EditMemoryViewModel(memory: viewStore.memory))
             }
             .onAppear {
-//                self.memory = self.viewModel.memory
-//                self.photos = self.viewModel.memory.photos.compactMap { $0.image }
+                viewStore.send(.onAppear(self.appModel))
             }
         }
     }
     
     @ViewBuilder
-    func DetailHeaderView() -> some View {
+    func DetailHeaderView(viewStore: ViewStore<MemoryDetailStore.State, MemoryDetailStore.Action>) -> some View {
         HStack {
             Button {
-                self.appModel.showDetailView = false
+                viewStore.send(.closeMemoryDetail)
             } label: {
                 Image(uiImage: UIImage.icBack)
                     .resizable()
@@ -103,7 +101,7 @@ struct MemoryDetailView: View {
             Spacer()
             
             Button {
-                self.showingSheet = true
+                viewStore.send(.showOptionSheet)
             } label: {
                 Image(uiImage: UIImage.icMore)
                     .resizable()
@@ -120,9 +118,9 @@ struct MemoryDetailView: View {
     }
     
     @ViewBuilder
-    private func PhotoView() -> some View {
+    private func PhotoView(photos: [UIImage]) -> some View {
         TabView {
-            ForEach(self.photos, id: \.self) { photo in
+            ForEach(photos, id: \.self) { photo in
                 Image(uiImage: photo)
                     .resizable()
                     .scaledToFill()
@@ -138,21 +136,21 @@ struct MemoryDetailView: View {
     }
     
     @ViewBuilder
-    private func ContentView() -> some View {
+    private func ContentView(memory: MemoryModel) -> some View {
         VStack(alignment: .leading, spacing: 16) {
             VStack(alignment: .leading, spacing: 4) {
-                Text(self.memory.title)
+                Text(memory.title)
                     .font(.pretendard(size: 20, weight: .semibold))
                     .foregroundStyle(Color.labelNormal)
                 
-                Text(self.memory.date.format("MMM d, yyyy"))
+                Text(memory.date.format("MMM d, yyyy"))
                     .font(.pretendard(size: 14, weight: .regular))
                     .foregroundStyle(Color.labelAlternative)
             }
             
             CBDivider()
             
-            Text(self.memory.note)
+            Text(memory.note)
                 .font(.pretendard(size: 16, weight: .regular))
                 .foregroundColor(Color.labelNormal)
                 .multilineTextAlignment(.leading)

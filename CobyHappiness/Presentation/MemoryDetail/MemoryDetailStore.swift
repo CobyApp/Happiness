@@ -5,17 +5,20 @@
 //  Created by Coby Kim on 6/26/24.
 //
 
-import Foundation
+import UIKit
 
 import ComposableArchitecture
 
 struct MemoryDetailStore: Reducer {
     
     struct State: Equatable {
-        @BindingState var showingOptionAlert: Bool = false
+        @BindingState var showingSheet = false
+        @BindingState var showingAlert = false
+        @BindingState var showingEditMemoryView: Bool = false
         
         var memoryId: UUID?
         var memory: MemoryModel?
+        var photos: [UIImage] = []
         var appModel: AppViewModel = .init()
         
         init(
@@ -30,9 +33,13 @@ struct MemoryDetailStore: Reducer {
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
         case onAppear(AppViewModel)
-        case showOptionAlert
+        case showOptionSheet
+        case showDeleteAlert
+        case showEditMemory
         case getMemory(UUID)
         case getMemoryResponse(TaskResult<MemoryModel>)
+        case getPhotos(MemoryModel)
+        case closeMemoryDetail
     }
     
     @Dependency(\.memoryDetailClient) private var memoryDetailClient
@@ -42,7 +49,11 @@ struct MemoryDetailStore: Reducer {
         
         Reduce { state, action in
             switch action {
-            case .binding(\.$showingOptionAlert):
+            case .binding(\.$showingSheet):
+                return .none
+            case .binding(\.$showingAlert):
+                return .none
+            case .binding(\.$showingEditMemoryView):
                 return .none
             case .binding:
                 return .none
@@ -51,10 +62,16 @@ struct MemoryDetailStore: Reducer {
                 if let id = state.memoryId {
                     return .send(.getMemory(id))
                 } else {
-                    return .none
+                    return .send(.getPhotos(state.memory ?? .init()))
                 }
-            case .showOptionAlert:
-                state.showingOptionAlert = true
+            case .showOptionSheet:
+                state.showingSheet = true
+                return .none
+            case .showDeleteAlert:
+                state.showingAlert = true
+                return .none
+            case .showEditMemory:
+                state.showingEditMemoryView = true
                 return .none
             case .getMemory(let id):
                 return .run { send in
@@ -65,9 +82,16 @@ struct MemoryDetailStore: Reducer {
                 }
             case let .getMemoryResponse(.success(memory)):
                 state.memory = memory
-                return .none
+                return .send(.getPhotos(memory))
             case let .getMemoryResponse(.failure(error)):
                 print(error.localizedDescription)
+                return .none
+            case .getPhotos(let memory):
+                state.photos = memory.photos.compactMap { $0.image }
+                return .none
+            case .closeMemoryDetail:
+                state.appModel.currentActiveItem = nil
+                state.appModel.showDetailView = false
                 return .none
             }
         }
