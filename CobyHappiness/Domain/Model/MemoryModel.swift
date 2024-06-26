@@ -2,16 +2,12 @@
 //  MemoryModel.swift
 //  CobyHappiness
 //
-//  Created by COBY_PRO on 2023/09/24.
+//  Created by Coby Kim on 6/26/24.
 //
 
-import SwiftUI
-import SwiftData
+import Foundation
 
-@Model
-final class MemoryModel {
-    
-    @Attribute(.unique)
+struct MemoryModel: Codable, Identifiable, Hashable, Equatable {
     var id: UUID
     var date: Date
     var type: MemoryType
@@ -20,7 +16,7 @@ final class MemoryModel {
     var location: LocationModel?
     var photos: [Data]
     var bunches: [BunchModel]
-
+    
     init(
         id: UUID = UUID(),
         date: Date = .now,

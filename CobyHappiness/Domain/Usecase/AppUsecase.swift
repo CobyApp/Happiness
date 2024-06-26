@@ -17,7 +17,7 @@ final class AppUsecase {
     
     func getMemoryById(id: UUID) async throws -> MemoryModel {
         do {
-            return try await self.repository.getMemoryById(id: id)
+            return try await self.repository.getMemoryById(id: id).toMemoryModel()
         } catch(let error) {
             throw error
         }
@@ -25,7 +25,7 @@ final class AppUsecase {
     
     func getMemories() async throws -> [MemoryModel] {
         do {
-            return try await self.repository.getMemories()
+            return try await self.repository.getMemories().map { $0.toMemoryModel() }
         } catch(let error) {
             throw error
         }
@@ -33,7 +33,7 @@ final class AppUsecase {
     
     func saveMemory(memory: MemoryModel) async throws {
         do {
-            return try await self.repository.saveMemory(memory: memory)
+            return try await self.repository.saveMemory(memory: memory.toMemory())
         } catch(let error) {
             throw error
         }
@@ -41,7 +41,7 @@ final class AppUsecase {
     
     func removeMemory(memory: MemoryModel) async throws {
         do {
-            return try await self.repository.removeMemory(memory: memory)
+            return try await self.repository.removeMemory(memory: memory.toMemory())
         } catch(let error) {
             throw error
         }
@@ -49,7 +49,7 @@ final class AppUsecase {
     
     func getBunchById(id: UUID) async throws -> BunchModel {
         do {
-            return try await self.repository.getBunchById(id: id)
+            return try await self.repository.getBunchById(id: id).toBunchModel()
         } catch(let error) {
             throw error
         }
@@ -57,7 +57,7 @@ final class AppUsecase {
     
     func getBunches() async throws -> [BunchModel] {
         do {
-            return try await self.repository.getBunches()
+            return try await self.repository.getBunches().map { $0.toBunchModel() }
         } catch(let error) {
             throw error
         }
@@ -65,7 +65,7 @@ final class AppUsecase {
     
     func saveBunch(bunch: BunchModel) async throws {
         do {
-            return try await self.repository.saveBunch(bunch: bunch)
+            return try await self.repository.saveBunch(bunch: bunch.toBunch())
         } catch(let error) {
             throw error
         }
@@ -73,7 +73,7 @@ final class AppUsecase {
     
     func removeBunch(bunch: BunchModel) async throws {
         do {
-            return try await self.repository.removeBunch(bunch: bunch)
+            return try await self.repository.removeBunch(bunch: bunch.toBunch())
         } catch(let error) {
             throw error
         }

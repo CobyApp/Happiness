@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct LocationModel: Codable {
+struct LocationModel: Codable, Hashable {
     var lat: Double
     var lon: Double
     

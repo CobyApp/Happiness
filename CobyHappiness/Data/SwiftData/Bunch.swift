@@ -1,5 +1,5 @@
 //
-//  BunchModel.swift
+//  Bunch.swift
 //  CobyHappiness
 //
 //  Created by Coby on 6/11/24.
@@ -9,22 +9,22 @@ import SwiftUI
 import SwiftData
 
 @Model
-final class BunchModel {
+final class Bunch {
     
     @Attribute(.unique)
     var id: UUID
     var startDate: Date
     var endDate: Date
     var title: String
-    @Relationship(deleteRule: .nullify, inverse: \MemoryModel.bunches)
-    var memories: [MemoryModel]
+    @Relationship(deleteRule: .nullify, inverse: \Memory.bunches)
+    var memories: [Memory]
     
     init(
         id: UUID = UUID(),
         startDate: Date = .now,
         endDate: Date = .now,
         title: String = "",
-        memories: [MemoryModel] = []
+        memories: [Memory] = []
     ) {
         self.id = id
         self.startDate = startDate
