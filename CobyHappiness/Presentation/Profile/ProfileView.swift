@@ -9,18 +9,14 @@ import SwiftUI
 import SwiftData
 
 import CobyDS
+import ComposableArchitecture
 
 struct ProfileView: View {
    
-    @EnvironmentObject private var appModel: AppViewModel
+    @Bindable private var store: StoreOf<ProfileStore>
     
-    @StateObject private var viewModel: ProfileViewModel
-    
-    @State private var selection: String? = nil
-    @State private var selectedMemoryType: MemoryType? = nil
-    
-    init(viewModel: ProfileViewModel) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
+    init(store: StoreOf<ProfileStore>) {
+        self.store = store
     }
     
     var body: some View {
@@ -31,38 +27,41 @@ struct ProfileView: View {
                 rightSide: .text,
                 rightTitle: "설정",
                 rightAction: {
-                    print("설정")
+                    self.store.send(.navigateToSettingView)
                 }
             )
             
-            NoteView()
+            MemoryFilterView()
             
-            MemoryListView()
+            MemoryListView(memories: self.store.memories.getFilteredMemories(self.store.memoryType))
         }
         .background(Color.backgroundNormalNormal)
+        .onAppear {
+            self.store.send(.getMemories)
+        }
     }
     
     @ViewBuilder
-    private func NoteView() -> some View {
+    private func MemoryFilterView() -> some View {
         ScrollView(.horizontal) {
             HStack(spacing: 8) {
                 BoxView(
-                    isSelected: self.selectedMemoryType == nil,
+                    isSelected: self.store.memoryType == nil,
                     title: "모두",
-                    description: "\(self.viewModel.getMemoryCount(nil))개"
+                    description: "\(self.store.memories.getFilteredMemories(nil).count)개"
                 )
                 .onTapGesture {
-                    self.selectedMemoryType = nil
+                    self.store.memoryType = nil
                 }
                 
                 ForEach(MemoryType.allCases, id: \.self) { memoryType in
                     BoxView(
-                        isSelected: self.selectedMemoryType == memoryType,
+                        isSelected: self.store.memoryType == memoryType,
                         title: memoryType.title,
-                        description: "\(self.viewModel.getMemoryCount(memoryType))개"
+                        description: "\(self.store.memories.getFilteredMemories(memoryType).count)개"
                     )
                     .onTapGesture {
-                        self.selectedMemoryType = memoryType
+                        self.store.memoryType = memoryType
                     }
                 }
             }
@@ -106,21 +105,20 @@ struct ProfileView: View {
     }
     
     @ViewBuilder
-    private func MemoryListView() -> some View {
-        if self.viewModel.getFilteredMemory(self.selectedMemoryType).isEmpty {
+    private func MemoryListView(memories: [MemoryModel]) -> some View {
+        if memories.isEmpty {
             EmptyMemoryView(
                 showingButton: false
             )
         } else {
             ScrollView {
                 LazyVStack(spacing: 8) {
-                    ForEach(self.viewModel.getFilteredMemory(self.selectedMemoryType)) { memory in
+                    ForEach(memories) { memory in
                         MemoryTileView(
                             memory: memory
                         )
                         .onTapGesture {
-                            self.appModel.currentActiveItem = memory
-                            self.appModel.showDetailView = true
+                            self.store.send(.showMemoryDetail(memory))
                         }
                     }
                 }

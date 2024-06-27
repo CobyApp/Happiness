@@ -14,7 +14,6 @@
 		CB09A5522C2B146700CB8485 /* AppUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB09A5512C2B146700CB8485 /* AppUsecase.swift */; };
 		CB0D58E52C1E183300EFE3D3 /* EditBunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E42C1E183300EFE3D3 /* EditBunchViewModel.swift */; };
 		CB0D58EA2C1EE83B00EFE3D3 /* EditBunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E92C1EE83B00EFE3D3 /* EditBunchView.swift */; };
-		CB0D58EC2C21C5A400EFE3D3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58EB2C21C5A400EFE3D3 /* ProfileViewModel.swift */; };
 		CB0D58EE2C21CB7200EFE3D3 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58ED2C21CB7200EFE3D3 /* AppViewModel.swift */; };
 		CB2471012ADABBFC00EEA032 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2471002ADABBFC00EEA032 /* PlaceModel.swift */; };
 		CB4063B12C1763EA00654F89 /* EditMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063B02C1763EA00654F89 /* EditMemoryView.swift */; };
@@ -24,7 +23,6 @@
 		CB4196012C18B83E003D958C /* BunchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4196002C18B83E003D958C /* BunchDetailView.swift */; };
 		CB4196092C19CF00003D958C /* UIImage+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4196082C19CF00003D958C /* UIImage+Assets.swift */; };
 		CB41960B2C19D19B003D958C /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB41960A2C19D19B003D958C /* Data+Extensions.swift */; };
-		CB4196112C1DF685003D958C /* BunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4196102C1DF685003D958C /* BunchViewModel.swift */; };
 		CB76292A2C267DF700138186 /* EmptyMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7629292C267DF700138186 /* EmptyMemoryView.swift */; };
 		CB76292C2C26898A00138186 /* EmptyBunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB76292B2C26898A00138186 /* EmptyBunchView.swift */; };
 		CB7D46E32C2D3D5B001E5E32 /* MapStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7D46E22C2D3D5B001E5E32 /* MapStore.swift */; };
@@ -48,6 +46,10 @@
 		CBAD455D2C158315009D4EFF /* BunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD455C2C158315009D4EFF /* BunchView.swift */; };
 		CBAD45602C15841D009D4EFF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD455F2C15841D009D4EFF /* ProfileView.swift */; };
 		CBAD45692C15EBB1009D4EFF /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAD45682C15EBB1009D4EFF /* LocationModel.swift */; };
+		CBAF77252C2D4CCD00F40F76 /* BunchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAF77242C2D4CCD00F40F76 /* BunchStore.swift */; };
+		CBAF77272C2D4CD200F40F76 /* BunchClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAF77262C2D4CD200F40F76 /* BunchClient.swift */; };
+		CBAF77292C2D4E6700F40F76 /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAF77282C2D4E6700F40F76 /* ProfileStore.swift */; };
+		CBAF772B2C2D4E6B00F40F76 /* ProfileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAF772A2C2D4E6B00F40F76 /* ProfileClient.swift */; };
 		CBB21C982C16F273007E6AA2 /* MapRepresentableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB21C972C16F273007E6AA2 /* MapRepresentableView.swift */; };
 		CBC3A4122C2BE5CE00B62F82 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = CBC3A4112C2BE5CE00B62F82 /* ComposableArchitecture */; };
 		CBC3A4142C2BE5F300B62F82 /* HomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC3A4132C2BE5F300B62F82 /* HomeClient.swift */; };
@@ -64,7 +66,6 @@
 		CB09A5512C2B146700CB8485 /* AppUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUsecase.swift; sourceTree = "<group>"; };
 		CB0D58E42C1E183300EFE3D3 /* EditBunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchViewModel.swift; sourceTree = "<group>"; };
 		CB0D58E92C1EE83B00EFE3D3 /* EditBunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchView.swift; sourceTree = "<group>"; };
-		CB0D58EB2C21C5A400EFE3D3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		CB0D58ED2C21CB7200EFE3D3 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		CB2471002ADABBFC00EEA032 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		CB4063B02C1763EA00654F89 /* EditMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoryView.swift; sourceTree = "<group>"; };
@@ -74,7 +75,6 @@
 		CB4196002C18B83E003D958C /* BunchDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchDetailView.swift; sourceTree = "<group>"; };
 		CB4196082C19CF00003D958C /* UIImage+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Assets.swift"; sourceTree = "<group>"; };
 		CB41960A2C19D19B003D958C /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
-		CB4196102C1DF685003D958C /* BunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchViewModel.swift; sourceTree = "<group>"; };
 		CB7629292C267DF700138186 /* EmptyMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMemoryView.swift; sourceTree = "<group>"; };
 		CB76292B2C26898A00138186 /* EmptyBunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBunchView.swift; sourceTree = "<group>"; };
 		CB7D46E22C2D3D5B001E5E32 /* MapStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStore.swift; sourceTree = "<group>"; };
@@ -99,6 +99,10 @@
 		CBAD455C2C158315009D4EFF /* BunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchView.swift; sourceTree = "<group>"; };
 		CBAD455F2C15841D009D4EFF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		CBAD45682C15EBB1009D4EFF /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		CBAF77242C2D4CCD00F40F76 /* BunchStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchStore.swift; sourceTree = "<group>"; };
+		CBAF77262C2D4CD200F40F76 /* BunchClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchClient.swift; sourceTree = "<group>"; };
+		CBAF77282C2D4E6700F40F76 /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
+		CBAF772A2C2D4E6B00F40F76 /* ProfileClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileClient.swift; sourceTree = "<group>"; };
 		CBB21C972C16F273007E6AA2 /* MapRepresentableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepresentableView.swift; sourceTree = "<group>"; };
 		CBC3A4132C2BE5F300B62F82 /* HomeClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeClient.swift; sourceTree = "<group>"; };
 		CBC3A4152C2BE5F900B62F82 /* HomeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStore.swift; sourceTree = "<group>"; };
@@ -372,7 +376,8 @@
 			isa = PBXGroup;
 			children = (
 				CBAD455C2C158315009D4EFF /* BunchView.swift */,
-				CB4196102C1DF685003D958C /* BunchViewModel.swift */,
+				CBAF77242C2D4CCD00F40F76 /* BunchStore.swift */,
+				CBAF77262C2D4CD200F40F76 /* BunchClient.swift */,
 			);
 			path = Bunch;
 			sourceTree = "<group>";
@@ -381,7 +386,8 @@
 			isa = PBXGroup;
 			children = (
 				CBAD455F2C15841D009D4EFF /* ProfileView.swift */,
-				CB0D58EB2C21C5A400EFE3D3 /* ProfileViewModel.swift */,
+				CBAF77282C2D4E6700F40F76 /* ProfileStore.swift */,
+				CBAF772A2C2D4E6B00F40F76 /* ProfileClient.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -496,10 +502,8 @@
 				CB4196092C19CF00003D958C /* UIImage+Assets.swift in Sources */,
 				CBAD455D2C158315009D4EFF /* BunchView.swift in Sources */,
 				CB76292A2C267DF700138186 /* EmptyMemoryView.swift in Sources */,
-				CB4196112C1DF685003D958C /* BunchViewModel.swift in Sources */,
 				CBAD45602C15841D009D4EFF /* ProfileView.swift in Sources */,
 				CB0D58E52C1E183300EFE3D3 /* EditBunchViewModel.swift in Sources */,
-				CB0D58EC2C21C5A400EFE3D3 /* ProfileViewModel.swift in Sources */,
 				CBFE3C4B2C1E0022000E3351 /* BunchDetailViewModel.swift in Sources */,
 				CB09A5492C2B115800CB8485 /* MemoryType.swift in Sources */,
 				CBAD45692C15EBB1009D4EFF /* LocationModel.swift in Sources */,
@@ -514,6 +518,9 @@
 				CBAB7F4F2ACD402500257778 /* ContentView.swift in Sources */,
 				CB4063B72C18A1C200654F89 /* MemoryTileView.swift in Sources */,
 				CBC3A4162C2BE5F900B62F82 /* HomeStore.swift in Sources */,
+				CBAF77272C2D4CD200F40F76 /* BunchClient.swift in Sources */,
+				CBAF772B2C2D4E6B00F40F76 /* ProfileClient.swift in Sources */,
+				CBAF77252C2D4CCD00F40F76 /* BunchStore.swift in Sources */,
 				CB09A54F2C2B120200CB8485 /* AppRepository.swift in Sources */,
 				CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */,
 				CB41960B2C19D19B003D958C /* Data+Extensions.swift in Sources */,
@@ -522,6 +529,7 @@
 				CB0D58EA2C1EE83B00EFE3D3 /* EditBunchView.swift in Sources */,
 				CB09A5422C27EBB900CB8485 /* SettingView.swift in Sources */,
 				CB7D46E52C2D3D60001E5E32 /* MapClient.swift in Sources */,
+				CBAF77292C2D4E6700F40F76 /* ProfileStore.swift in Sources */,
 				CB8836B52C2BF6FE0037CEC7 /* MemoryDetailClient.swift in Sources */,
 				CB8836B32C2BE80A0037CEC7 /* MemoryMapper.swift in Sources */,
 				CB4063B12C1763EA00654F89 /* EditMemoryView.swift in Sources */,

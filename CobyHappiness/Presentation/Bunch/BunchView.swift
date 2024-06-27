@@ -6,23 +6,21 @@
 //
 
 import SwiftUI
-import SwiftData
 
 import CobyDS
+import ComposableArchitecture
 
 struct BunchView: View {
 
-    @StateObject private var viewModel: BunchViewModel
-    
-    @State private var isPresented: Bool = false
+    @Bindable private var store: StoreOf<BunchStore>
     
     private let columns: [GridItem] = Array(
         repeating: GridItem(.flexible(), spacing: 8),
         count: 2
     )
     
-    init(viewModel: BunchViewModel) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
+    init(store: StoreOf<BunchStore>) {
+        self.store = store
     }
     
     var body: some View {
@@ -33,7 +31,7 @@ struct BunchView: View {
                 rightSide: .text,
                 rightTitle: "뭉치 추가",
                 rightAction: {
-                    self.isPresented = true
+                    self.store.send(.showEditBunch)
                 }
             )
             
@@ -41,28 +39,28 @@ struct BunchView: View {
         }
         .background(Color.backgroundNormalNormal)
         .fullScreenCover(
-            isPresented: self.$isPresented,
+            isPresented: self.$store.showingEditBunchView,
             onDismiss: {
-                self.viewModel.getBunches()
+                self.store.send(.getBunches)
             }
         ) {
             EditBunchView()
         }
         .onAppear {
-            self.viewModel.getBunches()
+            self.store.send(.getBunches)
         }
     }
     
     @ViewBuilder
     private func BunchGridView() -> some View {
-        if self.viewModel.bunches.isEmpty {
+        if self.store.bunches.isEmpty {
             EmptyBunchView {
-                self.isPresented = true
+                self.store.send(.showEditBunch)
             }
         } else {
             ScrollView {
                 LazyVGrid(columns: self.columns, spacing: 20) {
-                    ForEach(self.viewModel.bunches, id: \.self) { bunch in
+                    ForEach(self.store.bunches, id: \.self) { bunch in
                         NavigationLink(value: bunch) {
                             ThumbnailTitleView(
                                 image: bunch.image,

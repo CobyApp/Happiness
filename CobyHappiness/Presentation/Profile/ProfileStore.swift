@@ -1,21 +1,21 @@
 //
-//  HomeStore.swift
+//  ProfileStore.swift
 //  CobyHappiness
 //
-//  Created by Coby Kim on 6/26/24.
+//  Created by Coby Kim on 6/27/24.
 //
 
 import Foundation
 
 import ComposableArchitecture
 
-struct HomeStore: Reducer {
+struct ProfileStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
         var appModel: AppViewModel
-        var showingEditMemoryView: Bool = false
         var memories: [MemoryModel] = []
+        var memoryType: MemoryType? = nil
         
         init(appModel: AppViewModel) {
             self.appModel = appModel
@@ -24,13 +24,13 @@ struct HomeStore: Reducer {
     
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
-        case showEditMemory
         case showMemoryDetail(MemoryModel)
         case getMemories
         case getMemoriesResponse(TaskResult<[MemoryModel]>)
+        case navigateToSettingView
     }
     
-    @Dependency(\.homeClient) private var homeClient
+    @Dependency(\.profileClient) private var profileClient
     
     var body: some ReducerOf<Self> {
         BindingReducer()
@@ -39,9 +39,6 @@ struct HomeStore: Reducer {
             switch action {
             case .binding:
                 return .none
-            case .showEditMemory:
-                state.showingEditMemoryView = true
-                return .none
             case .showMemoryDetail(let memory):
                 state.appModel.currentActiveItem = memory
                 state.appModel.showDetailView = true
@@ -49,7 +46,7 @@ struct HomeStore: Reducer {
             case .getMemories:
                 return .run { send in
                     let result = await TaskResult {
-                        try await homeClient.memories()
+                        try await profileClient.memories()
                     }
                     await send(.getMemoriesResponse(result))
                 }
@@ -58,6 +55,8 @@ struct HomeStore: Reducer {
                 return .none
             case let .getMemoriesResponse(.failure(error)):
                 print(error.localizedDescription)
+                return .none
+            case .navigateToSettingView:
                 return .none
             }
         }

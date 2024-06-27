@@ -37,3 +37,13 @@ struct MemoryModel: Codable, Identifiable, Hashable, Equatable {
         self.bunches = bunches
     }
 }
+
+extension [MemoryModel] {
+    func getFilteredMemories(_ type: MemoryType?) -> [MemoryModel] {
+        if let type = type {
+            self.filter { $0.type == type }
+        } else {
+            self
+        }
+    }
+}

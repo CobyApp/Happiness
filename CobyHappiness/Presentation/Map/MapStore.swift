@@ -25,7 +25,6 @@ struct MapStore: Reducer {
     
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
-        case onAppear
         case showEditMemory
         case showMemoryDetail(MemoryModel)
         case getMemories
@@ -41,8 +40,6 @@ struct MapStore: Reducer {
             switch action {
             case .binding:
                 return .none
-            case .onAppear:
-                return .send(.getMemories)
             case .showEditMemory:
                 state.showingEditMemoryView = true
                 return .none

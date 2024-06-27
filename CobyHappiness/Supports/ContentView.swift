@@ -40,15 +40,21 @@ struct ContentView: View {
                         Label("지도", image: "map")
                     }
                     
-                    BunchView(viewModel: BunchViewModel())
-                        .tabItem {
-                            Label("뭉치", image: "travel")
-                        }
+                    BunchView(store: Store(initialState: BunchStore.State()) {
+                        BunchStore()
+                    })
+                    .tabItem {
+                        Label("뭉치", image: "travel")
+                    }
                     
-                    ProfileView(viewModel: ProfileViewModel())
-                        .tabItem {
-                            Label("정보", image: "person")
-                        }
+                    ProfileView(store: Store(initialState: ProfileStore.State(
+                        appModel: self.appModel
+                    )) {
+                        ProfileStore()
+                    })
+                    .tabItem {
+                        Label("정보", image: "person")
+                    }
                 }
                 .opacity(self.appModel.showDetailView ? 0 : 1)
             }

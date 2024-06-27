@@ -34,7 +34,7 @@ struct HomeView: View {
             EditMemoryView(viewModel: EditMemoryViewModel())
         }
         .onAppear {
-            self.store.send(.onAppear)
+            self.store.send(.getMemories)
         }
     }
     
