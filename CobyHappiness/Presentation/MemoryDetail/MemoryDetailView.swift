@@ -12,8 +12,6 @@ import ComposableArchitecture
 
 struct MemoryDetailView: View {
     
-    @EnvironmentObject private var appModel: AppViewModel
-    
     @Bindable private var store: StoreOf<MemoryDetailStore>
     
     @State private var scale: CGFloat = 1
@@ -77,7 +75,7 @@ struct MemoryDetailView: View {
             EditMemoryView(viewModel: EditMemoryViewModel(memory: self.store.memory))
         }
         .onAppear {
-            self.store.send(.onAppear(self.appModel))
+            self.store.send(.onAppear)
         }
     }
     

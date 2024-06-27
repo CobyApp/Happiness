@@ -13,18 +13,20 @@ struct MemoryDetailStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
+        var appModel: AppViewModel
         var showingSheet = false
         var showingAlert = false
         var showingEditMemoryView: Bool = false
         var memoryId: UUID?
         var memory: MemoryModel?
         var photos: [UIImage] = []
-        var appModel: AppViewModel = .init()
         
         init(
+            appModel: AppViewModel,
             memoryId: UUID? = nil,
             memory: MemoryModel? = nil
         ) {
+            self.appModel = appModel
             self.memoryId = memoryId
             self.memory = memory
         }
@@ -32,7 +34,7 @@ struct MemoryDetailStore: Reducer {
     
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
-        case onAppear(AppViewModel)
+        case onAppear
         case showOptionSheet
         case showDeleteAlert
         case showEditMemory
@@ -53,8 +55,7 @@ struct MemoryDetailStore: Reducer {
             switch action {
             case .binding:
                 return .none
-            case .onAppear(let appModel):
-                state.appModel = appModel
+            case .onAppear:
                 if let id = state.memoryId {
                     return .send(.getMemory(id))
                 } else {

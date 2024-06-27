@@ -11,8 +11,6 @@ import CobyDS
 import ComposableArchitecture
 
 struct HomeView: View {
-    
-    @EnvironmentObject private var appModel: AppViewModel
 
     @Bindable private var store: StoreOf<HomeStore>
     
@@ -36,7 +34,7 @@ struct HomeView: View {
             EditMemoryView(viewModel: EditMemoryViewModel())
         }
         .onAppear {
-            self.store.send(.onAppear(self.appModel))
+            self.store.send(.onAppear)
         }
     }
     

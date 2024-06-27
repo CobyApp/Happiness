@@ -22,14 +22,18 @@ struct ContentView: View {
         ZStack {
             NavigationStack {
                 TabView {
-                    HomeView(store: Store(initialState: HomeStore.State()) {
+                    HomeView(store: Store(initialState: HomeStore.State(
+                        appModel: self.appModel
+                    )) {
                         HomeStore()
                     })
                     .tabItem {
                         Label("홈", image: "home")
                     }
                     
-                    MapView(store: Store(initialState: MapStore.State()) {
+                    MapView(store: Store(initialState: MapStore.State(
+                        appModel: self.appModel
+                    )) {
                         MapStore()
                     })
                     .tabItem {
@@ -51,13 +55,13 @@ struct ContentView: View {
             
             if let memory = self.appModel.currentActiveItem, self.appModel.showDetailView {
                 MemoryDetailView(store: Store(initialState: MemoryDetailStore.State(
+                    appModel: self.appModel,
                     memory: memory
                 )) {
                     MemoryDetailStore()
                 })
             }
         }
-        .environmentObject(self.appModel)
         .animation(.easeInOut(duration: 0.1), value: self.appModel.showDetailView)
     }
 }

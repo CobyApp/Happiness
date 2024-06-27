@@ -11,8 +11,6 @@ import CobyDS
 import ComposableArchitecture
 
 struct MapView: View {
-    
-    @EnvironmentObject private var appModel: AppViewModel
 
     @Bindable private var store: StoreOf<MapStore>
     
@@ -72,7 +70,7 @@ struct MapView: View {
             EditMemoryView(viewModel: EditMemoryViewModel())
         }
         .onAppear {
-            self.store.send(.onAppear(self.appModel))
+            self.store.send(.onAppear)
         }
     }
 }
