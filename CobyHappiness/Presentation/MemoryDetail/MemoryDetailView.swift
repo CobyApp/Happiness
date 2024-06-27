@@ -75,7 +75,7 @@ struct MemoryDetailView: View {
             EditMemoryView(viewModel: EditMemoryViewModel(memory: self.store.memory))
         }
         .onAppear {
-            self.store.send(.onAppear)
+            self.store.send(.getPhotos)
         }
     }
     
