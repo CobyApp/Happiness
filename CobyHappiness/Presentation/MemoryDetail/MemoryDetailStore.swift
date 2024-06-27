@@ -11,11 +11,11 @@ import ComposableArchitecture
 
 struct MemoryDetailStore: Reducer {
     
+    @ObservableState
     struct State: Equatable {
-        @BindingState var showingSheet = false
-        @BindingState var showingAlert = false
-        @BindingState var showingEditMemoryView: Bool = false
-        
+        var showingSheet = false
+        var showingAlert = false
+        var showingEditMemoryView: Bool = false
         var memoryId: UUID?
         var memory: MemoryModel?
         var photos: [UIImage] = []
@@ -51,12 +51,6 @@ struct MemoryDetailStore: Reducer {
         
         Reduce { state, action in
             switch action {
-            case .binding(\.$showingSheet):
-                return .none
-            case .binding(\.$showingAlert):
-                return .none
-            case .binding(\.$showingEditMemoryView):
-                return .none
             case .binding:
                 return .none
             case .onAppear(let appModel):

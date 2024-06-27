@@ -29,10 +29,12 @@ struct ContentView: View {
                         Label("홈", image: "home")
                     }
                     
-                    MapView(viewModel: MapViewModel())
-                        .tabItem {
-                            Label("지도", image: "map")
-                        }
+                    MapView(store: Store(initialState: MapStore.State()) {
+                        MapStore()
+                    })
+                    .tabItem {
+                        Label("지도", image: "map")
+                    }
                     
                     BunchView(viewModel: BunchViewModel())
                         .tabItem {

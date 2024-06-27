@@ -1,20 +1,21 @@
 //
-//  HomeStore.swift
+//  MapStore.swift
 //  CobyHappiness
 //
-//  Created by Coby Kim on 6/26/24.
+//  Created by Coby Kim on 6/27/24.
 //
 
 import Foundation
 
 import ComposableArchitecture
 
-struct HomeStore: Reducer {
+struct MapStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
         var showingEditMemoryView: Bool = false
         var memories: [MemoryModel] = []
+        var filteredMemories: [MemoryModel] = []
         var appModel: AppViewModel = .init()
     }
     
@@ -27,7 +28,7 @@ struct HomeStore: Reducer {
         case getMemoriesResponse(TaskResult<[MemoryModel]>)
     }
     
-    @Dependency(\.homeClient) private var homeClient
+    @Dependency(\.mapClient) private var mapClient
     
     var body: some ReducerOf<Self> {
         BindingReducer()
@@ -49,7 +50,7 @@ struct HomeStore: Reducer {
             case .getMemories:
                 return .run { send in
                     let result = await TaskResult {
-                        try await homeClient.memories()
+                        try await mapClient.memories()
                     }
                     await send(.getMemoriesResponse(result))
                 }

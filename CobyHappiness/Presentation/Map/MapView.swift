@@ -6,21 +6,18 @@
 //
 
 import SwiftUI
-import SwiftData
 
 import CobyDS
+import ComposableArchitecture
 
 struct MapView: View {
     
     @EnvironmentObject private var appModel: AppViewModel
+
+    @Bindable private var store: StoreOf<MapStore>
     
-    @StateObject private var viewModel: MapViewModel
-    
-    @State private var isPresented: Bool = false
-    @State private var filteredMemories: [MemoryModel] = []
-    
-    init(viewModel: MapViewModel) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
+    init(store: StoreOf<MapStore>) {
+        self.store = store
     }
     
     var body: some View {
@@ -31,19 +28,19 @@ struct MapView: View {
                 rightSide: .text,
                 rightTitle: "추억 추가",
                 rightAction: {
-                    self.isPresented = true
+                    self.store.send(.showEditMemory)
                 }
             )
             
             ZStack(alignment: .bottom) {
                 MapRepresentableView(
-                    filteredMemories: self.$filteredMemories,
-                    memories: self.viewModel.memories
+                    filteredMemories: self.$store.filteredMemories,
+                    memories: self.store.memories
                 )
                 
                 ScrollView(.horizontal) {
                     LazyHStack(spacing: 8) {
-                        ForEach(self.filteredMemories, id: \.self) { memory in
+                        ForEach(self.store.filteredMemories, id: \.self) { memory in
                             MemoryTileView(
                                 memory: memory,
                                 isShadowing: true
@@ -52,8 +49,7 @@ struct MapView: View {
                             .padding(.horizontal, 20)
                             .containerRelativeFrame(.horizontal)
                             .onTapGesture {
-                                self.appModel.currentActiveItem = memory
-                                self.appModel.showDetailView = true
+                                self.store.send(.showMemoryDetail(memory))
                             }
                         }
                     }
@@ -68,12 +64,15 @@ struct MapView: View {
         }
         .background(Color.backgroundNormalNormal)
         .fullScreenCover(
-            isPresented: self.$isPresented,
+            isPresented: self.$store.showingEditMemoryView,
             onDismiss: {
-                self.viewModel.getMemories()
+                self.store.send(.getMemories)
             }
         ) {
             EditMemoryView(viewModel: EditMemoryViewModel())
+        }
+        .onAppear {
+            self.store.send(.onAppear(self.appModel))
         }
     }
 }
