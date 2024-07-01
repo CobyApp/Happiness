@@ -24,7 +24,7 @@ struct EditMemoryView: View {
     @State private var title: String = ""
     @State private var note: String = ""
     @State private var location: LocationModel? = nil
-    @State private var photos: [Data] = []
+    @State private var photos: [UIImage] = []
     
     var isDisabled: Bool {
         self.photos.isEmpty || self.title == "" || self.note == ""
@@ -132,7 +132,7 @@ struct EditMemoryView: View {
                         }
                     }
                     
-                    ForEach(self.photos.compactMap { UIImage(data: $0) }, id: \.self) { image in
+                    ForEach(self.photos, id: \.self) { image in
                         ThumbnailView(image: image)
                             .frame(width: 80, height: 80)
                     }

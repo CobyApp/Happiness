@@ -18,7 +18,6 @@ struct MemoryDetailStore: Reducer {
         var showingAlert = false
         var showingEditMemoryView: Bool = false
         var memory: MemoryModel
-        var photos: [UIImage] = []
         
         init(
             appModel: AppViewModel,
@@ -34,9 +33,8 @@ struct MemoryDetailStore: Reducer {
         case showOptionSheet
         case showDeleteAlert
         case showEditMemory
-        case removeMemory(MemoryModel)
+        case removeMemory(UUID)
         case removeMemoryResponse
-        case getPhotos
         case closeMemoryDetail
     }
     
@@ -58,18 +56,15 @@ struct MemoryDetailStore: Reducer {
             case .showEditMemory:
                 state.showingEditMemoryView = true
                 return .none
-            case .removeMemory(let memory):
+            case .removeMemory(let id):
                 return .run { send in
                     let _ = await TaskResult {
-                        try await memoryDetailClient.removeMemory(memory)
+                        try await memoryDetailClient.removeMemory(id)
                     }
                     await send(.removeMemoryResponse)
                 }
             case .removeMemoryResponse:
                 return .send(.closeMemoryDetail)
-            case .getPhotos:
-                state.photos = state.memory.photos.compactMap { $0.image }
-                return .none
             case .closeMemoryDetail:
                 state.appModel.currentActiveItem = nil
                 state.appModel.showDetailView = false

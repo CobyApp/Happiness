@@ -28,7 +28,7 @@ struct MemoryDetailView: View {
             isDown: self.$isDown
         ) {
             VStack(spacing: 20) {
-                self.PhotoView(photos: self.store.photos)
+                self.PhotoView(photos: self.store.memory.photos)
                 self.ContentView(memory: self.store.memory ?? .init())
             }
         }
@@ -64,7 +64,7 @@ struct MemoryDetailView: View {
                 primaryButton: .destructive(
                     Text("삭제"),
                     action: {
-                        self.store.send(.removeMemory(self.store.memory ?? .init()))
+                        self.store.send(.removeMemory(self.store.memory.id))
                         self.store.send(.closeMemoryDetail)
                     }
                 ),
@@ -73,9 +73,6 @@ struct MemoryDetailView: View {
         }
         .fullScreenCover(isPresented: self.$store.showingEditMemoryView) {
             EditMemoryView(viewModel: EditMemoryViewModel(memory: self.store.memory))
-        }
-        .onAppear {
-            self.store.send(.getPhotos)
         }
     }
     

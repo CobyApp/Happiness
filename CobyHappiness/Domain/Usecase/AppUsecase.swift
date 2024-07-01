@@ -15,9 +15,9 @@ final class AppUsecase {
         self.repository = repository
     }
     
-    func getMemoryById(id: UUID) async throws -> MemoryModel {
+    func getMemory(id: UUID) async throws -> MemoryModel {
         do {
-            return try await self.repository.getMemoryById(id: id).toMemoryModel()
+            return try await self.repository.getMemory(id: id).toMemoryModel()
         } catch(let error) {
             throw error
         }
@@ -39,17 +39,17 @@ final class AppUsecase {
         }
     }
     
-    func removeMemory(memory: MemoryModel) async throws {
+    func removeMemory(id: UUID) async throws {
         do {
-            return try await self.repository.removeMemory(memory: memory.toMemory())
+            return try await self.repository.removeMemory(id: id)
         } catch(let error) {
             throw error
         }
     }
     
-    func getBunchById(id: UUID) async throws -> BunchModel {
+    func getBunch(id: UUID) async throws -> BunchModel {
         do {
-            return try await self.repository.getBunchById(id: id).toBunchModel()
+            return try await self.repository.getBunch(id: id).toBunchModel()
         } catch(let error) {
             throw error
         }
@@ -71,9 +71,9 @@ final class AppUsecase {
         }
     }
     
-    func removeBunch(bunch: BunchModel) async throws {
+    func removeBunch(id: UUID) async throws {
         do {
-            return try await self.repository.removeBunch(bunch: bunch.toBunch())
+            return try await self.repository.removeBunch(id: id)
         } catch(let error) {
             throw error
         }

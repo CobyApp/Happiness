@@ -22,7 +22,7 @@ final class AppRepositoryImpl: AppRepository {
     }
     
     @MainActor
-    func getMemoryById(id: UUID) async throws -> Memory {
+    func getMemory(id: UUID) async throws -> Memory {
         let descriptor = FetchDescriptor<Memory>(predicate: #Predicate { $0.id == id })
         return try self.container.mainContext.fetch(descriptor).first!
     }
@@ -40,12 +40,13 @@ final class AppRepositoryImpl: AppRepository {
     }
     
     @MainActor
-    func removeMemory(memory: Memory) async throws {
-        self.container.mainContext.delete(memory)
+    func removeMemory(id: UUID) async throws {
+        let memory = try await self.getMemory(id: id)
+        return self.container.mainContext.delete(memory)
     }
     
     @MainActor
-    func getBunchById(id: UUID) async throws -> Bunch {
+    func getBunch(id: UUID) async throws -> Bunch {
         let descriptor = FetchDescriptor<Bunch>(predicate: #Predicate { $0.id == id })
         return try self.container.mainContext.fetch(descriptor).first!
     }
@@ -63,7 +64,8 @@ final class AppRepositoryImpl: AppRepository {
     }
     
     @MainActor
-    func removeBunch(bunch: Bunch) async throws {
-        self.container.mainContext.delete(bunch)
+    func removeBunch(id: UUID) async throws {
+        let bunch = try await self.getBunch(id: id)
+        return self.container.mainContext.delete(bunch)
     }
 }

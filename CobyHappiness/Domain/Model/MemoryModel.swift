@@ -5,16 +5,16 @@
 //  Created by Coby Kim on 6/26/24.
 //
 
-import Foundation
+import UIKit
 
-struct MemoryModel: Codable, Identifiable, Hashable, Equatable {
+struct MemoryModel: Identifiable, Hashable, Equatable {
     var id: UUID
     var date: Date
     var type: MemoryType
     var title: String
     var note: String
     var location: LocationModel?
-    var photos: [Data]
+    var photos: [UIImage]
     var bunches: [BunchModel]
     
     init(
@@ -24,7 +24,7 @@ struct MemoryModel: Codable, Identifiable, Hashable, Equatable {
         title: String = "",
         note: String = "",
         location: LocationModel? = nil,
-        photos: [Data] = [],
+        photos: [UIImage] = [],
         bunches: [BunchModel] = []
     ) {
         self.id = id

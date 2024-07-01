@@ -30,7 +30,7 @@ struct MemoryTileView: View {
     var body: some View {
         HStack(spacing: 16) {
             ThumbnailView(
-                image: self.memory.photos.first?.image
+                image: self.memory.photos.first
             )
             .frame(width: 80, height: 80)
             

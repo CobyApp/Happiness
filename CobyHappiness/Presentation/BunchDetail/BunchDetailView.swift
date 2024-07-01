@@ -70,7 +70,7 @@ struct BunchDetailView: View {
                 primaryButton: .destructive(
                     Text("삭제"),
                     action: {
-                        self.viewModel.removeBunch(bunch: self.bunch)
+                        self.viewModel.removeBunch(id: self.bunch.id)
                         self.dismiss()
                     }
                 ),

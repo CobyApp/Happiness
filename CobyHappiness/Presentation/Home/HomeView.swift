@@ -86,7 +86,7 @@ struct HomeView: View {
     @ViewBuilder
     private func MemoryThumbnailView(memory: MemoryModel) -> some View {
         ThumbnailCardView(
-            image: memory.photos.first?.image,
+            image: memory.photos.first,
             title: memory.title,
             description: memory.date.format("MMM d, yyyy"),
             isShadowing: true

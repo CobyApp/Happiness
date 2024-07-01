@@ -40,7 +40,7 @@ final class EditMemoryViewModel: ObservableObject {
         title: String,
         note: String,
         location: LocationModel?,
-        photos: [Data]
+        photos: [UIImage]
     ) {
         Task {
             do {
@@ -76,8 +76,8 @@ final class EditMemoryViewModel: ObservableObject {
 
 // MARK: Photo
 extension EditMemoryViewModel {
-    func setPhotos(items: [PhotosPickerItem], completion: @escaping ([Data], Date, LocationModel?) -> Void) {
-        var photoDataArray: [Data] = []
+    func setPhotos(items: [PhotosPickerItem], completion: @escaping ([UIImage], Date, LocationModel?) -> Void) {
+        var photoDataArray: [UIImage] = []
         var dateArray: [Date] = []
         var locationArray: [LocationModel] = []
         
@@ -91,9 +91,7 @@ extension EditMemoryViewModel {
                 case .success(let data):
                     if let data = data {
                         if let originalImage = UIImage(data: data) {
-                            if let compressedImageData = self.compressImage(originalImage) {
-                                photoDataArray.append(compressedImageData)
-                            }
+                            photoDataArray.append(originalImage)
                         }
                     }
                 case .failure(let error):
@@ -125,20 +123,6 @@ extension EditMemoryViewModel {
         
         dispatchGroup.notify(queue: .main) {
             completion(photoDataArray, dateArray.first ?? .now, locationArray.first)
-        }
-    }
-    
-    private func compressImage(_ image: UIImage) -> Data? {
-        let newSize = CGSize(width: image.size.width * 0.3, height: image.size.height * 0.3)
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-        let compressedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        if let compressedImageData = compressedImage?.jpegData(compressionQuality: 0.3) {
-            return compressedImageData
-        } else {
-            return nil
         }
     }
 }

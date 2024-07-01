@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct BunchModel: Codable, Identifiable, Hashable, Equatable {
+struct BunchModel: Identifiable, Hashable, Equatable {
     var id: UUID
     var startDate: Date
     var endDate: Date
@@ -29,7 +29,7 @@ struct BunchModel: Codable, Identifiable, Hashable, Equatable {
     }
     
     var image: UIImage? {
-        self.memories.first?.photos.first?.image
+        self.memories.first?.photos.first
     }
     
     var term: String {

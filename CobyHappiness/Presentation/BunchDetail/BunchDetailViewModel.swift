@@ -24,10 +24,10 @@ final class BunchDetailViewModel: ObservableObject {
         self.errorMessage = message
     }
     
-    func removeBunch(bunch: BunchModel) {
+    func removeBunch(id: UUID) {
         Task {
             do {
-                try await self.usecase.removeBunch(bunch: bunch)
+                try await self.usecase.removeBunch(id: id)
             } catch(let error) {
                 await self.showErrorMessage(error.localizedDescription)
             }
