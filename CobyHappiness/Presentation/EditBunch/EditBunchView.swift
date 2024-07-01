@@ -12,6 +12,8 @@ import ComposableArchitecture
 
 struct EditBunchView: View {
     
+    @Environment(\.dismiss) private var dismiss
+    
     @Bindable private var store: StoreOf<EditBunchStore>
     
     init(store: StoreOf<EditBunchStore>) {
@@ -50,6 +52,9 @@ struct EditBunchView: View {
         .background(Color.backgroundNormalNormal)
         .onAppear {
             self.store.send(.getMemories)
+        }
+        .onChange(of: self.store.isPresented) {
+            self.dismiss()
         }
         .alert("뭉치 만들기", isPresented: self.$store.showingAlert) {
             TextField(self.store.bunch.title, text: self.$store.bunch.title)

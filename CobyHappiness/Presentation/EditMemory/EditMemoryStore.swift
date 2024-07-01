@@ -16,6 +16,7 @@ struct EditMemoryStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
+        var isPresented: Bool = true
         var memory: MemoryModel
         
         init(
@@ -33,7 +34,6 @@ struct EditMemoryStore: Reducer {
         case dismiss
     }
     
-    @Dependency(\.dismiss) private var dismiss
     @Dependency(\.editMemoryClient) private var editMemoryClient
     
     var body: some ReducerOf<Self> {
@@ -56,9 +56,8 @@ struct EditMemoryStore: Reducer {
             case .saveMemoryResponse:
                 return .send(.dismiss)
             case .dismiss:
-                return .run { send in
-                    await self.dismiss()
-                }
+                state.isPresented = false
+                return .none
             }
         }
     }

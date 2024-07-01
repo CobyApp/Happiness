@@ -14,6 +14,8 @@ import ComposableArchitecture
 
 struct EditMemoryView: View {
     
+    @Environment(\.dismiss) private var dismiss
+    
     @Bindable private var store: StoreOf<EditMemoryStore>
     
     @State private var selectedItems: [PhotosPickerItem] = []
@@ -63,6 +65,9 @@ struct EditMemoryView: View {
         .background(Color.backgroundNormalNormal)
         .onTapGesture {
             self.closeKeyboard()
+        }
+        .onChange(of: self.store.isPresented) {
+            self.dismiss()
         }
     }
     

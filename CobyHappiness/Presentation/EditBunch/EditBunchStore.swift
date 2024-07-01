@@ -14,6 +14,7 @@ struct EditBunchStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
+        var isPresented: Bool = true
         var showingAlert = false
         var memories: [MemoryModel] = []
         var bunch: BunchModel
@@ -35,7 +36,6 @@ struct EditBunchStore: Reducer {
         case dismiss
     }
     
-    @Dependency(\.dismiss) private var dismiss
     @Dependency(\.editBunchClient) private var editBunchClient
     
     var body: some ReducerOf<Self> {
@@ -73,9 +73,8 @@ struct EditBunchStore: Reducer {
                 state.showingAlert = true
                 return .none
             case .dismiss:
-                return .run { send in
-                    await self.dismiss()
-                }
+                state.isPresented = false
+                return .none
             }
         }
     }
