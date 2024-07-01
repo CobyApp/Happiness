@@ -16,7 +16,7 @@ extension Memory {
             title: self.title,
             note: self.note,
             location: self.location,
-            photos: self.photos.compactMap { $0.image },
+            photos: self.photos.compactMap { UIImage(data: $0) },
             bunches: self.bunches.map { $0.toBunchModel() }
         )
     }

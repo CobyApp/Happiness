@@ -73,10 +73,10 @@ final class AppRepositoryImpl: AppRepository {
             id: request.id,
             startDate: request.startDate,
             endDate: request.endDate,
-            title: request.title,
-            memories: memories
+            title: request.title
         )
         self.container.mainContext.insert(bunch)
+        bunch.memories = memories
         return try self.container.mainContext.save()
     }
     
