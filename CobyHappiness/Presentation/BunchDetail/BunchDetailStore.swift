@@ -14,6 +14,7 @@ struct BunchDetailStore: Reducer {
     @ObservableState
     struct State: Equatable {
         var appModel: AppViewModel
+        var isPresented: Bool = true
         var showingSheet = false
         var showingAlert = false
         var showingEditBunchView: Bool = false
@@ -39,7 +40,6 @@ struct BunchDetailStore: Reducer {
         case dismiss
     }
     
-    @Dependency(\.dismiss) private var dismiss
     @Dependency(\.bunchDetailClient) private var bunchDetailClient
     
     var body: some ReducerOf<Self> {
@@ -72,9 +72,8 @@ struct BunchDetailStore: Reducer {
                 state.appModel.showDetailView = true
                 return .none
             case .dismiss:
-                return .run { send in
-                    await self.dismiss()
-                }
+                state.isPresented = false
+                return .none
             }
         }
     }

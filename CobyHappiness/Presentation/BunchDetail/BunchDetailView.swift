@@ -12,6 +12,8 @@ import ComposableArchitecture
 
 struct BunchDetailView: View {
     
+    @Environment(\.dismiss) private var dismiss
+    
     @Bindable private var store: StoreOf<BunchDetailStore>
     
     init(store: StoreOf<BunchDetailStore>) {
@@ -71,6 +73,9 @@ struct BunchDetailView: View {
             )) {
                 EditBunchStore()
             })
+        }
+        .onChange(of: self.store.isPresented) {
+            self.dismiss()
         }
     }
     

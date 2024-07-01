@@ -27,7 +27,6 @@ struct BunchStore: Reducer {
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
         case showEditBunch
-        case showBunchDetail(BunchModel)
         case getBunches
         case getBunchesResponse(TaskResult<[BunchModel]>)
     }
@@ -43,8 +42,6 @@ struct BunchStore: Reducer {
                 return .none
             case .showEditBunch:
                 state.showingEditBunchView = true
-                return .none
-            case .showBunchDetail(let bunch):
                 return .none
             case .getBunches:
                 return .run { send in
