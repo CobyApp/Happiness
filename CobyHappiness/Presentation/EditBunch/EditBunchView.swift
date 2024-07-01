@@ -48,6 +48,9 @@ struct EditBunchView: View {
             .padding(.bottom, 20)
         }
         .background(Color.backgroundNormalNormal)
+        .onAppear {
+            self.store.send(.getMemories)
+        }
         .alert("뭉치 만들기", isPresented: self.$store.showingAlert) {
             TextField(self.store.bunch.title, text: self.$store.bunch.title)
             
