@@ -44,7 +44,9 @@ struct BunchView: View {
                 self.store.send(.getBunches)
             }
         ) {
-            EditBunchView()
+            EditBunchView(store: Store(initialState: EditBunchStore.State()) {
+                EditBunchStore()
+            })
         }
         .onAppear {
             self.store.send(.getBunches)

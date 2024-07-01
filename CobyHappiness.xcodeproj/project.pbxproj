@@ -59,7 +59,6 @@
 		CBC3A4122C2BE5CE00B62F82 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = CBC3A4112C2BE5CE00B62F82 /* ComposableArchitecture */; };
 		CBC3A4142C2BE5F300B62F82 /* HomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC3A4132C2BE5F300B62F82 /* HomeClient.swift */; };
 		CBC3A4162C2BE5F900B62F82 /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC3A4152C2BE5F900B62F82 /* HomeStore.swift */; };
-		CBFE3C4D2C1E00BD000E3351 /* EditMemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFE3C4C2C1E00BD000E3351 /* EditMemoryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,7 +114,6 @@
 		CBB21C972C16F273007E6AA2 /* MapRepresentableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepresentableView.swift; sourceTree = "<group>"; };
 		CBC3A4132C2BE5F300B62F82 /* HomeClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeClient.swift; sourceTree = "<group>"; };
 		CBC3A4152C2BE5F900B62F82 /* HomeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStore.swift; sourceTree = "<group>"; };
-		CBFE3C4C2C1E00BD000E3351 /* EditMemoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -366,7 +364,6 @@
 			isa = PBXGroup;
 			children = (
 				CB4063B02C1763EA00654F89 /* EditMemoryView.swift */,
-				CBFE3C4C2C1E00BD000E3351 /* EditMemoryViewModel.swift */,
 				CB4511F82C32936200B5FA02 /* EditMemoryStore.swift */,
 				CB4511FA2C32936700B5FA02 /* EditMemoryClient.swift */,
 			);
@@ -501,7 +498,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB8836AC2C2BE6AC0037CEC7 /* BunchModel.swift in Sources */,
-				CBFE3C4D2C1E00BD000E3351 /* EditMemoryViewModel.swift in Sources */,
 				CB4511F72C32933200B5FA02 /* EditBunchStore.swift in Sources */,
 				CBB21C982C16F273007E6AA2 /* MapRepresentableView.swift in Sources */,
 				CB4063B32C189B4B00654F89 /* Bunch.swift in Sources */,

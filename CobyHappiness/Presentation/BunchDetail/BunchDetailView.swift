@@ -66,7 +66,11 @@ struct BunchDetailView: View {
         .fullScreenCover(
             isPresented: self.$store.showingEditBunchView
         ) {
-            EditBunchView(bunch: self.store.bunch)
+            EditBunchView(store: Store(initialState: EditBunchStore.State(
+                bunch: self.store.bunch
+            )) {
+                EditBunchStore()
+            })
         }
     }
     
