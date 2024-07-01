@@ -34,7 +34,16 @@ final class AppRepositoryImpl: AppRepository {
     }
     
     @MainActor
-    func saveMemory(memory: Memory) async throws {
+    func saveMemory(request: SaveMemoryRequest) async throws {
+        let memory = Memory(
+            id: request.id,
+            date: request.date,
+            type: request.type,
+            title: request.title,
+            note: request.note,
+            location: request.location,
+            photos: request.photos
+        )
         self.container.mainContext.insert(memory)
         return try self.container.mainContext.save()
     }
@@ -58,7 +67,15 @@ final class AppRepositoryImpl: AppRepository {
     }
     
     @MainActor
-    func saveBunch(bunch: Bunch) async throws {
+    func saveBunch(request: SaveBunchRequest) async throws {
+//        let memories = try await request.memories.asyncMap { try await self.getMemory(id: $0) }
+        let bunch = Bunch(
+            id: request.id,
+            startDate: request.startDate,
+            endDate: request.endDate,
+            title: request.title
+//            memories: memories
+        )
         self.container.mainContext.insert(bunch)
         return try self.container.mainContext.save()
     }

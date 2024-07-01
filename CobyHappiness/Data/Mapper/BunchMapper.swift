@@ -18,15 +18,3 @@ extension Bunch {
         )
     }
 }
-
-extension BunchModel {
-    func toBunch() -> Bunch {
-        Bunch(
-            id: self.id,
-            startDate: self.startDate,
-            endDate: self.endDate,
-            title: self.title,
-            memories: self.memories.map { $0.toMemory() }
-        )
-    }
-}

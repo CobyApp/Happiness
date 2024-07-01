@@ -32,7 +32,14 @@ extension EditBunchClient: DependencyKey {
         },
         saveBunch: { bunch in
             do {
-                return try await AppUsecase(AppRepositoryImpl()).saveBunch(bunch: bunch)
+                let request = SaveBunchRequest(
+                    id: bunch.id,
+                    startDate: bunch.startDate,
+                    endDate: bunch.endDate,
+                    title: bunch.title,
+                    memories: bunch.memories.map { $0.id }
+                )
+                return try await AppUsecase(AppRepositoryImpl()).saveBunch(request: request)
             } catch(let error) {
                 throw error
             }

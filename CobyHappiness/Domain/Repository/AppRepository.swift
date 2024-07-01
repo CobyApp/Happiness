@@ -12,12 +12,12 @@ protocol AppRepository {
     // Memory
     func getMemory(id: UUID) async throws -> Memory
     func getMemories() async throws -> [Memory]
-    func saveMemory(memory: Memory) async throws
+    func saveMemory(request: SaveMemoryRequest) async throws
     func deleteMemory(id: UUID) async throws
     
     // Bunch
     func getBunch(id: UUID) async throws -> Bunch
     func getBunches() async throws -> [Bunch]
-    func saveBunch(bunch: Bunch) async throws
+    func saveBunch(request: SaveBunchRequest) async throws
     func deleteBunch(id: UUID) async throws
 }

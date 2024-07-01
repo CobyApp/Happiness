@@ -24,7 +24,16 @@ extension EditMemoryClient: DependencyKey {
     static let liveValue = EditMemoryClient(
         saveMemory: { memory in
             do {
-                return try await AppUsecase(AppRepositoryImpl()).saveMemory(memory: memory)
+                let request = SaveMemoryRequest(
+                    id: memory.id,
+                    date: memory.date,
+                    type: memory.type,
+                    title: memory.title,
+                    note: memory.note,
+                    location: memory.location,
+                    photos: memory.photos.map { $0.compressImage }
+                )
+                return try await AppUsecase(AppRepositoryImpl()).saveMemory(request: request)
             } catch(let error) {
                 throw error
             }

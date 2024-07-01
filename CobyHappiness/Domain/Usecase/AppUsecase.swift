@@ -5,7 +5,7 @@
 //  Created by Coby on 6/26/24.
 //
 
-import Foundation
+import UIKit
 
 final class AppUsecase {
     
@@ -31,9 +31,9 @@ final class AppUsecase {
         }
     }
     
-    func saveMemory(memory: MemoryModel) async throws {
+    func saveMemory(request: SaveMemoryRequest) async throws {
         do {
-            return try await self.repository.saveMemory(memory: memory.toMemory())
+            return try await self.repository.saveMemory(request: request)
         } catch(let error) {
             throw error
         }
@@ -63,9 +63,9 @@ final class AppUsecase {
         }
     }
     
-    func saveBunch(bunch: BunchModel) async throws {
+    func saveBunch(request: SaveBunchRequest) async throws {
         do {
-            return try await self.repository.saveBunch(bunch: bunch.toBunch())
+            return try await self.repository.saveBunch(request: request)
         } catch(let error) {
             throw error
         }
@@ -76,6 +76,22 @@ final class AppUsecase {
             return try await self.repository.deleteBunch(id: id)
         } catch(let error) {
             throw error
+        }
+    }
+}
+
+extension AppUsecase {
+    private func compressImage(_ image: UIImage) -> Data? {
+        let newSize = CGSize(width: image.size.width * 0.3, height: image.size.height * 0.3)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        let compressedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        if let compressedImageData = compressedImage?.jpegData(compressionQuality: 0.3) {
+            return compressedImageData
+        } else {
+            return nil
         }
     }
 }

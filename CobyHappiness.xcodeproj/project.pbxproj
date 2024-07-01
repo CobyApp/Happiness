@@ -59,6 +59,9 @@
 		CBC3A4122C2BE5CE00B62F82 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = CBC3A4112C2BE5CE00B62F82 /* ComposableArchitecture */; };
 		CBC3A4142C2BE5F300B62F82 /* HomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC3A4132C2BE5F300B62F82 /* HomeClient.swift */; };
 		CBC3A4162C2BE5F900B62F82 /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC3A4152C2BE5F900B62F82 /* HomeStore.swift */; };
+		CBF1787C2C330FDD00C81F4A /* SaveBunchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF1787B2C330FDD00C81F4A /* SaveBunchRequest.swift */; };
+		CBF1787E2C33107B00C81F4A /* SaveMemoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF1787D2C33107B00C81F4A /* SaveMemoryRequest.swift */; };
+		CBF178802C3314D900C81F4A /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF1787F2C3314D900C81F4A /* Sequence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +117,9 @@
 		CBB21C972C16F273007E6AA2 /* MapRepresentableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepresentableView.swift; sourceTree = "<group>"; };
 		CBC3A4132C2BE5F300B62F82 /* HomeClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeClient.swift; sourceTree = "<group>"; };
 		CBC3A4152C2BE5F900B62F82 /* HomeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStore.swift; sourceTree = "<group>"; };
+		CBF1787B2C330FDD00C81F4A /* SaveBunchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveBunchRequest.swift; sourceTree = "<group>"; };
+		CBF1787D2C33107B00C81F4A /* SaveMemoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMemoryRequest.swift; sourceTree = "<group>"; };
+		CBF1787F2C3314D900C81F4A /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */,
+				CBF1787F2C3314D900C81F4A /* Sequence.swift */,
 				CB4196082C19CF00003D958C /* UIImage+Assets.swift */,
 				CB41960A2C19D19B003D958C /* Data+Extensions.swift */,
 			);
@@ -409,9 +416,19 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
+		CBF1787A2C330FB600C81F4A /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				CBF1787B2C330FDD00C81F4A /* SaveBunchRequest.swift */,
+				CBF1787D2C33107B00C81F4A /* SaveMemoryRequest.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
 		CBFE3C472C1DFC0A000E3351 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				CBF1787A2C330FB600C81F4A /* DTO */,
 				CB8836AF2C2BE79C0037CEC7 /* Mapper */,
 				CB09A5462C2B113200CB8485 /* SwiftData */,
 				CB09A54A2C2B119C00CB8485 /* Repository */,
@@ -514,11 +531,13 @@
 				CBAD45602C15841D009D4EFF /* ProfileView.swift in Sources */,
 				CB09A5492C2B115800CB8485 /* MemoryType.swift in Sources */,
 				CBAD45692C15EBB1009D4EFF /* LocationModel.swift in Sources */,
+				CBF1787E2C33107B00C81F4A /* SaveMemoryRequest.swift in Sources */,
 				CB4063BC2C18A66200654F89 /* SelectMemoriesView.swift in Sources */,
 				CB8836AE2C2BE6B10037CEC7 /* MemoryModel.swift in Sources */,
 				CBAD455A2C1582A7009D4EFF /* MapView.swift in Sources */,
 				CB7D46E32C2D3D5B001E5E32 /* MapStore.swift in Sources */,
 				CB4511F92C32936200B5FA02 /* EditMemoryStore.swift in Sources */,
+				CBF178802C3314D900C81F4A /* Sequence.swift in Sources */,
 				CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */,
 				CB8836B12C2BE7B90037CEC7 /* BunchMapper.swift in Sources */,
 				CB4196012C18B83E003D958C /* BunchDetailView.swift in Sources */,
@@ -538,6 +557,7 @@
 				CBAF772F2C2D539800F40F76 /* BunchDetailClient.swift in Sources */,
 				CB4511FB2C32936700B5FA02 /* EditMemoryClient.swift in Sources */,
 				CB0D58EA2C1EE83B00EFE3D3 /* EditBunchView.swift in Sources */,
+				CBF1787C2C330FDD00C81F4A /* SaveBunchRequest.swift in Sources */,
 				CB09A5422C27EBB900CB8485 /* SettingView.swift in Sources */,
 				CB7D46E52C2D3D60001E5E32 /* MapClient.swift in Sources */,
 				CBAF77292C2D4E6700F40F76 /* ProfileStore.swift in Sources */,
