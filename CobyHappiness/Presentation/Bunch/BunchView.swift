@@ -76,7 +76,13 @@ struct BunchView: View {
                 .padding(.bottom, 20)
             }
             .navigationDestination(for: BunchModel.self) { bunch in
-                BunchDetailView(viewModel: BunchDetailViewModel(), bunch: bunch).navigationBarHidden(true)
+                BunchDetailView(store: Store(initialState: BunchDetailStore.State(
+                    appModel: self.store.appModel,
+                    bunch: bunch
+                )) {
+                    BunchDetailStore()
+                })
+                .navigationBarHidden(true)
             }
         }
     }

@@ -39,9 +39,9 @@ final class AppUsecase {
         }
     }
     
-    func removeMemory(id: UUID) async throws {
+    func deleteMemory(id: UUID) async throws {
         do {
-            return try await self.repository.removeMemory(id: id)
+            return try await self.repository.deleteMemory(id: id)
         } catch(let error) {
             throw error
         }
@@ -71,9 +71,9 @@ final class AppUsecase {
         }
     }
     
-    func removeBunch(id: UUID) async throws {
+    func deleteBunch(id: UUID) async throws {
         do {
-            return try await self.repository.removeBunch(id: id)
+            return try await self.repository.deleteBunch(id: id)
         } catch(let error) {
             throw error
         }

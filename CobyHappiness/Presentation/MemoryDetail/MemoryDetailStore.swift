@@ -33,8 +33,8 @@ struct MemoryDetailStore: Reducer {
         case showOptionSheet
         case showDeleteAlert
         case showEditMemory
-        case removeMemory(UUID)
-        case removeMemoryResponse
+        case deleteMemory(UUID)
+        case deleteMemoryResponse
         case closeMemoryDetail
     }
     
@@ -56,14 +56,14 @@ struct MemoryDetailStore: Reducer {
             case .showEditMemory:
                 state.showingEditMemoryView = true
                 return .none
-            case .removeMemory(let id):
+            case .deleteMemory(let id):
                 return .run { send in
                     let _ = await TaskResult {
-                        try await memoryDetailClient.removeMemory(id)
+                        try await memoryDetailClient.deleteMemory(id)
                     }
-                    await send(.removeMemoryResponse)
+                    await send(.deleteMemoryResponse)
                 }
-            case .removeMemoryResponse:
+            case .deleteMemoryResponse:
                 return .send(.closeMemoryDetail)
             case .closeMemoryDetail:
                 state.appModel.currentActiveItem = nil

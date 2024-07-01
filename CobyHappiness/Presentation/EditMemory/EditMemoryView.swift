@@ -10,30 +10,20 @@ import MapKit
 import PhotosUI
 
 import CobyDS
+import ComposableArchitecture
 
 struct EditMemoryView: View {
     
-    @Environment(\.dismiss) private var dismiss
-    
-    @StateObject private var viewModel: EditMemoryViewModel
-    
+    @Bindable private var store: StoreOf<EditMemoryStore>
     @State private var selectedItems: [PhotosPickerItem] = []
     
-    @State private var type: MemoryType = MemoryType.moment
-    @State private var date: Date = Date()
-    @State private var title: String = ""
-    @State private var note: String = ""
-    @State private var location: LocationModel? = nil
-    @State private var photos: [UIImage] = []
-    
-    var isDisabled: Bool {
-        self.photos.isEmpty || self.title == "" || self.note == ""
+    init(store: StoreOf<EditMemoryStore>) {
+        self.store = store
     }
     
-    init(
-        viewModel: EditMemoryViewModel
-    ) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
+    var isDisabled: Bool {
+        true
+//        self.photos.isEmpty || self.title == "" || self.note == ""
     }
     
     var body: some View {
@@ -41,7 +31,7 @@ struct EditMemoryView: View {
             TopBarView(
                 leftSide: .left,
                 leftAction: {
-                    self.dismiss()
+                    self.store.send(.dismiss)
                 },
                 title: "추억 기록"
             )
@@ -56,15 +46,7 @@ struct EditMemoryView: View {
             
             Button {
                 if !self.isDisabled {
-                    self.viewModel.appendMemory(
-                        type: self.type,
-                        date: self.date,
-                        title: self.title,
-                        note: self.note,
-                        location: self.location,
-                        photos: self.photos
-                    )
-                    self.dismiss()
+                    self.store.send(.saveMemory(self.store.memory))
                 }
             } label: {
                 Text("추억 만들기")
@@ -81,14 +63,6 @@ struct EditMemoryView: View {
         .background(Color.backgroundNormalNormal)
         .onTapGesture {
             self.closeKeyboard()
-        }
-        .onAppear {
-            if let memory = self.viewModel.getMemory() {
-                self.type = memory.type
-                self.title = memory.title
-                self.note = memory.note
-                self.photos = memory.photos
-            }
         }
     }
     
@@ -125,14 +99,10 @@ struct EditMemoryView: View {
                             )
                     }
                     .onChange(of: self.selectedItems) {
-                        self.viewModel.setPhotos(items: self.selectedItems) { photos, date, location in
-                            self.photos = photos
-                            self.date = date
-                            self.location = location
-                        }
+                        self.store.send(.setPhotos(self.selectedItems))
                     }
                     
-                    ForEach(self.photos, id: \.self) { image in
+                    ForEach(self.store.memory.photos, id: \.self) { image in
                         ThumbnailView(image: image)
                             .frame(width: 80, height: 80)
                     }
@@ -146,13 +116,13 @@ struct EditMemoryView: View {
     func ContentView() -> some View {
         VStack(spacing: 20) {
             CBTextFieldView(
-                text: self.$title,
+                text: self.$store.memory.title,
                 title: "제목",
                 placeholder: "제목을 입력해주세요."
             )
             
             CBTextAreaView(
-                text: self.$note,
+                text: self.$store.memory.note,
                 title: "내용",
                 placeholder: "내용을 입력해주세요."
             )

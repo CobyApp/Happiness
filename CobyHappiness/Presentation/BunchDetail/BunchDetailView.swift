@@ -6,29 +6,16 @@
 //
 
 import SwiftUI
-import SwiftData
 
 import CobyDS
+import ComposableArchitecture
 
 struct BunchDetailView: View {
     
-    @EnvironmentObject private var appModel: AppViewModel
-    @Environment(\.dismiss) private var dismiss
+    @Bindable private var store: StoreOf<BunchDetailStore>
     
-    @StateObject private var viewModel: BunchDetailViewModel
-    
-    @State private var showingSheet = false
-    @State private var showingAlert = false
-    @State private var isPresented: Bool = false
-    
-    private var bunch: BunchModel
-    
-    init(
-        viewModel: BunchDetailViewModel,
-        bunch: BunchModel
-    ) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
-        self.bunch = bunch
+    init(store: StoreOf<BunchDetailStore>) {
+        self.store = store
     }
     
     var body: some View {
@@ -36,70 +23,68 @@ struct BunchDetailView: View {
             TopBarView(
                 leftSide: .left,
                 leftAction: {
-                    self.dismiss()
+                    self.store.send(.dismiss)
                 },
                 rightSide: .icon,
                 rightIcon: UIImage.icMore,
                 rightAction: {
-                    self.showingSheet = true
+                    self.store.send(.showOptionSheet)
                 }
             )
             
-            MemoryListView()
+            MemoryListView(memories: self.store.bunch.memories)
         }
         .edgesIgnoringSafeArea(.bottom)
-        .actionSheet(isPresented: self.$showingSheet) {
+        .actionSheet(isPresented: self.$store.showingSheet) {
             ActionSheet(
                 title: Text("원하는 옵션을 선택해주세요."),
                 message: nil,
                 buttons: [
                     .default(Text("편집")) {
-                        self.isPresented = true
+                        self.store.send(.showEditBunch)
                     },
                     .destructive(Text("삭제")) {
-                        self.showingAlert = true
+                        self.store.send(.showDeleteAlert)
                     },
                     .cancel(Text("취소"))
                 ]
             )
         }
-        .alert(isPresented: self.$showingAlert) {
+        .alert(isPresented: self.$store.showingAlert) {
             Alert(
                 title: Text("추억 뭉치를 삭제하시겠습니까?"),
                 message: nil,
                 primaryButton: .destructive(
                     Text("삭제"),
                     action: {
-                        self.viewModel.removeBunch(id: self.bunch.id)
-                        self.dismiss()
+                        self.store.send(.deleteBunch(self.store.bunch.id))
                     }
                 ),
                 secondaryButton: .cancel(Text("취소"))
             )
         }
         .fullScreenCover(
-            isPresented: self.$isPresented
+            isPresented: self.$store.showingEditBunchView
         ) {
-            EditBunchView(bunch: self.bunch)
+            EditBunchView(bunch: self.store.bunch)
         }
     }
     
     @ViewBuilder
-    private func MemoryListView() -> some View {
-        if self.bunch.memories.isEmpty {
+    private func MemoryListView(memories: [MemoryModel]) -> some View {
+        if memories.isEmpty {
             EmptyMemoryView(
                 showingButton: false
             )
         } else {
             ScrollView {
                 LazyVStack(spacing: 8) {
-                    ForEach(self.bunch.memories) { memory in
+                    ForEach(memories) { memory in
                         MemoryTileView(
                             memory: memory
                         )
                         .onTapGesture {
-                            self.appModel.currentActiveItem = memory
-                            self.appModel.showDetailView = true
+                            self.store.send(.showMemoryDetail(memory))
                         }
                     }
                 }

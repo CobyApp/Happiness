@@ -40,7 +40,9 @@ struct ContentView: View {
                         Label("지도", image: "map")
                     }
                     
-                    BunchView(store: Store(initialState: BunchStore.State()) {
+                    BunchView(store: Store(initialState: BunchStore.State(
+                        appModel: self.appModel
+                    )) {
                         BunchStore()
                     })
                     .tabItem {

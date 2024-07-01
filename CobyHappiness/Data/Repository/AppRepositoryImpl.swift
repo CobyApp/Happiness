@@ -40,7 +40,7 @@ final class AppRepositoryImpl: AppRepository {
     }
     
     @MainActor
-    func removeMemory(id: UUID) async throws {
+    func deleteMemory(id: UUID) async throws {
         let memory = try await self.getMemory(id: id)
         return self.container.mainContext.delete(memory)
     }
@@ -64,7 +64,7 @@ final class AppRepositoryImpl: AppRepository {
     }
     
     @MainActor
-    func removeBunch(id: UUID) async throws {
+    func deleteBunch(id: UUID) async throws {
         let bunch = try await self.getBunch(id: id)
         return self.container.mainContext.delete(bunch)
     }

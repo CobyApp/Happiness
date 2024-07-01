@@ -12,7 +12,6 @@
 		CB09A54C2C2B11C300CB8485 /* AppRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB09A54B2C2B11C300CB8485 /* AppRepositoryImpl.swift */; };
 		CB09A54F2C2B120200CB8485 /* AppRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB09A54E2C2B120200CB8485 /* AppRepository.swift */; };
 		CB09A5522C2B146700CB8485 /* AppUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB09A5512C2B146700CB8485 /* AppUsecase.swift */; };
-		CB0D58E52C1E183300EFE3D3 /* EditBunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E42C1E183300EFE3D3 /* EditBunchViewModel.swift */; };
 		CB0D58EA2C1EE83B00EFE3D3 /* EditBunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E92C1EE83B00EFE3D3 /* EditBunchView.swift */; };
 		CB0D58EE2C21CB7200EFE3D3 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58ED2C21CB7200EFE3D3 /* AppViewModel.swift */; };
 		CB2471012ADABBFC00EEA032 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2471002ADABBFC00EEA032 /* PlaceModel.swift */; };
@@ -23,6 +22,10 @@
 		CB4196012C18B83E003D958C /* BunchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4196002C18B83E003D958C /* BunchDetailView.swift */; };
 		CB4196092C19CF00003D958C /* UIImage+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4196082C19CF00003D958C /* UIImage+Assets.swift */; };
 		CB41960B2C19D19B003D958C /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB41960A2C19D19B003D958C /* Data+Extensions.swift */; };
+		CB4511F52C32932A00B5FA02 /* EditBunchClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4511F42C32932A00B5FA02 /* EditBunchClient.swift */; };
+		CB4511F72C32933200B5FA02 /* EditBunchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4511F62C32933200B5FA02 /* EditBunchStore.swift */; };
+		CB4511F92C32936200B5FA02 /* EditMemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4511F82C32936200B5FA02 /* EditMemoryStore.swift */; };
+		CB4511FB2C32936700B5FA02 /* EditMemoryClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4511FA2C32936700B5FA02 /* EditMemoryClient.swift */; };
 		CB76292A2C267DF700138186 /* EmptyMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7629292C267DF700138186 /* EmptyMemoryView.swift */; };
 		CB76292C2C26898A00138186 /* EmptyBunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB76292B2C26898A00138186 /* EmptyBunchView.swift */; };
 		CB7D46E32C2D3D5B001E5E32 /* MapStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7D46E22C2D3D5B001E5E32 /* MapStore.swift */; };
@@ -56,7 +59,6 @@
 		CBC3A4122C2BE5CE00B62F82 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = CBC3A4112C2BE5CE00B62F82 /* ComposableArchitecture */; };
 		CBC3A4142C2BE5F300B62F82 /* HomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC3A4132C2BE5F300B62F82 /* HomeClient.swift */; };
 		CBC3A4162C2BE5F900B62F82 /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC3A4152C2BE5F900B62F82 /* HomeStore.swift */; };
-		CBFE3C4B2C1E0022000E3351 /* BunchDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFE3C4A2C1E0022000E3351 /* BunchDetailViewModel.swift */; };
 		CBFE3C4D2C1E00BD000E3351 /* EditMemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFE3C4C2C1E00BD000E3351 /* EditMemoryViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,7 +68,6 @@
 		CB09A54B2C2B11C300CB8485 /* AppRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRepositoryImpl.swift; sourceTree = "<group>"; };
 		CB09A54E2C2B120200CB8485 /* AppRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRepository.swift; sourceTree = "<group>"; };
 		CB09A5512C2B146700CB8485 /* AppUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUsecase.swift; sourceTree = "<group>"; };
-		CB0D58E42C1E183300EFE3D3 /* EditBunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchViewModel.swift; sourceTree = "<group>"; };
 		CB0D58E92C1EE83B00EFE3D3 /* EditBunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchView.swift; sourceTree = "<group>"; };
 		CB0D58ED2C21CB7200EFE3D3 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		CB2471002ADABBFC00EEA032 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
@@ -77,6 +78,10 @@
 		CB4196002C18B83E003D958C /* BunchDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchDetailView.swift; sourceTree = "<group>"; };
 		CB4196082C19CF00003D958C /* UIImage+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Assets.swift"; sourceTree = "<group>"; };
 		CB41960A2C19D19B003D958C /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
+		CB4511F42C32932A00B5FA02 /* EditBunchClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchClient.swift; sourceTree = "<group>"; };
+		CB4511F62C32933200B5FA02 /* EditBunchStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchStore.swift; sourceTree = "<group>"; };
+		CB4511F82C32936200B5FA02 /* EditMemoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoryStore.swift; sourceTree = "<group>"; };
+		CB4511FA2C32936700B5FA02 /* EditMemoryClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoryClient.swift; sourceTree = "<group>"; };
 		CB7629292C267DF700138186 /* EmptyMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMemoryView.swift; sourceTree = "<group>"; };
 		CB76292B2C26898A00138186 /* EmptyBunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBunchView.swift; sourceTree = "<group>"; };
 		CB7D46E22C2D3D5B001E5E32 /* MapStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStore.swift; sourceTree = "<group>"; };
@@ -110,7 +115,6 @@
 		CBB21C972C16F273007E6AA2 /* MapRepresentableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepresentableView.swift; sourceTree = "<group>"; };
 		CBC3A4132C2BE5F300B62F82 /* HomeClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeClient.swift; sourceTree = "<group>"; };
 		CBC3A4152C2BE5F900B62F82 /* HomeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStore.swift; sourceTree = "<group>"; };
-		CBFE3C4A2C1E0022000E3351 /* BunchDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchDetailViewModel.swift; sourceTree = "<group>"; };
 		CBFE3C4C2C1E00BD000E3351 /* EditMemoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -218,7 +222,8 @@
 			children = (
 				CB0D58E62C1EE82100EFE3D3 /* Component */,
 				CB0D58E92C1EE83B00EFE3D3 /* EditBunchView.swift */,
-				CB0D58E42C1E183300EFE3D3 /* EditBunchViewModel.swift */,
+				CB4511F62C32933200B5FA02 /* EditBunchStore.swift */,
+				CB4511F42C32932A00B5FA02 /* EditBunchClient.swift */,
 			);
 			path = EditBunch;
 			sourceTree = "<group>";
@@ -229,7 +234,6 @@
 				CB4196002C18B83E003D958C /* BunchDetailView.swift */,
 				CBAF772C2C2D539400F40F76 /* BunchDetailStore.swift */,
 				CBAF772E2C2D539800F40F76 /* BunchDetailClient.swift */,
-				CBFE3C4A2C1E0022000E3351 /* BunchDetailViewModel.swift */,
 			);
 			path = BunchDetail;
 			sourceTree = "<group>";
@@ -306,14 +310,14 @@
 			children = (
 				CB4063B52C18A1AD00654F89 /* Common */,
 				CBABE92D2ACB313400103BB0 /* Home */,
+				CBAB7F522ACD455200257778 /* MemoryDetail */,
+				CBABE9302ACB378500103BB0 /* EditMemory */,
 				CBAD45582C15829C009D4EFF /* Map */,
 				CBAD455B2C158308009D4EFF /* Bunch */,
+				CB4195FF2C18B800003D958C /* BunchDetail */,
+				CB4063B82C18A61200654F89 /* EditBunch */,
 				CBAD455E2C158416009D4EFF /* Profile */,
 				CB09A5402C27EB1000CB8485 /* Setting */,
-				CBAB7F522ACD455200257778 /* MemoryDetail */,
-				CB4195FF2C18B800003D958C /* BunchDetail */,
-				CBABE9302ACB378500103BB0 /* EditMemory */,
-				CB4063B82C18A61200654F89 /* EditBunch */,
 				CB09A5452C2B10D900CB8485 /* Util */,
 			);
 			path = Presentation;
@@ -363,6 +367,8 @@
 			children = (
 				CB4063B02C1763EA00654F89 /* EditMemoryView.swift */,
 				CBFE3C4C2C1E00BD000E3351 /* EditMemoryViewModel.swift */,
+				CB4511F82C32936200B5FA02 /* EditMemoryStore.swift */,
+				CB4511FA2C32936700B5FA02 /* EditMemoryClient.swift */,
 			);
 			path = EditMemory;
 			sourceTree = "<group>";
@@ -496,6 +502,7 @@
 			files = (
 				CB8836AC2C2BE6AC0037CEC7 /* BunchModel.swift in Sources */,
 				CBFE3C4D2C1E00BD000E3351 /* EditMemoryViewModel.swift in Sources */,
+				CB4511F72C32933200B5FA02 /* EditBunchStore.swift in Sources */,
 				CBB21C982C16F273007E6AA2 /* MapRepresentableView.swift in Sources */,
 				CB4063B32C189B4B00654F89 /* Bunch.swift in Sources */,
 				CBA038692ABF352F00BD74CF /* Memory.swift in Sources */,
@@ -509,17 +516,17 @@
 				CBAD455D2C158315009D4EFF /* BunchView.swift in Sources */,
 				CB76292A2C267DF700138186 /* EmptyMemoryView.swift in Sources */,
 				CBAD45602C15841D009D4EFF /* ProfileView.swift in Sources */,
-				CB0D58E52C1E183300EFE3D3 /* EditBunchViewModel.swift in Sources */,
-				CBFE3C4B2C1E0022000E3351 /* BunchDetailViewModel.swift in Sources */,
 				CB09A5492C2B115800CB8485 /* MemoryType.swift in Sources */,
 				CBAD45692C15EBB1009D4EFF /* LocationModel.swift in Sources */,
 				CB4063BC2C18A66200654F89 /* SelectMemoriesView.swift in Sources */,
 				CB8836AE2C2BE6B10037CEC7 /* MemoryModel.swift in Sources */,
 				CBAD455A2C1582A7009D4EFF /* MapView.swift in Sources */,
 				CB7D46E32C2D3D5B001E5E32 /* MapStore.swift in Sources */,
+				CB4511F92C32936200B5FA02 /* EditMemoryStore.swift in Sources */,
 				CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */,
 				CB8836B12C2BE7B90037CEC7 /* BunchMapper.swift in Sources */,
 				CB4196012C18B83E003D958C /* BunchDetailView.swift in Sources */,
+				CB4511F52C32932A00B5FA02 /* EditBunchClient.swift in Sources */,
 				CBABE92F2ACB313C00103BB0 /* HomeView.swift in Sources */,
 				CBAB7F4F2ACD402500257778 /* ContentView.swift in Sources */,
 				CB4063B72C18A1C200654F89 /* MemoryTileView.swift in Sources */,
@@ -533,6 +540,7 @@
 				CB2471012ADABBFC00EEA032 /* PlaceModel.swift in Sources */,
 				CBC3A4142C2BE5F300B62F82 /* HomeClient.swift in Sources */,
 				CBAF772F2C2D539800F40F76 /* BunchDetailClient.swift in Sources */,
+				CB4511FB2C32936700B5FA02 /* EditMemoryClient.swift in Sources */,
 				CB0D58EA2C1EE83B00EFE3D3 /* EditBunchView.swift in Sources */,
 				CB09A5422C27EBB900CB8485 /* SettingView.swift in Sources */,
 				CB7D46E52C2D3D60001E5E32 /* MapClient.swift in Sources */,
