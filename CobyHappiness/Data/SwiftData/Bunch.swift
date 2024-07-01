@@ -24,27 +24,12 @@ final class Bunch {
         startDate: Date,
         endDate: Date,
         title: String,
-        memories: [Memory]
+        memories: [Memory] = []
     ) {
         self.id = id
         self.startDate = startDate
         self.endDate = endDate
         self.title = title
         self.memories = memories
-    }
-    
-    var image: UIImage? {
-        self.memories.first?.photos.first?.image
-    }
-    
-    var term: String {
-        let startDate = self.startDate.format("MMM d, yyyy")
-        let endDate = self.endDate.format("MMM d, yyyy")
-        
-        if startDate == endDate {
-            return startDate
-        } else {
-            return "\(startDate) ~ \(endDate)"
-        }
     }
 }

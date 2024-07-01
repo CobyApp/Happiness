@@ -85,6 +85,7 @@ struct BunchDetailView: View {
             EmptyMemoryView(
                 showingButton: false
             )
+            .padding(.top, -100)
         } else {
             ScrollView {
                 LazyVStack(spacing: 8) {
