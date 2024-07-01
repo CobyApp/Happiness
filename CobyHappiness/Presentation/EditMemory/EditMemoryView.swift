@@ -15,6 +15,7 @@ import ComposableArchitecture
 struct EditMemoryView: View {
     
     @Bindable private var store: StoreOf<EditMemoryStore>
+    
     @State private var selectedItems: [PhotosPickerItem] = []
     
     init(store: StoreOf<EditMemoryStore>) {
@@ -22,8 +23,7 @@ struct EditMemoryView: View {
     }
     
     var isDisabled: Bool {
-        true
-//        self.photos.isEmpty || self.title == "" || self.note == ""
+        self.store.memory.photos.isEmpty || self.store.memory.title == "" || self.store.memory.note == ""
     }
     
     var body: some View {

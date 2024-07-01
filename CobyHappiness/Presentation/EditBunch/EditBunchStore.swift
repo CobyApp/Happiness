@@ -15,8 +15,8 @@ struct EditBunchStore: Reducer {
     @ObservableState
     struct State: Equatable {
         var showingAlert = false
-        var bunch: BunchModel
         var memories: [MemoryModel] = []
+        var bunch: BunchModel
         
         init(
             bunch: BunchModel = BunchModel()
@@ -68,11 +68,9 @@ struct EditBunchStore: Reducer {
             case .saveBunchResponse:
                 return .send(.dismiss)
             case .showTitleAlert:
-                if !state.bunch.memories.isEmpty {
-                    state.bunch.startDate = state.bunch.memories.map { $0.date }.min() ?? .now
-                    state.bunch.endDate = state.bunch.memories.map { $0.date }.max() ?? .now
-                    state.showingAlert = true
-                }
+                state.bunch.startDate = state.bunch.memories.map { $0.date }.min() ?? .now
+                state.bunch.endDate = state.bunch.memories.map { $0.date }.max() ?? .now
+                state.showingAlert = true
                 return .none
             case .dismiss:
                 return .run { send in
