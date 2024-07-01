@@ -32,7 +32,7 @@ extension MemoryDetailClient: DependencyKey {
         },
         removeMemory: { id in
             do {
-                return try await AppUsecase(AppRepositoryImpl()).removeBunch(id: id)
+                return try await AppUsecase(AppRepositoryImpl()).removeMemory(id: id)
             } catch(let error) {
                 throw error
             }

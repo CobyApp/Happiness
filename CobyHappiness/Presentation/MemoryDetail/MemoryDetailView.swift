@@ -29,7 +29,7 @@ struct MemoryDetailView: View {
         ) {
             VStack(spacing: 20) {
                 self.PhotoView(photos: self.store.memory.photos)
-                self.ContentView(memory: self.store.memory ?? .init())
+                self.ContentView(memory: self.store.memory)
             }
         }
         .overlay(
