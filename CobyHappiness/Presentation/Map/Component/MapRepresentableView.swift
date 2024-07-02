@@ -11,16 +11,15 @@ import CoreLocation
 
 struct MapRepresentableView: UIViewRepresentable {
     
+    @Binding var memories: [MemoryModel]
     @Binding var filteredMemories: [MemoryModel]
     
-    private var memories: [MemoryModel]
-    
     init(
-        filteredMemories: Binding<[MemoryModel]>,
-        memories: [MemoryModel]
+        memories: Binding<[MemoryModel]>,
+        filteredMemories: Binding<[MemoryModel]>
     ) {
+        self._memories = memories
         self._filteredMemories = filteredMemories
-        self.memories = memories
     }
     
     class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {

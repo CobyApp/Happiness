@@ -32,8 +32,8 @@ struct MapView: View {
             
             ZStack(alignment: .bottom) {
                 MapRepresentableView(
-                    filteredMemories: self.$store.filteredMemories,
-                    memories: self.store.memories
+                    memories: self.$store.memories,
+                    filteredMemories: self.$store.filteredMemories
                 )
                 
                 ScrollView(.horizontal) {
