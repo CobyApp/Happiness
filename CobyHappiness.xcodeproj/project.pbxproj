@@ -58,6 +58,8 @@
 		CBC3A4122C2BE5CE00B62F82 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = CBC3A4112C2BE5CE00B62F82 /* ComposableArchitecture */; };
 		CBC3A4142C2BE5F300B62F82 /* HomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC3A4132C2BE5F300B62F82 /* HomeClient.swift */; };
 		CBC3A4162C2BE5F900B62F82 /* HomeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC3A4152C2BE5F900B62F82 /* HomeStore.swift */; };
+		CBCA53802C34312E00544CC5 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCA537F2C34312E00544CC5 /* Database.swift */; };
+		CBCA53822C34316A00544CC5 /* AppDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCA53812C34316A00544CC5 /* AppDatabase.swift */; };
 		CBF1787C2C330FDD00C81F4A /* SaveBunchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF1787B2C330FDD00C81F4A /* SaveBunchRequest.swift */; };
 		CBF1787E2C33107B00C81F4A /* SaveMemoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF1787D2C33107B00C81F4A /* SaveMemoryRequest.swift */; };
 		CBF178802C3314D900C81F4A /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF1787F2C3314D900C81F4A /* Sequence.swift */; };
@@ -115,6 +117,8 @@
 		CBB21C972C16F273007E6AA2 /* MapRepresentableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepresentableView.swift; sourceTree = "<group>"; };
 		CBC3A4132C2BE5F300B62F82 /* HomeClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeClient.swift; sourceTree = "<group>"; };
 		CBC3A4152C2BE5F900B62F82 /* HomeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeStore.swift; sourceTree = "<group>"; };
+		CBCA537F2C34312E00544CC5 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		CBCA53812C34316A00544CC5 /* AppDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDatabase.swift; sourceTree = "<group>"; };
 		CBF1787B2C330FDD00C81F4A /* SaveBunchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveBunchRequest.swift; sourceTree = "<group>"; };
 		CBF1787D2C33107B00C81F4A /* SaveMemoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMemoryRequest.swift; sourceTree = "<group>"; };
 		CBF1787F2C3314D900C81F4A /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
@@ -413,6 +417,15 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
+		CBCA537E2C34311F00544CC5 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				CBCA537F2C34312E00544CC5 /* Database.swift */,
+				CBCA53812C34316A00544CC5 /* AppDatabase.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		CBF1787A2C330FB600C81F4A /* DTO */ = {
 			isa = PBXGroup;
 			children = (
@@ -425,6 +438,7 @@
 		CBFE3C472C1DFC0A000E3351 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				CBCA537E2C34311F00544CC5 /* Service */,
 				CBF1787A2C330FB600C81F4A /* DTO */,
 				CB8836AF2C2BE79C0037CEC7 /* Mapper */,
 				CB09A5462C2B113200CB8485 /* SwiftData */,
@@ -517,6 +531,7 @@
 				CB4063B32C189B4B00654F89 /* Bunch.swift in Sources */,
 				CBA038692ABF352F00BD74CF /* Memory.swift in Sources */,
 				CB8836B72C2BF76E0037CEC7 /* MemoryDetailStore.swift in Sources */,
+				CBCA53822C34316A00544CC5 /* AppDatabase.swift in Sources */,
 				CB09A5522C2B146700CB8485 /* AppUsecase.swift in Sources */,
 				CBAB7F542ACD455E00257778 /* MemoryDetailView.swift in Sources */,
 				CB0D58EE2C21CB7200EFE3D3 /* AppViewModel.swift in Sources */,
@@ -541,6 +556,7 @@
 				CB4511F52C32932A00B5FA02 /* EditBunchClient.swift in Sources */,
 				CBABE92F2ACB313C00103BB0 /* HomeView.swift in Sources */,
 				CBAB7F4F2ACD402500257778 /* ContentView.swift in Sources */,
+				CBCA53802C34312E00544CC5 /* Database.swift in Sources */,
 				CB4063B72C18A1C200654F89 /* MemoryTileView.swift in Sources */,
 				CBC3A4162C2BE5F900B62F82 /* HomeStore.swift in Sources */,
 				CBAF77272C2D4CD200F40F76 /* BunchClient.swift in Sources */,

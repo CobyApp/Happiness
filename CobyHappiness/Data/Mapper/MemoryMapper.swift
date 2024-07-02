@@ -21,3 +21,18 @@ extension Memory {
         )
     }
 }
+
+extension MemoryModel {
+    func toMemory() -> Memory {
+        Memory(
+            id: self.id,
+            date: self.date,
+            type: self.type,
+            title: self.title,
+            note: self.note,
+            location: self.location,
+            photos: self.photos.map { $0.compressImage },
+            bunches: self.bunches.map { $0.toBunch() }
+        )
+    }
+}
