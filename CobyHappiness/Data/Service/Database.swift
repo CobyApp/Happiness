@@ -18,8 +18,7 @@ extension DependencyValues {
 
 fileprivate let appContext: ModelContext = {
     do {
-        let url = URL.applicationSupportDirectory.appending(path: "Model.sqlite")
-        let config = ModelConfiguration(url: url)
+        let config = ModelConfiguration(for: Bunch.self, Memory.self)
         let container = try ModelContainer(for: Bunch.self, Memory.self, configurations: config)
         return ModelContext(container)
     } catch {
