@@ -90,7 +90,7 @@ struct HomeView: View {
         ThumbnailCardView(
             image: memory.photos.first,
             title: memory.title,
-            description: memory.date.format("MMM d, yyyy"),
+            description: memory.date.format("yyyy년 MM월 dd일"),
             isShadowing: true
         )
         .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
