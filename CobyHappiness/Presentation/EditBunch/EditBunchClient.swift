@@ -37,7 +37,7 @@ extension EditBunchClient: DependencyKey {
                     startDate: bunch.startDate,
                     endDate: bunch.endDate,
                     title: bunch.title,
-                    memories: bunch.memories.map { $0.id }
+                    memoryIds: bunch.memories.map { $0.id }
                 )
                 return try await AppUsecase(AppRepositoryImpl()).saveBunch(request: request)
             } catch(let error) {

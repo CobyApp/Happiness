@@ -51,7 +51,8 @@ final class AppRepositoryImpl: AppRepository {
     @MainActor
     func deleteMemory(id: UUID) async throws {
         let memory = try await self.getMemory(id: id)
-        return self.container.mainContext.delete(memory)
+        self.container.mainContext.delete(memory)
+        return try self.container.mainContext.save()
     }
     
     @MainActor
@@ -68,21 +69,21 @@ final class AppRepositoryImpl: AppRepository {
     
     @MainActor
     func saveBunch(request: SaveBunchRequest) async throws {
-        let memories = try await request.memories.asyncMap { try await self.getMemory(id: $0) }
         let bunch = Bunch(
             id: request.id,
             startDate: request.startDate,
             endDate: request.endDate,
-            title: request.title
+            title: request.title,
+            memories: try await request.memoryIds.asyncMap { try await self.getMemory(id: $0) }
         )
         self.container.mainContext.insert(bunch)
-        bunch.memories = memories
         return try self.container.mainContext.save()
     }
     
     @MainActor
     func deleteBunch(id: UUID) async throws {
         let bunch = try await self.getBunch(id: id)
-        return self.container.mainContext.delete(bunch)
+        self.container.mainContext.delete(bunch)
+        return try self.container.mainContext.save()
     }
 }

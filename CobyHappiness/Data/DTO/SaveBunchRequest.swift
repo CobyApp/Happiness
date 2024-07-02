@@ -12,5 +12,5 @@ struct SaveBunchRequest: Codable {
     let startDate: Date
     let endDate: Date
     let title: String
-    let memories: [UUID]
+    let memoryIds: [UUID]
 }
