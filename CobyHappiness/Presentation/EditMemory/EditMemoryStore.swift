@@ -34,7 +34,7 @@ struct EditMemoryStore: Reducer {
         case dismiss
     }
     
-    @Dependency(\.swiftData) private var context
+    @Dependency(\.memoryData) private var memoryContext
     
     var body: some ReducerOf<Self> {
         BindingReducer()
@@ -49,7 +49,7 @@ struct EditMemoryStore: Reducer {
             case .saveMemory(let memory):
                 return .run { send in
                     let _ = await TaskResult {
-                        try self.context.addMemory(memory)
+                        try self.memoryContext.add(memory)
                     }
                     await send(.saveMemoryResponse)
                 }

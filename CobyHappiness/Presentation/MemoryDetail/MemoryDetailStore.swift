@@ -38,7 +38,7 @@ struct MemoryDetailStore: Reducer {
         case closeMemoryDetail
     }
     
-    @Dependency(\.swiftData) private var context
+    @Dependency(\.memoryData) private var memoryContext
     
     var body: some ReducerOf<Self> {
         BindingReducer()
@@ -59,7 +59,7 @@ struct MemoryDetailStore: Reducer {
             case .deleteMemory(let memory):
                 return .run { send in
                     let _ = await TaskResult {
-                        try self.context.deleteMemory(memory)
+                        try self.memoryContext.delete(memory)
                     }
                     await send(.deleteMemoryResponse)
                 }

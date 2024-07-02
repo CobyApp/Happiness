@@ -40,7 +40,7 @@ struct BunchDetailStore: Reducer {
         case dismiss
     }
     
-    @Dependency(\.swiftData) private var context
+    @Dependency(\.bunchData) private var bunchContext
     
     var body: some ReducerOf<Self> {
         BindingReducer()
@@ -61,7 +61,7 @@ struct BunchDetailStore: Reducer {
             case .deleteBunch(let bunch):
                 return .run { send in
                     let _ = await TaskResult {
-                        try self.context.deleteBunch(bunch)
+                        try self.bunchContext.delete(bunch)
                     }
                     await send(.deleteBunchResponse)
                 }
