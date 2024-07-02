@@ -28,7 +28,7 @@ final class Memory {
         title: String ,
         note: String,
         location: LocationModel?,
-        photos: [Data],
+        photos: [Data] = [],
         bunches: [Bunch] = []
     ) {
         self.id = id

@@ -30,7 +30,7 @@ extension MemoryModel {
             title: self.title,
             note: self.note,
             location: self.location,
-            photos: self.photos.compactMap { $0.compressedImage }
+            photos: self.photos.compactMap { $0.jpegData(compressionQuality: 1.0) }
         )
     }
 }
