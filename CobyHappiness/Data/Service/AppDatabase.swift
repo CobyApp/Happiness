@@ -65,6 +65,7 @@ extension AppDatabase: DependencyKey {
                 @Dependency(\.databaseService.context) var context
                 let bunchContext = try context()
                 bunchContext.insert(model.toBunch())
+                return try bunchContext.save()
             } catch {
                 throw AppError.addBunch
             }
@@ -74,6 +75,7 @@ extension AppDatabase: DependencyKey {
                 @Dependency(\.databaseService.context) var context
                 let bunchContext = try context()
                 bunchContext.delete(model.toBunch())
+                return try bunchContext.save()
             } catch {
                 throw AppError.deleteBunch
             }
@@ -102,6 +104,7 @@ extension AppDatabase: DependencyKey {
                 @Dependency(\.databaseService.context) var context
                 let memoryContext = try context()
                 memoryContext.insert(model.toMemory())
+                return try memoryContext.save()
             } catch {
                 throw AppError.addMemory
             }
@@ -111,6 +114,7 @@ extension AppDatabase: DependencyKey {
                 @Dependency(\.databaseService.context) var context
                 let memoryContext = try context()
                 memoryContext.delete(model.toMemory())
+                return try memoryContext.save()
             } catch {
                 throw AppError.deleteMemory
             }
