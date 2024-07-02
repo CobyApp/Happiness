@@ -24,20 +24,18 @@ struct AppDatabase {
     var addBunch: @Sendable (BunchModel) throws -> Void
     var deleteBunch: @Sendable (BunchModel) throws -> Void
     
-    enum BunchError: Error {
-        case add
-        case delete
-    }
-    
     // Memory
     var fetchAllMemory: @Sendable () throws -> [MemoryModel]
     var fetchMemory: @Sendable (FetchDescriptor<Memory>) throws -> [MemoryModel]
     var addMemory: @Sendable (MemoryModel) throws -> Void
     var deleteMemory: @Sendable (MemoryModel) throws -> Void
     
-    enum MemoryError: Error {
-        case add
-        case delete
+    // Error
+    enum AppError: Error {
+        case addBunch
+        case deleteBunch
+        case addMemory
+        case deleteMemory
     }
 }
 
@@ -68,7 +66,7 @@ extension AppDatabase: DependencyKey {
                 let bunchContext = try context()
                 bunchContext.insert(model.toBunch())
             } catch {
-                throw BunchError.add
+                throw AppError.addBunch
             }
         },
         deleteBunch: { model in
@@ -77,7 +75,7 @@ extension AppDatabase: DependencyKey {
                 let bunchContext = try context()
                 bunchContext.delete(model.toBunch())
             } catch {
-                throw BunchError.delete
+                throw AppError.deleteBunch
             }
         },
         fetchAllMemory: {
@@ -105,7 +103,7 @@ extension AppDatabase: DependencyKey {
                 let memoryContext = try context()
                 memoryContext.insert(model.toMemory())
             } catch {
-                throw MemoryError.add
+                throw AppError.addMemory
             }
         },
         deleteMemory: { model in
@@ -114,7 +112,7 @@ extension AppDatabase: DependencyKey {
                 let memoryContext = try context()
                 memoryContext.delete(model.toMemory())
             } catch {
-                throw MemoryError.delete
+                throw AppError.deleteMemory
             }
         }
     )
