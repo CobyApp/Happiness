@@ -38,6 +38,15 @@ struct BunchView: View {
             BunchGridView()
         }
         .background(Color.backgroundNormalNormal)
+        .navigationDestination(for: BunchModel.self) { bunch in
+            BunchDetailView(store: Store(initialState: BunchDetailStore.State(
+                appModel: self.store.appModel,
+                bunch: bunch
+            )) {
+                BunchDetailStore()
+            })
+            .navigationBarHidden(true)
+        }
         .fullScreenCover(
             isPresented: self.$store.showingEditBunchView,
             onDismiss: {
@@ -76,15 +85,6 @@ struct BunchView: View {
                 .padding(.horizontal, BaseSize.horizantalPadding)
                 .padding(.top, 8)
                 .padding(.bottom, 20)
-            }
-            .navigationDestination(for: BunchModel.self) { bunch in
-                BunchDetailView(store: Store(initialState: BunchDetailStore.State(
-                    appModel: self.store.appModel,
-                    bunch: bunch
-                )) {
-                    BunchDetailStore()
-                })
-                .navigationBarHidden(true)
             }
         }
     }
