@@ -36,7 +36,7 @@ struct EditBunchStore: Reducer {
         case dismiss
     }
     
-    @Dependency(\.editBunchClient) private var editBunchClient
+    @Dependency(\.swiftData) private var swiftData
     
     var body: some ReducerOf<Self> {
         BindingReducer()
@@ -48,7 +48,7 @@ struct EditBunchStore: Reducer {
             case .getMemories:
                 return .run { send in
                     let result = await TaskResult {
-                        try await editBunchClient.memories()
+                        try self.swiftData.fetchAllMemory()
                     }
                     await send(.getMemoriesResponse(result))
                 }
@@ -61,7 +61,7 @@ struct EditBunchStore: Reducer {
             case .saveBunch(let bunch):
                 return .run { send in
                     let _ = await TaskResult {
-                        try await self.editBunchClient.saveBunch(bunch)
+                        try self.swiftData.addBunch(bunch)
                     }
                     await send(.saveBunchResponse)
                 }

@@ -31,7 +31,7 @@ extension MemoryModel {
             title: self.title,
             note: self.note,
             location: self.location,
-            photos: self.photos.map { $0.compressImage },
+            photos: self.photos.map { $0.toData },
             bunches: self.bunches.map { $0.toBunch() }
         )
     }

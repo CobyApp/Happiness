@@ -34,13 +34,13 @@ struct BunchDetailStore: Reducer {
         case showOptionSheet
         case showDeleteAlert
         case showEditBunch
-        case deleteBunch(UUID)
+        case deleteBunch(BunchModel)
         case deleteBunchResponse
         case showMemoryDetail(MemoryModel)
         case dismiss
     }
     
-    @Dependency(\.bunchDetailClient) private var bunchDetailClient
+    @Dependency(\.swiftData) private var swiftData
     
     var body: some ReducerOf<Self> {
         BindingReducer()
@@ -58,10 +58,10 @@ struct BunchDetailStore: Reducer {
             case .showEditBunch:
                 state.showingEditBunchView = true
                 return .none
-            case .deleteBunch(let id):
+            case .deleteBunch(let bunch):
                 return .run { send in
                     let _ = await TaskResult {
-                        try await self.bunchDetailClient.deleteBunch(id)
+                        try self.swiftData.deleteBunch(bunch)
                     }
                     await send(.deleteBunchResponse)
                 }

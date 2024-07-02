@@ -31,7 +31,7 @@ struct MapStore: Reducer {
         case getMemoriesResponse(TaskResult<[MemoryModel]>)
     }
     
-    @Dependency(\.mapClient) private var mapClient
+    @Dependency(\.swiftData) private var swiftData
     
     var body: some ReducerOf<Self> {
         BindingReducer()
@@ -50,7 +50,7 @@ struct MapStore: Reducer {
             case .getMemories:
                 return .run { send in
                     let result = await TaskResult {
-                        try await mapClient.memories()
+                        try self.swiftData.fetchAllMemory()
                     }
                     await send(.getMemoriesResponse(result))
                 }

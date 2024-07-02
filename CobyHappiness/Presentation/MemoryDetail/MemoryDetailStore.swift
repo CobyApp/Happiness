@@ -33,12 +33,12 @@ struct MemoryDetailStore: Reducer {
         case showOptionSheet
         case showDeleteAlert
         case showEditMemory
-        case deleteMemory(UUID)
+        case deleteMemory(MemoryModel)
         case deleteMemoryResponse
         case closeMemoryDetail
     }
     
-    @Dependency(\.memoryDetailClient) private var memoryDetailClient
+    @Dependency(\.swiftData) private var swiftData
     
     var body: some ReducerOf<Self> {
         BindingReducer()
@@ -56,10 +56,10 @@ struct MemoryDetailStore: Reducer {
             case .showEditMemory:
                 state.showingEditMemoryView = true
                 return .none
-            case .deleteMemory(let id):
+            case .deleteMemory(let memory):
                 return .run { send in
                     let _ = await TaskResult {
-                        try await memoryDetailClient.deleteMemory(id)
+                        try self.swiftData.deleteMemory(memory)
                     }
                     await send(.deleteMemoryResponse)
                 }

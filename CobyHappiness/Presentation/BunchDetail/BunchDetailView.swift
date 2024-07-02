@@ -59,7 +59,7 @@ struct BunchDetailView: View {
                 primaryButton: .destructive(
                     Text("삭제"),
                     action: {
-                        self.store.send(.deleteBunch(self.store.bunch.id))
+                        self.store.send(.deleteBunch(self.store.bunch))
                     }
                 ),
                 secondaryButton: .cancel(Text("취소"))

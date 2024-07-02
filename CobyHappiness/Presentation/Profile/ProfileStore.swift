@@ -30,7 +30,7 @@ struct ProfileStore: Reducer {
         case navigateToSettingView
     }
     
-    @Dependency(\.profileClient) private var profileClient
+    @Dependency(\.swiftData) private var swiftData
     
     var body: some ReducerOf<Self> {
         BindingReducer()
@@ -46,7 +46,7 @@ struct ProfileStore: Reducer {
             case .getMemories:
                 return .run { send in
                     let result = await TaskResult {
-                        try await profileClient.memories()
+                        try self.swiftData.fetchAllMemory()
                     }
                     await send(.getMemoriesResponse(result))
                 }

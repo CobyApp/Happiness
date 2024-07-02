@@ -31,7 +31,7 @@ struct BunchStore: Reducer {
         case getBunchesResponse(TaskResult<[BunchModel]>)
     }
     
-    @Dependency(\.bunchClient) private var bunchClient
+    @Dependency(\.swiftData) private var swiftData
     
     var body: some ReducerOf<Self> {
         BindingReducer()
@@ -46,8 +46,7 @@ struct BunchStore: Reducer {
             case .getBunches:
                 return .run { send in
                     let result = await TaskResult {
-                        try await bunchClient.bunches()
-                    }
+                        try self.swiftData.fetchAllBunch()                    }
                     await send(.getBunchesResponse(result))
                 }
             case let .getBunchesResponse(.success(bunches)):

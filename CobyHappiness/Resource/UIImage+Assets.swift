@@ -36,4 +36,8 @@ extension UIImage {
         
         return (compressedImage?.jpegData(compressionQuality: 0.3))!
     }
+    
+    var toData: Data {
+        self.jpegData(compressionQuality: 1.0)!
+    }
 }
