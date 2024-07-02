@@ -14,7 +14,8 @@ final class AppRepositoryImpl: AppRepository {
     
     init() {
         do {
-            let config = ModelConfiguration(for: Bunch.self, Memory.self)
+            let url = URL.applicationSupportDirectory.appending(path: "Model.sqlite")
+            let config = ModelConfiguration(url: url)
             self.container = try ModelContainer(for: Bunch.self, Memory.self, configurations: config)
         } catch {
             fatalError("Failed to configure SwiftData container.")
@@ -73,10 +74,10 @@ final class AppRepositoryImpl: AppRepository {
             id: request.id,
             startDate: request.startDate,
             endDate: request.endDate,
-            title: request.title,
-            memories: try await request.memoryIds.asyncMap { try await self.getMemory(id: $0) }
+            title: request.title
         )
         self.container.mainContext.insert(bunch)
+        bunch.memories = try await request.memoryIds.asyncMap { try await self.getMemory(id: $0) }
         return try self.container.mainContext.save()
     }
     
