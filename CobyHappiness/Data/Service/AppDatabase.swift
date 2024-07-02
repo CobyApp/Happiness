@@ -64,7 +64,9 @@ extension AppDatabase: DependencyKey {
             do {
                 @Dependency(\.databaseService.context) var context
                 let bunchContext = try context()
-                bunchContext.insert(model.toBunch())
+                let bunch = model.toBunch()
+                bunchContext.insert(bunch)
+                bunch.memories = model.memories.map { $0.toMemory() }
                 return try bunchContext.save()
             } catch {
                 throw AppError.addBunch

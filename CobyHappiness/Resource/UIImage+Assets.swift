@@ -27,7 +27,7 @@ extension UIImage {
 }
 
 extension UIImage {
-    var compressImage: Data {
+    var compressedImage: Data {
         let newSize = CGSize(width: self.size.width * 0.3, height: self.size.height * 0.3)
         UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
         self.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))

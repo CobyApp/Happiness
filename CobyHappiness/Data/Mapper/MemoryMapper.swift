@@ -16,8 +16,7 @@ extension Memory {
             title: self.title,
             note: self.note,
             location: self.location,
-            photos: self.photos.compactMap { UIImage(data: $0) },
-            bunches: self.bunches.map { $0.toBunchModel() }
+            photos: self.photos.compactMap { UIImage(data: $0) }
         )
     }
 }
@@ -31,8 +30,7 @@ extension MemoryModel {
             title: self.title,
             note: self.note,
             location: self.location,
-            photos: self.photos.compactMap { $0.jpegData(compressionQuality: 1.0) },
-            bunches: self.bunches.map { $0.toBunch() }
+            photos: self.photos.compactMap { $0.compressedImage }
         )
     }
 }

@@ -18,8 +18,7 @@ extension DependencyValues {
 
 fileprivate let appContext: ModelContext = {
     do {
-        let config = ModelConfiguration(for: Bunch.self, Memory.self)
-        let container = try ModelContainer(for: Bunch.self, Memory.self, configurations: config)
+        let container = try ModelContainer(for: Bunch.self)
         return ModelContext(container)
     } catch {
         fatalError("Failed to create container.")
