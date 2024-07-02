@@ -18,11 +18,13 @@ extension DependencyValues {
 
 struct MemoryDatabase {
     var fetchAll: @Sendable () throws -> [MemoryModel]
+    var fetchById: @Sendable (UUID) throws -> MemoryModel
     var fetch: @Sendable (FetchDescriptor<Memory>) throws -> [MemoryModel]
     var add: @Sendable (MemoryModel) throws -> Void
     var delete: @Sendable (MemoryModel) throws -> Void
     
     enum MemoryError: Error {
+        case get
         case add
         case delete
     }
@@ -38,6 +40,16 @@ extension MemoryDatabase: DependencyKey {
                 return try memoryContext.fetch(descriptor).map { $0.toMemoryModel() }
             } catch {
                 return []
+            }
+        },
+        fetchById: { id in
+            do {
+                @Dependency(\.databaseService.context) var context
+                let memoryContext = try context()
+                let descriptor = FetchDescriptor<Memory>(predicate: #Predicate { $0.id == id })
+                return try memoryContext.fetch(descriptor).first!.toMemoryModel()
+            } catch {
+                throw MemoryError.get
             }
         },
         fetch: { descriptor in
@@ -79,6 +91,7 @@ extension MemoryDatabase: TestDependencyKey {
     
     public static let testValue = Self(
         fetchAll: unimplemented("\(Self.self).fetch"),
+        fetchById: unimplemented("\(Self.self).fetchById"),
         fetch: unimplemented("\(Self.self).fetchDescriptor"),
         add: unimplemented("\(Self.self).add"),
         delete: unimplemented("\(Self.self).delete")
@@ -86,6 +99,7 @@ extension MemoryDatabase: TestDependencyKey {
     
     static let noop = Self(
         fetchAll: { [] },
+        fetchById: { _ in .init() },
         fetch: { _ in [] },
         add: { _ in },
         delete: { _ in }

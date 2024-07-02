@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import SwiftData
 
 import ComposableArchitecture
+import Dependencies
 
 struct MemoryDetailStore: Reducer {
     
@@ -35,6 +37,8 @@ struct MemoryDetailStore: Reducer {
         case showEditMemory
         case deleteMemory(MemoryModel)
         case deleteMemoryResponse
+        case getMemory(MemoryModel)
+        case getMemoryResponse(TaskResult<MemoryModel>)
         case closeMemoryDetail
     }
     
@@ -65,6 +69,19 @@ struct MemoryDetailStore: Reducer {
                 }
             case .deleteMemoryResponse:
                 return .send(.closeMemoryDetail)
+            case .getMemory(let memory):
+                return .run { send in
+                    let result = await TaskResult {
+                        return try self.memoryContext.fetchById(memory.id)
+                    }
+                    await send(.getMemoryResponse(result))
+                }
+            case let .getMemoryResponse(.success(memory)):
+                state.memory = memory
+                return .none
+            case let .getMemoryResponse(.failure(error)):
+                print(error.localizedDescription)
+                return .none
             case .closeMemoryDetail:
                 state.appModel.currentActiveItem = nil
                 state.appModel.showDetailView = false

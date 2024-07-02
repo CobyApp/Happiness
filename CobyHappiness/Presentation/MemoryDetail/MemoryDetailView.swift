@@ -71,7 +71,12 @@ struct MemoryDetailView: View {
                 secondaryButton: .cancel(Text("취소"))
             )
         }
-        .fullScreenCover(isPresented: self.$store.showingEditMemoryView) {
+        .fullScreenCover(
+            isPresented: self.$store.showingEditMemoryView,
+            onDismiss: {
+                self.store.send(.getMemory(self.store.memory))
+            }
+        ) {
             EditMemoryView(store: Store(initialState: EditMemoryStore.State(
                 memory: self.store.memory
             )) {
