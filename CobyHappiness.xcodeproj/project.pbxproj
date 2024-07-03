@@ -50,6 +50,7 @@
 		CBCA53822C34316A00544CC5 /* BunchDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCA53812C34316A00544CC5 /* BunchDatabase.swift */; };
 		CBF178802C3314D900C81F4A /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF1787F2C3314D900C81F4A /* Sequence.swift */; };
 		CBFF75A42C34558B00B00CE9 /* MemoryDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFF75A32C34558B00B00CE9 /* MemoryDatabase.swift */; };
+		CBFF75AA2C358CD000B00CE9 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFF75A92C358CD000B00CE9 /* Path.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,7 @@
 		CBCA53812C34316A00544CC5 /* BunchDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchDatabase.swift; sourceTree = "<group>"; };
 		CBF1787F2C3314D900C81F4A /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		CBFF75A32C34558B00B00CE9 /* MemoryDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDatabase.swift; sourceTree = "<group>"; };
+		CBFF75A92C358CD000B00CE9 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +254,7 @@
 		CB9EF8E22ABC670E00FDCE12 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				CBFF75A82C358CC700B00CE9 /* Destination */,
 				CB4063B52C18A1AD00654F89 /* Common */,
 				CBABE92D2ACB313400103BB0 /* Home */,
 				CBAB7F522ACD455200257778 /* MemoryDetail */,
@@ -368,6 +371,14 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		CBFF75A82C358CC700B00CE9 /* Destination */ = {
+			isa = PBXGroup;
+			children = (
+				CBFF75A92C358CD000B00CE9 /* Path.swift */,
+			);
+			path = Destination;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -468,6 +479,7 @@
 				CB7D46E32C2D3D5B001E5E32 /* MapStore.swift in Sources */,
 				CB4511F92C32936200B5FA02 /* EditMemoryStore.swift in Sources */,
 				CBF178802C3314D900C81F4A /* Sequence.swift in Sources */,
+				CBFF75AA2C358CD000B00CE9 /* Path.swift in Sources */,
 				CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */,
 				CB8836B12C2BE7B90037CEC7 /* BunchMapper.swift in Sources */,
 				CB4196012C18B83E003D958C /* BunchDetailView.swift in Sources */,

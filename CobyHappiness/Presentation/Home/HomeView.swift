@@ -19,6 +19,24 @@ struct HomeView: View {
     }
     
     var body: some View {
+        NavigationStack(
+            path: $store.scope(state: \.path, action: \.path)
+        ) {
+            HomeRootView()
+        } destination: { store in
+            switch store.case {
+            case .detailMemory(let store):
+                MemoryDetailView(store: store)
+                    .navigationBarHidden(true)
+            case .editMemory(let store):
+                EditMemoryView(store: store)
+                    .navigationBarHidden(true)
+            }
+        }
+    }
+        
+    @ViewBuilder
+    private func HomeRootView() -> some View {
         VStack(spacing: 0) {
             self.HomeTopBarView()
             
@@ -79,7 +97,9 @@ struct HomeView: View {
             ScrollView {
                 LazyVStack(spacing: BaseSize.cellVerticalSpacing) {
                     ForEach(self.store.memories) { memory in
-                        NavigationLink(value: memory) {
+                        NavigationLink(
+                            state: HomeStore.Path.State.detailMemory(MemoryDetailStore.State(memory: memory))
+                        ) {
                             MemoryThumbnailView(
                                 memory: memory
                             )
