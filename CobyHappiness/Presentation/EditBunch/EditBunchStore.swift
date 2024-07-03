@@ -10,6 +10,7 @@ import SwiftUI
 
 import ComposableArchitecture
 
+@Reducer
 struct EditBunchStore: Reducer {
     
     @ObservableState

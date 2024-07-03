@@ -16,7 +16,8 @@ extension Memory {
             title: self.title,
             note: self.note,
             location: self.location,
-            photos: self.photos.compactMap { UIImage(data: $0) }
+            photos: self.photos.compactMap { UIImage(data: $0) },
+            photosData: self.photos
         )
     }
 }
@@ -30,7 +31,7 @@ extension MemoryModel {
             title: self.title,
             note: self.note,
             location: self.location,
-            photos: self.photos.compactMap { self.isPhotoCompressed ? $0.pngData() : $0.compressedImage }
+            photos: self.photosData
         )
     }
 }

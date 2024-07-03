@@ -5,7 +5,7 @@
 //  Created by Coby Kim on 6/26/24.
 //
 
-import Foundation
+import UIKit
 
 extension Bunch {
     func toBunchModel() -> BunchModel {
@@ -14,6 +14,8 @@ extension Bunch {
             startDate: self.startDate,
             endDate: self.endDate,
             title: self.title,
+            image: self.image != nil ? UIImage(data: self.image!) : nil,
+            imageData: self.image,
             memories: self.memories.map { $0.toMemoryModel() }
         )
     }
@@ -25,7 +27,8 @@ extension BunchModel {
             id: self.id,
             startDate: self.startDate,
             endDate: self.endDate,
-            title: self.title
+            title: self.title,
+            image: self.imageData
         )
     }
 }

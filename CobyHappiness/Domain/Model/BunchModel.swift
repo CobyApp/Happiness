@@ -12,6 +12,8 @@ struct BunchModel: Identifiable, Hashable, Equatable {
     var startDate: Date
     var endDate: Date
     var title: String
+    var image: UIImage?
+    var imageData: Data?
     var memories: [MemoryModel]
     
     init(
@@ -19,22 +21,22 @@ struct BunchModel: Identifiable, Hashable, Equatable {
         startDate: Date = .now,
         endDate: Date = .now,
         title: String = "",
+        image: UIImage? = nil,
+        imageData: Data? = nil,
         memories: [MemoryModel] = []
     ) {
         self.id = id
         self.startDate = startDate
         self.endDate = endDate
         self.title = title
+        self.image = image
+        self.imageData = imageData
         self.memories = memories
     }
     
-    var image: UIImage? {
-        self.memories.first?.photos.first
-    }
-    
     var term: String {
-        let startDate = self.startDate.format("yyyy년 MM월 dd일")
-        let endDate = self.endDate.format("yyyy년 MM월 dd일")
+        let startDate = self.startDate.format("yyyy.MM.dd")
+        let endDate = self.endDate.format("yyyy.MM.dd")
         
         if startDate == endDate {
             return startDate

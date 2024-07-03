@@ -16,6 +16,7 @@ final class Bunch {
     var startDate: Date
     var endDate: Date
     var title: String
+    var image: Data?
     @Relationship(deleteRule: .nullify, inverse: \Memory.bunches)
     var memories: [Memory]
     
@@ -24,12 +25,14 @@ final class Bunch {
         startDate: Date,
         endDate: Date,
         title: String,
+        image: Data? = nil,
         memories: [Memory] = []
     ) {
         self.id = id
         self.startDate = startDate
         self.endDate = endDate
         self.title = title
+        self.image = image
         self.memories = memories
     }
 }

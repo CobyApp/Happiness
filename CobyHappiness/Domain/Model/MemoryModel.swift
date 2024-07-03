@@ -15,6 +15,7 @@ struct MemoryModel: Identifiable, Hashable, Equatable {
     var note: String
     var location: LocationModel?
     var photos: [UIImage]
+    var photosData: [Data]
     var bunches: [BunchModel]
     
     init(
@@ -25,6 +26,7 @@ struct MemoryModel: Identifiable, Hashable, Equatable {
         note: String = "",
         location: LocationModel? = nil,
         photos: [UIImage] = [],
+        photosData: [Data] = [],
         bunches: [BunchModel] = []
     ) {
         self.id = id
@@ -34,10 +36,9 @@ struct MemoryModel: Identifiable, Hashable, Equatable {
         self.note = note
         self.location = location
         self.photos = photos
+        self.photosData = photosData
         self.bunches = bunches
     }
-    
-    var isPhotoCompressed: Bool = false
 }
 
 extension [MemoryModel] {

@@ -12,6 +12,7 @@ import PhotosUI
 
 import ComposableArchitecture
 
+@Reducer
 struct EditMemoryStore: Reducer {
     
     @ObservableState
@@ -20,14 +21,9 @@ struct EditMemoryStore: Reducer {
         var memory: MemoryModel
         
         init(
-            memory: MemoryModel
+            memory: MemoryModel = MemoryModel()
         ) {
             self.memory = memory
-            self.memory.isPhotoCompressed = true
-        }
-        
-        init() {
-            self.memory = MemoryModel()
         }
     }
     
