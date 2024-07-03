@@ -9,6 +9,7 @@ import Foundation
 
 import ComposableArchitecture
 
+@Reducer
 struct BunchStore: Reducer {
     
     @ObservableState

@@ -19,24 +19,6 @@ struct MapView: View {
     }
     
     var body: some View {
-        NavigationStack(
-            path: self.$store.scope(state: \.path, action: \.path)
-        ) {
-            MapRootView()
-        } destination: { store in
-            switch store.case {
-            case .detailMemory(let store):
-                MemoryDetailView(store: store)
-                    .navigationBarHidden(true)
-            case .editMemory(let store):
-                EditMemoryView(store: store)
-                    .navigationBarHidden(true)
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private func MapRootView() -> some View {
         VStack(spacing: 0) {
             TopBarView(
                 leftSide: .title,
@@ -58,7 +40,7 @@ struct MapView: View {
                     LazyHStack(spacing: 8) {
                         ForEach(self.store.filteredMemories, id: \.self) { memory in
                             NavigationLink(
-                                state: MapStore.Path.State.detailMemory(MemoryDetailStore.State(memory: memory))
+                                state: RootStore.Path.State.detailMemory(MemoryDetailStore.State(memory: memory))
                             ) {
                                 MemoryTileView(
                                     memory: memory,

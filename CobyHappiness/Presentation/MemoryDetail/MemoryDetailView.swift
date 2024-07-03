@@ -93,9 +93,6 @@ struct MemoryDetailView: View {
                 })
             }
         }
-        .onChange(of: self.store.isPresented) {
-            self.dismiss()
-        }
     }
     
     @ViewBuilder

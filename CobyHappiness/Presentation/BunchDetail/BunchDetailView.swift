@@ -74,9 +74,6 @@ struct BunchDetailView: View {
                 EditBunchStore()
             })
         }
-        .onChange(of: self.store.isPresented) {
-            self.dismiss()
-        }
     }
     
     @ViewBuilder

@@ -9,6 +9,7 @@ import Foundation
 
 import ComposableArchitecture
 
+@Reducer
 struct ProfileStore: Reducer {
     
     @ObservableState

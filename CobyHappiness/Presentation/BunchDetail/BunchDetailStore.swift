@@ -9,11 +9,11 @@ import UIKit
 
 import ComposableArchitecture
 
+@Reducer
 struct BunchDetailStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
-        var isPresented: Bool = true
         var showingSheet: Bool = false
         var showingAlert: Bool = false
         var showingEditBunchView: Bool = false
@@ -36,6 +36,7 @@ struct BunchDetailStore: Reducer {
         case dismiss
     }
     
+    @Dependency(\.dismiss) private var dismiss
     @Dependency(\.bunchData) private var bunchContext
     
     var body: some ReducerOf<Self> {
@@ -64,8 +65,7 @@ struct BunchDetailStore: Reducer {
             case .deleteBunchResponse:
                 return .send(.dismiss)
             case .dismiss:
-                state.isPresented = false
-                return .none
+                return .run { _ in await self.dismiss() }
             }
         }
     }

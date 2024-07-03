@@ -11,6 +11,7 @@ import SwiftData
 import ComposableArchitecture
 import Dependencies
 
+@Reducer
 struct MemoryDetailStore: Reducer {
     
     @ObservableState
@@ -48,6 +49,8 @@ struct MemoryDetailStore: Reducer {
         
         Reduce { state, action in
             switch action {
+            case .binding(\.isPresented):
+                return .send(.dismiss)
             case .binding:
                 return .none
             case .showOptionSheet:
@@ -82,8 +85,7 @@ struct MemoryDetailStore: Reducer {
                 print(error.localizedDescription)
                 return .none
             case .dismiss:
-                state.isPresented = false
-                return .none
+                return .run { _ in await self.dismiss() }
             }
         }
     }
