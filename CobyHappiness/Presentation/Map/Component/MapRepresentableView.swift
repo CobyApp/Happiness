@@ -24,17 +24,12 @@ struct MapRepresentableView: UIViewRepresentable {
     
     class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
         var parent: MapRepresentableView
-        var locationManager: CLLocationManager?
         var mapView: MKMapView?
         var isInitialLocationSet = false
         
         init(parent: MapRepresentableView) {
             self.parent = parent
             super.init()
-            locationManager = CLLocationManager()
-            locationManager?.delegate = self
-            locationManager?.requestWhenInUseAuthorization()
-            locationManager?.startUpdatingLocation()
         }
         
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
