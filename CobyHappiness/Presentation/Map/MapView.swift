@@ -39,15 +39,14 @@ struct MapView: View {
                 ScrollView(.horizontal) {
                     LazyHStack(spacing: 8) {
                         ForEach(self.store.filteredMemories, id: \.self) { memory in
-                            MemoryTileView(
-                                memory: memory,
-                                isShadowing: true
-                            )
-                            .frame(width: BaseSize.fullWidth, height: 100)
-                            .padding(.horizontal, 20)
-                            .containerRelativeFrame(.horizontal)
-                            .onTapGesture {
-                                self.store.send(.showMemoryDetail(memory))
+                            NavigationLink(value: memory) {
+                                MemoryTileView(
+                                    memory: memory,
+                                    isShadowing: true
+                                )
+                                .frame(width: BaseSize.fullWidth, height: 100)
+                                .padding(.horizontal, 20)
+                                .containerRelativeFrame(.horizontal)
                             }
                         }
                     }
@@ -61,6 +60,14 @@ struct MapView: View {
             }
         }
         .background(Color.backgroundNormalNormal)
+        .navigationDestination(for: MemoryModel.self) { memory in
+            MemoryDetailView(store: Store(initialState: MemoryDetailStore.State(
+                memory: memory
+            )) {
+                MemoryDetailStore()
+            })
+            .navigationBarHidden(true)
+        }
         .fullScreenCover(
             isPresented: self.$store.showingEditMemoryView,
             onDismiss: {

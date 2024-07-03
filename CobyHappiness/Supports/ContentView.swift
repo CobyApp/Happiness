@@ -12,8 +12,6 @@ import ComposableArchitecture
 
 struct ContentView: View {
     
-    @StateObject var appModel: AppViewModel = .init()
-    
     init() {
         self.setupTabBarStyle()
     }
@@ -22,55 +20,36 @@ struct ContentView: View {
         ZStack {
             NavigationStack {
                 TabView {
-                    HomeView(store: Store(initialState: HomeStore.State(
-                        appModel: self.appModel
-                    )) {
+                    HomeView(store: Store(initialState: HomeStore.State()) {
                         HomeStore()
                     })
                     .tabItem {
                         Label("홈", image: "home")
                     }
                     
-                    MapView(store: Store(initialState: MapStore.State(
-                        appModel: self.appModel
-                    )) {
+                    MapView(store: Store(initialState: MapStore.State()) {
                         MapStore()
                     })
                     .tabItem {
                         Label("지도", image: "map")
                     }
                     
-                    BunchView(store: Store(initialState: BunchStore.State(
-                        appModel: self.appModel
-                    )) {
+                    BunchView(store: Store(initialState: BunchStore.State()) {
                         BunchStore()
                     })
                     .tabItem {
                         Label("뭉치", image: "travel")
                     }
                     
-                    ProfileView(store: Store(initialState: ProfileStore.State(
-                        appModel: self.appModel
-                    )) {
+                    ProfileView(store: Store(initialState: ProfileStore.State()) {
                         ProfileStore()
                     })
                     .tabItem {
                         Label("정보", image: "person")
                     }
                 }
-                .opacity(self.appModel.showDetailView ? 0 : 1)
-            }
-            
-            if let memory = self.appModel.currentActiveItem, self.appModel.showDetailView {
-                MemoryDetailView(store: Store(initialState: MemoryDetailStore.State(
-                    appModel: self.appModel,
-                    memory: memory
-                )) {
-                    MemoryDetailStore()
-                })
             }
         }
-        .animation(.easeInOut(duration: 0.1), value: self.appModel.showDetailView)
     }
 }
 

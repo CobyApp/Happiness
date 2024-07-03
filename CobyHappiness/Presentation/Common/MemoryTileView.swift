@@ -11,8 +11,6 @@ import CobyDS
 
 struct MemoryTileView: View {
     
-    @EnvironmentObject private var appModel: AppViewModel
-    
     private let memory: MemoryModel
     private let isShadowing: Bool
     private let isSelected: Bool

@@ -10,7 +10,6 @@
 		CB09A5422C27EBB900CB8485 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB09A5412C27EBB900CB8485 /* SettingView.swift */; };
 		CB09A5492C2B115800CB8485 /* MemoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB09A5482C2B115800CB8485 /* MemoryType.swift */; };
 		CB0D58EA2C1EE83B00EFE3D3 /* EditBunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E92C1EE83B00EFE3D3 /* EditBunchView.swift */; };
-		CB0D58EE2C21CB7200EFE3D3 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58ED2C21CB7200EFE3D3 /* AppViewModel.swift */; };
 		CB2471012ADABBFC00EEA032 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2471002ADABBFC00EEA032 /* PlaceModel.swift */; };
 		CB4063B12C1763EA00654F89 /* EditMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063B02C1763EA00654F89 /* EditMemoryView.swift */; };
 		CB4063B32C189B4B00654F89 /* Bunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063B22C189B4B00654F89 /* Bunch.swift */; };
@@ -57,7 +56,6 @@
 		CB09A5412C27EBB900CB8485 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		CB09A5482C2B115800CB8485 /* MemoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryType.swift; sourceTree = "<group>"; };
 		CB0D58E92C1EE83B00EFE3D3 /* EditBunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchView.swift; sourceTree = "<group>"; };
-		CB0D58ED2C21CB7200EFE3D3 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		CB2471002ADABBFC00EEA032 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		CB4063B02C1763EA00654F89 /* EditMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoryView.swift; sourceTree = "<group>"; };
 		CB4063B22C189B4B00654F89 /* Bunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bunch.swift; sourceTree = "<group>"; };
@@ -128,14 +126,6 @@
 				CB9EF8E12ABC670100FDCE12 /* Model */,
 			);
 			path = Domain;
-			sourceTree = "<group>";
-		};
-		CB09A5452C2B10D900CB8485 /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				CB0D58ED2C21CB7200EFE3D3 /* AppViewModel.swift */,
-			);
-			path = Util;
 			sourceTree = "<group>";
 		};
 		CB09A5462C2B113200CB8485 /* SwiftData */ = {
@@ -272,7 +262,6 @@
 				CB4063B82C18A61200654F89 /* EditBunch */,
 				CBAD455E2C158416009D4EFF /* Profile */,
 				CB09A5402C27EB1000CB8485 /* Setting */,
-				CB09A5452C2B10D900CB8485 /* Util */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -466,7 +455,6 @@
 				CB8836B72C2BF76E0037CEC7 /* MemoryDetailStore.swift in Sources */,
 				CBCA53822C34316A00544CC5 /* BunchDatabase.swift in Sources */,
 				CBAB7F542ACD455E00257778 /* MemoryDetailView.swift in Sources */,
-				CB0D58EE2C21CB7200EFE3D3 /* AppViewModel.swift in Sources */,
 				CB76292C2C26898A00138186 /* EmptyBunchView.swift in Sources */,
 				CB4196092C19CF00003D958C /* UIImage+Assets.swift in Sources */,
 				CBAD455D2C158315009D4EFF /* BunchView.swift in Sources */,

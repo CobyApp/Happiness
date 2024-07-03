@@ -36,6 +36,14 @@ struct ProfileView: View {
             MemoryListView(memories: self.store.memories.getFilteredMemories(self.store.memoryType))
         }
         .background(Color.backgroundNormalNormal)
+        .navigationDestination(for: MemoryModel.self) { memory in
+            MemoryDetailView(store: Store(initialState: MemoryDetailStore.State(
+                memory: memory
+            )) {
+                MemoryDetailStore()
+            })
+            .navigationBarHidden(true)
+        }
         .onAppear {
             self.store.send(.getMemories)
         }
@@ -114,11 +122,10 @@ struct ProfileView: View {
             ScrollView {
                 LazyVStack(spacing: 8) {
                     ForEach(memories) { memory in
-                        MemoryTileView(
-                            memory: memory
-                        )
-                        .onTapGesture {
-                            self.store.send(.showMemoryDetail(memory))
+                        NavigationLink(value: memory) {
+                            MemoryTileView(
+                                memory: memory
+                            )
                         }
                     }
                 }

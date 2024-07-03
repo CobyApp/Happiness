@@ -37,6 +37,14 @@ struct BunchDetailView: View {
             MemoryListView(memories: self.store.bunch.memories)
         }
         .edgesIgnoringSafeArea(.bottom)
+        .navigationDestination(for: MemoryModel.self) { memory in
+            MemoryDetailView(store: Store(initialState: MemoryDetailStore.State(
+                memory: memory
+            )) {
+                MemoryDetailStore()
+            })
+            .navigationBarHidden(true)
+        }
         .actionSheet(isPresented: self.$store.showingSheet) {
             ActionSheet(
                 title: Text("원하는 옵션을 선택해주세요."),
@@ -90,11 +98,10 @@ struct BunchDetailView: View {
             ScrollView {
                 LazyVStack(spacing: 8) {
                     ForEach(memories) { memory in
-                        MemoryTileView(
-                            memory: memory
-                        )
-                        .onTapGesture {
-                            self.store.send(.showMemoryDetail(memory))
+                        NavigationLink(value: memory) {
+                            MemoryTileView(
+                                memory: memory
+                            )
                         }
                     }
                 }

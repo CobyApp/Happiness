@@ -25,6 +25,14 @@ struct HomeView: View {
             self.MemoryListView()
         }
         .background(Color.backgroundNormalNormal)
+        .navigationDestination(for: MemoryModel.self) { memory in
+            MemoryDetailView(store: Store(initialState: MemoryDetailStore.State(
+                memory: memory
+            )) {
+                MemoryDetailStore()
+            })
+            .navigationBarHidden(true)
+        }
         .fullScreenCover(
             isPresented: self.$store.showingEditMemoryView,
             onDismiss: {
@@ -71,11 +79,10 @@ struct HomeView: View {
             ScrollView {
                 LazyVStack(spacing: BaseSize.cellVerticalSpacing) {
                     ForEach(self.store.memories) { memory in
-                        self.MemoryThumbnailView(
-                            memory: memory
-                        )
-                        .onTapGesture {
-                            self.store.send(.showMemoryDetail(memory))
+                        NavigationLink(value: memory) {
+                            MemoryThumbnailView(
+                                memory: memory
+                            )
                         }
                     }
                 }

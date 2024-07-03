@@ -13,15 +13,8 @@ struct BunchStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
-        var appModel: AppViewModel
         var showingEditBunchView: Bool = false
         var bunches: [BunchModel] = []
-        
-        init(
-            appModel: AppViewModel
-        ) {
-            self.appModel = appModel
-        }
     }
     
     enum Action: BindableAction, Equatable {

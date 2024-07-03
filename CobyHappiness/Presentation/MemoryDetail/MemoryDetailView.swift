@@ -14,6 +14,7 @@ struct MemoryDetailView: View {
     
     @Bindable private var store: StoreOf<MemoryDetailStore>
     
+    @State private var isPresented: Bool = true
     @State private var scale: CGFloat = 1
     @State private var isDown: Bool = false
     
@@ -24,7 +25,7 @@ struct MemoryDetailView: View {
     var body: some View {
         VStack {
             CBScaleScrollView(
-                isPresented: self.$store.appModel.showDetailView,
+                isPresented: self.$isPresented,
                 scale: self.$scale,
                 isDown: self.$isDown
             ) {
@@ -66,7 +67,7 @@ struct MemoryDetailView: View {
                         Text("삭제"),
                         action: {
                             self.store.send(.deleteMemory(self.store.memory))
-                            self.store.send(.closeMemoryDetail)
+//                            self.store.send(.closeMemoryDetail)
                         }
                     ),
                     secondaryButton: .cancel(Text("취소"))
@@ -92,7 +93,7 @@ struct MemoryDetailView: View {
     func DetailHeaderView() -> some View {
         HStack {
             Button {
-                self.store.send(.closeMemoryDetail)
+//                self.store.send(.closeMemoryDetail)
             } label: {
                 Image(uiImage: UIImage.icBack)
                     .resizable()

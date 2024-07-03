@@ -40,7 +40,6 @@ struct BunchView: View {
         .background(Color.backgroundNormalNormal)
         .navigationDestination(for: BunchModel.self) { bunch in
             BunchDetailView(store: Store(initialState: BunchDetailStore.State(
-                appModel: self.store.appModel,
                 bunch: bunch
             )) {
                 BunchDetailStore()

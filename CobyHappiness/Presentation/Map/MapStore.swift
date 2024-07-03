@@ -13,20 +13,14 @@ struct MapStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
-        var appModel: AppViewModel
         var showingEditMemoryView: Bool = false
         var memories: [MemoryModel] = []
         var filteredMemories: [MemoryModel] = []
-        
-        init(appModel: AppViewModel) {
-            self.appModel = appModel
-        }
     }
     
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
         case showEditMemory
-        case showMemoryDetail(MemoryModel)
         case getMemories
         case getMemoriesResponse(TaskResult<[MemoryModel]>)
     }
@@ -42,10 +36,6 @@ struct MapStore: Reducer {
                 return .none
             case .showEditMemory:
                 state.showingEditMemoryView = true
-                return .none
-            case .showMemoryDetail(let memory):
-                state.appModel.currentActiveItem = memory
-                state.appModel.showDetailView = true
                 return .none
             case .getMemories:
                 return .run { send in

@@ -15,17 +15,14 @@ struct MemoryDetailStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
-        var appModel: AppViewModel
         var showingSheet = false
         var showingAlert = false
         var showingEditMemoryView: Bool = false
         var memory: MemoryModel
         
         init(
-            appModel: AppViewModel,
             memory: MemoryModel
         ) {
-            self.appModel = appModel
             self.memory = memory
         }
     }
@@ -39,7 +36,6 @@ struct MemoryDetailStore: Reducer {
         case deleteMemoryResponse
         case getMemory(MemoryModel)
         case getMemoryResponse(TaskResult<MemoryModel>)
-        case closeMemoryDetail
     }
     
     @Dependency(\.memoryData) private var memoryContext
@@ -68,7 +64,7 @@ struct MemoryDetailStore: Reducer {
                     await send(.deleteMemoryResponse)
                 }
             case .deleteMemoryResponse:
-                return .send(.closeMemoryDetail)
+                return .none
             case .getMemory(let memory):
                 return .run { send in
                     let result = await TaskResult {
@@ -81,10 +77,6 @@ struct MemoryDetailStore: Reducer {
                 return .none
             case let .getMemoryResponse(.failure(error)):
                 print(error.localizedDescription)
-                return .none
-            case .closeMemoryDetail:
-                state.appModel.currentActiveItem = nil
-                state.appModel.showDetailView = false
                 return .none
             }
         }

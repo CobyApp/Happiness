@@ -13,7 +13,6 @@ struct BunchDetailStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
-        var appModel: AppViewModel
         var isPresented: Bool = true
         var showingSheet = false
         var showingAlert = false
@@ -21,10 +20,8 @@ struct BunchDetailStore: Reducer {
         var bunch: BunchModel
         
         init(
-            appModel: AppViewModel,
             bunch: BunchModel
         ) {
-            self.appModel = appModel
             self.bunch = bunch
         }
     }
@@ -36,7 +33,6 @@ struct BunchDetailStore: Reducer {
         case showEditBunch
         case deleteBunch(BunchModel)
         case deleteBunchResponse
-        case showMemoryDetail(MemoryModel)
         case dismiss
     }
     
@@ -67,10 +63,6 @@ struct BunchDetailStore: Reducer {
                 }
             case .deleteBunchResponse:
                 return .send(.dismiss)
-            case .showMemoryDetail(let memory):
-                state.appModel.currentActiveItem = memory
-                state.appModel.showDetailView = true
-                return .none
             case .dismiss:
                 state.isPresented = false
                 return .none
