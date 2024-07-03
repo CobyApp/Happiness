@@ -20,9 +20,14 @@ struct EditMemoryStore: Reducer {
         var memory: MemoryModel
         
         init(
-            memory: MemoryModel = MemoryModel()
+            memory: MemoryModel
         ) {
             self.memory = memory
+            self.memory.isPhotoCompressed = true
+        }
+        
+        init() {
+            self.memory = MemoryModel()
         }
     }
     

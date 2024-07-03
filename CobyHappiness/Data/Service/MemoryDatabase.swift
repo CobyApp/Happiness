@@ -65,9 +65,7 @@ extension MemoryDatabase: DependencyKey {
             do {
                 @Dependency(\.databaseService.context) var context
                 let memoryContext = try context()
-                let memory = model.toMemory()
-                memory.photos = model.photos.map { $0.compressedImage }
-                memoryContext.insert(memory)
+                memoryContext.insert(model.toMemory())
                 return try memoryContext.save()
             } catch {
                 throw MemoryError.add

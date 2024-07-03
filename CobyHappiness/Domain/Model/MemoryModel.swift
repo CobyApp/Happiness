@@ -36,6 +36,8 @@ struct MemoryModel: Identifiable, Hashable, Equatable {
         self.photos = photos
         self.bunches = bunches
     }
+    
+    var isPhotoCompressed: Bool = false
 }
 
 extension [MemoryModel] {
