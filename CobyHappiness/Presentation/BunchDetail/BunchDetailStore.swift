@@ -9,12 +9,10 @@ import UIKit
 
 import ComposableArchitecture
 
-@Reducer
 struct BunchDetailStore: Reducer {
     
     @ObservableState
-    struct State {
-        var path = StackState<Path.State>()
+    struct State: Equatable {
         var isPresented: Bool = true
         var showingSheet: Bool = false
         var showingAlert: Bool = false
@@ -28,8 +26,7 @@ struct BunchDetailStore: Reducer {
         }
     }
     
-    enum Action: BindableAction {
-        case path(StackActionOf<Path>)
+    enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
         case showOptionSheet
         case showDeleteAlert
@@ -39,11 +36,6 @@ struct BunchDetailStore: Reducer {
         case dismiss
     }
     
-    @Reducer
-    enum Path {
-        case detailMemory(MemoryDetailStore)
-    }
-    
     @Dependency(\.bunchData) private var bunchContext
     
     var body: some ReducerOf<Self> {
@@ -51,8 +43,6 @@ struct BunchDetailStore: Reducer {
         
         Reduce { state, action in
             switch action {
-            case .path:
-                return .none
             case .binding:
                 return .none
             case .showOptionSheet:
@@ -78,6 +68,5 @@ struct BunchDetailStore: Reducer {
                 return .none
             }
         }
-        .forEach(\.path, action: \.path)
     }
 }

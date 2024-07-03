@@ -8,13 +8,16 @@
 import SwiftUI
 
 import CobyDS
+import ComposableArchitecture
 
 @main
 struct CobyHappinessApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .loadCustomFonts()
+            RootView(store: Store(initialState: RootStore.State()) {
+                RootStore()
+            })
+            .loadCustomFonts()
         }
     }
 }

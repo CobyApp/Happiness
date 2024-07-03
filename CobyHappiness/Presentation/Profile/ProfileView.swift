@@ -20,21 +20,6 @@ struct ProfileView: View {
     }
     
     var body: some View {
-        NavigationStack(
-            path: self.$store.scope(state: \.path, action: \.path)
-        ) {
-            ProfileRootView()
-        } destination: { store in
-            switch store.case {
-            case .detailMemory(let store):
-                MemoryDetailView(store: store)
-                    .navigationBarHidden(true)
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private func ProfileRootView() -> some View {
         VStack(spacing: 0) {
             TopBarView(
                 leftSide: .title,
@@ -130,7 +115,7 @@ struct ProfileView: View {
                 LazyVStack(spacing: 8) {
                     ForEach(memories) { memory in
                         NavigationLink(
-                            state: ProfileStore.Path.State.detailMemory(MemoryDetailStore.State(memory: memory))
+                            state: RootStore.Path.State.detailMemory(MemoryDetailStore.State(memory: memory))
                         ) {
                             MemoryTileView(
                                 memory: memory

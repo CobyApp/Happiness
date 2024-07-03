@@ -19,38 +19,12 @@ struct HomeView: View {
     }
     
     var body: some View {
-        NavigationStack(
-            path: self.$store.scope(state: \.path, action: \.path)
-        ) {
-            HomeRootView()
-        } destination: { store in
-            switch store.case {
-            case .detailMemory(let store):
-                MemoryDetailView(store: store)
-                    .navigationBarHidden(true)
-            case .editMemory(let store):
-                EditMemoryView(store: store)
-                    .navigationBarHidden(true)
-            }
-        }
-    }
-        
-    @ViewBuilder
-    private func HomeRootView() -> some View {
         VStack(spacing: 0) {
             self.HomeTopBarView()
             
             self.MemoryListView()
         }
         .background(Color.backgroundNormalNormal)
-        .navigationDestination(for: MemoryModel.self) { memory in
-            MemoryDetailView(store: Store(initialState: MemoryDetailStore.State(
-                memory: memory
-            )) {
-                MemoryDetailStore()
-            })
-            .navigationBarHidden(true)
-        }
         .fullScreenCover(
             isPresented: self.$store.showingEditMemoryView,
             onDismiss: {
@@ -98,7 +72,7 @@ struct HomeView: View {
                 LazyVStack(spacing: BaseSize.cellVerticalSpacing) {
                     ForEach(self.store.memories) { memory in
                         NavigationLink(
-                            state: HomeStore.Path.State.detailMemory(MemoryDetailStore.State(memory: memory))
+                            state: RootStore.Path.State.detailMemory(MemoryDetailStore.State(memory: memory))
                         ) {
                             MemoryThumbnailView(
                                 memory: memory

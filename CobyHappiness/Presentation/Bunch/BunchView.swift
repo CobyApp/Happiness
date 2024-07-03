@@ -24,24 +24,6 @@ struct BunchView: View {
     }
     
     var body: some View {
-        NavigationStack(
-            path: self.$store.scope(state: \.path, action: \.path)
-        ) {
-            BunchRootView()
-        } destination: { store in
-            switch store.case {
-            case .detailBunch(let store):
-                BunchDetailView(store: store)
-                    .navigationBarHidden(true)
-            case .editBunch(let store):
-                EditBunchView(store: store)
-                    .navigationBarHidden(true)
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private func BunchRootView() -> some View {
         VStack(spacing: 0) {
             TopBarView(
                 leftSide: .title,
@@ -82,7 +64,7 @@ struct BunchView: View {
                 LazyVGrid(columns: self.columns, spacing: 20) {
                     ForEach(self.store.bunches, id: \.self) { bunch in
                         NavigationLink(
-                            state: BunchStore.Path.State.detailBunch(BunchDetailStore.State(bunch: bunch))
+                            state: RootStore.Path.State.detailBunch(BunchDetailStore.State(bunch: bunch))
                         ) {
                             ThumbnailTitleView(
                                 image: bunch.image,

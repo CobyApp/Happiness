@@ -9,28 +9,19 @@ import Foundation
 
 import ComposableArchitecture
 
-@Reducer
 struct BunchStore: Reducer {
     
     @ObservableState
-    struct State {
-        var path = StackState<Path.State>()
+    struct State: Equatable {
         var showingEditBunchView: Bool = false
         var bunches: [BunchModel] = []
     }
     
-    enum Action: BindableAction {
-        case path(StackActionOf<Path>)
+    enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
         case showEditBunch
         case getBunches
         case getBunchesResponse(TaskResult<[BunchModel]>)
-    }
-    
-    @Reducer
-    enum Path {
-        case detailBunch(BunchDetailStore)
-        case editBunch(EditBunchStore)
     }
     
     @Dependency(\.bunchData) private var bunchContext
@@ -40,8 +31,6 @@ struct BunchStore: Reducer {
         
         Reduce { state, action in
             switch action {
-            case .path:
-                return .none
             case .binding:
                 return .none
             case .showEditBunch:
@@ -62,6 +51,5 @@ struct BunchStore: Reducer {
                 return .none
             }
         }
-        .forEach(\.path, action: \.path)
     }
 }

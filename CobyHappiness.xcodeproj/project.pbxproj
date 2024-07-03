@@ -32,7 +32,7 @@
 		CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */; };
 		CB9EF9082ABC829F00FDCE12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */; };
 		CBA038692ABF352F00BD74CF /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA038682ABF352F00BD74CF /* Memory.swift */; };
-		CBAB7F4F2ACD402500257778 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F4E2ACD402500257778 /* ContentView.swift */; };
+		CBAB7F4F2ACD402500257778 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F4E2ACD402500257778 /* RootView.swift */; };
 		CBAB7F542ACD455E00257778 /* MemoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F532ACD455E00257778 /* MemoryDetailView.swift */; };
 		CBABE92F2ACB313C00103BB0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABE92E2ACB313C00103BB0 /* HomeView.swift */; };
 		CBAD45562C151D6E009D4EFF /* CobyDS in Frameworks */ = {isa = PBXBuildFile; productRef = CBAD45552C151D6E009D4EFF /* CobyDS */; };
@@ -50,7 +50,7 @@
 		CBCA53822C34316A00544CC5 /* BunchDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCA53812C34316A00544CC5 /* BunchDatabase.swift */; };
 		CBF178802C3314D900C81F4A /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF1787F2C3314D900C81F4A /* Sequence.swift */; };
 		CBFF75A42C34558B00B00CE9 /* MemoryDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFF75A32C34558B00B00CE9 /* MemoryDatabase.swift */; };
-		CBFF75AA2C358CD000B00CE9 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFF75A92C358CD000B00CE9 /* Path.swift */; };
+		CBFF75AD2C359F7100B00CE9 /* RootStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFF75AC2C359F7100B00CE9 /* RootStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,7 +81,7 @@
 		CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CBA038682ABF352F00BD74CF /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
-		CBAB7F4E2ACD402500257778 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CBAB7F4E2ACD402500257778 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		CBAB7F532ACD455E00257778 /* MemoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDetailView.swift; sourceTree = "<group>"; };
 		CBABE92E2ACB313C00103BB0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CBAD45592C1582A7009D4EFF /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		CBCA53812C34316A00544CC5 /* BunchDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchDatabase.swift; sourceTree = "<group>"; };
 		CBF1787F2C3314D900C81F4A /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		CBFF75A32C34558B00B00CE9 /* MemoryDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDatabase.swift; sourceTree = "<group>"; };
-		CBFF75A92C358CD000B00CE9 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
+		CBFF75AC2C359F7100B00CE9 /* RootStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,8 +254,8 @@
 		CB9EF8E22ABC670E00FDCE12 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				CBFF75A82C358CC700B00CE9 /* Destination */,
 				CB4063B52C18A1AD00654F89 /* Common */,
+				CBFF75AB2C359F4600B00CE9 /* Root */,
 				CBABE92D2ACB313400103BB0 /* Home */,
 				CBAB7F522ACD455200257778 /* MemoryDetail */,
 				CBABE9302ACB378500103BB0 /* EditMemory */,
@@ -275,7 +275,6 @@
 				CB9EF8E52ABC673100FDCE12 /* Extensions */,
 				CB96DE382ABF597600B01762 /* Info.plist */,
 				CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */,
-				CBAB7F4E2ACD402500257778 /* ContentView.swift */,
 			);
 			path = Supports;
 			sourceTree = "<group>";
@@ -371,12 +370,13 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		CBFF75A82C358CC700B00CE9 /* Destination */ = {
+		CBFF75AB2C359F4600B00CE9 /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				CBFF75A92C358CD000B00CE9 /* Path.swift */,
+				CBAB7F4E2ACD402500257778 /* RootView.swift */,
+				CBFF75AC2C359F7100B00CE9 /* RootStore.swift */,
 			);
-			path = Destination;
+			path = Root;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -479,12 +479,11 @@
 				CB7D46E32C2D3D5B001E5E32 /* MapStore.swift in Sources */,
 				CB4511F92C32936200B5FA02 /* EditMemoryStore.swift in Sources */,
 				CBF178802C3314D900C81F4A /* Sequence.swift in Sources */,
-				CBFF75AA2C358CD000B00CE9 /* Path.swift in Sources */,
 				CB9EF8E72ABC674F00FDCE12 /* View+Extensions.swift in Sources */,
 				CB8836B12C2BE7B90037CEC7 /* BunchMapper.swift in Sources */,
 				CB4196012C18B83E003D958C /* BunchDetailView.swift in Sources */,
 				CBABE92F2ACB313C00103BB0 /* HomeView.swift in Sources */,
-				CBAB7F4F2ACD402500257778 /* ContentView.swift in Sources */,
+				CBAB7F4F2ACD402500257778 /* RootView.swift in Sources */,
 				CBCA53802C34312E00544CC5 /* Database.swift in Sources */,
 				CB4063B72C18A1C200654F89 /* MemoryTileView.swift in Sources */,
 				CBC3A4162C2BE5F900B62F82 /* HomeStore.swift in Sources */,
@@ -493,6 +492,7 @@
 				CB2471012ADABBFC00EEA032 /* PlaceModel.swift in Sources */,
 				CB0D58EA2C1EE83B00EFE3D3 /* EditBunchView.swift in Sources */,
 				CB09A5422C27EBB900CB8485 /* SettingView.swift in Sources */,
+				CBFF75AD2C359F7100B00CE9 /* RootStore.swift in Sources */,
 				CBAF77292C2D4E6700F40F76 /* ProfileStore.swift in Sources */,
 				CBAF772D2C2D539400F40F76 /* BunchDetailStore.swift in Sources */,
 				CB8836B32C2BE80A0037CEC7 /* MemoryMapper.swift in Sources */,

@@ -21,21 +21,6 @@ struct BunchDetailView: View {
     }
     
     var body: some View {
-        NavigationStack(
-            path: self.$store.scope(state: \.path, action: \.path)
-        ) {
-            BunchDetailRootView()
-        } destination: { store in
-            switch store.case {
-            case .detailMemory(let store):
-                MemoryDetailView(store: store)
-                    .navigationBarHidden(true)
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private func BunchDetailRootView() -> some View {
         VStack(spacing: 0) {
             TopBarView(
                 leftSide: .left,
@@ -105,14 +90,8 @@ struct BunchDetailView: View {
             ScrollView {
                 LazyVStack(spacing: 8) {
                     ForEach(memories) { memory in
-                        NavigationLink(value: memory) {
-                            MemoryTileView(
-                                memory: memory
-                            )
-                        }
-                        
                         NavigationLink(
-                            state: BunchDetailStore.Path.State.detailMemory(MemoryDetailStore.State(memory: memory))
+                            state: RootStore.Path.State.detailMemory(MemoryDetailStore.State(memory: memory))
                         ) {
                             MemoryTileView(
                                 memory: memory
