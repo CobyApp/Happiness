@@ -14,7 +14,7 @@ extension Bunch {
             startDate: self.startDate,
             endDate: self.endDate,
             title: self.title,
-            image: self.image != nil ? UIImage(data: self.image!) : nil,
+            image: self.image.flatMap { UIImage(data: $0) },
             imageData: self.image,
             memories: self.memories.map { $0.toMemoryModel() }
         )
