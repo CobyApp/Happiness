@@ -22,67 +22,70 @@ struct MemoryDetailView: View {
     }
     
     var body: some View {
-        CBScaleScrollView(
-            isPresented: self.$store.appModel.showDetailView,
-            scale: self.$scale,
-            isDown: self.$isDown
-        ) {
-            VStack(spacing: 20) {
-                self.PhotoView(photos: self.store.memory.photos)
-                self.ContentView(memory: self.store.memory)
+        VStack {
+            CBScaleScrollView(
+                isPresented: self.$store.appModel.showDetailView,
+                scale: self.$scale,
+                isDown: self.$isDown
+            ) {
+                VStack(spacing: 20) {
+                    self.PhotoView(photos: self.store.memory.photos)
+                    self.ContentView(memory: self.store.memory)
+                }
             }
-        }
-        .overlay(
-            alignment: .top,
-            content: {
-                DetailHeaderView()
-            }
-        )
-        .background(Color.backgroundNormalNormal)
-        .clipShape(RoundedRectangle(cornerRadius: scale == 1 ? 0 : 30))
-        .scaleEffect(self.scale)
-        .ignoresSafeArea()
-        .actionSheet(isPresented: self.$store.showingSheet) {
-            ActionSheet(
-                title: Text("원하는 옵션을 선택해주세요."),
-                message: nil,
-                buttons: [
-                    .default(Text("편집")) {
-                        self.store.send(.showEditMemory)
-                    },
-                    .destructive(Text("삭제")) {
-                        self.store.send(.showDeleteAlert)
-                    },
-                    .cancel(Text("취소"))
-                ]
+            .overlay(
+                alignment: .top,
+                content: {
+                    DetailHeaderView()
+                }
             )
-        }
-        .alert(isPresented: self.$store.showingAlert) {
-            Alert(
-                title: Text("추억을 삭제하시겠습니까?"),
-                message: nil,
-                primaryButton: .destructive(
-                    Text("삭제"),
-                    action: {
-                        self.store.send(.deleteMemory(self.store.memory))
-                        self.store.send(.closeMemoryDetail)
-                    }
-                ),
-                secondaryButton: .cancel(Text("취소"))
-            )
-        }
-        .fullScreenCover(
-            isPresented: self.$store.showingEditMemoryView,
-            onDismiss: {
-                self.store.send(.getMemory(self.store.memory))
+            .background(Color.backgroundNormalNormal)
+            .clipShape(RoundedRectangle(cornerRadius: scale == 1 ? 0 : 30))
+            .scaleEffect(self.scale)
+            .ignoresSafeArea()
+            .actionSheet(isPresented: self.$store.showingSheet) {
+                ActionSheet(
+                    title: Text("원하는 옵션을 선택해주세요."),
+                    message: nil,
+                    buttons: [
+                        .default(Text("편집")) {
+                            self.store.send(.showEditMemory)
+                        },
+                        .destructive(Text("삭제")) {
+                            self.store.send(.showDeleteAlert)
+                        },
+                        .cancel(Text("취소"))
+                    ]
+                )
             }
-        ) {
-            EditMemoryView(store: Store(initialState: EditMemoryStore.State(
-                memory: self.store.memory
-            )) {
-                EditMemoryStore()
-            })
+            .alert(isPresented: self.$store.showingAlert) {
+                Alert(
+                    title: Text("추억을 삭제하시겠습니까?"),
+                    message: nil,
+                    primaryButton: .destructive(
+                        Text("삭제"),
+                        action: {
+                            self.store.send(.deleteMemory(self.store.memory))
+                            self.store.send(.closeMemoryDetail)
+                        }
+                    ),
+                    secondaryButton: .cancel(Text("취소"))
+                )
+            }
+            .fullScreenCover(
+                isPresented: self.$store.showingEditMemoryView,
+                onDismiss: {
+                    self.store.send(.getMemory(self.store.memory))
+                }
+            ) {
+                EditMemoryView(store: Store(initialState: EditMemoryStore.State(
+                    memory: self.store.memory
+                )) {
+                    EditMemoryStore()
+                })
+            }
         }
+        .background(Color.backgroundNormalAlternative)
     }
     
     @ViewBuilder
