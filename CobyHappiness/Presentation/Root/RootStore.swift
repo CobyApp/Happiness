@@ -29,8 +29,6 @@ struct RootStore: Reducer {
         case editMemory(EditMemoryStore)
     }
     
-    @Dependency(\.memoryData) private var memoryContext
-    
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {

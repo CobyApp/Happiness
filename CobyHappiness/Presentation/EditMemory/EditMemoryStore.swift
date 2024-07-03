@@ -46,6 +46,7 @@ struct EditMemoryStore: Reducer {
                 return .none
             case .setPhotos(let photoItems):
                 (state.memory.photos, state.memory.date, state.memory.location) = self.setPhotos(items: photoItems)
+                state.memory.photosData = state.memory.photos.map { $0.compressedImage }
                 return .none
             case .saveMemory(let memory):
                 return .run { send in
