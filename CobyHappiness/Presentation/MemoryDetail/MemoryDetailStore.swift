@@ -15,7 +15,7 @@ struct MemoryDetailStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
-        var isPresented: Bool = false
+        var isPresented: Bool = true
         var showingSheet: Bool = false
         var showingAlert: Bool = false
         var showingEditMemoryView: Bool = false
