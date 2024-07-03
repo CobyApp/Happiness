@@ -20,6 +20,21 @@ struct ProfileView: View {
     }
     
     var body: some View {
+        NavigationStack(
+            path: self.$store.scope(state: \.path, action: \.path)
+        ) {
+            ProfileRootView()
+        } destination: { store in
+            switch store.case {
+            case .detailMemory(let store):
+                MemoryDetailView(store: store)
+                    .navigationBarHidden(true)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func ProfileRootView() -> some View {
         VStack(spacing: 0) {
             TopBarView(
                 leftSide: .title,
@@ -36,14 +51,6 @@ struct ProfileView: View {
             MemoryListView(memories: self.store.memories.getFilteredMemories(self.store.memoryType))
         }
         .background(Color.backgroundNormalNormal)
-        .navigationDestination(for: MemoryModel.self) { memory in
-            MemoryDetailView(store: Store(initialState: MemoryDetailStore.State(
-                memory: memory
-            )) {
-                MemoryDetailStore()
-            })
-            .navigationBarHidden(true)
-        }
         .onAppear {
             self.store.send(.getMemories)
         }
@@ -122,7 +129,9 @@ struct ProfileView: View {
             ScrollView {
                 LazyVStack(spacing: 8) {
                     ForEach(memories) { memory in
-                        NavigationLink(value: memory) {
+                        NavigationLink(
+                            state: ProfileStore.Path.State.detailMemory(MemoryDetailStore.State(memory: memory))
+                        ) {
                             MemoryTileView(
                                 memory: memory
                             )

@@ -21,6 +21,21 @@ struct BunchDetailView: View {
     }
     
     var body: some View {
+        NavigationStack(
+            path: self.$store.scope(state: \.path, action: \.path)
+        ) {
+            BunchDetailRootView()
+        } destination: { store in
+            switch store.case {
+            case .detailMemory(let store):
+                MemoryDetailView(store: store)
+                    .navigationBarHidden(true)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func BunchDetailRootView() -> some View {
         VStack(spacing: 0) {
             TopBarView(
                 leftSide: .left,
@@ -37,14 +52,6 @@ struct BunchDetailView: View {
             MemoryListView(memories: self.store.bunch.memories)
         }
         .edgesIgnoringSafeArea(.bottom)
-        .navigationDestination(for: MemoryModel.self) { memory in
-            MemoryDetailView(store: Store(initialState: MemoryDetailStore.State(
-                memory: memory
-            )) {
-                MemoryDetailStore()
-            })
-            .navigationBarHidden(true)
-        }
         .actionSheet(isPresented: self.$store.showingSheet) {
             ActionSheet(
                 title: Text("원하는 옵션을 선택해주세요."),
@@ -99,6 +106,14 @@ struct BunchDetailView: View {
                 LazyVStack(spacing: 8) {
                     ForEach(memories) { memory in
                         NavigationLink(value: memory) {
+                            MemoryTileView(
+                                memory: memory
+                            )
+                        }
+                        
+                        NavigationLink(
+                            state: BunchDetailStore.Path.State.detailMemory(MemoryDetailStore.State(memory: memory))
+                        ) {
                             MemoryTileView(
                                 memory: memory
                             )

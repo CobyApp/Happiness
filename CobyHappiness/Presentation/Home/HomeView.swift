@@ -20,7 +20,7 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack(
-            path: $store.scope(state: \.path, action: \.path)
+            path: self.$store.scope(state: \.path, action: \.path)
         ) {
             HomeRootView()
         } destination: { store in

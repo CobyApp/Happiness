@@ -24,6 +24,24 @@ struct BunchView: View {
     }
     
     var body: some View {
+        NavigationStack(
+            path: self.$store.scope(state: \.path, action: \.path)
+        ) {
+            BunchRootView()
+        } destination: { store in
+            switch store.case {
+            case .detailBunch(let store):
+                BunchDetailView(store: store)
+                    .navigationBarHidden(true)
+            case .editBunch(let store):
+                EditBunchView(store: store)
+                    .navigationBarHidden(true)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func BunchRootView() -> some View {
         VStack(spacing: 0) {
             TopBarView(
                 leftSide: .title,
@@ -38,14 +56,6 @@ struct BunchView: View {
             BunchGridView()
         }
         .background(Color.backgroundNormalNormal)
-        .navigationDestination(for: BunchModel.self) { bunch in
-            BunchDetailView(store: Store(initialState: BunchDetailStore.State(
-                bunch: bunch
-            )) {
-                BunchDetailStore()
-            })
-            .navigationBarHidden(true)
-        }
         .fullScreenCover(
             isPresented: self.$store.showingEditBunchView,
             onDismiss: {
@@ -71,7 +81,9 @@ struct BunchView: View {
             ScrollView {
                 LazyVGrid(columns: self.columns, spacing: 20) {
                     ForEach(self.store.bunches, id: \.self) { bunch in
-                        NavigationLink(value: bunch) {
+                        NavigationLink(
+                            state: BunchStore.Path.State.detailBunch(BunchDetailStore.State(bunch: bunch))
+                        ) {
                             ThumbnailTitleView(
                                 image: bunch.image,
                                 title: bunch.title,

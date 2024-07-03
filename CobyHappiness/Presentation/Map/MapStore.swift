@@ -9,20 +9,29 @@ import Foundation
 
 import ComposableArchitecture
 
+@Reducer
 struct MapStore: Reducer {
     
     @ObservableState
-    struct State: Equatable {
+    struct State {
+        var path = StackState<Path.State>()
         var showingEditMemoryView: Bool = false
         var memories: [MemoryModel] = []
         var filteredMemories: [MemoryModel] = []
     }
     
-    enum Action: BindableAction, Equatable {
+    enum Action: BindableAction {
+        case path(StackActionOf<Path>)
         case binding(BindingAction<State>)
         case showEditMemory
         case getMemories
         case getMemoriesResponse(TaskResult<[MemoryModel]>)
+    }
+    
+    @Reducer
+    enum Path {
+        case detailMemory(MemoryDetailStore)
+        case editMemory(EditMemoryStore)
     }
     
     @Dependency(\.memoryData) private var memoryContext
@@ -32,6 +41,8 @@ struct MapStore: Reducer {
         
         Reduce { state, action in
             switch action {
+            case .path:
+                return .none
             case .binding:
                 return .none
             case .showEditMemory:
@@ -52,5 +63,6 @@ struct MapStore: Reducer {
                 return .none
             }
         }
+        .forEach(\.path, action: \.path)
     }
 }

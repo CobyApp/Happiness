@@ -19,6 +19,24 @@ struct MapView: View {
     }
     
     var body: some View {
+        NavigationStack(
+            path: self.$store.scope(state: \.path, action: \.path)
+        ) {
+            MapRootView()
+        } destination: { store in
+            switch store.case {
+            case .detailMemory(let store):
+                MemoryDetailView(store: store)
+                    .navigationBarHidden(true)
+            case .editMemory(let store):
+                EditMemoryView(store: store)
+                    .navigationBarHidden(true)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func MapRootView() -> some View {
         VStack(spacing: 0) {
             TopBarView(
                 leftSide: .title,
@@ -39,7 +57,9 @@ struct MapView: View {
                 ScrollView(.horizontal) {
                     LazyHStack(spacing: 8) {
                         ForEach(self.store.filteredMemories, id: \.self) { memory in
-                            NavigationLink(value: memory) {
+                            NavigationLink(
+                                state: MapStore.Path.State.detailMemory(MemoryDetailStore.State(memory: memory))
+                            ) {
                                 MemoryTileView(
                                     memory: memory,
                                     isShadowing: true
@@ -60,14 +80,6 @@ struct MapView: View {
             }
         }
         .background(Color.backgroundNormalNormal)
-        .navigationDestination(for: MemoryModel.self) { memory in
-            MemoryDetailView(store: Store(initialState: MemoryDetailStore.State(
-                memory: memory
-            )) {
-                MemoryDetailStore()
-            })
-            .navigationBarHidden(true)
-        }
         .fullScreenCover(
             isPresented: self.$store.showingEditMemoryView,
             onDismiss: {
