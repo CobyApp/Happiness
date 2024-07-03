@@ -12,9 +12,10 @@ import ComposableArchitecture
 
 struct MemoryDetailView: View {
     
+    @Environment(\.dismiss) private var dismiss
+    
     @Bindable private var store: StoreOf<MemoryDetailStore>
     
-    @State private var isPresented: Bool = true
     @State private var scale: CGFloat = 1
     @State private var isDown: Bool = false
     
@@ -23,16 +24,23 @@ struct MemoryDetailView: View {
     }
     
     var body: some View {
-        VStack {
+        ZStack {
+            Color.backgroundNormalAlternative
+                .edgesIgnoringSafeArea(.all)
+            
             CBScaleScrollView(
-                isPresented: self.$isPresented,
+                isPresented: self.$store.isPresented,
                 scale: self.$scale,
                 isDown: self.$isDown
             ) {
                 VStack(spacing: 20) {
-                    self.PhotoView(photos: self.store.memory.photos)
-                    self.ContentView(memory: self.store.memory)
+                    PhotoView(photos: self.store.memory.photos)
+                    
+                    ContentView(memory: self.store.memory)
+                    
+                    Spacer()
                 }
+                .contentShape(Rectangle())
             }
             .overlay(
                 alignment: .top,
@@ -67,7 +75,6 @@ struct MemoryDetailView: View {
                         Text("삭제"),
                         action: {
                             self.store.send(.deleteMemory(self.store.memory))
-//                            self.store.send(.closeMemoryDetail)
                         }
                     ),
                     secondaryButton: .cancel(Text("취소"))
@@ -86,14 +93,16 @@ struct MemoryDetailView: View {
                 })
             }
         }
-        .background(Color.backgroundNormalAlternative)
+        .onChange(of: self.store.isPresented) {
+            self.dismiss()
+        }
     }
     
     @ViewBuilder
     func DetailHeaderView() -> some View {
         HStack {
             Button {
-//                self.store.send(.closeMemoryDetail)
+                self.store.send(.dismiss)
             } label: {
                 Image(uiImage: UIImage.icBack)
                     .resizable()

@@ -15,8 +15,9 @@ struct MemoryDetailStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
-        var showingSheet = false
-        var showingAlert = false
+        var isPresented: Bool = false
+        var showingSheet: Bool = false
+        var showingAlert: Bool = false
         var showingEditMemoryView: Bool = false
         var memory: MemoryModel
         
@@ -36,8 +37,10 @@ struct MemoryDetailStore: Reducer {
         case deleteMemoryResponse
         case getMemory(MemoryModel)
         case getMemoryResponse(TaskResult<MemoryModel>)
+        case dismiss
     }
     
+    @Dependency(\.dismiss) private var dismiss
     @Dependency(\.memoryData) private var memoryContext
     
     var body: some ReducerOf<Self> {
@@ -64,7 +67,7 @@ struct MemoryDetailStore: Reducer {
                     await send(.deleteMemoryResponse)
                 }
             case .deleteMemoryResponse:
-                return .none
+                return .send(.dismiss)
             case .getMemory(let memory):
                 return .run { send in
                     let result = await TaskResult {
@@ -77,6 +80,9 @@ struct MemoryDetailStore: Reducer {
                 return .none
             case let .getMemoryResponse(.failure(error)):
                 print(error.localizedDescription)
+                return .none
+            case .dismiss:
+                state.isPresented = false
                 return .none
             }
         }

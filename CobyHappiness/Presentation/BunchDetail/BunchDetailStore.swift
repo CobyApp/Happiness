@@ -14,8 +14,8 @@ struct BunchDetailStore: Reducer {
     @ObservableState
     struct State: Equatable {
         var isPresented: Bool = true
-        var showingSheet = false
-        var showingAlert = false
+        var showingSheet: Bool = false
+        var showingAlert: Bool = false
         var showingEditBunchView: Bool = false
         var bunch: BunchModel
         
