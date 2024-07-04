@@ -23,18 +23,27 @@ struct MemoryTileView: View {
     }
     
     var body: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: 12) {
             ThumbnailView(
                 image: self.memory.photos.first
             )
             .frame(width: 80, height: 80)
             
             VStack(alignment: .leading, spacing: 4) {
-                Text(self.memory.title)
-                    .font(.pretendard(size: 16, weight: .semibold))
-                    .foregroundColor(Color.labelNormal)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
+                HStack {
+                    Text(self.memory.title)
+                        .font(.pretendard(size: 16, weight: .medium))
+                        .foregroundColor(Color.labelNormal)
+                        .lineLimit(1)
+                        .truncationMode(.tail)
+                    
+                    Spacer()
+                    
+                    Text(self.memory.date.format("yy.MM.dd"))
+                        .font(.pretendard(size: 12, weight: .regular))
+                        .foregroundColor(Color.labelAlternative)
+                        .minimumScaleFactor(1)
+                }
                 
                 Text(self.memory.note)
                     .font(.pretendard(size: 14, weight: .regular))
@@ -44,12 +53,10 @@ struct MemoryTileView: View {
                 
                 Spacer()
             }
-            
-            Spacer()
+            .padding(4)
         }
         .padding(10)
         .frame(maxWidth: .infinity)
-        .frame(height: 100)
         .background(Color.backgroundNormalNormal)
         .clipShape(.rect(cornerRadius: 12))
         .overlay(

@@ -155,7 +155,7 @@ struct DetailMemoryView: View {
                     .font(.pretendard(size: 20, weight: .semibold))
                     .foregroundStyle(Color.labelNormal)
                 
-                Text(memory.date.format("yyyy년 MM월 dd일"))
+                Text(memory.date.format("yy.MM.dd"))
                     .font(.pretendard(size: 14, weight: .regular))
                     .foregroundStyle(Color.labelAlternative)
             }
