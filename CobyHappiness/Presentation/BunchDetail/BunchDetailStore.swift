@@ -14,6 +14,7 @@ struct BunchDetailStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
+        @Presents var detailMemory: MemoryDetailStore.State?
         var showingSheet: Bool = false
         var showingAlert: Bool = false
         var showingEditBunchView: Bool = false
@@ -28,6 +29,7 @@ struct BunchDetailStore: Reducer {
     
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
+        case detailMemory(PresentationAction<MemoryDetailStore.Action>)
         case showOptionSheet
         case showDeleteAlert
         case showEditBunch
@@ -45,6 +47,8 @@ struct BunchDetailStore: Reducer {
         Reduce { state, action in
             switch action {
             case .binding:
+                return .none
+            case .detailMemory:
                 return .none
             case .showOptionSheet:
                 state.showingSheet = true
@@ -67,6 +71,9 @@ struct BunchDetailStore: Reducer {
             case .dismiss:
                 return .run { _ in await self.dismiss() }
             }
+        }
+        .ifLet(\.$detailMemory, action: \.detailMemory) {
+            MemoryDetailStore()
         }
     }
 }

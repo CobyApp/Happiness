@@ -14,12 +14,14 @@ struct BunchStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
+        @Presents var detailBunch: BunchDetailStore.State?
         var showingEditBunchView: Bool = false
         var bunches: [BunchModel] = []
     }
     
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
+        case detailBunch(PresentationAction<BunchDetailStore.Action>)
         case showEditBunch
         case getBunches
         case getBunchesResponse(TaskResult<[BunchModel]>)
@@ -33,6 +35,8 @@ struct BunchStore: Reducer {
         Reduce { state, action in
             switch action {
             case .binding:
+                return .none
+            case .detailBunch:
                 return .none
             case .showEditBunch:
                 state.showingEditBunchView = true
@@ -51,6 +55,9 @@ struct BunchStore: Reducer {
                 print(error.localizedDescription)
                 return .none
             }
+        }
+        .ifLet(\.$detailBunch, action: \.detailBunch) {
+            BunchDetailStore()
         }
     }
 }

@@ -63,21 +63,22 @@ struct BunchView: View {
             ScrollView {
                 LazyVGrid(columns: self.columns, spacing: 20) {
                     ForEach(self.store.bunches, id: \.self) { bunch in
-                        NavigationLink(
-                            state: RootStore.Path.State.detailBunch(BunchDetailStore.State(bunch: bunch))
-                        ) {
-                            ThumbnailTitleView(
-                                image: bunch.image,
-                                title: bunch.title,
-                                description: bunch.term
-                            )
-                            .frame(width: BaseSize.cellWidth)
-                        }
+                        ThumbnailTitleView(
+                            image: bunch.image,
+                            title: bunch.title,
+                            description: bunch.term
+                        )
+                        .frame(width: BaseSize.cellWidth)
                     }
                 }
                 .padding(.horizontal, BaseSize.horizantalPadding)
                 .padding(.top, 8)
                 .padding(.bottom, 20)
+                .sheet(
+                    item: self.$store.scope(state: \.detailBunch, action: \.detailBunch)
+                ) { store in
+                    BunchDetailView(store: store)
+                }
             }
         }
     }

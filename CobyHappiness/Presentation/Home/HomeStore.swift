@@ -14,13 +14,18 @@ struct HomeStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
+        @Presents var addMemory: EditMemoryStore.State?
+        @Presents var detailMemory: MemoryDetailStore.State?
         var showingEditMemoryView: Bool = false
         var memories: [MemoryModel] = []
     }
     
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
+        case addMemory(PresentationAction<EditMemoryStore.Action>)
+        case detailMemory(PresentationAction<MemoryDetailStore.Action>)
         case showEditMemory
+        case showMemoryDetail(MemoryModel)
         case getMemories
         case getMemoriesResponse(TaskResult<[MemoryModel]>)
     }
@@ -34,8 +39,15 @@ struct HomeStore: Reducer {
             switch action {
             case .binding:
                 return .none
+            case .addMemory:
+                return .none
+            case .detailMemory:
+                return .none
             case .showEditMemory:
-                state.showingEditMemoryView = true
+                state.addMemory = EditMemoryStore.State()
+                return .none
+            case .showMemoryDetail(let memory):
+                state.detailMemory = MemoryDetailStore.State(memory: memory)
                 return .none
             case .getMemories:
                 return .run { send in
@@ -51,6 +63,12 @@ struct HomeStore: Reducer {
                 print(error.localizedDescription)
                 return .none
             }
+        }
+        .ifLet(\.$addMemory, action: \.addMemory) {
+            EditMemoryStore()
+        }
+        .ifLet(\.$detailMemory, action: \.detailMemory) {
+            MemoryDetailStore()
         }
     }
 }

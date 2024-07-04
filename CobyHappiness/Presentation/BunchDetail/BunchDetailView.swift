@@ -87,18 +87,19 @@ struct BunchDetailView: View {
             ScrollView {
                 LazyVStack(spacing: 8) {
                     ForEach(memories) { memory in
-                        NavigationLink(
-                            state: RootStore.Path.State.detailMemory(MemoryDetailStore.State(memory: memory))
-                        ) {
-                            MemoryTileView(
-                                memory: memory
-                            )
-                        }
+                        MemoryTileView(
+                            memory: memory
+                        )
                     }
                 }
                 .padding(.horizontal, BaseSize.horizantalPadding)
                 .padding(.top, 8)
                 .padding(.bottom, 20)
+                .sheet(
+                    item: self.$store.scope(state: \.detailMemory, action: \.detailMemory)
+                ) { store in
+                    MemoryDetailView(store: store)
+                }
             }
         }
     }

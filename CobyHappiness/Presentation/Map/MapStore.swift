@@ -14,6 +14,8 @@ struct MapStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
+        @Presents var addMemory: EditMemoryStore.State?
+        @Presents var detailMemory: MemoryDetailStore.State?
         var showingEditMemoryView: Bool = false
         var topLeft: LocationModel? = nil
         var bottomRight: LocationModel? = nil
@@ -23,6 +25,8 @@ struct MapStore: Reducer {
     
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
+        case addMemory(PresentationAction<EditMemoryStore.Action>)
+        case detailMemory(PresentationAction<MemoryDetailStore.Action>)
         case showEditMemory
         case getMemories
         case getMemoriesResponse(TaskResult<[MemoryModel]>)
@@ -42,8 +46,12 @@ struct MapStore: Reducer {
                 return .send(.filterMemory)
             case .binding:
                 return .none
+            case .addMemory:
+                return .none
+            case .detailMemory:
+                return .none
             case .showEditMemory:
-                state.showingEditMemoryView = true
+                state.addMemory = EditMemoryStore.State()
                 return .none
             case .getMemories:
                 return .run { send in
@@ -70,6 +78,12 @@ struct MapStore: Reducer {
                 }
                 return .none
             }
+        }
+        .ifLet(\.$addMemory, action: \.addMemory) {
+            EditMemoryStore()
+        }
+        .ifLet(\.$detailMemory, action: \.detailMemory) {
+            MemoryDetailStore()
         }
     }
 }

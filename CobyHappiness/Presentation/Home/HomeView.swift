@@ -71,17 +71,18 @@ struct HomeView: View {
             ScrollView {
                 LazyVStack(spacing: BaseSize.cellVerticalSpacing) {
                     ForEach(self.store.memories) { memory in
-                        NavigationLink(
-                            state: RootStore.Path.State.detailMemory(MemoryDetailStore.State(memory: memory))
-                        ) {
-                            MemoryThumbnailView(
-                                memory: memory
-                            )
-                        }
+                        MemoryThumbnailView(
+                            memory: memory
+                        )
                     }
                 }
                 .padding(.top, 8)
                 .padding(.bottom, 20)
+                .sheet(
+                    item: self.$store.scope(state: \.detailMemory, action: \.detailMemory)
+                ) { store in
+                    MemoryDetailView(store: store)
+                }
             }
         }
     }

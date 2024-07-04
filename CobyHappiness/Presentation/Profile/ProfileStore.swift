@@ -14,12 +14,14 @@ struct ProfileStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
+        @Presents var detailMemory: MemoryDetailStore.State?
         var memories: [MemoryModel] = []
         var memoryType: MemoryType? = nil
     }
     
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
+        case detailMemory(PresentationAction<MemoryDetailStore.Action>)
         case getMemories
         case getMemoriesResponse(TaskResult<[MemoryModel]>)
         case navigateToSettingView
@@ -33,6 +35,8 @@ struct ProfileStore: Reducer {
         Reduce { state, action in
             switch action {
             case .binding:
+                return .none
+            case .detailMemory:
                 return .none
             case .getMemories:
                 return .run { send in
@@ -50,6 +54,9 @@ struct ProfileStore: Reducer {
             case .navigateToSettingView:
                 return .none
             }
+        }
+        .ifLet(\.$detailMemory, action: \.detailMemory) {
+            MemoryDetailStore()
         }
     }
 }

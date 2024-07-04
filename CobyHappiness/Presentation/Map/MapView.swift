@@ -40,20 +40,21 @@ struct MapView: View {
                 ScrollView(.horizontal) {
                     LazyHStack(spacing: 8) {
                         ForEach(self.store.filteredMemories, id: \.self) { memory in
-                            NavigationLink(
-                                state: RootStore.Path.State.detailMemory(MemoryDetailStore.State(memory: memory))
-                            ) {
-                                MemoryTileView(
-                                    memory: memory,
-                                    isShadowing: true
-                                )
-                                .frame(width: BaseSize.fullWidth, height: 100)
-                                .padding(.horizontal, 20)
-                                .containerRelativeFrame(.horizontal)
-                            }
+                            MemoryTileView(
+                                memory: memory,
+                                isShadowing: true
+                            )
+                            .frame(width: BaseSize.fullWidth, height: 100)
+                            .padding(.horizontal, 20)
+                            .containerRelativeFrame(.horizontal)
                         }
                     }
                     .scrollTargetLayout()
+                    .sheet(
+                        item: self.$store.scope(state: \.detailMemory, action: \.detailMemory)
+                    ) { store in
+                        MemoryDetailView(store: store)
+                    }
                 }
                 .contentMargins(.horizontal, BaseSize.horizantalPadding, for: .scrollContent)
                 .scrollIndicators(.hidden)
