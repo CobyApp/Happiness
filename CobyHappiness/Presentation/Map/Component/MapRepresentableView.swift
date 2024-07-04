@@ -7,7 +7,6 @@
 
 import SwiftUI
 import MapKit
-import CoreLocation
 
 struct MapRepresentableView: UIViewRepresentable {
     
@@ -25,7 +24,6 @@ struct MapRepresentableView: UIViewRepresentable {
     class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
         var parent: MapRepresentableView
         var mapView: MKMapView?
-        var isInitialLocationSet = false
         
         init(parent: MapRepresentableView) {
             self.parent = parent
@@ -44,15 +42,18 @@ struct MapRepresentableView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+            self.filterMemories(for: mapView)
+        }
+        
+        private func filterMemories(for mapView: MKMapView) {
             let topLeft = mapView.convert(CGPoint(x: 0, y: 0), toCoordinateFrom: mapView)
             let bottomRight = mapView.convert(CGPoint(x: mapView.frame.width, y: mapView.frame.height), toCoordinateFrom: mapView)
             
             self.parent.filteredMemories = self.parent.memories.compactMap { memory in
-                if let location = memory.location?.coordinate {
-                    if location.latitude <= topLeft.latitude && location.latitude >= bottomRight.latitude &&
-                        location.longitude >= topLeft.longitude && location.longitude <= bottomRight.longitude {
-                        return memory
-                    }
+                guard let location = memory.location?.coordinate else { return nil }
+                if location.latitude <= topLeft.latitude && location.latitude >= bottomRight.latitude &&
+                    location.longitude >= topLeft.longitude && location.longitude <= bottomRight.longitude {
+                    return memory
                 }
                 return nil
             }
@@ -60,7 +61,7 @@ struct MapRepresentableView: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(parent: self)
+        return Coordinator(parent: self)
     }
     
     func makeUIView(context: Context) -> MKMapView {
@@ -71,16 +72,14 @@ struct MapRepresentableView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        let allAnnotations = uiView.annotations
-        uiView.removeAnnotations(allAnnotations)
+        uiView.removeAnnotations(uiView.annotations)
         
         for memory in self.memories {
-            if let coordinate = memory.location?.coordinate {
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = coordinate
-                annotation.title = memory.title
-                uiView.addAnnotation(annotation)
-            }
+            guard let coordinate = memory.location?.coordinate else { continue }
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = memory.title
+            uiView.addAnnotation(annotation)
         }
     }
 }
