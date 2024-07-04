@@ -54,7 +54,7 @@ struct MapStore: Reducer {
                 }
             case let .getMemoriesResponse(.success(memories)):
                 state.memories = memories
-                return .none
+                return .send(.filterMemory)
             case let .getMemoriesResponse(.failure(error)):
                 print(error.localizedDescription)
                 return .none
