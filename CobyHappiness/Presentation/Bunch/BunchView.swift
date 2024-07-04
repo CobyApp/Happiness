@@ -31,25 +31,25 @@ struct BunchView: View {
                 rightSide: .text,
                 rightTitle: "뭉치 추가",
                 rightAction: {
-                    self.store.send(.showEditBunch)
+                    self.store.send(.showAddBunch)
                 }
             )
             
             BunchGridView()
         }
         .background(Color.backgroundNormalNormal)
-        .fullScreenCover(
-            isPresented: self.$store.showingEditBunchView,
-            onDismiss: {
-                self.store.send(.getBunches)
-            }
-        ) {
-            EditBunchView(store: Store(initialState: EditBunchStore.State()) {
-                EditBunchStore()
-            })
-        }
         .onAppear {
             self.store.send(.getBunches)
+        }
+        .navigationDestination(
+            item: self.$store.scope(state: \.addBunch, action: \.addBunch)
+        ) { store in
+            EditBunchView(store: store).navigationBarHidden(true)
+        }
+        .navigationDestination(
+            item: self.$store.scope(state: \.detailBunch, action: \.detailBunch)
+        ) { store in
+            DetailBunchView(store: store).navigationBarHidden(true)
         }
     }
     
@@ -57,7 +57,7 @@ struct BunchView: View {
     private func BunchGridView() -> some View {
         if self.store.bunches.isEmpty {
             EmptyBunchView {
-                self.store.send(.showEditBunch)
+                self.store.send(.showAddBunch)
             }
         } else {
             ScrollView {
@@ -69,16 +69,14 @@ struct BunchView: View {
                             description: bunch.term
                         )
                         .frame(width: BaseSize.cellWidth)
+                        .onTapGesture {
+                            self.store.send(.showDetailBunch(bunch))
+                        }
                     }
                 }
                 .padding(.horizontal, BaseSize.horizantalPadding)
                 .padding(.top, 8)
                 .padding(.bottom, 20)
-                .sheet(
-                    item: self.$store.scope(state: \.detailBunch, action: \.detailBunch)
-                ) { store in
-                    DetailBunchView(store: store)
-                }
             }
         }
     }
