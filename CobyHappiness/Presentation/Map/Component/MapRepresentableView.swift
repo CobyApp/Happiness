@@ -24,10 +24,13 @@ struct MapRepresentableView: UIViewRepresentable {
     class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
         var parent: MapRepresentableView
         var mapView: MKMapView?
+        var locationManager = CLLocationManager()
         
         init(parent: MapRepresentableView) {
             self.parent = parent
             super.init()
+            self.locationManager.delegate = self
+            self.locationManager.requestWhenInUseAuthorization()
         }
         
         func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
@@ -41,9 +44,24 @@ struct MapRepresentableView: UIViewRepresentable {
             self.parent.filteredMemories = self.parent.memories.filter { memory in
                 guard let location = memory.location?.coordinate else { return false }
                 return location.latitude <= topLeftCoordinate.latitude &&
-                       location.latitude >= bottomRightCoordinate.latitude &&
-                       location.longitude >= topLeftCoordinate.longitude &&
-                       location.longitude <= bottomRightCoordinate.longitude
+                location.latitude >= bottomRightCoordinate.latitude &&
+                location.longitude >= topLeftCoordinate.longitude &&
+                location.longitude <= bottomRightCoordinate.longitude
+            }
+        }
+        
+        func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+            if status == .authorizedWhenInUse || status == .authorizedAlways {
+                self.locationManager.startUpdatingLocation()
+            }
+        }
+        
+        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            if let location = locations.first {
+                let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                let region = MKCoordinateRegion(center: location.coordinate, span: span)
+                mapView?.setRegion(region, animated: true)
+                self.locationManager.stopUpdatingLocation() // 위치 업데이트 중지
             }
         }
     }
@@ -56,6 +74,7 @@ struct MapRepresentableView: UIViewRepresentable {
         let mapView = MKMapView(frame: .zero)
         context.coordinator.mapView = mapView
         mapView.delegate = context.coordinator
+        mapView.showsUserLocation = true
         return mapView
     }
     
