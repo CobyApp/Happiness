@@ -37,6 +37,7 @@ struct DetailBunchView: View {
             MemoryListView(memories: self.store.bunch.memories)
         }
         .edgesIgnoringSafeArea(.bottom)
+        .background(Color.backgroundNormalNormal)
         .actionSheet(isPresented: self.$store.showingSheet) {
             ActionSheet(
                 title: Text("원하는 옵션을 선택해주세요."),

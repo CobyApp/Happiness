@@ -41,8 +41,7 @@ struct MapView: View {
                     LazyHStack(spacing: 8) {
                         ForEach(self.store.filteredMemories, id: \.self) { memory in
                             MemoryTileView(
-                                memory: memory,
-                                isShadowing: true
+                                memory: memory
                             )
                             .frame(width: BaseSize.fullWidth, height: 100)
                             .padding(.horizontal, 20)
