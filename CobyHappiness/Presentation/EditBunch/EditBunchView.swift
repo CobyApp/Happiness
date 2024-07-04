@@ -43,7 +43,6 @@ struct EditBunchView: View {
             .buttonStyle(
                 CBButtonStyle(
                     isDisabled: self.store.bunch.memories.isEmpty,
-                    isBlur: true,
                     buttonColor: Color.redNormal
                 )
             )

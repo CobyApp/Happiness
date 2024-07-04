@@ -68,12 +68,16 @@ struct HomeView: View {
                 self.store.send(.showAddMemory)
             }
         } else {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 LazyVStack(spacing: BaseSize.cellVerticalSpacing) {
                     ForEach(self.store.memories) { memory in
-                        MemoryThumbnailView(
-                            memory: memory
+                        ThumbnailCardView(
+                            image: memory.photos.first,
+                            title: memory.title,
+                            description: memory.date.format("yyyy년 MM월 dd일")
                         )
+                        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
+                        .frame(maxWidth: .infinity)
                         .onTapGesture {
                             self.store.send(.showDetailMemory(memory))
                         }
@@ -83,17 +87,5 @@ struct HomeView: View {
                 .padding(.bottom, 20)
             }
         }
-    }
-    
-    @ViewBuilder
-    private func MemoryThumbnailView(memory: MemoryModel) -> some View {
-        ThumbnailCardView(
-            image: memory.photos.first,
-            title: memory.title,
-            description: memory.date.format("yyyy년 MM월 dd일"),
-            isShadowing: true
-        )
-        .frame(width: BaseSize.fullWidth, height: BaseSize.fullWidth * 0.8)
-        .frame(maxWidth: .infinity)
     }
 }

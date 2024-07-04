@@ -55,7 +55,6 @@ struct EditMemoryView: View {
             .buttonStyle(
                 CBButtonStyle(
                     isDisabled: self.isDisabled,
-                    isBlur: true,
                     buttonColor: Color.redNormal
                 )
             )
@@ -127,7 +126,7 @@ struct EditMemoryView: View {
                             .frame(width: 32, height: 32)
                             .foregroundColor(Color.labelAlternative)
                             .frame(width: 80, height: 80)
-                            .background(Color.backgroundNormalAlternative)
+                            .background(Color.fillStrong)
                             .clipShape(.rect(cornerRadius: 12))
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12)

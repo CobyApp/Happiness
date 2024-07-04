@@ -11,7 +11,7 @@ import CobyDS
 import ComposableArchitecture
 
 struct MapView: View {
-
+    
     @Bindable private var store: StoreOf<MapStore>
     
     init(store: StoreOf<MapStore>) {

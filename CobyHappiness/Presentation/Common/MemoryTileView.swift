@@ -12,16 +12,13 @@ import CobyDS
 struct MemoryTileView: View {
     
     private let memory: MemoryModel
-    private let isShadowing: Bool
     private let isSelected: Bool
     
     init(
         memory: MemoryModel,
-        isShadowing: Bool = false,
         isSelected: Bool = false
     ) {
         self.memory = memory
-        self.isShadowing = isShadowing
         self.isSelected = isSelected
     }
     
@@ -57,13 +54,7 @@ struct MemoryTileView: View {
         .clipShape(.rect(cornerRadius: 12))
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(self.isSelected ? Color.blueNormal : Color.lineNormalNeutral, lineWidth: self.isShadowing ? 0 : 1)
-        )
-        .shadow(
-            color: self.isShadowing ? Color.shadowEmphasize : Color.clear,
-            radius: 8,
-            x: 0,
-            y: 2
+                .stroke(self.isSelected ? Color.blueNormal : Color.lineNormalNeutral, lineWidth: 1)
         )
     }
 }
