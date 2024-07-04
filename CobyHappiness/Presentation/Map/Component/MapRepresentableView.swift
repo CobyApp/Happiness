@@ -11,14 +11,17 @@ import MapKit
 struct MapRepresentableView: UIViewRepresentable {
     
     @Binding var memories: [MemoryModel]
-    @Binding var filteredMemories: [MemoryModel]
+    @Binding var topLeft: LocationModel?
+    @Binding var bottomRight: LocationModel?
     
     init(
         memories: Binding<[MemoryModel]>,
-        filteredMemories: Binding<[MemoryModel]>
+        topLeft: Binding<LocationModel?>,
+        bottomRight: Binding<LocationModel?>
     ) {
         self._memories = memories
-        self._filteredMemories = filteredMemories
+        self._topLeft = topLeft
+        self._bottomRight = bottomRight
     }
     
     class Coordinator: NSObject, MKMapViewDelegate, CLLocationManagerDelegate {
@@ -34,20 +37,8 @@ struct MapRepresentableView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-            self.filterMemoriesInVisibleRegion(mapView)
-        }
-        
-        private func filterMemoriesInVisibleRegion(_ mapView: MKMapView) {
-            let topLeftCoordinate = mapView.convert(CGPoint(x: 0, y: 0), toCoordinateFrom: mapView)
-            let bottomRightCoordinate = mapView.convert(CGPoint(x: mapView.frame.width, y: mapView.frame.height), toCoordinateFrom: mapView)
-            
-            self.parent.filteredMemories = self.parent.memories.filter { memory in
-                guard let location = memory.location?.coordinate else { return false }
-                return location.latitude <= topLeftCoordinate.latitude &&
-                location.latitude >= bottomRightCoordinate.latitude &&
-                location.longitude >= topLeftCoordinate.longitude &&
-                location.longitude <= bottomRightCoordinate.longitude
-            }
+            self.parent.topLeft = mapView.convert(CGPoint(x: 0, y: 0), toCoordinateFrom: mapView).toLocationModel()
+            self.parent.bottomRight = mapView.convert(CGPoint(x: mapView.frame.width, y: mapView.frame.height), toCoordinateFrom: mapView).toLocationModel()
         }
         
         func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -86,7 +77,7 @@ struct MapRepresentableView: UIViewRepresentable {
         mapView.removeAnnotations(mapView.annotations)
         
         let annotations = self.memories.compactMap { memory -> MKPointAnnotation? in
-            guard let coordinate = memory.location?.coordinate else { return nil }
+            guard let coordinate = memory.location?.toCLLocationCoordinate2D() else { return nil }
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
             annotation.title = memory.title

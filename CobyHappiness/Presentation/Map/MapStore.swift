@@ -15,6 +15,8 @@ struct MapStore: Reducer {
     @ObservableState
     struct State: Equatable {
         var showingEditMemoryView: Bool = false
+        var topLeft: LocationModel? = nil
+        var bottomRight: LocationModel? = nil
         var memories: [MemoryModel] = []
         var filteredMemories: [MemoryModel] = []
     }
@@ -24,6 +26,7 @@ struct MapStore: Reducer {
         case showEditMemory
         case getMemories
         case getMemoriesResponse(TaskResult<[MemoryModel]>)
+        case filterMemory
     }
     
     @Dependency(\.memoryData) private var memoryContext
@@ -33,6 +36,10 @@ struct MapStore: Reducer {
         
         Reduce { state, action in
             switch action {
+            case .binding(\.topLeft):
+                return .send(.filterMemory)
+            case .binding(\.bottomRight):
+                return .send(.filterMemory)
             case .binding:
                 return .none
             case .showEditMemory:
@@ -50,6 +57,17 @@ struct MapStore: Reducer {
                 return .none
             case let .getMemoriesResponse(.failure(error)):
                 print(error.localizedDescription)
+                return .none
+            case .filterMemory:
+                guard let topLeft = state.topLeft else { return .none }
+                guard let bottomRight = state.bottomRight else { return .none }
+                state.filteredMemories = state.memories.filter { memory in
+                    guard let location = memory.location else { return false }
+                    return location.lat <= topLeft.lat &&
+                    location.lat >= bottomRight.lat &&
+                    location.lon >= topLeft.lon &&
+                    location.lon <= bottomRight.lon
+                }
                 return .none
             }
         }
