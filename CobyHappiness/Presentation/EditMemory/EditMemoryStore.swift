@@ -29,6 +29,7 @@ struct EditMemoryStore: Reducer {
     
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
+        case setType(MemoryType)
         case setPhotos([PhotosPickerItem])
         case saveMemory(MemoryModel)
         case saveMemoryResponse
@@ -43,6 +44,9 @@ struct EditMemoryStore: Reducer {
         Reduce { state, action in
             switch action {
             case .binding:
+                return .none
+            case .setType(let type):
+                state.memory.type = type
                 return .none
             case .setPhotos(let photoItems):
                 (state.memory.photos, state.memory.date, state.memory.location) = self.setPhotos(items: photoItems)

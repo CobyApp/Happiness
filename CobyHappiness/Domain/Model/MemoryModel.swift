@@ -21,7 +21,7 @@ struct MemoryModel: Identifiable, Hashable, Equatable {
     init(
         id: UUID = UUID(),
         date: Date = .now,
-        type: MemoryType = .moment,
+        type: MemoryType = .trip,
         title: String = "",
         note: String = "",
         location: LocationModel? = nil,

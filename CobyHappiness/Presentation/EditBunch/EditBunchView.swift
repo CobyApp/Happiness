@@ -42,12 +42,12 @@ struct EditBunchView: View {
             }
             .buttonStyle(
                 CBButtonStyle(
-                    buttonColor: Color.redNormal,
-                    disable: self.store.bunch.memories.isEmpty
+                    isDisabled: self.store.bunch.memories.isEmpty,
+                    isBlur: true,
+                    buttonColor: Color.redNormal
                 )
             )
-            .padding(.horizontal, BaseSize.horizantalPadding)
-            .padding(.bottom, 20)
+            .padding(20)
         }
         .background(Color.backgroundNormalNormal)
         .onAppear {

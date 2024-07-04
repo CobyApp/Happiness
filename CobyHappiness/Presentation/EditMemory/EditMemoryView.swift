@@ -46,6 +46,7 @@ struct EditMemoryView: View {
                     
                     self.ContentView()
                 }
+                .padding(.bottom, 20)
             }
             
             Button {
@@ -57,8 +58,9 @@ struct EditMemoryView: View {
             }
             .buttonStyle(
                 CBButtonStyle(
-                    buttonColor: Color.redNormal,
-                    disable: self.isDisabled
+                    isDisabled: self.isDisabled,
+                    isBlur: true,
+                    buttonColor: Color.redNormal
                 )
             )
             .padding(.horizontal, BaseSize.horizantalPadding)
@@ -75,13 +77,33 @@ struct EditMemoryView: View {
     
     @ViewBuilder
     func MemoryTypeView() -> some View {
-        FlexibleStack {
-            ForEach(MemoryType.allCases) { memoryType in
-                Text(memoryType.title)
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                Text("태그")
                     .font(.pretendard(size: 16, weight: .regular))
                     .foregroundColor(Color.labelNormal)
-                    .padding(10)
-                    .background(Color.backgroundElevatedAlternative)
+                
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, minHeight: 32)
+            
+            FlexibleStack(spacing: 8) {
+                ForEach(MemoryType.allCases) { memoryType in
+                    Text(memoryType.title)
+                        .font(.pretendard(size: 14, weight: .regular))
+                        .foregroundColor(Color.labelNeutral)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .background(self.store.memory.type == memoryType ? Color.fillStrong : Color.backgroundNormalNormal)
+                        .clipShape(.rect(cornerRadius: 12))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.lineNormalNeutral, lineWidth: 1)
+                        )
+                        .onTapGesture {
+                            self.store.send(.setType(memoryType))
+                        }
+                }
             }
         }
         .padding(.horizontal, BaseSize.horizantalPadding)

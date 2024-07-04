@@ -80,7 +80,7 @@ struct ProfileView: View {
         VStack(spacing: 4) {
             HStack {
                 Text(title)
-                    .font(.pretendard(size: 16, weight: .medium))
+                    .font(.pretendard(size: 16, weight: .regular))
                     .foregroundStyle(Color.labelNormal)
                 
                 Spacer()
