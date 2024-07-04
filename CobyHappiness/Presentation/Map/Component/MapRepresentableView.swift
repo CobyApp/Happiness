@@ -30,32 +30,20 @@ struct MapRepresentableView: UIViewRepresentable {
             super.init()
         }
         
-        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-            if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "marker") {
-                annotationView.annotation = annotation
-                return annotationView
-            } else {
-                let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "marker")
-                annotationView.canShowCallout = true
-                return annotationView
-            }
-        }
-        
         func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-            self.filterMemories(for: mapView)
+            self.filterMemoriesInVisibleRegion(mapView)
         }
         
-        private func filterMemories(for mapView: MKMapView) {
-            let topLeft = mapView.convert(CGPoint(x: 0, y: 0), toCoordinateFrom: mapView)
-            let bottomRight = mapView.convert(CGPoint(x: mapView.frame.width, y: mapView.frame.height), toCoordinateFrom: mapView)
+        private func filterMemoriesInVisibleRegion(_ mapView: MKMapView) {
+            let topLeftCoordinate = mapView.convert(CGPoint(x: 0, y: 0), toCoordinateFrom: mapView)
+            let bottomRightCoordinate = mapView.convert(CGPoint(x: mapView.frame.width, y: mapView.frame.height), toCoordinateFrom: mapView)
             
-            self.parent.filteredMemories = self.parent.memories.compactMap { memory in
-                guard let location = memory.location?.coordinate else { return nil }
-                if location.latitude <= topLeft.latitude && location.latitude >= bottomRight.latitude &&
-                    location.longitude >= topLeft.longitude && location.longitude <= bottomRight.longitude {
-                    return memory
-                }
-                return nil
+            self.parent.filteredMemories = self.parent.memories.filter { memory in
+                guard let location = memory.location?.coordinate else { return false }
+                return location.latitude <= topLeftCoordinate.latitude &&
+                       location.latitude >= bottomRightCoordinate.latitude &&
+                       location.longitude >= topLeftCoordinate.longitude &&
+                       location.longitude <= bottomRightCoordinate.longitude
             }
         }
     }
@@ -72,14 +60,20 @@ struct MapRepresentableView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        uiView.removeAnnotations(uiView.annotations)
+        self.addMarkersToMapView(uiView)
+    }
+    
+    private func addMarkersToMapView(_ mapView: MKMapView) {
+        mapView.removeAnnotations(mapView.annotations)
         
-        for memory in self.memories {
-            guard let coordinate = memory.location?.coordinate else { continue }
+        let annotations = self.memories.compactMap { memory -> MKPointAnnotation? in
+            guard let coordinate = memory.location?.coordinate else { return nil }
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
             annotation.title = memory.title
-            uiView.addAnnotation(annotation)
+            return annotation
         }
+        
+        mapView.addAnnotations(annotations)
     }
 }
