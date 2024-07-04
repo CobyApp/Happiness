@@ -25,18 +25,18 @@ struct HomeView: View {
             self.MemoryListView()
         }
         .background(Color.backgroundNormalNormal)
-        .fullScreenCover(
-            isPresented: self.$store.showingEditMemoryView,
-            onDismiss: {
-                self.store.send(.getMemories)
-            }
-        ) {
-            EditMemoryView(store: Store(initialState: EditMemoryStore.State()) {
-                EditMemoryStore()
-            })
-        }
         .onAppear {
             self.store.send(.getMemories)
+        }
+        .navigationDestination(
+            item: self.$store.scope(state: \.addMemory, action: \.addMemory)
+        ) { store in
+            EditMemoryView(store: store).navigationBarHidden(true)
+        }
+        .navigationDestination(
+            item: self.$store.scope(state: \.detailMemory, action: \.detailMemory)
+        ) { store in
+            MemoryDetailView(store: store).navigationBarHidden(true)
         }
     }
     
@@ -74,15 +74,13 @@ struct HomeView: View {
                         MemoryThumbnailView(
                             memory: memory
                         )
+                        .onTapGesture {
+                            self.store.send(.showMemoryDetail(memory))
+                        }
                     }
                 }
                 .padding(.top, 8)
                 .padding(.bottom, 20)
-                .sheet(
-                    item: self.$store.scope(state: \.detailMemory, action: \.detailMemory)
-                ) { store in
-                    MemoryDetailView(store: store)
-                }
             }
         }
     }

@@ -16,7 +16,6 @@ struct HomeStore: Reducer {
     struct State: Equatable {
         @Presents var addMemory: EditMemoryStore.State?
         @Presents var detailMemory: MemoryDetailStore.State?
-        var showingEditMemoryView: Bool = false
         var memories: [MemoryModel] = []
     }
     
