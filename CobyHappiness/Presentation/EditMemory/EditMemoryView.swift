@@ -40,6 +40,8 @@ struct EditMemoryView: View {
             
             ScrollView {
                 VStack(spacing: 20) {
+                    self.MemoryTypeView()
+                    
                     self.PhotosView()
                     
                     self.ContentView()
@@ -69,6 +71,20 @@ struct EditMemoryView: View {
         .onChange(of: self.store.isPresented) {
             self.dismiss()
         }
+    }
+    
+    @ViewBuilder
+    func MemoryTypeView() -> some View {
+        FlexibleStack {
+            ForEach(MemoryType.allCases) { memoryType in
+                Text(memoryType.title)
+                    .font(.pretendard(size: 16, weight: .regular))
+                    .foregroundColor(Color.labelNormal)
+                    .padding(10)
+                    .background(Color.backgroundElevatedAlternative)
+            }
+        }
+        .padding(.horizontal, BaseSize.horizantalPadding)
     }
     
     @ViewBuilder
