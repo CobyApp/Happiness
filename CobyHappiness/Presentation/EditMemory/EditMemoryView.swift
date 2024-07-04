@@ -14,11 +14,7 @@ import ComposableArchitecture
 
 struct EditMemoryView: View {
     
-    @Environment(\.dismiss) private var dismiss
-    
     @Bindable private var store: StoreOf<EditMemoryStore>
-    
-    @State private var selectedItems: [PhotosPickerItem] = []
     
     init(store: StoreOf<EditMemoryStore>) {
         self.store = store
@@ -69,9 +65,6 @@ struct EditMemoryView: View {
         .background(Color.backgroundNormalNormal)
         .onTapGesture {
             self.closeKeyboard()
-        }
-        .onChange(of: self.store.isPresented) {
-            self.dismiss()
         }
     }
     
@@ -125,7 +118,7 @@ struct EditMemoryView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 6) {
                     PhotosPicker(
-                        selection: self.$selectedItems,
+                        selection: self.$store.selectedItems,
                         matching: .images,
                         photoLibrary: .shared()
                     ) {
@@ -140,9 +133,6 @@ struct EditMemoryView: View {
                                 RoundedRectangle(cornerRadius: 12)
                                     .stroke(Color.lineNormalNeutral, lineWidth: 1)
                             )
-                    }
-                    .onChange(of: self.selectedItems) {
-                        self.store.send(.setPhotos(self.selectedItems))
                     }
                     
                     ForEach(self.store.memory.photos, id: \.self) { image in

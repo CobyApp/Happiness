@@ -1,5 +1,5 @@
 //
-//  BunchDetailStore.swift
+//  DetailBunchStore.swift
 //  CobyHappiness
 //
 //  Created by Coby Kim on 6/27/24.
@@ -10,11 +10,11 @@ import UIKit
 import ComposableArchitecture
 
 @Reducer
-struct BunchDetailStore: Reducer {
+struct DetailBunchStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
-        @Presents var detailMemory: MemoryDetailStore.State?
+        @Presents var detailMemory: DetailMemoryStore.State?
         var showingSheet: Bool = false
         var showingAlert: Bool = false
         var showingEditBunchView: Bool = false
@@ -29,7 +29,7 @@ struct BunchDetailStore: Reducer {
     
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
-        case detailMemory(PresentationAction<MemoryDetailStore.Action>)
+        case detailMemory(PresentationAction<DetailMemoryStore.Action>)
         case showOptionSheet
         case showDeleteAlert
         case showEditBunch
@@ -73,7 +73,7 @@ struct BunchDetailStore: Reducer {
             }
         }
         .ifLet(\.$detailMemory, action: \.detailMemory) {
-            MemoryDetailStore()
+            DetailMemoryStore()
         }
     }
 }

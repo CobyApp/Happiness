@@ -1,5 +1,5 @@
 //
-//  BunchDetailView.swift
+//  DetailBunchView.swift
 //  CobyHappiness
 //
 //  Created by Coby on 6/12/24.
@@ -10,13 +10,13 @@ import SwiftUI
 import CobyDS
 import ComposableArchitecture
 
-struct BunchDetailView: View {
+struct DetailBunchView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @Bindable private var store: StoreOf<BunchDetailStore>
+    @Bindable private var store: StoreOf<DetailBunchStore>
     
-    init(store: StoreOf<BunchDetailStore>) {
+    init(store: StoreOf<DetailBunchStore>) {
         self.store = store
     }
     
@@ -98,7 +98,7 @@ struct BunchDetailView: View {
                 .sheet(
                     item: self.$store.scope(state: \.detailMemory, action: \.detailMemory)
                 ) { store in
-                    MemoryDetailView(store: store)
+                    DetailMemoryView(store: store)
                 }
             }
         }

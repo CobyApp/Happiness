@@ -36,7 +36,7 @@ struct HomeView: View {
         .navigationDestination(
             item: self.$store.scope(state: \.detailMemory, action: \.detailMemory)
         ) { store in
-            MemoryDetailView(store: store).navigationBarHidden(true)
+            DetailMemoryView(store: store).navigationBarHidden(true)
         }
     }
     
@@ -47,7 +47,7 @@ struct HomeView: View {
             rightSide: .text,
             rightTitle: "추억 추가",
             rightAction: {
-                self.store.send(.showEditMemory)
+                self.store.send(.showAddMemory)
             }
         )
         .overlay(alignment: .leading) {
@@ -65,7 +65,7 @@ struct HomeView: View {
     private func MemoryListView() -> some View {
         if self.store.memories.isEmpty {
             EmptyMemoryView {
-                self.store.send(.showEditMemory)
+                self.store.send(.showAddMemory)
             }
         } else {
             ScrollView {
@@ -75,7 +75,7 @@ struct HomeView: View {
                             memory: memory
                         )
                         .onTapGesture {
-                            self.store.send(.showMemoryDetail(memory))
+                            self.store.send(.showDetailMemory(memory))
                         }
                     }
                 }

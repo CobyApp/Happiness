@@ -17,8 +17,8 @@ struct EditMemoryStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
-        var isPresented: Bool = true
         var memory: MemoryModel
+        var selectedItems: [PhotosPickerItem] = []
         
         init(
             memory: MemoryModel = MemoryModel()
@@ -30,12 +30,12 @@ struct EditMemoryStore: Reducer {
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
         case setType(MemoryType)
-        case setPhotos([PhotosPickerItem])
         case saveMemory(MemoryModel)
         case saveMemoryResponse
         case dismiss
     }
     
+    @Dependency(\.dismiss) private var dismiss
     @Dependency(\.memoryData) private var memoryContext
     
     var body: some ReducerOf<Self> {
@@ -43,14 +43,14 @@ struct EditMemoryStore: Reducer {
         
         Reduce { state, action in
             switch action {
+            case .binding(\.selectedItems):
+                (state.memory.photos, state.memory.date, state.memory.location) = self.setPhotos(items: state.selectedItems)
+                state.memory.photosData = state.memory.photos.map { $0.compressedImage }
+                return .none
             case .binding:
                 return .none
             case .setType(let type):
                 state.memory.type = type
-                return .none
-            case .setPhotos(let photoItems):
-                (state.memory.photos, state.memory.date, state.memory.location) = self.setPhotos(items: photoItems)
-                state.memory.photosData = state.memory.photos.map { $0.compressedImage }
                 return .none
             case .saveMemory(let memory):
                 return .run { send in
@@ -62,8 +62,7 @@ struct EditMemoryStore: Reducer {
             case .saveMemoryResponse:
                 return .send(.dismiss)
             case .dismiss:
-                state.isPresented = false
-                return .none
+                return .run { _ in await self.dismiss() }
             }
         }
     }

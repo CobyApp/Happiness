@@ -26,7 +26,7 @@ struct MapView: View {
                 rightSide: .text,
                 rightTitle: "추억 추가",
                 rightAction: {
-                    self.store.send(.showEditMemory)
+                    self.store.send(.showAddMemory)
                 }
             )
             
@@ -47,14 +47,12 @@ struct MapView: View {
                             .frame(width: BaseSize.fullWidth, height: 100)
                             .padding(.horizontal, 20)
                             .containerRelativeFrame(.horizontal)
+                            .onTapGesture {
+                                self.store.send(.showDetailMemory(memory))
+                            }
                         }
                     }
                     .scrollTargetLayout()
-                    .sheet(
-                        item: self.$store.scope(state: \.detailMemory, action: \.detailMemory)
-                    ) { store in
-                        MemoryDetailView(store: store)
-                    }
                 }
                 .contentMargins(.horizontal, BaseSize.horizantalPadding, for: .scrollContent)
                 .scrollIndicators(.hidden)
@@ -64,18 +62,18 @@ struct MapView: View {
             }
         }
         .background(Color.backgroundNormalNormal)
-        .fullScreenCover(
-            isPresented: self.$store.showingEditMemoryView,
-            onDismiss: {
-                self.store.send(.getMemories)
-            }
-        ) {
-            EditMemoryView(store: Store(initialState: EditMemoryStore.State()) {
-                EditMemoryStore()
-            })
-        }
         .onAppear {
             self.store.send(.getMemories)
+        }
+        .navigationDestination(
+            item: self.$store.scope(state: \.addMemory, action: \.addMemory)
+        ) { store in
+            EditMemoryView(store: store).navigationBarHidden(true)
+        }
+        .navigationDestination(
+            item: self.$store.scope(state: \.detailMemory, action: \.detailMemory)
+        ) { store in
+            DetailMemoryView(store: store).navigationBarHidden(true)
         }
     }
 }

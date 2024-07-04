@@ -77,7 +77,7 @@ struct BunchView: View {
                 .sheet(
                     item: self.$store.scope(state: \.detailBunch, action: \.detailBunch)
                 ) { store in
-                    BunchDetailView(store: store)
+                    DetailBunchView(store: store)
                 }
             }
         }

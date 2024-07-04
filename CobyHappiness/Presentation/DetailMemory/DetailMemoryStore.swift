@@ -1,5 +1,5 @@
 //
-//  MemoryDetailStore.swift
+//  DetailMemoryStore.swift
 //  CobyHappiness
 //
 //  Created by Coby Kim on 6/26/24.
@@ -12,7 +12,7 @@ import ComposableArchitecture
 import Dependencies
 
 @Reducer
-struct MemoryDetailStore: Reducer {
+struct DetailMemoryStore: Reducer {
     
     @ObservableState
     struct State: Equatable {

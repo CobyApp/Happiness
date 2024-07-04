@@ -1,5 +1,5 @@
 //
-//  MemoryDetailView.swift
+//  DetailMemoryView.swift
 //  CobyHappiness
 //
 //  Created by COBY_PRO on 10/4/23.
@@ -10,16 +10,16 @@ import SwiftUI
 import CobyDS
 import ComposableArchitecture
 
-struct MemoryDetailView: View {
+struct DetailMemoryView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @Bindable private var store: StoreOf<MemoryDetailStore>
+    @Bindable private var store: StoreOf<DetailMemoryStore>
     
     @State private var scale: CGFloat = 1
     @State private var isDown: Bool = false
     
-    init(store: StoreOf<MemoryDetailStore>) {
+    init(store: StoreOf<DetailMemoryStore>) {
         self.store = store
     }
     

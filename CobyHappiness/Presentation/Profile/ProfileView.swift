@@ -125,7 +125,7 @@ struct ProfileView: View {
                 .sheet(
                     item: self.$store.scope(state: \.detailMemory, action: \.detailMemory)
                 ) { store in
-                    MemoryDetailView(store: store)
+                    DetailMemoryView(store: store)
                 }
             }
         }
