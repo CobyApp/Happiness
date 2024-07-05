@@ -44,7 +44,7 @@ struct DetailMemoryView: View {
             )
             .background(Color.backgroundNormalNormal)
             .clipShape(RoundedRectangle(cornerRadius: self.store.scale == 1 ? 0 : 30))
-            .scaleEffect(self.scale)
+            .scaleEffect(self.store.scale)
             .ignoresSafeArea()
         }
         .navigationDestination(
