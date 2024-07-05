@@ -125,7 +125,7 @@ struct DetailMemoryStore: Reducer {
             case .deleteMemory(let memory):
                 return .run { send in
                     let _ = await TaskResult {
-                        try self.memoryContext.delete(memory)
+                        try self.memoryContext.delete(memory.id)
                     }
                     await send(.deleteMemoryResponse)
                 }

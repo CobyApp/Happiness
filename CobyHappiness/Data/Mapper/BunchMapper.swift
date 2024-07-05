@@ -16,7 +16,8 @@ extension Bunch {
             title: self.title,
             image: self.image.flatMap { UIImage(data: $0) },
             imageData: self.image,
-            memories: self.memories.map { $0.toMemoryModel() }
+            memories: self.memories.map { $0.toMemoryModel() },
+            isFirst: false
         )
     }
 }

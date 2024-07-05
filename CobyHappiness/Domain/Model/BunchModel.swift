@@ -15,6 +15,7 @@ struct BunchModel: Identifiable, Hashable, Equatable {
     var image: UIImage?
     var imageData: Data?
     var memories: [MemoryModel]
+    var isFirst: Bool = true
     
     init(
         id: UUID = UUID(),
@@ -23,7 +24,8 @@ struct BunchModel: Identifiable, Hashable, Equatable {
         title: String = "",
         image: UIImage? = nil,
         imageData: Data? = nil,
-        memories: [MemoryModel] = []
+        memories: [MemoryModel] = [],
+        isFirst: Bool = true
     ) {
         self.id = id
         self.startDate = startDate
@@ -32,6 +34,7 @@ struct BunchModel: Identifiable, Hashable, Equatable {
         self.image = image
         self.imageData = imageData
         self.memories = memories
+        self.isFirst = isFirst
     }
     
     var term: String {

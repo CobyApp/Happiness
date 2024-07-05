@@ -17,6 +17,7 @@ struct MemoryModel: Identifiable, Hashable, Equatable {
     var photos: [UIImage]
     var photosData: [Data]
     var bunches: [BunchModel]
+    var isFirst: Bool = true
     
     init(
         id: UUID = UUID(),
@@ -27,7 +28,8 @@ struct MemoryModel: Identifiable, Hashable, Equatable {
         location: LocationModel? = nil,
         photos: [UIImage] = [],
         photosData: [Data] = [],
-        bunches: [BunchModel] = []
+        bunches: [BunchModel] = [],
+        isFirst: Bool = true
     ) {
         self.id = id
         self.date = date
@@ -38,6 +40,7 @@ struct MemoryModel: Identifiable, Hashable, Equatable {
         self.photos = photos
         self.photosData = photosData
         self.bunches = bunches
+        self.isFirst = isFirst
     }
 }
 

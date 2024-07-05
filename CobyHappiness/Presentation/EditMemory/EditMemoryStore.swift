@@ -58,9 +58,10 @@ struct EditMemoryStore: Reducer {
                 return .none
             case .saveMemory(let memory):
                 guard !state.isDisabled else { return .none }
+                let isFirst = state.memory.isFirst
                 return .run { send in
                     let _ = await TaskResult {
-                        try self.memoryContext.add(memory)
+                        try isFirst ? self.memoryContext.add(memory) : self.memoryContext.edit(memory)
                     }
                     await send(.saveMemoryResponse)
                 }

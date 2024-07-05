@@ -17,7 +17,8 @@ extension Memory {
             note: self.note,
             location: self.location,
             photos: self.photos.compactMap { UIImage(data: $0) },
-            photosData: self.photos
+            photosData: self.photos,
+            isFirst: false
         )
     }
 }
