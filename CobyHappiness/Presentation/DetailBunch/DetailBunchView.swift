@@ -14,10 +14,6 @@ struct DetailBunchView: View {
     
     @Bindable private var store: StoreOf<DetailBunchStore>
     
-    @State private var scale: CGFloat = 1
-    @State private var isDown: Bool = false
-    @State private var isPresented: Bool = true
-    
     init(store: StoreOf<DetailBunchStore>) {
         self.store = store
     }
@@ -29,8 +25,8 @@ struct DetailBunchView: View {
             
             CBScaleScrollView(
                 isPresented: self.$store.isPresented,
-                scale: self.$self.store.scale,
-                isDown: self.$self.store.isDown
+                scale: self.$store.scale,
+                isDown: self.$store.isDown
             ) {
                 VStack(spacing: 20) {
                     PhotoView(photos: self.store.bunch.photos)
@@ -80,9 +76,9 @@ struct DetailBunchView: View {
                 Image(uiImage: UIImage.icBack)
                     .resizable()
                     .frame(width: 24, height: 24)
-                    .foregroundColor(self.isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
+                    .foregroundColor(self.store.isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
                     .padding()
-                    .background(self.isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
+                    .background(self.store.isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
                     .clipShape(Circle())
             }
             
@@ -94,9 +90,9 @@ struct DetailBunchView: View {
                 Image(uiImage: UIImage.icMore)
                     .resizable()
                     .frame(width: 24, height: 24)
-                    .foregroundColor(self.isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
+                    .foregroundColor(self.store.isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
                     .padding()
-                    .background(self.isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
+                    .background(self.store.isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
                     .clipShape(Circle())
             }
         }
