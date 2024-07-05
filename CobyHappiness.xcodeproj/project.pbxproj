@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB07E5A72C37AD5E00E78DD1 /* SettingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB07E5A62C37AD5E00E78DD1 /* SettingStore.swift */; };
 		CB09A5422C27EBB900CB8485 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB09A5412C27EBB900CB8485 /* SettingView.swift */; };
 		CB09A5492C2B115800CB8485 /* MemoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB09A5482C2B115800CB8485 /* MemoryType.swift */; };
 		CB0D58EA2C1EE83B00EFE3D3 /* EditBunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0D58E92C1EE83B00EFE3D3 /* EditBunchView.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB07E5A62C37AD5E00E78DD1 /* SettingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingStore.swift; sourceTree = "<group>"; };
 		CB09A5412C27EBB900CB8485 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		CB09A5482C2B115800CB8485 /* MemoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryType.swift; sourceTree = "<group>"; };
 		CB0D58E92C1EE83B00EFE3D3 /* EditBunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				CB09A5412C27EBB900CB8485 /* SettingView.swift */,
+				CB07E5A62C37AD5E00E78DD1 /* SettingStore.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB07E5A72C37AD5E00E78DD1 /* SettingStore.swift in Sources */,
 				CB8836AC2C2BE6AC0037CEC7 /* BunchModel.swift in Sources */,
 				CB4511F72C32933200B5FA02 /* EditBunchStore.swift in Sources */,
 				CBB21C982C16F273007E6AA2 /* MapRepresentableView.swift in Sources */,

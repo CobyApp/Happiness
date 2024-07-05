@@ -37,6 +37,7 @@ struct EditBunchStore: Reducer {
         case dismiss
     }
     
+    @Dependency(\.dismiss) private var dismiss
     @Dependency(\.bunchData) private var bunchContext
     @Dependency(\.memoryData) private var memoryContext
     
@@ -75,8 +76,7 @@ struct EditBunchStore: Reducer {
                 state.showingAlert = true
                 return .none
             case .dismiss:
-                state.isPresented = false
-                return .none
+                return .run { _ in await self.dismiss() }
             }
         }
     }

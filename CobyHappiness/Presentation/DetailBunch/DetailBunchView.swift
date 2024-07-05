@@ -12,8 +12,6 @@ import ComposableArchitecture
 
 struct DetailBunchView: View {
     
-    @Environment(\.dismiss) private var dismiss
-    
     @Bindable private var store: StoreOf<DetailBunchStore>
     
     init(store: StoreOf<DetailBunchStore>) {
