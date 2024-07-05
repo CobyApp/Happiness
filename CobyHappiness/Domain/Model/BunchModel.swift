@@ -62,4 +62,16 @@ struct BunchModel: Identifiable, Hashable, Equatable {
     var photos: [UIImage] {
         self.memories.flatMap { $0.photos }
     }
+    
+    var isFirstPageDisabled: Bool {
+        self.memories.isEmpty
+    }
+    
+    var isSecondPageDisabled: Bool {
+        self.title == ""
+    }
+    
+    var isDisabled: Bool {
+        self.isFirstPageDisabled || self.isSecondPageDisabled
+    }
 }

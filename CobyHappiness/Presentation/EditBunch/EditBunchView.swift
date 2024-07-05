@@ -18,33 +18,49 @@ struct EditBunchView: View {
         self.store = store
     }
     
+    var isPageDisabled: Bool {
+        switch self.store.selection {
+        case .first:
+            return self.store.bunch.isFirstPageDisabled
+        case .second:
+            return self.store.bunch.isSecondPageDisabled
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             TopBarView(
                 leftSide: .left,
                 leftAction: {
                     self.store.send(.dismiss)
-                },
-                title: "일상 선택"
+                }
             )
             
-            SelectMemoriesView(
-                selectedMemories: self.$store.bunch.memories,
-                memories: self.store.memories
-            )
-            
-            Button {
-                self.store.send(.showTitleAlert)
-            } label: {
-                Text("뭉치 만들기")
-            }
-            .buttonStyle(
-                CBButtonStyle(
-                    isDisabled: self.store.bunch.memories.isEmpty,
-                    buttonColor: Color.redNormal
+            TabView(selection: self.$store.selection) {
+                EditBunchFirstPageView(
+                    bunch: self.$store.bunch,
+                    memories: self.store.memories
                 )
+                .tag(PageType.first)
+                .simultaneousGesture(DragGesture())
+                
+                EditBunchSecondPageView(
+                    bunch: self.$store.bunch
+                )
+                .tag(PageType.second)
+                .simultaneousGesture(DragGesture())
+            }
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .animation(.easeOut(duration: 0.2), value: self.store.selection)
+            
+            PageBottomButtonView(
+                selection: self.$store.selection,
+                isDisabled: self.isPageDisabled,
+                buttonAction: {
+                    self.closeKeyboard()
+                    self.store.send(.completeButtonTapped)
+                }
             )
-            .padding(20)
         }
         .background(Color.backgroundNormalNormal)
         .onAppear {

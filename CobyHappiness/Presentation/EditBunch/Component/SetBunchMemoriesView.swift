@@ -1,5 +1,5 @@
 //
-//  SelectMemoriesView.swift
+//  SetBunchMemoriesView.swift
 //  CobyHappiness
 //
 //  Created by Coby on 6/12/24.
@@ -10,7 +10,7 @@ import SwiftData
 
 import CobyDS
 
-struct SelectMemoriesView: View {
+struct SetBunchMemoriesView: View {
     
     @Binding var selectedMemories: [MemoryModel]
     
@@ -30,7 +30,16 @@ struct SelectMemoriesView: View {
                 showingButton: false
             )
         } else {
-            ScrollView {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text("뭉칠 기록들을 선택해주세요.")
+                        .font(.pretendard(size: 16, weight: .regular))
+                        .foregroundColor(Color.labelNormal)
+                    
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, minHeight: 32)
+                
                 LazyVStack(spacing: 8) {
                     ForEach(self.memories) { memory in
                         MemoryTileView(
@@ -46,10 +55,8 @@ struct SelectMemoriesView: View {
                         }
                     }
                 }
-                .padding(.horizontal, BaseSize.horizantalPadding)
-                .padding(.top, 8)
-                .padding(.bottom, 20)
             }
+            .padding(.horizontal, BaseSize.horizantalPadding)
         }
     }
 }

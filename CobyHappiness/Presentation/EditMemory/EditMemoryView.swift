@@ -27,15 +27,6 @@ struct EditMemoryView: View {
         }
     }
     
-    var buttonTitle: String {
-        switch self.store.selection {
-        case .first:
-            return "다음"
-        case .second:
-            return "저장"
-        }
-    }
-    
     var body: some View {
         VStack(spacing: 0) {
             TopBarView(

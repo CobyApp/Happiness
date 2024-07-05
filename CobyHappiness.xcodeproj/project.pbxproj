@@ -15,7 +15,7 @@
 		CB4063B12C1763EA00654F89 /* EditMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063B02C1763EA00654F89 /* EditMemoryView.swift */; };
 		CB4063B32C189B4B00654F89 /* Bunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063B22C189B4B00654F89 /* Bunch.swift */; };
 		CB4063B72C18A1C200654F89 /* MemoryTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063B62C18A1C200654F89 /* MemoryTileView.swift */; };
-		CB4063BC2C18A66200654F89 /* SelectMemoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063BB2C18A66200654F89 /* SelectMemoriesView.swift */; };
+		CB4063BC2C18A66200654F89 /* SetBunchMemoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063BB2C18A66200654F89 /* SetBunchMemoriesView.swift */; };
 		CB4196012C18B83E003D958C /* DetailBunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4196002C18B83E003D958C /* DetailBunchView.swift */; };
 		CB4196092C19CF00003D958C /* UIImage+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4196082C19CF00003D958C /* UIImage+Assets.swift */; };
 		CB4511F72C32933200B5FA02 /* EditBunchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4511F62C32933200B5FA02 /* EditBunchStore.swift */; };
@@ -38,6 +38,9 @@
 		CB9651EB2C384F48009D13A6 /* SetMemoryContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651EA2C384F48009D13A6 /* SetMemoryContentView.swift */; };
 		CB9651ED2C385562009D13A6 /* PageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651EC2C385562009D13A6 /* PageType.swift */; };
 		CB9651EF2C3858A6009D13A6 /* PageBottomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651EE2C3858A6009D13A6 /* PageBottomButtonView.swift */; };
+		CB9651F12C386F53009D13A6 /* EditBunchFirstPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651F02C386F53009D13A6 /* EditBunchFirstPageView.swift */; };
+		CB9651F32C386F5B009D13A6 /* EditBunchSecondPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651F22C386F5B009D13A6 /* EditBunchSecondPageView.swift */; };
+		CB9651F52C387597009D13A6 /* SetBunchImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651F42C387596009D13A6 /* SetBunchImageView.swift */; };
 		CB9D9FD12C36EA79003570F0 /* LocationMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9D9FD02C36EA79003570F0 /* LocationMapper.swift */; };
 		CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */; };
 		CB9EF8DB2ABC633B00FDCE12 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF8DA2ABC633B00FDCE12 /* Preview Assets.xcassets */; };
@@ -73,7 +76,7 @@
 		CB4063B02C1763EA00654F89 /* EditMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoryView.swift; sourceTree = "<group>"; };
 		CB4063B22C189B4B00654F89 /* Bunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bunch.swift; sourceTree = "<group>"; };
 		CB4063B62C18A1C200654F89 /* MemoryTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryTileView.swift; sourceTree = "<group>"; };
-		CB4063BB2C18A66200654F89 /* SelectMemoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMemoriesView.swift; sourceTree = "<group>"; };
+		CB4063BB2C18A66200654F89 /* SetBunchMemoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBunchMemoriesView.swift; sourceTree = "<group>"; };
 		CB4196002C18B83E003D958C /* DetailBunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBunchView.swift; sourceTree = "<group>"; };
 		CB4196082C19CF00003D958C /* UIImage+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Assets.swift"; sourceTree = "<group>"; };
 		CB4511F62C32933200B5FA02 /* EditBunchStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchStore.swift; sourceTree = "<group>"; };
@@ -97,6 +100,9 @@
 		CB9651EA2C384F48009D13A6 /* SetMemoryContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetMemoryContentView.swift; sourceTree = "<group>"; };
 		CB9651EC2C385562009D13A6 /* PageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageType.swift; sourceTree = "<group>"; };
 		CB9651EE2C3858A6009D13A6 /* PageBottomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageBottomButtonView.swift; sourceTree = "<group>"; };
+		CB9651F02C386F53009D13A6 /* EditBunchFirstPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchFirstPageView.swift; sourceTree = "<group>"; };
+		CB9651F22C386F5B009D13A6 /* EditBunchSecondPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchSecondPageView.swift; sourceTree = "<group>"; };
+		CB9651F42C387596009D13A6 /* SetBunchImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBunchImageView.swift; sourceTree = "<group>"; };
 		CB96DE382ABF597600B01762 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB9D9FD02C36EA79003570F0 /* LocationMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapper.swift; sourceTree = "<group>"; };
 		CB9EF8D02ABC633A00FDCE12 /* CobyHappiness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CobyHappiness.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,7 +181,8 @@
 		CB0D58E62C1EE82100EFE3D3 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				CB4063BB2C18A66200654F89 /* SelectMemoriesView.swift */,
+				CB4063BB2C18A66200654F89 /* SetBunchMemoriesView.swift */,
+				CB9651F42C387596009D13A6 /* SetBunchImageView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -227,6 +234,8 @@
 		CB9651DD2C384AF9009D13A6 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				CB9651F02C386F53009D13A6 /* EditBunchFirstPageView.swift */,
+				CB9651F22C386F5B009D13A6 /* EditBunchSecondPageView.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -520,6 +529,7 @@
 				CB9651E72C384D31009D13A6 /* TagView.swift in Sources */,
 				CB8836B72C2BF76E0037CEC7 /* DetailMemoryStore.swift in Sources */,
 				CB9651EF2C3858A6009D13A6 /* PageBottomButtonView.swift in Sources */,
+				CB9651F32C386F5B009D13A6 /* EditBunchSecondPageView.swift in Sources */,
 				CBCA53822C34316A00544CC5 /* BunchDatabase.swift in Sources */,
 				CBAB7F542ACD455E00257778 /* DetailMemoryView.swift in Sources */,
 				CB76292C2C26898A00138186 /* EmptyBunchView.swift in Sources */,
@@ -530,7 +540,7 @@
 				CB09A5492C2B115800CB8485 /* MemoryType.swift in Sources */,
 				CBAD45692C15EBB1009D4EFF /* LocationModel.swift in Sources */,
 				CB9651DA2C3817A6009D13A6 /* DetailPhotosView.swift in Sources */,
-				CB4063BC2C18A66200654F89 /* SelectMemoriesView.swift in Sources */,
+				CB4063BC2C18A66200654F89 /* SetBunchMemoriesView.swift in Sources */,
 				CB8836AE2C2BE6B10037CEC7 /* MemoryModel.swift in Sources */,
 				CBAD455A2C1582A7009D4EFF /* MapView.swift in Sources */,
 				CB7D46E32C2D3D5B001E5E32 /* MapStore.swift in Sources */,
@@ -547,12 +557,14 @@
 				CBABE92F2ACB313C00103BB0 /* HomeView.swift in Sources */,
 				CBAB7F4F2ACD402500257778 /* ContentView.swift in Sources */,
 				CBCA53802C34312E00544CC5 /* Database.swift in Sources */,
+				CB9651F52C387597009D13A6 /* SetBunchImageView.swift in Sources */,
 				CB9D9FD12C36EA79003570F0 /* LocationMapper.swift in Sources */,
 				CB4063B72C18A1C200654F89 /* MemoryTileView.swift in Sources */,
 				CBC3A4162C2BE5F900B62F82 /* HomeStore.swift in Sources */,
 				CBAF77252C2D4CCD00F40F76 /* BunchStore.swift in Sources */,
 				CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */,
 				CB2471012ADABBFC00EEA032 /* PlaceModel.swift in Sources */,
+				CB9651F12C386F53009D13A6 /* EditBunchFirstPageView.swift in Sources */,
 				CB0D58EA2C1EE83B00EFE3D3 /* EditBunchView.swift in Sources */,
 				CB09A5422C27EBB900CB8485 /* SettingView.swift in Sources */,
 				CBAF77292C2D4E6700F40F76 /* ProfileStore.swift in Sources */,

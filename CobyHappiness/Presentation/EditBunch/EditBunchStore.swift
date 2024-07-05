@@ -16,6 +16,7 @@ struct EditBunchStore: Reducer {
     @ObservableState
     struct State: Equatable {
         var showingAlert = false
+        var selection: PageType = .first
         var memories: [MemoryModel] = []
         var bunch: BunchModel
         
@@ -28,6 +29,7 @@ struct EditBunchStore: Reducer {
     
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
+        case completeButtonTapped
         case getMemories
         case getMemoriesResponse(TaskResult<[MemoryModel]>)
         case saveBunch(BunchModel)
@@ -46,6 +48,15 @@ struct EditBunchStore: Reducer {
         Reduce { state, action in
             switch action {
             case .binding:
+                return .none
+            case .completeButtonTapped:
+                switch state.selection {
+                case .first:
+                    state.selection = .second
+                case .second:
+                    guard !state.bunch.isDisabled else { return .none }
+                    return .send(.saveBunch(state.bunch))
+                }
                 return .none
             case .getMemories:
                 return .run { send in
