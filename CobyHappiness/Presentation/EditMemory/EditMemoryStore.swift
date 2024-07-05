@@ -17,6 +17,7 @@ struct EditMemoryStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
+        var isDisabled: Bool = true
         var memory: MemoryModel
         var selectedItems: [PhotosPickerItem] = []
         
@@ -32,6 +33,7 @@ struct EditMemoryStore: Reducer {
         case setType(MemoryType)
         case saveMemory(MemoryModel)
         case saveMemoryResponse
+        case checkDisabled
         case dismiss
     }
     
@@ -43,6 +45,8 @@ struct EditMemoryStore: Reducer {
         
         Reduce { state, action in
             switch action {
+            case .binding(\.memory):
+                return .send(.checkDisabled)
             case .binding(\.selectedItems):
                 (state.memory.photos, state.memory.date, state.memory.location) = self.setPhotos(items: state.selectedItems)
                 state.memory.photosData = state.memory.photos.map { $0.compressedImage }
@@ -53,6 +57,7 @@ struct EditMemoryStore: Reducer {
                 state.memory.type = type
                 return .none
             case .saveMemory(let memory):
+                guard !state.isDisabled else { return .none }
                 return .run { send in
                     let _ = await TaskResult {
                         try self.memoryContext.add(memory)
@@ -61,6 +66,9 @@ struct EditMemoryStore: Reducer {
                 }
             case .saveMemoryResponse:
                 return .send(.dismiss)
+            case .checkDisabled:
+                state.isDisabled = state.memory.photos.isEmpty || state.memory.title == "" || state.memory.note == ""
+                return .none
             case .dismiss:
                 return .run { _ in await self.dismiss() }
             }

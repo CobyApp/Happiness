@@ -20,10 +20,6 @@ struct EditMemoryView: View {
         self.store = store
     }
     
-    var isDisabled: Bool {
-        self.store.memory.photos.isEmpty || self.store.memory.title == "" || self.store.memory.note == ""
-    }
-    
     var body: some View {
         VStack(spacing: 0) {
             TopBarView(
@@ -46,15 +42,13 @@ struct EditMemoryView: View {
             }
             
             Button {
-                if !self.isDisabled {
-                    self.store.send(.saveMemory(self.store.memory))
-                }
+                self.store.send(.saveMemory(self.store.memory))
             } label: {
                 Text("추억 만들기")
             }
             .buttonStyle(
                 CBButtonStyle(
-                    isDisabled: self.isDisabled,
+                    isDisabled: self.store.isDisabled,
                     buttonColor: Color.redNormal
                 )
             )
