@@ -23,6 +23,7 @@ struct DetailMemoryView: View {
             isPresented: self.$store.isPresented,
             scale: self.$store.scale,
             isDown: self.$store.isDown,
+            topContentHeight: BaseSize.screenWidth,
             header: {
                 DetailHeaderView(
                     isDown: self.store.isDown,

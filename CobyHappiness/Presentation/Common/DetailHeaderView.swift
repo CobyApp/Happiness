@@ -33,9 +33,9 @@ struct DetailHeaderView: View {
                 Image(uiImage: UIImage.icBack)
                     .resizable()
                     .frame(width: 24, height: 24)
-                    .foregroundColor(self.isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
-                    .padding()
-                    .background(self.isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
+                    .foregroundColor(self.isDown ? Color.inverseLabel : Color.labelNormal)
+                    .padding(8)
+                    .background(self.isDown ? Color.inverseBackground.opacity(0.7) : Color.backgroundNormalAlternative.opacity(0.7))
                     .clipShape(Circle())
             }
             
@@ -47,9 +47,9 @@ struct DetailHeaderView: View {
                 Image(uiImage: UIImage.icMore)
                     .resizable()
                     .frame(width: 24, height: 24)
-                    .foregroundColor(self.isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
-                    .padding()
-                    .background(self.isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
+                    .foregroundColor(self.isDown ? Color.inverseLabel : Color.labelNormal)
+                    .padding(8)
+                    .background(self.isDown ? Color.inverseBackground.opacity(0.7) : Color.backgroundNormalAlternative.opacity(0.7))
                     .clipShape(Circle())
             }
         }
