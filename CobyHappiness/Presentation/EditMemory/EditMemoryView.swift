@@ -34,7 +34,10 @@ struct EditMemoryView: View {
                 VStack(spacing: 20) {
                     self.MemoryTypeView()
                     
-                    self.PhotosView()
+                    SelectPhotosView(
+                        selectedItems: self.$store.selectedItems,
+                        images: self.store.memory.photos
+                    )
                     
                     self.ContentView()
                 }
@@ -78,67 +81,17 @@ struct EditMemoryView: View {
             
             FlexibleStack(spacing: 8) {
                 ForEach(MemoryType.allCases) { memoryType in
-                    Text(memoryType.title)
-                        .font(.pretendard(size: 14, weight: .regular))
-                        .foregroundColor(Color.labelNeutral)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 8)
-                        .background(self.store.memory.type == memoryType ? Color.fillStrong : Color.backgroundNormalNormal)
-                        .clipShape(.rect(cornerRadius: 12))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.lineNormalNeutral, lineWidth: 1)
-                        )
-                        .onTapGesture {
-                            self.store.send(.setType(memoryType))
-                        }
+                    TagView(
+                        isSelected: self.store.memory.type == memoryType,
+                        title: memoryType.title
+                    )
+                    .onTapGesture {
+                        self.store.send(.setType(memoryType))
+                    }
                 }
             }
         }
         .padding(.horizontal, BaseSize.horizantalPadding)
-    }
-    
-    @ViewBuilder
-    func PhotosView() -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            HStack {
-                Text("사진")
-                    .font(.pretendard(size: 16, weight: .regular))
-                    .foregroundColor(Color.labelNormal)
-                
-                Spacer()
-            }
-            .frame(maxWidth: .infinity, minHeight: 32)
-            .padding(.horizontal, BaseSize.horizantalPadding)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 6) {
-                    PhotosPicker(
-                        selection: self.$store.selectedItems,
-                        matching: .images,
-                        photoLibrary: .shared()
-                    ) {
-                        Image(uiImage: UIImage.camera)
-                            .resizable()
-                            .frame(width: 32, height: 32)
-                            .foregroundColor(Color.labelAlternative)
-                            .frame(width: 80, height: 80)
-                            .background(Color.fillStrong)
-                            .clipShape(.rect(cornerRadius: 12))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(Color.lineNormalNeutral, lineWidth: 1)
-                            )
-                    }
-                    
-                    ForEach(self.store.memory.photos, id: \.self) { image in
-                        ThumbnailView(image: image)
-                            .frame(width: 80, height: 80)
-                    }
-                }
-                .padding(.horizontal, BaseSize.horizantalPadding)
-            }
-        }
     }
     
     @ViewBuilder
