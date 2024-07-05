@@ -24,6 +24,7 @@ struct ProfileStore: Reducer {
         case binding(BindingAction<State>)
         case detailMemory(PresentationAction<DetailMemoryStore.Action>)
         case setting(PresentationAction<SettingStore.Action>)
+        case showDetailMemory(MemoryModel)
         case getMemories
         case getMemoriesResponse(TaskResult<[MemoryModel]>)
         case navigateToSettingView
@@ -41,6 +42,9 @@ struct ProfileStore: Reducer {
             case .detailMemory:
                 return .none
             case .setting:
+                return .none
+            case .showDetailMemory(let memory):
+                state.detailMemory = DetailMemoryStore.State(memory: memory)
                 return .none
             case .getMemories:
                 return .run { send in

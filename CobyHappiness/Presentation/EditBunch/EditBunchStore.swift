@@ -15,7 +15,6 @@ struct EditBunchStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
-        var isPresented: Bool = true
         var showingAlert = false
         var memories: [MemoryModel] = []
         var bunch: BunchModel

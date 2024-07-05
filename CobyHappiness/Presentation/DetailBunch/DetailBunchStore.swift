@@ -35,6 +35,7 @@ struct DetailBunchStore: Reducer {
         case deleteAlert(PresentationAction<DeleteAlertAction>)
         case showOptionSheet
         case showDeleteAlert
+        case showDetailMemory(MemoryModel)
         case showEditBunch(BunchModel)
         case deleteBunch(BunchModel)
         case deleteBunchResponse
@@ -113,6 +114,9 @@ struct DetailBunchStore: Reducer {
                         )
                     ]
                 )
+                return .none
+            case .showDetailMemory(let memory):
+                state.detailMemory = DetailMemoryStore.State(memory: memory)
                 return .none
             case .showEditBunch(let bunch):
                 state.editBunch = EditBunchStore.State(bunch: bunch)

@@ -68,6 +68,9 @@ struct DetailBunchView: View {
                         MemoryTileView(
                             memory: memory
                         )
+                        .onTapGesture {
+                            self.store.send(.showDetailMemory(memory))
+                        }
                     }
                 }
                 .padding(.horizontal, BaseSize.horizantalPadding)

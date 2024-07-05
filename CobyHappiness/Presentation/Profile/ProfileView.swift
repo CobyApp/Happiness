@@ -39,6 +39,11 @@ struct ProfileView: View {
         .onAppear {
             self.store.send(.getMemories)
         }
+        .navigationDestination(
+            item: self.$store.scope(state: \.detailMemory, action: \.detailMemory)
+        ) { store in
+            DetailMemoryView(store: store).navigationBarHidden(true)
+        }
     }
     
     @ViewBuilder
@@ -117,16 +122,14 @@ struct ProfileView: View {
                         MemoryTileView(
                             memory: memory
                         )
+                        .onTapGesture {
+                            self.store.send(.showDetailMemory(memory))
+                        }
                     }
                 }
                 .padding(.horizontal, BaseSize.horizantalPadding)
                 .padding(.top, 8)
                 .padding(.bottom, 20)
-                .sheet(
-                    item: self.$store.scope(state: \.detailMemory, action: \.detailMemory)
-                ) { store in
-                    DetailMemoryView(store: store)
-                }
             }
         }
     }
