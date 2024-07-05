@@ -61,9 +61,10 @@ struct EditBunchStore: Reducer {
                 print(error.localizedDescription)
                 return .none
             case .saveBunch(let bunch):
+                let isFirst = state.bunch.isFirst
                 return .run { send in
                     let _ = await TaskResult {
-                        try self.bunchContext.add(bunch)
+                        try isFirst ? self.bunchContext.add(bunch) : self.bunchContext.edit(bunch)
                     }
                     await send(.saveBunchResponse)
                 }

@@ -129,7 +129,7 @@ struct DetailBunchStore: Reducer {
             case .deleteBunch(let bunch):
                 return .run { send in
                     let _ = await TaskResult {
-                        try self.bunchContext.delete(bunch)
+                        try self.bunchContext.delete(bunch.id)
                     }
                     await send(.deleteBunchResponse)
                 }
