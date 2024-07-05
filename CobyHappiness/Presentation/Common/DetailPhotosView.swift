@@ -32,6 +32,6 @@ struct DetailPhotosView: View {
         .background(Color.backgroundNormalAlternative)
         .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth)
         .tabViewStyle(PageTabViewStyle())
-        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
     }
 }
