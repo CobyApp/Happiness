@@ -37,6 +37,7 @@ struct DetailBunchView: View {
                     
                     ContentView(bunch: self.store.bunch)
                 }
+                .padding(.bottom, BaseSize.bottomAreaPadding + BaseSize.cellVerticalSpacing)
             }
         )
         .onAppear {

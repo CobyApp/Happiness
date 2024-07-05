@@ -59,6 +59,9 @@ struct EditMemoryView: View {
         .onTapGesture {
             self.closeKeyboard()
         }
+        .onAppear {
+            self.store.send(.checkDisabled)
+        }
     }
     
     @ViewBuilder

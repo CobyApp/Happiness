@@ -73,6 +73,7 @@ struct EditBunchStore: Reducer {
             case .showTitleAlert:
                 state.bunch.startDate = state.bunch.memories.map { $0.date }.min() ?? .now
                 state.bunch.endDate = state.bunch.memories.map { $0.date }.max() ?? .now
+                state.bunch.imageData = state.bunch.memories.first?.photosData.first
                 state.showingAlert = true
                 return .none
             case .dismiss:
