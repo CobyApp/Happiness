@@ -1,5 +1,5 @@
 //
-//  SelectPhotosView.swift
+//  SetMemoryPhotosView.swift
 //  CobyHappiness
 //
 //  Created by Coby on 7/6/24.
@@ -10,7 +10,7 @@ import PhotosUI
 
 import CobyDS
 
-struct SelectPhotosView: View {
+struct SetMemoryPhotosView: View {
     
     @Binding private var selectedItems: [PhotosPickerItem]
     

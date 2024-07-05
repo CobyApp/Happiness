@@ -32,14 +32,22 @@ struct EditMemoryView: View {
             
             ScrollView {
                 VStack(spacing: 20) {
-                    self.MemoryTypeView()
+                    SetMemoryTypeView(
+                        selectedType: self.$store.memory.type,
+                        setTypeAction: { type in
+                            self.store.send(.setType(type))
+                        }
+                    )
                     
-                    SelectPhotosView(
+                    SetMemoryPhotosView(
                         selectedItems: self.$store.selectedItems,
                         images: self.store.memory.photos
                     )
                     
-                    self.ContentView()
+                    SetMemoryContentView(
+                        title: self.$store.memory.title,
+                        note: self.$store.memory.note
+                    )
                 }
                 .padding(.bottom, 20)
             }
@@ -65,50 +73,5 @@ struct EditMemoryView: View {
         .onAppear {
             self.store.send(.checkDisabled)
         }
-    }
-    
-    @ViewBuilder
-    func MemoryTypeView() -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            HStack {
-                Text("태그")
-                    .font(.pretendard(size: 16, weight: .regular))
-                    .foregroundColor(Color.labelNormal)
-                
-                Spacer()
-            }
-            .frame(maxWidth: .infinity, minHeight: 32)
-            
-            FlexibleStack(spacing: 8) {
-                ForEach(MemoryType.allCases) { memoryType in
-                    TagView(
-                        isSelected: self.store.memory.type == memoryType,
-                        title: memoryType.title
-                    )
-                    .onTapGesture {
-                        self.store.send(.setType(memoryType))
-                    }
-                }
-            }
-        }
-        .padding(.horizontal, BaseSize.horizantalPadding)
-    }
-    
-    @ViewBuilder
-    func ContentView() -> some View {
-        VStack(spacing: 20) {
-            CBTextFieldView(
-                text: self.$store.memory.title,
-                title: "제목",
-                placeholder: "제목을 입력해주세요."
-            )
-            
-            CBTextAreaView(
-                text: self.$store.memory.note,
-                title: "내용",
-                placeholder: "내용을 입력해주세요."
-            )
-        }
-        .padding(.horizontal, BaseSize.horizantalPadding)
     }
 }
