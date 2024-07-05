@@ -62,6 +62,8 @@ struct DetailBunchStore: Reducer {
         
         Reduce { state, action in
             switch action {
+            case .binding(\.isPresented):
+                return .send(.dismiss)
             case .binding:
                 return .none
             case .detailMemory:
