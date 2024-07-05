@@ -47,6 +47,9 @@ struct DetailMemoryView: View {
             .scaleEffect(self.store.scale)
             .ignoresSafeArea()
         }
+        .onAppear {
+            self.store.send(.getMemory)
+        }
         .navigationDestination(
             item: self.$store.scope(state: \.editMemory, action: \.editMemory)
         ) { store in

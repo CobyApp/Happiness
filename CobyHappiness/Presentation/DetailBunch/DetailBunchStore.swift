@@ -42,6 +42,8 @@ struct DetailBunchStore: Reducer {
         case showEditBunch(BunchModel)
         case deleteBunch(BunchModel)
         case deleteBunchResponse
+        case getBunch
+        case getBunchResponse(TaskResult<BunchModel>)
         case dismiss
     }
     
@@ -135,6 +137,20 @@ struct DetailBunchStore: Reducer {
                 }
             case .deleteBunchResponse:
                 return .send(.dismiss)
+            case .getBunch:
+                let id = state.bunch.id
+                return .run { send in
+                    let result = await TaskResult {
+                        return try self.bunchContext.fetchById(id)
+                    }
+                    await send(.getBunchResponse(result))
+                }
+            case let .getBunchResponse(.success(bunch)):
+                state.bunch = bunch
+                return .none
+            case let .getBunchResponse(.failure(error)):
+                print(error.localizedDescription)
+                return .none
             case .dismiss:
                 return .run { _ in await self.dismiss() }
             }

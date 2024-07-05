@@ -41,7 +41,7 @@ struct DetailMemoryStore: Reducer {
         case showEditMemory(MemoryModel)
         case deleteMemory(MemoryModel)
         case deleteMemoryResponse
-        case getMemory(MemoryModel)
+        case getMemory
         case getMemoryResponse(TaskResult<MemoryModel>)
         case dismiss
     }
@@ -131,10 +131,11 @@ struct DetailMemoryStore: Reducer {
                 }
             case .deleteMemoryResponse:
                 return .send(.dismiss)
-            case .getMemory(let memory):
+            case .getMemory:
+                let id = state.memory.id
                 return .run { send in
                     let result = await TaskResult {
-                        return try self.memoryContext.fetchById(memory.id)
+                        return try self.memoryContext.fetchById(id)
                     }
                     await send(.getMemoryResponse(result))
                 }

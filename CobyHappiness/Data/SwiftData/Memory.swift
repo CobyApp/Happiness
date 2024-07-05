@@ -11,7 +11,6 @@ import SwiftData
 @Model
 final class Memory {
     
-    @Attribute(.unique)
     var id: UUID
     var date: Date
     var type: MemoryType

@@ -49,6 +49,9 @@ struct DetailBunchView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .background(Color.backgroundNormalNormal)
+        .onAppear {
+            self.store.send(.getBunch)
+        }
         .navigationDestination(
             item: self.$store.scope(state: \.detailMemory, action: \.detailMemory)
         ) { store in

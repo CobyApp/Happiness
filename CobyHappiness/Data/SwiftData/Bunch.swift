@@ -11,7 +11,6 @@ import SwiftData
 @Model
 final class Bunch {
     
-    @Attribute(.unique)
     var id: UUID
     var startDate: Date
     var endDate: Date
