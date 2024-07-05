@@ -11,14 +11,14 @@ import SwiftData
 @Model
 final class Memory {
     
-    var id: UUID
-    var date: Date
-    var type: MemoryType
-    var title: String
-    var note: String
+    var id: UUID = UUID()
+    var date: Date = Date.now
+    var type: MemoryType = MemoryType.trip
+    var title: String = ""
+    var note: String = ""
     var location: LocationModel?
-    var photos: [Data]
-    var bunches: [Bunch]
+    var photos: [Data]?
+    var bunches: [Bunch]?
 
     init(
         id: UUID = UUID(),

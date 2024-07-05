@@ -16,8 +16,8 @@ extension Memory {
             title: self.title,
             note: self.note,
             location: self.location,
-            photos: self.photos.compactMap { UIImage(data: $0) },
-            photosData: self.photos,
+            photos: self.photos?.compactMap { UIImage(data: $0) } ?? [],
+            photosData: self.photos ?? [],
             isFirst: false
         )
     }

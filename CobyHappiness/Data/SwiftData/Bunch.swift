@@ -11,13 +11,13 @@ import SwiftData
 @Model
 final class Bunch {
     
-    var id: UUID
-    var startDate: Date
-    var endDate: Date
-    var title: String
+    var id: UUID = UUID()
+    var startDate: Date = Date.now
+    var endDate: Date = Date.now
+    var title: String = ""
     var image: Data?
     @Relationship(deleteRule: .nullify, inverse: \Memory.bunches)
-    var memories: [Memory]
+    var memories: [Memory]?
     
     init(
         id: UUID = UUID(),
