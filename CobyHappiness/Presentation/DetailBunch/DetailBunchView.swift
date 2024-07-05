@@ -82,8 +82,8 @@ struct DetailBunchView: View {
                 MemoryListView(memories: bunch.memories)
             }
         }
-        .frame(maxWidth: .infinity)
         .padding(.horizontal, BaseSize.horizantalPadding)
+        .frame(maxWidth: .infinity)
     }
     
     @ViewBuilder

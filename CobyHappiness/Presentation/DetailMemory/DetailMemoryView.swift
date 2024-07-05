@@ -36,6 +36,7 @@ struct DetailMemoryView: View {
                     
                     ContentView(memory: self.store.memory)
                 }
+                .padding(.bottom, BaseSize.bottomAreaPadding + BaseSize.cellVerticalSpacing)
             }
         )
         .onAppear {
@@ -77,6 +78,6 @@ struct DetailMemoryView: View {
                 .fixedSize(horizontal: false, vertical: true)
         }
         .padding(.horizontal, BaseSize.horizantalPadding)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .frame(maxWidth: .infinity)
     }
 }
