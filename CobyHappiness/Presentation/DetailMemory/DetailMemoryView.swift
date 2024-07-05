@@ -56,7 +56,7 @@ struct DetailMemoryView: View {
         ) { store in
             EditMemoryView(store: store).navigationBarHidden(true)
         }
-        .alert(
+        .confirmationDialog(
             self.$store.scope(state: \.optionSheet, action: \.optionSheet)
         )
         .alert(

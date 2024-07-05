@@ -17,7 +17,7 @@ struct DetailMemoryStore: Reducer {
     @ObservableState
     struct State: Equatable {
         @Presents var editMemory: EditMemoryStore.State?
-        @Presents var optionSheet: AlertState<OptionSheetAction>?
+        @Presents var optionSheet: ConfirmationDialogState<OptionSheetAction>?
         @Presents var deleteAlert: AlertState<DeleteAlertAction>?
         var isPresented: Bool = true
         var memory: MemoryModel
@@ -84,7 +84,7 @@ struct DetailMemoryStore: Reducer {
                     return .none
                 }
             case .showOptionSheet:
-                state.optionSheet = AlertState(
+                state.optionSheet = ConfirmationDialogState(
                     title: TextState("원하는 옵션을 선택해주세요."),
                     message: nil,
                     buttons: [
