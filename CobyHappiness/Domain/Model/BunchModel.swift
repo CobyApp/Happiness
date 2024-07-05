@@ -38,6 +38,17 @@ struct BunchModel: Identifiable, Hashable, Equatable {
     }
     
     var term: String {
+        let startDate = self.startDate.format("yy년 MM월 dd일")
+        let endDate = self.endDate.format("yy년 MM월 dd일")
+        
+        if startDate == endDate {
+            return startDate
+        } else {
+            return "\(startDate) ~ \(endDate)"
+        }
+    }
+    
+    var termShort: String {
         let startDate = self.startDate.format("yy.MM.dd")
         let endDate = self.endDate.format("yy.MM.dd")
         

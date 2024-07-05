@@ -66,7 +66,7 @@ struct BunchView: View {
                         ThumbnailTitleView(
                             image: bunch.image,
                             title: bunch.title,
-                            description: bunch.term
+                            description: bunch.termShort
                         )
                         .frame(width: BaseSize.cellWidth)
                         .onTapGesture {

@@ -39,7 +39,7 @@ struct MemoryTileView: View {
                     
                     Spacer()
                     
-                    Text(self.memory.date.format("yy.MM.dd"))
+                    Text(self.memory.date.format("yy년 MM월 dd일"))
                         .font(.pretendard(size: 12, weight: .regular))
                         .foregroundColor(Color.labelAlternative)
                         .minimumScaleFactor(1)
