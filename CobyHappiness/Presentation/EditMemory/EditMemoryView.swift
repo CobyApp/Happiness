@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import MapKit
-import PhotosUI
 
 import CobyDS
 import ComposableArchitecture
@@ -20,58 +18,58 @@ struct EditMemoryView: View {
         self.store = store
     }
     
+    var isPageDisabled: Bool {
+        switch self.store.selection {
+        case .first:
+            return self.store.memory.isFirstPageDisabled
+        case .second:
+            return self.store.memory.isSecondPageDisabled
+        }
+    }
+    
+    var buttonTitle: String {
+        switch self.store.selection {
+        case .first:
+            return "다음"
+        case .second:
+            return "저장"
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             TopBarView(
                 leftSide: .left,
                 leftAction: {
                     self.store.send(.dismiss)
-                },
-                title: "추억 기록"
-            )
-            
-            ScrollView {
-                VStack(spacing: 20) {
-                    SetMemoryTypeView(
-                        selectedType: self.$store.memory.type,
-                        setTypeAction: { type in
-                            self.store.send(.setType(type))
-                        }
-                    )
-                    
-                    SetMemoryPhotosView(
-                        selectedItems: self.$store.selectedItems,
-                        images: self.store.memory.photos
-                    )
-                    
-                    SetMemoryContentView(
-                        title: self.$store.memory.title,
-                        note: self.$store.memory.note
-                    )
                 }
-                .padding(.bottom, 20)
-            }
-            
-            Button {
-                self.store.send(.saveMemory(self.store.memory))
-            } label: {
-                Text("추억 만들기")
-            }
-            .buttonStyle(
-                CBButtonStyle(
-                    isDisabled: self.store.isDisabled,
-                    buttonColor: Color.redNormal
-                )
             )
-            .padding(.horizontal, BaseSize.horizantalPadding)
-            .padding(.bottom, 20)
+            
+            TabView(selection: self.$store.selection) {
+                EditMemoryFirstPageView(
+                    memory: self.$store.memory
+                )
+                .tag(PageType.first)
+                
+                EditMemorySecondPageView(
+                    memory: self.$store.memory
+                )
+                .tag(PageType.second)
+            }
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            
+            
+            PageBottomButtonView(
+                selection: self.$store.selection,
+                isDisabled: self.isPageDisabled,
+                buttonAction: {
+                    self.store.send(.completeButtonTapped)
+                }
+            )
         }
         .background(Color.backgroundNormalNormal)
         .onTapGesture {
             self.closeKeyboard()
-        }
-        .onAppear {
-            self.store.send(.checkDisabled)
         }
     }
 }

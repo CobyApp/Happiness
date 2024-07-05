@@ -7,12 +7,27 @@
 
 import SwiftUI
 
-struct EditMemorySecondPageView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+import CobyDS
 
-#Preview {
-    EditMemorySecondPageView()
+struct EditMemorySecondPageView: View {
+    
+    @Binding private var memory: MemoryModel
+    
+    init(
+        memory: Binding<MemoryModel>
+    ) {
+        self._memory = memory
+    }
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                SetMemoryContentView(
+                    title: self.$memory.title,
+                    note: self.$memory.note
+                )
+            }
+            .padding(.bottom, 20)
+        }
+    }
 }

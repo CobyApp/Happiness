@@ -6,18 +6,34 @@
 //
 
 import SwiftUI
-import MapKit
-import PhotosUI
 
 import CobyDS
-import ComposableArchitecture
 
 struct EditMemoryFirstPageView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    
+    @Binding private var memory: MemoryModel
+    
+    init(
+        memory: Binding<MemoryModel>
+    ) {
+        self._memory = memory
     }
-}
-
-#Preview {
-    EditMemoryFirstPageView()
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                SetMemoryTypeView(
+                    selectedType: self.$memory.type
+                )
+                
+                SetMemoryPhotosView(
+                    photos: self.$memory.photos,
+                    photosData: self.$memory.photosData,
+                    date: self.$memory.date,
+                    location: self.$memory.location
+                )
+            }
+            .padding(.bottom, 20)
+        }
+    }
 }

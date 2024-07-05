@@ -42,6 +42,18 @@ struct MemoryModel: Identifiable, Hashable, Equatable {
         self.bunches = bunches
         self.isFirst = isFirst
     }
+    
+    var isFirstPageDisabled: Bool {
+        self.photos.isEmpty
+    }
+    
+    var isSecondPageDisabled: Bool {
+        self.title == "" || self.note == ""
+    }
+    
+    var isDisabled: Bool {
+        self.isFirstPageDisabled || self.isSecondPageDisabled
+    }
 }
 
 extension [MemoryModel] {

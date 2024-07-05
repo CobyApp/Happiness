@@ -36,6 +36,8 @@
 		CB9651E72C384D31009D13A6 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651E62C384D31009D13A6 /* TagView.swift */; };
 		CB9651E92C384E4E009D13A6 /* SetMemoryTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651E82C384E4E009D13A6 /* SetMemoryTypeView.swift */; };
 		CB9651EB2C384F48009D13A6 /* SetMemoryContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651EA2C384F48009D13A6 /* SetMemoryContentView.swift */; };
+		CB9651ED2C385562009D13A6 /* PageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651EC2C385562009D13A6 /* PageType.swift */; };
+		CB9651EF2C3858A6009D13A6 /* PageBottomButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651EE2C3858A6009D13A6 /* PageBottomButtonView.swift */; };
 		CB9D9FD12C36EA79003570F0 /* LocationMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9D9FD02C36EA79003570F0 /* LocationMapper.swift */; };
 		CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */; };
 		CB9EF8DB2ABC633B00FDCE12 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF8DA2ABC633B00FDCE12 /* Preview Assets.xcassets */; };
@@ -93,6 +95,8 @@
 		CB9651E62C384D31009D13A6 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		CB9651E82C384E4E009D13A6 /* SetMemoryTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetMemoryTypeView.swift; sourceTree = "<group>"; };
 		CB9651EA2C384F48009D13A6 /* SetMemoryContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetMemoryContentView.swift; sourceTree = "<group>"; };
+		CB9651EC2C385562009D13A6 /* PageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageType.swift; sourceTree = "<group>"; };
+		CB9651EE2C3858A6009D13A6 /* PageBottomButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageBottomButtonView.swift; sourceTree = "<group>"; };
 		CB96DE382ABF597600B01762 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB9D9FD02C36EA79003570F0 /* LocationMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapper.swift; sourceTree = "<group>"; };
 		CB9EF8D02ABC633A00FDCE12 /* CobyHappiness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CobyHappiness.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				CB09A5482C2B115800CB8485 /* MemoryType.swift */,
+				CB9651EC2C385562009D13A6 /* PageType.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -178,11 +183,13 @@
 		CB4063B52C18A1AD00654F89 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				CB9651E62C384D31009D13A6 /* TagView.swift */,
 				CB4063B62C18A1C200654F89 /* MemoryTileView.swift */,
 				CB7629292C267DF700138186 /* EmptyMemoryView.swift */,
 				CB76292B2C26898A00138186 /* EmptyBunchView.swift */,
 				CB9651D92C3817A6009D13A6 /* DetailPhotosView.swift */,
 				CB9651DB2C381842009D13A6 /* DetailHeaderView.swift */,
+				CB9651EE2C3858A6009D13A6 /* PageBottomButtonView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -236,7 +243,6 @@
 		CB9651E32C384BAB009D13A6 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				CB9651E62C384D31009D13A6 /* TagView.swift */,
 				CB9651E82C384E4E009D13A6 /* SetMemoryTypeView.swift */,
 				CB9651E42C384BCB009D13A6 /* SetMemoryPhotosView.swift */,
 				CB9651EA2C384F48009D13A6 /* SetMemoryContentView.swift */,
@@ -506,12 +512,14 @@
 				CB9651E52C384BCB009D13A6 /* SetMemoryPhotosView.swift in Sources */,
 				CB8836AC2C2BE6AC0037CEC7 /* BunchModel.swift in Sources */,
 				CB4511F72C32933200B5FA02 /* EditBunchStore.swift in Sources */,
+				CB9651ED2C385562009D13A6 /* PageType.swift in Sources */,
 				CBB21C982C16F273007E6AA2 /* MapRepresentableView.swift in Sources */,
 				CB4063B32C189B4B00654F89 /* Bunch.swift in Sources */,
 				CBA038692ABF352F00BD74CF /* Memory.swift in Sources */,
 				CBFF75A42C34558B00B00CE9 /* MemoryDatabase.swift in Sources */,
 				CB9651E72C384D31009D13A6 /* TagView.swift in Sources */,
 				CB8836B72C2BF76E0037CEC7 /* DetailMemoryStore.swift in Sources */,
+				CB9651EF2C3858A6009D13A6 /* PageBottomButtonView.swift in Sources */,
 				CBCA53822C34316A00544CC5 /* BunchDatabase.swift in Sources */,
 				CBAB7F542ACD455E00257778 /* DetailMemoryView.swift in Sources */,
 				CB76292C2C26898A00138186 /* EmptyBunchView.swift in Sources */,
@@ -781,7 +789,7 @@
 			repositoryURL = "https://github.com/CobyLibrary/CobyDS.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.4.2;
+				version = 1.4.3;
 			};
 		};
 		CBC3A4102C2BE5CE00B62F82 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {

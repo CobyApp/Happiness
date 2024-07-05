@@ -13,14 +13,10 @@ struct SetMemoryTypeView: View {
     
     @Binding private var selectedType: MemoryType
     
-    private let setTypeAction: (MemoryType) -> Void
-    
     init(
-        selectedType: Binding<MemoryType>,
-        setTypeAction: @escaping (MemoryType) -> Void
+        selectedType: Binding<MemoryType>
     ) {
         self._selectedType = selectedType
-        self.setTypeAction = setTypeAction
     }
     
     var body: some View {
@@ -41,7 +37,7 @@ struct SetMemoryTypeView: View {
                         title: memoryType.title
                     )
                     .onTapGesture {
-                        self.setTypeAction(memoryType)
+                        self.selectedType = memoryType
                     }
                 }
             }

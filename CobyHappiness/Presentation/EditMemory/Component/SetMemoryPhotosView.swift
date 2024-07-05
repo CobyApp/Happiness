@@ -6,22 +6,30 @@
 //
 
 import SwiftUI
+import MapKit
 import PhotosUI
 
 import CobyDS
 
 struct SetMemoryPhotosView: View {
     
-    @Binding private var selectedItems: [PhotosPickerItem]
+    @Binding private var photos: [UIImage]
+    @Binding private var photosData: [Data]
+    @Binding private var date: Date
+    @Binding private var location: LocationModel?
     
-    private let images: [UIImage]
+    @State private var selectedItems: [PhotosPickerItem] = []
     
     init(
-        selectedItems: Binding<[PhotosPickerItem]>,
-        images: [UIImage]
+        photos: Binding<[UIImage]>,
+        photosData: Binding<[Data]>,
+        date: Binding<Date>,
+        location: Binding<LocationModel?>
     ) {
-        self._selectedItems = selectedItems
-        self.images = images
+        self._photos = photos
+        self._photosData = photosData
+        self._date = date
+        self._location = location
     }
     
     var body: some View {
@@ -56,7 +64,7 @@ struct SetMemoryPhotosView: View {
                             )
                     }
                     
-                    ForEach(self.images, id: \.self) { image in
+                    ForEach(self.photos, id: \.self) { image in
                         ThumbnailView(image: image)
                             .frame(width: 80, height: 80)
                     }
@@ -64,5 +72,62 @@ struct SetMemoryPhotosView: View {
                 .padding(.horizontal, BaseSize.horizantalPadding)
             }
         }
+        .onChange(of: self.selectedItems) {
+            (self.photos, self.date, self.location) = self.setPhotos(items: self.selectedItems)
+            self.photosData = self.photos.map { $0.compressedImage }
+        }
+    }
+}
+
+// MARK: Photo
+extension SetMemoryPhotosView {
+    func setPhotos(items: [PhotosPickerItem]) -> ([UIImage], Date, LocationModel?) {
+        var photoDataArray: [UIImage] = []
+        var dateArray: [Date] = []
+        var locationArray: [LocationModel] = []
+        
+        let dispatchGroup = DispatchGroup()
+        
+        for item in items {
+            dispatchGroup.enter()
+            
+            item.loadTransferable(type: Data.self) { result in
+                switch result {
+                case .success(let data):
+                    if let data = data {
+                        if let originalImage = UIImage(data: data) {
+                            photoDataArray.append(originalImage)
+                        }
+                    }
+                case .failure(let error):
+                    print("Error loading transferable data: \(error)")
+                }
+                dispatchGroup.leave()
+            }
+            
+            if let localID = item.itemIdentifier {
+                dispatchGroup.enter()
+                let result = PHAsset.fetchAssets(withLocalIdentifiers: [localID], options: nil)
+                
+                if let asset = result.firstObject {
+                    if let date = asset.creationDate {
+                        dateArray.append(date)
+                    }
+                    
+                    if let location = asset.location?.coordinate {
+                        let locationModel = LocationModel(
+                            lat: location.latitude,
+                            lon: location.longitude
+                        )
+                        locationArray.append(locationModel)
+                    }
+                }
+                dispatchGroup.leave()
+            }
+        }
+        
+        dispatchGroup.wait()
+        
+        return (photoDataArray, dateArray.first ?? .now, locationArray.first)
     }
 }
