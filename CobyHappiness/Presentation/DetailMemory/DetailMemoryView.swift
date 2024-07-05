@@ -12,8 +12,6 @@ import ComposableArchitecture
 
 struct DetailMemoryView: View {
     
-    @Environment(\.dismiss) private var dismiss
-    
     @Bindable private var store: StoreOf<DetailMemoryStore>
     
     @State private var scale: CGFloat = 1
@@ -52,47 +50,18 @@ struct DetailMemoryView: View {
             .clipShape(RoundedRectangle(cornerRadius: scale == 1 ? 0 : 30))
             .scaleEffect(self.scale)
             .ignoresSafeArea()
-            .actionSheet(isPresented: self.$store.showingSheet) {
-                ActionSheet(
-                    title: Text("원하는 옵션을 선택해주세요."),
-                    message: nil,
-                    buttons: [
-                        .default(Text("편집")) {
-                            self.store.send(.showEditMemory)
-                        },
-                        .destructive(Text("삭제")) {
-                            self.store.send(.showDeleteAlert)
-                        },
-                        .cancel(Text("취소"))
-                    ]
-                )
-            }
-            .alert(isPresented: self.$store.showingAlert) {
-                Alert(
-                    title: Text("추억을 삭제하시겠습니까?"),
-                    message: nil,
-                    primaryButton: .destructive(
-                        Text("삭제"),
-                        action: {
-                            self.store.send(.deleteMemory(self.store.memory))
-                        }
-                    ),
-                    secondaryButton: .cancel(Text("취소"))
-                )
-            }
-            .fullScreenCover(
-                isPresented: self.$store.showingEditMemoryView,
-                onDismiss: {
-                    self.store.send(.getMemory(self.store.memory))
-                }
-            ) {
-                EditMemoryView(store: Store(initialState: EditMemoryStore.State(
-                    memory: self.store.memory
-                )) {
-                    EditMemoryStore()
-                })
-            }
         }
+        .navigationDestination(
+            item: self.$store.scope(state: \.editMemory, action: \.editMemory)
+        ) { store in
+            EditMemoryView(store: store).navigationBarHidden(true)
+        }
+        .alert(
+            self.$store.scope(state: \.optionSheet, action: \.optionSheet)
+        )
+        .alert(
+            self.$store.scope(state: \.deleteAlert, action: \.deleteAlert)
+        )
     }
     
     @ViewBuilder
