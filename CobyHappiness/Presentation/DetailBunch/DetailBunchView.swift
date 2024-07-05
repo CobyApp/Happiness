@@ -19,36 +19,25 @@ struct DetailBunchView: View {
     }
     
     var body: some View {
-        ZStack {
-            Color.backgroundNormalAlternative
-                .edgesIgnoringSafeArea(.all)
-            
-            CBScaleScrollView(
-                isPresented: self.$store.isPresented,
-                scale: self.$store.scale,
-                isDown: self.$store.isDown
-            ) {
+        CBScaleScrollView(
+            isPresented: self.$store.isPresented,
+            scale: self.$store.scale,
+            isDown: self.$store.isDown,
+            header: {
+                DetailHeaderView(
+                    isDown: self.store.isDown,
+                    backAction: { self.store.send(.dismiss) },
+                    optionAction: { self.store.send(.showOptionSheet) }
+                )
+            },
+            content: {
                 VStack(spacing: 20) {
-                    PhotoView(photos: self.store.bunch.photos)
+                    DetailPhotosView(photos: self.store.bunch.photos)
                     
                     ContentView(bunch: self.store.bunch)
-                    
-                    Spacer()
                 }
             }
-            .overlay(
-                alignment: .top,
-                content: {
-                    DetailHeaderView()
-                }
-            )
-            .background(Color.backgroundNormalNormal)
-            .clipShape(RoundedRectangle(cornerRadius: self.store.scale == 1 ? 0 : 30))
-            .scaleEffect(self.store.scale)
-            .ignoresSafeArea()
-        }
-        .edgesIgnoringSafeArea(.bottom)
-        .background(Color.backgroundNormalNormal)
+        )
         .onAppear {
             self.store.send(.getBunch)
         }
@@ -68,58 +57,6 @@ struct DetailBunchView: View {
         .alert(
             self.$store.scope(state: \.deleteAlert, action: \.deleteAlert)
         )
-    }
-    
-    @ViewBuilder
-    func DetailHeaderView() -> some View {
-        HStack {
-            Button {
-                self.store.send(.dismiss)
-            } label: {
-                Image(uiImage: UIImage.icBack)
-                    .resizable()
-                    .frame(width: 24, height: 24)
-                    .foregroundColor(self.store.isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
-                    .padding()
-                    .background(self.store.isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
-                    .clipShape(Circle())
-            }
-            
-            Spacer()
-            
-            Button {
-                self.store.send(.showOptionSheet)
-            } label: {
-                Image(uiImage: UIImage.icMore)
-                    .resizable()
-                    .frame(width: 24, height: 24)
-                    .foregroundColor(self.store.isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
-                    .padding()
-                    .background(self.store.isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
-                    .clipShape(Circle())
-            }
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.horizontal, BaseSize.horizantalPadding)
-        .padding(.top, BaseSize.topAreaPadding + 10)
-    }
-    
-    @ViewBuilder
-    private func PhotoView(photos: [UIImage]) -> some View {
-        TabView {
-            ForEach(photos, id: \.self) { photo in
-                Image(uiImage: photo)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth)
-                    .clipped()
-                    .ignoresSafeArea()
-            }
-        }
-        .background(Color.backgroundNormalAlternative)
-        .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth)
-        .tabViewStyle(PageTabViewStyle())
-        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
     }
     
     @ViewBuilder
