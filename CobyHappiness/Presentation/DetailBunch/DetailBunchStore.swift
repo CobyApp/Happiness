@@ -18,6 +18,9 @@ struct DetailBunchStore: Reducer {
         @Presents var editBunch: EditBunchStore.State?
         @Presents var optionSheet: ConfirmationDialogState<OptionSheetAction>?
         @Presents var deleteAlert: AlertState<DeleteAlertAction>?
+        var isPresented: Bool = true
+        var scale: CGFloat = 1
+        var isDown: Bool = false
         var bunch: BunchModel
         
         init(

@@ -14,9 +14,6 @@ struct DetailMemoryView: View {
     
     @Bindable private var store: StoreOf<DetailMemoryStore>
     
-    @State private var scale: CGFloat = 1
-    @State private var isDown: Bool = false
-    
     init(store: StoreOf<DetailMemoryStore>) {
         self.store = store
     }
@@ -28,8 +25,8 @@ struct DetailMemoryView: View {
             
             CBScaleScrollView(
                 isPresented: self.$store.isPresented,
-                scale: self.$scale,
-                isDown: self.$isDown
+                scale: self.$self.store.scale,
+                isDown: self.$self.store.isDown
             ) {
                 VStack(spacing: 20) {
                     PhotoView(photos: self.store.memory.photos)
@@ -38,7 +35,6 @@ struct DetailMemoryView: View {
                     
                     Spacer()
                 }
-                .contentShape(Rectangle())
             }
             .overlay(
                 alignment: .top,
@@ -47,7 +43,7 @@ struct DetailMemoryView: View {
                 }
             )
             .background(Color.backgroundNormalNormal)
-            .clipShape(RoundedRectangle(cornerRadius: scale == 1 ? 0 : 30))
+            .clipShape(RoundedRectangle(cornerRadius: self.store.scale == 1 ? 0 : 30))
             .scaleEffect(self.scale)
             .ignoresSafeArea()
         }

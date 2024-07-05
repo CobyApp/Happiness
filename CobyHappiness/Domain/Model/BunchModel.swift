@@ -44,4 +44,8 @@ struct BunchModel: Identifiable, Hashable, Equatable {
             return "\(startDate) ~ \(endDate)"
         }
     }
+    
+    var photos: [UIImage] {
+        self.memories.flatMap { $0.photos }
+    }
 }

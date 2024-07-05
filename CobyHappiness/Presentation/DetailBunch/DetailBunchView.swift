@@ -14,25 +14,42 @@ struct DetailBunchView: View {
     
     @Bindable private var store: StoreOf<DetailBunchStore>
     
+    @State private var scale: CGFloat = 1
+    @State private var isDown: Bool = false
+    @State private var isPresented: Bool = true
+    
     init(store: StoreOf<DetailBunchStore>) {
         self.store = store
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            TopBarView(
-                leftSide: .left,
-                leftAction: {
-                    self.store.send(.dismiss)
-                },
-                rightSide: .icon,
-                rightIcon: UIImage.icMore,
-                rightAction: {
-                    self.store.send(.showOptionSheet)
+        ZStack {
+            Color.backgroundNormalAlternative
+                .edgesIgnoringSafeArea(.all)
+            
+            CBScaleScrollView(
+                isPresented: self.$store.isPresented,
+                scale: self.$self.store.scale,
+                isDown: self.$self.store.isDown
+            ) {
+                VStack(spacing: 20) {
+                    PhotoView(photos: self.store.bunch.photos)
+                    
+                    ContentView(bunch: self.store.bunch)
+                    
+                    Spacer()
+                }
+            }
+            .overlay(
+                alignment: .top,
+                content: {
+                    DetailHeaderView()
                 }
             )
-            
-            MemoryListView(memories: self.store.bunch.memories)
+            .background(Color.backgroundNormalNormal)
+            .clipShape(RoundedRectangle(cornerRadius: self.store.scale == 1 ? 0 : 30))
+            .scaleEffect(self.scale)
+            .ignoresSafeArea()
         }
         .edgesIgnoringSafeArea(.bottom)
         .background(Color.backgroundNormalNormal)
@@ -55,6 +72,85 @@ struct DetailBunchView: View {
     }
     
     @ViewBuilder
+    func DetailHeaderView() -> some View {
+        HStack {
+            Button {
+                self.store.send(.dismiss)
+            } label: {
+                Image(uiImage: UIImage.icBack)
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(self.isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
+                    .padding()
+                    .background(self.isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
+                    .clipShape(Circle())
+            }
+            
+            Spacer()
+            
+            Button {
+                self.store.send(.showOptionSheet)
+            } label: {
+                Image(uiImage: UIImage.icMore)
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(self.isDown ? Color.white.opacity(0.8) : Color.black.opacity(0.7))
+                    .padding()
+                    .background(self.isDown ? Color.black.opacity(0.7) : Color.white.opacity(0.8))
+                    .clipShape(Circle())
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, BaseSize.horizantalPadding)
+        .padding(.top, BaseSize.topAreaPadding + 10)
+    }
+    
+    @ViewBuilder
+    private func PhotoView(photos: [UIImage]) -> some View {
+        TabView {
+            ForEach(photos, id: \.self) { photo in
+                Image(uiImage: photo)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth)
+                    .clipped()
+                    .ignoresSafeArea()
+            }
+        }
+        .background(Color.backgroundNormalAlternative)
+        .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth)
+        .tabViewStyle(PageTabViewStyle())
+        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+    }
+    
+    @ViewBuilder
+    private func ContentView(bunch: BunchModel) -> some View {
+        VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(bunch.title)
+                    .font(.pretendard(size: 20, weight: .semibold))
+                    .foregroundStyle(Color.labelNormal)
+                
+                Text(bunch.term)
+                    .font(.pretendard(size: 14, weight: .regular))
+                    .foregroundStyle(Color.labelAlternative)
+            }
+            
+            CBDivider()
+            
+            VStack(alignment: .leading, spacing: 12) {
+                Text("목록")
+                    .font(.pretendard(size: 16, weight: .semibold))
+                    .foregroundColor(Color.labelNormal)
+                
+                MemoryListView(memories: bunch.memories)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, BaseSize.horizantalPadding)
+    }
+    
+    @ViewBuilder
     private func MemoryListView(memories: [MemoryModel]) -> some View {
         if memories.isEmpty {
             EmptyMemoryView(
@@ -62,20 +158,15 @@ struct DetailBunchView: View {
             )
             .padding(.top, -100)
         } else {
-            ScrollView {
-                LazyVStack(spacing: 8) {
-                    ForEach(memories) { memory in
-                        MemoryTileView(
-                            memory: memory
-                        )
-                        .onTapGesture {
-                            self.store.send(.showDetailMemory(memory))
-                        }
+            LazyVStack(spacing: 8) {
+                ForEach(memories) { memory in
+                    MemoryTileView(
+                        memory: memory
+                    )
+                    .onTapGesture {
+                        self.store.send(.showDetailMemory(memory))
                     }
                 }
-                .padding(.horizontal, BaseSize.horizantalPadding)
-                .padding(.top, 8)
-                .padding(.bottom, 20)
             }
         }
     }
