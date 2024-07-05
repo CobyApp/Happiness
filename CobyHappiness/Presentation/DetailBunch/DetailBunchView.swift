@@ -38,43 +38,22 @@ struct DetailBunchView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .background(Color.backgroundNormalNormal)
-        .actionSheet(isPresented: self.$store.showingSheet) {
-            ActionSheet(
-                title: Text("원하는 옵션을 선택해주세요."),
-                message: nil,
-                buttons: [
-                    .default(Text("편집")) {
-                        self.store.send(.showEditBunch)
-                    },
-                    .destructive(Text("삭제")) {
-                        self.store.send(.showDeleteAlert)
-                    },
-                    .cancel(Text("취소"))
-                ]
-            )
+        .navigationDestination(
+            item: self.$store.scope(state: \.detailMemory, action: \.detailMemory)
+        ) { store in
+            DetailMemoryView(store: store).navigationBarHidden(true)
         }
-        .alert(isPresented: self.$store.showingAlert) {
-            Alert(
-                title: Text("추억 뭉치를 삭제하시겠습니까?"),
-                message: nil,
-                primaryButton: .destructive(
-                    Text("삭제"),
-                    action: {
-                        self.store.send(.deleteBunch(self.store.bunch))
-                    }
-                ),
-                secondaryButton: .cancel(Text("취소"))
-            )
+        .navigationDestination(
+            item: self.$store.scope(state: \.editBunch, action: \.editBunch)
+        ) { store in
+            EditBunchView(store: store).navigationBarHidden(true)
         }
-        .fullScreenCover(
-            isPresented: self.$store.showingEditBunchView
-        ) {
-            EditBunchView(store: Store(initialState: EditBunchStore.State(
-                bunch: self.store.bunch
-            )) {
-                EditBunchStore()
-            })
-        }
+        .confirmationDialog(
+            self.$store.scope(state: \.optionSheet, action: \.optionSheet)
+        )
+        .alert(
+            self.$store.scope(state: \.deleteAlert, action: \.deleteAlert)
+        )
     }
     
     @ViewBuilder
@@ -96,11 +75,6 @@ struct DetailBunchView: View {
                 .padding(.horizontal, BaseSize.horizantalPadding)
                 .padding(.top, 8)
                 .padding(.bottom, 20)
-                .sheet(
-                    item: self.$store.scope(state: \.detailMemory, action: \.detailMemory)
-                ) { store in
-                    DetailMemoryView(store: store)
-                }
             }
         }
     }

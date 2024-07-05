@@ -16,7 +16,6 @@ struct MapStore: Reducer {
     struct State: Equatable {
         @Presents var addMemory: EditMemoryStore.State?
         @Presents var detailMemory: DetailMemoryStore.State?
-        var showingEditMemoryView: Bool = false
         var topLeft: LocationModel? = nil
         var bottomRight: LocationModel? = nil
         var memories: [MemoryModel] = []

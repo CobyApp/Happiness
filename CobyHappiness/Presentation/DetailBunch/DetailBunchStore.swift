@@ -15,9 +15,9 @@ struct DetailBunchStore: Reducer {
     @ObservableState
     struct State: Equatable {
         @Presents var detailMemory: DetailMemoryStore.State?
-        var showingSheet: Bool = false
-        var showingAlert: Bool = false
-        var showingEditBunchView: Bool = false
+        @Presents var editBunch: EditBunchStore.State?
+        @Presents var optionSheet: ConfirmationDialogState<OptionSheetAction>?
+        @Presents var deleteAlert: AlertState<DeleteAlertAction>?
         var bunch: BunchModel
         
         init(
@@ -30,12 +30,24 @@ struct DetailBunchStore: Reducer {
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
         case detailMemory(PresentationAction<DetailMemoryStore.Action>)
+        case editBunch(PresentationAction<EditBunchStore.Action>)
+        case optionSheet(PresentationAction<OptionSheetAction>)
+        case deleteAlert(PresentationAction<DeleteAlertAction>)
         case showOptionSheet
         case showDeleteAlert
-        case showEditBunch
+        case showEditBunch(BunchModel)
         case deleteBunch(BunchModel)
         case deleteBunchResponse
         case dismiss
+    }
+    
+    enum OptionSheetAction: Equatable {
+        case edit
+        case delete
+    }
+    
+    enum DeleteAlertAction: Equatable {
+        case delete
     }
     
     @Dependency(\.dismiss) private var dismiss
@@ -50,14 +62,60 @@ struct DetailBunchStore: Reducer {
                 return .none
             case .detailMemory:
                 return .none
+            case .editBunch:
+                return .none
+            case let .optionSheet(action):
+                switch action {
+                case .presented(.edit):
+                    return .send(.showEditBunch(state.bunch))
+                case .presented(.delete):
+                    return .send(.showDeleteAlert)
+                case .dismiss:
+                    return .none
+                }
+            case let .deleteAlert(action):
+                switch action {
+                case .presented(.delete):
+                    return .send(.deleteBunch(state.bunch))
+                case .dismiss:
+                    return .none
+                }
             case .showOptionSheet:
-                state.showingSheet = true
+                state.optionSheet = ConfirmationDialogState(
+                    title: TextState("원하는 옵션을 선택해주세요."),
+                    message: nil,
+                    buttons: [
+                        .default(
+                            TextState("편집"),
+                            action: .send(.edit)
+                        ),
+                        .destructive(
+                            TextState("삭제"),
+                            action: .send(.delete)
+                        ),
+                        .cancel(
+                            TextState("취소")
+                        )
+                    ]
+                )
                 return .none
             case .showDeleteAlert:
-                state.showingAlert = true
+                state.deleteAlert = AlertState(
+                    title: TextState("추억 뭉치를 삭제하시겠습니까?"),
+                    message: nil,
+                    buttons: [
+                        .destructive(
+                            TextState("삭제"),
+                            action: .send(.delete)
+                        ),
+                        .cancel(
+                            TextState("취소")
+                        )
+                    ]
+                )
                 return .none
-            case .showEditBunch:
-                state.showingEditBunchView = true
+            case .showEditBunch(let bunch):
+                state.editBunch = EditBunchStore.State(bunch: bunch)
                 return .none
             case .deleteBunch(let bunch):
                 return .run { send in
@@ -75,5 +133,10 @@ struct DetailBunchStore: Reducer {
         .ifLet(\.$detailMemory, action: \.detailMemory) {
             DetailMemoryStore()
         }
+        .ifLet(\.$editBunch, action: \.editBunch) {
+            EditBunchStore()
+        }
+        .ifLet(\.$optionSheet, action: \.optionSheet)
+        .ifLet(\.$deleteAlert, action: \.deleteAlert)
     }
 }
