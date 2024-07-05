@@ -76,6 +76,7 @@
 		CB8836B02C2BE7B90037CEC7 /* BunchMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchMapper.swift; sourceTree = "<group>"; };
 		CB8836B22C2BE80A0037CEC7 /* MemoryMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryMapper.swift; sourceTree = "<group>"; };
 		CB8836B62C2BF76D0037CEC7 /* DetailMemoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMemoryStore.swift; sourceTree = "<group>"; };
+		CB9651D82C3812F7009D13A6 /* CobyHappiness.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CobyHappiness.entitlements; sourceTree = "<group>"; };
 		CB96DE382ABF597600B01762 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB9D9FD02C36EA79003570F0 /* LocationMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapper.swift; sourceTree = "<group>"; };
 		CB9EF8D02ABC633A00FDCE12 /* CobyHappiness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CobyHappiness.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,6 +227,7 @@
 		CB9EF8D22ABC633A00FDCE12 /* CobyHappiness */ = {
 			isa = PBXGroup;
 			children = (
+				CB9651D82C3812F7009D13A6 /* CobyHappiness.entitlements */,
 				CBFE3C472C1DFC0A000E3351 /* Data */,
 				CB09A5442C2B10A600CB8485 /* Domain */,
 				CB9EF8E22ABC670E00FDCE12 /* Presentation */,
@@ -625,6 +627,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CobyHappiness/CobyHappiness.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CobyHappiness/Preview Content\"";
@@ -634,7 +637,9 @@
 				INFOPLIST_FILE = CobyHappiness/Supports/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Happy;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need date and loacation";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your permission to access your location data.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need your permission to access the photo library.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -659,6 +664,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = CobyHappiness/CobyHappiness.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CobyHappiness/Preview Content\"";
@@ -668,7 +674,9 @@
 				INFOPLIST_FILE = CobyHappiness/Supports/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Happy;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need date and loacation";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your permission to access your location data.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need your permission to access the photo library.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
