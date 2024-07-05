@@ -21,7 +21,9 @@ struct EditMemoryFirstPageView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 20) {
+            VStack(spacing: 24) {
+                PageTitleView()
+                
                 SetMemoryTypeView(
                     selectedType: self.$memory.type
                 )
@@ -30,10 +32,24 @@ struct EditMemoryFirstPageView: View {
                     photos: self.$memory.photos,
                     photosData: self.$memory.photosData,
                     date: self.$memory.date,
-                    location: self.$memory.location
+                    location: self.$memory.location,
+                    title: self.memory.type.description
                 )
             }
             .padding(.bottom, 20)
         }
+    }
+    
+    @ViewBuilder
+    private func PageTitleView() -> some View {
+        HStack {
+            Text("일상 기록하기")
+                .font(.pretendard(size: 20, weight: .bold))
+                .foregroundColor(Color.labelNormal)
+            
+            Spacer()
+        }
+        .padding(.top, 8)
+        .padding(.horizontal, BaseSize.horizantalPadding)
     }
 }

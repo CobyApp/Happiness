@@ -50,7 +50,8 @@ struct PageBottomButtonView: View {
                     }
                     .buttonStyle(
                         CBButtonStyle(
-                            buttonType: .outlined
+                            buttonType: .outlined,
+                            buttonColor: Color.backgroundNormalNormal
                         )
                     )
                     .frame(width: 100)

@@ -20,22 +20,26 @@ struct SetMemoryPhotosView: View {
     
     @State private var selectedItems: [PhotosPickerItem] = []
     
+    private let title: String
+    
     init(
         photos: Binding<[UIImage]>,
         photosData: Binding<[Data]>,
         date: Binding<Date>,
-        location: Binding<LocationModel?>
+        location: Binding<LocationModel?>,
+        title: String
     ) {
         self._photos = photos
         self._photosData = photosData
         self._date = date
         self._location = location
+        self.title = title
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 4) {
             HStack {
-                Text("사진")
+                Text(self.title)
                     .font(.pretendard(size: 16, weight: .regular))
                     .foregroundColor(Color.labelNormal)
                 
@@ -45,7 +49,7 @@ struct SetMemoryPhotosView: View {
             .padding(.horizontal, BaseSize.horizantalPadding)
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 6) {
+                HStack(spacing: 8) {
                     PhotosPicker(
                         selection: self.$selectedItems,
                         matching: .images,

@@ -29,7 +29,7 @@ struct BunchView: View {
                 leftSide: .title,
                 leftTitle: "뭉치",
                 rightSide: .text,
-                rightTitle: "뭉치 추가",
+                rightTitle: "일상 뭉치기",
                 rightAction: {
                     self.store.send(.showAddBunch)
                 }

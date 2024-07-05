@@ -20,9 +20,9 @@ struct SetMemoryTypeView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 4) {
             HStack {
-                Text("태그")
+                Text("태그를 선택해주세요.")
                     .font(.pretendard(size: 16, weight: .regular))
                     .foregroundColor(Color.labelNormal)
                 

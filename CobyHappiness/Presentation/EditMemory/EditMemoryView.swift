@@ -50,19 +50,22 @@ struct EditMemoryView: View {
                     memory: self.$store.memory
                 )
                 .tag(PageType.first)
+                .simultaneousGesture(DragGesture())
                 
                 EditMemorySecondPageView(
                     memory: self.$store.memory
                 )
                 .tag(PageType.second)
+                .simultaneousGesture(DragGesture())
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
-            
+            .animation(.easeOut(duration: 0.2), value: self.store.selection)
             
             PageBottomButtonView(
                 selection: self.$store.selection,
                 isDisabled: self.isPageDisabled,
                 buttonAction: {
+                    self.closeKeyboard()
                     self.store.send(.completeButtonTapped)
                 }
             )

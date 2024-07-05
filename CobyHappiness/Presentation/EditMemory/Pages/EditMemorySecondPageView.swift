@@ -21,7 +21,7 @@ struct EditMemorySecondPageView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 20) {
+            VStack(spacing: 24) {
                 SetMemoryContentView(
                     title: self.$memory.title,
                     note: self.$memory.note

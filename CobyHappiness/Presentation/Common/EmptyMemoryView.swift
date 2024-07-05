@@ -26,7 +26,7 @@ struct EmptyMemoryView: View {
         VStack(spacing: 8) {
             Spacer()
             
-            Text(self.showingButton ? "행복한 추억을 남겨주세요." : "저장된 추억이 없어요.")
+            Text(self.showingButton ? "행복한 일상을 남겨주세요." : "저장된 일상이 없어요.")
                 .font(.pretendard(size: 16, weight: .regular))
                 .foregroundStyle(Color.labelNormal)
             
@@ -34,7 +34,7 @@ struct EmptyMemoryView: View {
                 Button {
                     self.buttonAction()
                 } label: {
-                    Text("추억 만들기")
+                    Text("일상 만들기")
                 }
                 .buttonStyle(
                     CBButtonStyle(

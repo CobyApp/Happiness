@@ -25,7 +25,7 @@ struct EditBunchView: View {
                 leftAction: {
                     self.store.send(.dismiss)
                 },
-                title: "추억 선택"
+                title: "일상 선택"
             )
             
             SelectMemoriesView(

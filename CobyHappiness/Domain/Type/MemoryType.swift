@@ -26,4 +26,17 @@ enum MemoryType: String, Identifiable, CaseIterable, Codable {
             return "순간"
         }
     }
+    
+    var description: String {
+        switch self {
+        case .trip:
+            return "여행의 즐거운 순간을 담은 사진을 골라주세요."
+        case .food:
+            return "맛있는 음식을 즐겼던 사진을 골라주세요."
+        case .hobby:
+            return "내가 좋아하는 것들의 사진을 골라주세요."
+        case .moment:
+            return "오늘 특별한 순간의 사진을 골라주세요."
+        }
+    }
 }

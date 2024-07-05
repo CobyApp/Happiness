@@ -23,7 +23,7 @@ struct SetMemoryContentView: View {
     }
     
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 24) {
             CBTextFieldView(
                 text: self.$title,
                 title: "제목",
