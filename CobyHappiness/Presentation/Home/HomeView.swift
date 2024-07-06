@@ -45,7 +45,7 @@ struct HomeView: View {
         TopBarView(
             leftSide: .none,
             rightSide: .text,
-            rightTitle: "일상 기록하기",
+            rightTitle: "추억 기록하기",
             rightAction: {
                 self.store.send(.showAddMemory)
             }

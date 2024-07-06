@@ -109,7 +109,7 @@ struct DetailBunchStore: Reducer {
                 return .none
             case .showDeleteAlert:
                 state.deleteAlert = AlertState(
-                    title: TextState("일상 뭉치를 삭제하시겠습니까?"),
+                    title: TextState("추억 뭉치를 삭제하시겠습니까?"),
                     message: nil,
                     buttons: [
                         .destructive(

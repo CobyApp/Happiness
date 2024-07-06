@@ -40,7 +40,7 @@ struct EditBunchFirstPageView: View {
     @ViewBuilder
     private func PageTitleView() -> some View {
         HStack {
-            Text("일상 뭉치기")
+            Text("추억 뭉치기")
                 .font(.pretendard(size: 20, weight: .bold))
                 .foregroundColor(Color.labelNormal)
             

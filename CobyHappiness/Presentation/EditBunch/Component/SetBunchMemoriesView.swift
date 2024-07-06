@@ -32,7 +32,7 @@ struct SetBunchMemoriesView: View {
         } else {
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
-                    Text("뭉칠 일상들을 선택해주세요.")
+                    Text("뭉칠 추억들을 선택해주세요.")
                         .font(.pretendard(size: 16, weight: .regular))
                         .foregroundColor(Color.labelNormal)
                     

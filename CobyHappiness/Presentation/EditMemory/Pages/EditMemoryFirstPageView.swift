@@ -43,7 +43,7 @@ struct EditMemoryFirstPageView: View {
     @ViewBuilder
     private func PageTitleView() -> some View {
         HStack {
-            Text("일상 기록하기")
+            Text("추억 기록하기")
                 .font(.pretendard(size: 20, weight: .bold))
                 .foregroundColor(Color.labelNormal)
             

@@ -27,14 +27,14 @@ struct SetMemoryContentView: View {
             CBTextFieldView(
                 text: self.$title,
                 textFieldTrailing: .textCount,
-                title: "일상에 이름을 만들어주세요.",
+                title: "추억에 이름을 만들어주세요.",
                 placeholder: "10자 이내로 적어주세요.",
                 maxLength: 10
             )
             
             CBTextAreaView(
                 text: self.$note,
-                title: "어떤 행복한 일상이었나요?",
+                title: "어떤 행복한 추억이었나요?",
                 placeholder: "내용을 기록해주세요."
             )
         }
