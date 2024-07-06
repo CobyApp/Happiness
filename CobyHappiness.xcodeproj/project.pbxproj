@@ -14,7 +14,6 @@
 		CB2471012ADABBFC00EEA032 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2471002ADABBFC00EEA032 /* PlaceModel.swift */; };
 		CB4063B12C1763EA00654F89 /* EditMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063B02C1763EA00654F89 /* EditMemoryView.swift */; };
 		CB4063B32C189B4B00654F89 /* Bunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063B22C189B4B00654F89 /* Bunch.swift */; };
-		CB4063B72C18A1C200654F89 /* MemoryTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063B62C18A1C200654F89 /* MemoryTileView.swift */; };
 		CB4063BC2C18A66200654F89 /* SetBunchMemoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4063BB2C18A66200654F89 /* SetBunchMemoriesView.swift */; };
 		CB4196012C18B83E003D958C /* DetailBunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4196002C18B83E003D958C /* DetailBunchView.swift */; };
 		CB4196092C19CF00003D958C /* UIImage+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4196082C19CF00003D958C /* UIImage+Assets.swift */; };
@@ -41,6 +40,7 @@
 		CB9651F12C386F53009D13A6 /* EditBunchFirstPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651F02C386F53009D13A6 /* EditBunchFirstPageView.swift */; };
 		CB9651F32C386F5B009D13A6 /* EditBunchSecondPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651F22C386F5B009D13A6 /* EditBunchSecondPageView.swift */; };
 		CB9651F52C387597009D13A6 /* SetBunchImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651F42C387596009D13A6 /* SetBunchImageView.swift */; };
+		CB9651F72C38FE15009D13A6 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651F62C38FE15009D13A6 /* Date+Extensions.swift */; };
 		CB9D9FD12C36EA79003570F0 /* LocationMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9D9FD02C36EA79003570F0 /* LocationMapper.swift */; };
 		CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9EF8D32ABC633A00FDCE12 /* CobyHappinessApp.swift */; };
 		CB9EF8DB2ABC633B00FDCE12 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF8DA2ABC633B00FDCE12 /* Preview Assets.xcassets */; };
@@ -75,7 +75,6 @@
 		CB2471002ADABBFC00EEA032 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		CB4063B02C1763EA00654F89 /* EditMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoryView.swift; sourceTree = "<group>"; };
 		CB4063B22C189B4B00654F89 /* Bunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bunch.swift; sourceTree = "<group>"; };
-		CB4063B62C18A1C200654F89 /* MemoryTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryTileView.swift; sourceTree = "<group>"; };
 		CB4063BB2C18A66200654F89 /* SetBunchMemoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBunchMemoriesView.swift; sourceTree = "<group>"; };
 		CB4196002C18B83E003D958C /* DetailBunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBunchView.swift; sourceTree = "<group>"; };
 		CB4196082C19CF00003D958C /* UIImage+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Assets.swift"; sourceTree = "<group>"; };
@@ -103,6 +102,7 @@
 		CB9651F02C386F53009D13A6 /* EditBunchFirstPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchFirstPageView.swift; sourceTree = "<group>"; };
 		CB9651F22C386F5B009D13A6 /* EditBunchSecondPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchSecondPageView.swift; sourceTree = "<group>"; };
 		CB9651F42C387596009D13A6 /* SetBunchImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBunchImageView.swift; sourceTree = "<group>"; };
+		CB9651F62C38FE15009D13A6 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		CB96DE382ABF597600B01762 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB9D9FD02C36EA79003570F0 /* LocationMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapper.swift; sourceTree = "<group>"; };
 		CB9EF8D02ABC633A00FDCE12 /* CobyHappiness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CobyHappiness.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,7 +191,6 @@
 			isa = PBXGroup;
 			children = (
 				CB9651E62C384D31009D13A6 /* TagView.swift */,
-				CB4063B62C18A1C200654F89 /* MemoryTileView.swift */,
 				CB7629292C267DF700138186 /* EmptyMemoryView.swift */,
 				CB76292B2C26898A00138186 /* EmptyBunchView.swift */,
 				CB9651D92C3817A6009D13A6 /* DetailPhotosView.swift */,
@@ -350,6 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */,
+				CB9651F62C38FE15009D13A6 /* Date+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -540,6 +540,7 @@
 				CB09A5492C2B115800CB8485 /* MemoryType.swift in Sources */,
 				CBAD45692C15EBB1009D4EFF /* LocationModel.swift in Sources */,
 				CB9651DA2C3817A6009D13A6 /* DetailPhotosView.swift in Sources */,
+				CB9651F72C38FE15009D13A6 /* Date+Extensions.swift in Sources */,
 				CB4063BC2C18A66200654F89 /* SetBunchMemoriesView.swift in Sources */,
 				CB8836AE2C2BE6B10037CEC7 /* MemoryModel.swift in Sources */,
 				CBAD455A2C1582A7009D4EFF /* MapView.swift in Sources */,
@@ -559,7 +560,6 @@
 				CBCA53802C34312E00544CC5 /* Database.swift in Sources */,
 				CB9651F52C387597009D13A6 /* SetBunchImageView.swift in Sources */,
 				CB9D9FD12C36EA79003570F0 /* LocationMapper.swift in Sources */,
-				CB4063B72C18A1C200654F89 /* MemoryTileView.swift in Sources */,
 				CBC3A4162C2BE5F900B62F82 /* HomeStore.swift in Sources */,
 				CBAF77252C2D4CCD00F40F76 /* BunchStore.swift in Sources */,
 				CB9EF8D42ABC633A00FDCE12 /* CobyHappinessApp.swift in Sources */,
@@ -801,7 +801,7 @@
 			repositoryURL = "https://github.com/CobyLibrary/CobyDS.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.4.3;
+				version = 1.4.4;
 			};
 		};
 		CBC3A4102C2BE5CE00B62F82 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {

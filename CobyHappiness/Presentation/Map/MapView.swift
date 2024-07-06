@@ -40,10 +40,13 @@ struct MapView: View {
                 ScrollView(.horizontal) {
                     LazyHStack(spacing: 8) {
                         ForEach(self.store.filteredMemories, id: \.self) { memory in
-                            MemoryTileView(
-                                memory: memory
+                            ThumbnailTileView(
+                                image: memory.photos.first,
+                                title: memory.title,
+                                subTitle: memory.date.formatShort,
+                                description: memory.note
                             )
-                            .frame(width: BaseSize.fullWidth, height: 100)
+                            .frame(width: BaseSize.fullWidth, height: 120)
                             .padding(.horizontal, 20)
                             .containerRelativeFrame(.horizontal)
                             .onTapGesture {

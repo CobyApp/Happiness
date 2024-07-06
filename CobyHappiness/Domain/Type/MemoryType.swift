@@ -30,7 +30,7 @@ enum MemoryType: String, Identifiable, CaseIterable, Codable {
     var description: String {
         switch self {
         case .trip:
-            return "여행의 즐거운 순간을 담은 사진을 골라주세요."
+            return "여행의 즐거움을 담은 사진을 골라주세요."
         case .food:
             return "맛있는 음식을 즐겼던 사진을 골라주세요."
         case .hobby:

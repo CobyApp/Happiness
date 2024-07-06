@@ -32,7 +32,7 @@ struct SetBunchMemoriesView: View {
         } else {
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
-                    Text("뭉칠 기록들을 선택해주세요.")
+                    Text("뭉칠 일상들을 선택해주세요.")
                         .font(.pretendard(size: 16, weight: .regular))
                         .foregroundColor(Color.labelNormal)
                     
@@ -42,10 +42,14 @@ struct SetBunchMemoriesView: View {
                 
                 LazyVStack(spacing: 8) {
                     ForEach(self.memories) { memory in
-                        MemoryTileView(
-                            memory: memory,
-                            isSelected: self.selectedMemories.contains(memory)
+                        ThumbnailTileView(
+                            isSelected: self.selectedMemories.contains(memory),
+                            image: memory.photos.first,
+                            title: memory.title,
+                            subTitle: memory.date.formatShort,
+                            description: memory.note
                         )
+                        .frame(width: BaseSize.fullWidth, height: 120)
                         .onTapGesture {
                             if self.selectedMemories.contains(memory) {
                                 self.selectedMemories = self.selectedMemories.filter { $0 != memory }

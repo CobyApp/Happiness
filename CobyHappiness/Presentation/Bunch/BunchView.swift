@@ -60,7 +60,7 @@ struct BunchView: View {
                 self.store.send(.showAddBunch)
             }
         } else {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 LazyVGrid(columns: self.columns, spacing: 20) {
                     ForEach(self.store.bunches, id: \.self) { bunch in
                         ThumbnailTitleView(

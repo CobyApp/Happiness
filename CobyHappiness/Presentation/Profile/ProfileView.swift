@@ -119,9 +119,13 @@ struct ProfileView: View {
             ScrollView {
                 LazyVStack(spacing: 8) {
                     ForEach(memories) { memory in
-                        MemoryTileView(
-                            memory: memory
+                        ThumbnailTileView(
+                            image: memory.photos.first,
+                            title: memory.title,
+                            subTitle: memory.date.formatShort,
+                            description: memory.note
                         )
+                        .frame(width: BaseSize.fullWidth, height: 120)
                         .onTapGesture {
                             self.store.send(.showDetailMemory(memory))
                         }

@@ -69,7 +69,7 @@ struct DetailBunchView: View {
                     .font(.pretendard(size: 20, weight: .semibold))
                     .foregroundStyle(Color.labelNormal)
                 
-                Text(bunch.term)
+                Text(bunch.termLong)
                     .font(.pretendard(size: 14, weight: .regular))
                     .foregroundStyle(Color.labelAlternative)
             }
@@ -98,9 +98,13 @@ struct DetailBunchView: View {
         } else {
             LazyVStack(spacing: 8) {
                 ForEach(memories) { memory in
-                    MemoryTileView(
-                        memory: memory
+                    ThumbnailTileView(
+                        image: memory.photos.first,
+                        title: memory.title,
+                        subTitle: memory.date.formatShort,
+                        description: memory.note
                     )
+                    .frame(width: BaseSize.fullWidth, height: 120)
                     .onTapGesture {
                         self.store.send(.showDetailMemory(memory))
                     }
