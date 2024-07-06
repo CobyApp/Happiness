@@ -52,7 +52,7 @@ struct SetMemoryPhotosView: View {
                         matching: .images,
                         photoLibrary: .shared()
                     ) {
-                        Image(uiImage: UIImage.camera)
+                        Image(uiImage: UIImage.icCamera)
                             .resizable()
                             .frame(width: 32, height: 32)
                             .foregroundColor(Color.labelAlternative)

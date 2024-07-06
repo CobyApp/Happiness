@@ -20,18 +20,6 @@ struct DetailMemoryView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            TopBarView(
-                leftSide: .left,
-                leftAction: {
-                    self.store.send(.dismiss)
-                },
-                rightSide: .icon,
-                rightIcon: UIImage.icMore,
-                rightAction: {
-                    self.store.send(.showOptionSheet)
-                }
-            )
-            
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
                     DetailPhotosView(photos: self.store.memory.photos)
@@ -41,7 +29,23 @@ struct DetailMemoryView: View {
                 .padding(.bottom, BaseSize.verticalPadding)
             }
         }
+        .edgesIgnoringSafeArea(.top)
         .background(Color.backgroundNormalNormal)
+        .overlay(alignment: .top) {
+            TopBarView(
+                barType: .transParents,
+                leftSide: .iconInverse,
+                leftIcon: UIImage.icClose,
+                leftAction: {
+                    self.store.send(.dismiss)
+                },
+                rightSide: .iconInverse,
+                rightIcon: UIImage.icMore,
+                rightAction: {
+                    self.store.send(.showOptionSheet)
+                }
+            )
+        }
         .onAppear {
             self.store.send(.getMemory)
         }

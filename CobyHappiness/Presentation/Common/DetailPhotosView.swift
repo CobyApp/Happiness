@@ -26,12 +26,13 @@ struct DetailPhotosView: View {
                     .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth)
                     .clipped()
                     .contentShape(Rectangle())
-                    .ignoresSafeArea()
+                    .edgesIgnoringSafeArea(.top)
             }
         }
         .background(Color.backgroundNormalAlternative)
         .frame(width: BaseSize.screenWidth, height: BaseSize.screenWidth)
         .tabViewStyle(PageTabViewStyle())
         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+        .edgesIgnoringSafeArea(.top)
     }
 }

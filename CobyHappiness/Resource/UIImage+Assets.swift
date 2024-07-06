@@ -19,9 +19,7 @@ extension UIImage {
     static let icFilter = UIImage(name: "filter")!
     static let icHome = UIImage(name: "home")!
     static let icMap = UIImage(name: "map")!
-    static let icMore = UIImage(name: "more")!
     static let icPerson = UIImage(name: "person")!
-    static let icPlus = UIImage(name: "plus")!
     static let icSetting = UIImage(name: "setting")!
     static let icTravel = UIImage(name: "travel")!
 }
