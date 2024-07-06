@@ -13,7 +13,6 @@ import CobyDS
 
 struct SetMemoryPhotosView: View {
     
-    @Binding private var photos: [UIImage]
     @Binding private var photosData: [Data]
     @Binding private var date: Date
     @Binding private var location: LocationModel?
@@ -23,13 +22,11 @@ struct SetMemoryPhotosView: View {
     private let title: String
     
     init(
-        photos: Binding<[UIImage]>,
         photosData: Binding<[Data]>,
         date: Binding<Date>,
         location: Binding<LocationModel?>,
         title: String
     ) {
-        self._photos = photos
         self._photosData = photosData
         self._date = date
         self._location = location
@@ -37,7 +34,7 @@ struct SetMemoryPhotosView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(spacing: 4) {
             HStack {
                 Text(self.title)
                     .font(.pretendard(size: 16, weight: .regular))
@@ -68,25 +65,30 @@ struct SetMemoryPhotosView: View {
                             )
                     }
                     
-                    ForEach(self.photos, id: \.self) { image in
-                        ThumbnailView(image: image)
-                            .frame(width: 80, height: 80)
+                    ForEach(self.photosData, id: \.self) { imageData in
+                        ThumbnailView(
+                            image: UIImage(data: imageData)
+                        )
+                        .frame(width: 80, height: 80)
                     }
                 }
                 .padding(.horizontal, BaseSize.horizantalPadding)
             }
         }
         .onChange(of: self.selectedItems) {
-            (self.photos, self.date, self.location) = self.setPhotos(items: self.selectedItems)
-            self.photosData = self.photos.map { $0.compressedImage }
+            self.setPhotos(items: self.selectedItems) { data, date, location in
+                self.photosData = data
+                self.date = date
+                self.location = location
+            }
         }
     }
 }
 
 // MARK: Photo
 extension SetMemoryPhotosView {
-    func setPhotos(items: [PhotosPickerItem]) -> ([UIImage], Date, LocationModel?) {
-        var photoDataArray: [UIImage] = []
+    func setPhotos(items: [PhotosPickerItem], completion: @escaping ([Data], Date, LocationModel?) -> Void) {
+        var photoDataArray: [Data] = []
         var dateArray: [Date] = []
         var locationArray: [LocationModel] = []
         
@@ -99,8 +101,8 @@ extension SetMemoryPhotosView {
                 switch result {
                 case .success(let data):
                     if let data = data {
-                        if let originalImage = UIImage(data: data) {
-                            photoDataArray.append(originalImage)
+                        if let compressedData = UIImage(data: data)?.compressedImage {
+                            photoDataArray.append(compressedData)
                         }
                     }
                 case .failure(let error):
@@ -130,8 +132,8 @@ extension SetMemoryPhotosView {
             }
         }
         
-        dispatchGroup.wait()
-        
-        return (photoDataArray, dateArray.first ?? .now, locationArray.first)
+        dispatchGroup.notify(queue: .main) {
+            completion(photoDataArray, dateArray.first ?? .now, locationArray.first)
+        }
     }
 }

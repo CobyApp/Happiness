@@ -24,8 +24,8 @@ struct EditBunchFirstPageView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 24) {
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 32) {
                 PageTitleView()
                 
                 SetBunchMemoriesView(

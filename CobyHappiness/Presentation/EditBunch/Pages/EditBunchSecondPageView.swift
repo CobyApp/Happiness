@@ -19,8 +19,8 @@ struct EditBunchSecondPageView: View {
         self._bunch = bunch
     }
     var body: some View {
-        ScrollView {
-            VStack(spacing: 24) {
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 32) {
                 SetBunchImageView(
                     image: self.$bunch.image,
                     imageData: self.$bunch.imageData

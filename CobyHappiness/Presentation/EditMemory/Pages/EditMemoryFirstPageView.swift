@@ -20,8 +20,8 @@ struct EditMemoryFirstPageView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 24) {
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 32) {
                 PageTitleView()
                 
                 SetMemoryTypeView(
@@ -29,7 +29,6 @@ struct EditMemoryFirstPageView: View {
                 )
                 
                 SetMemoryPhotosView(
-                    photos: self.$memory.photos,
                     photosData: self.$memory.photosData,
                     date: self.$memory.date,
                     location: self.$memory.location,
