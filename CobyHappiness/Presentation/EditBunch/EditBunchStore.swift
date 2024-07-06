@@ -67,6 +67,11 @@ struct EditBunchStore: Reducer {
                 }
             case let .getMemoriesResponse(.success(memories)):
                 state.memories = memories
+                
+                print("뭉치메모리-----------------")
+                print(state.bunch.memories)
+                print("메모리-----------------")
+                print(state.memories)
                 return .none
             case let .getMemoriesResponse(.failure(error)):
                 print(error.localizedDescription)

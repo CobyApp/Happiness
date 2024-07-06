@@ -43,16 +43,17 @@ struct SetBunchMemoriesView: View {
                 LazyVStack(spacing: 8) {
                     ForEach(self.memories) { memory in
                         ThumbnailTileView(
-                            isSelected: self.selectedMemories.contains(memory),
+                            isSelected: self.selectedMemories.contains(where: { $0.id == memory.id }),
                             image: memory.photos.first,
                             title: memory.title,
                             subTitle: memory.date.formatShort,
-                            description: memory.note
+                            description: memory.note,
+                            isSelectedBorderColor: Color.redNormal
                         )
                         .frame(width: BaseSize.fullWidth, height: 120)
                         .onTapGesture {
-                            if self.selectedMemories.contains(memory) {
-                                self.selectedMemories = self.selectedMemories.filter { $0 != memory }
+                            if self.selectedMemories.contains(where: { $0.id == memory.id }) {
+                                self.selectedMemories = self.selectedMemories.filter { $0.id != memory.id }
                             } else {
                                 self.selectedMemories.append(memory)
                             }
