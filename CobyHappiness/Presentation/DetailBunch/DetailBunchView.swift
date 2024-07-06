@@ -19,27 +19,29 @@ struct DetailBunchView: View {
     }
     
     var body: some View {
-        CBScaleScrollView(
-            isPresented: self.$store.isPresented,
-            scale: self.$store.scale,
-            isDown: self.$store.isDown,
-            topContentHeight: BaseSize.screenWidth,
-            header: {
-                DetailHeaderView(
-                    isDown: self.store.isDown,
-                    backAction: { self.store.send(.dismiss) },
-                    optionAction: { self.store.send(.showOptionSheet) }
-                )
-            },
-            content: {
+        VStack(spacing: 0) {
+            TopBarView(
+                leftSide: .left,
+                leftAction: {
+                    self.store.send(.dismiss)
+                },
+                rightSide: .icon,
+                rightIcon: UIImage.icMore,
+                rightAction: {
+                    self.store.send(.showOptionSheet)
+                }
+            )
+            
+            ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
                     DetailPhotosView(photos: self.store.bunch.photos)
                     
                     ContentView(bunch: self.store.bunch)
                 }
-                .padding(.bottom, BaseSize.bottomAreaPadding + BaseSize.cellVerticalSpacing)
+                .padding(.bottom, BaseSize.verticalPadding)
             }
-        )
+        }
+        .background(Color.backgroundNormalNormal)
         .onAppear {
             self.store.send(.getBunch)
         }
@@ -78,7 +80,7 @@ struct DetailBunchView: View {
             
             VStack(alignment: .leading, spacing: 12) {
                 Text("목록")
-                    .font(.pretendard(size: 16, weight: .semibold))
+                    .font(.pretendard(size: 17, weight: .semibold))
                     .foregroundColor(Color.labelNormal)
                 
                 MemoryListView(memories: bunch.memories)
@@ -94,7 +96,6 @@ struct DetailBunchView: View {
             EmptyMemoryView(
                 showingButton: false
             )
-            .padding(.top, -100)
         } else {
             LazyVStack(spacing: 8) {
                 ForEach(memories) { memory in

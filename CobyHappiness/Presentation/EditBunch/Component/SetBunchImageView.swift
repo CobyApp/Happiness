@@ -13,13 +13,16 @@ import CobyDS
 struct SetBunchImageView: View {
     
     @Binding private var image: UIImage?
+    @Binding private var imageData: Data?
     
     @State private var selectedItem: PhotosPickerItem?
     
     init(
-        image: Binding<UIImage?>
+        image: Binding<UIImage?>,
+        imageData: Binding<Data?>
     ) {
         self._image = image
+        self._imageData = imageData
     }
     
     var body: some View {
@@ -41,6 +44,7 @@ struct SetBunchImageView: View {
             guard let imageData = try await self.selectedItem?.loadTransferable(type: Data.self) else { return }
             guard let inputImage = UIImage(data: imageData) else { return }
             self.image = inputImage
+            self.imageData = imageData
         }
     }
 }

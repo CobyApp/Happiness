@@ -39,7 +39,7 @@ struct MapView: View {
                 
                 ScrollView(.horizontal) {
                     LazyHStack(spacing: 8) {
-                        ForEach(self.store.filteredMemories, id: \.self) { memory in
+                        ForEach(self.store.filteredMemories) { memory in
                             ThumbnailTileView(
                                 image: memory.photos.first,
                                 title: memory.title,
@@ -47,11 +47,10 @@ struct MapView: View {
                                 description: memory.note
                             )
                             .frame(width: BaseSize.fullWidth, height: 120)
-                            .padding(.horizontal, 20)
-                            .containerRelativeFrame(.horizontal)
                             .onTapGesture {
                                 self.store.send(.showDetailMemory(memory))
                             }
+                            .containerRelativeFrame(.horizontal)
                         }
                     }
                     .scrollTargetLayout()
@@ -59,7 +58,7 @@ struct MapView: View {
                 .contentMargins(.horizontal, BaseSize.horizantalPadding, for: .scrollContent)
                 .scrollIndicators(.hidden)
                 .scrollTargetBehavior(.viewAligned)
-                .frame(height: 100)
+                .frame(height: 120)
                 .padding(.bottom, 30)
             }
         }

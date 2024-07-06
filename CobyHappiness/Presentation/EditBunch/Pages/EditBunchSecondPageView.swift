@@ -22,7 +22,8 @@ struct EditBunchSecondPageView: View {
         ScrollView {
             VStack(spacing: 24) {
                 SetBunchImageView(
-                    image: self.$bunch.image
+                    image: self.$bunch.image,
+                    imageData: self.$bunch.imageData
                 )
                 
                 CBTextFieldView(
