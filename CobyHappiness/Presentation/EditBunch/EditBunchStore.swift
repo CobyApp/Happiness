@@ -15,7 +15,7 @@ struct EditBunchStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
-        var showingAlert = false
+        @Presents var closeAlert: AlertState<CloseAlertAction>?
         var selection: PageType = .first
         var memories: [MemoryModel] = []
         var bunch: BunchModel
@@ -29,13 +29,18 @@ struct EditBunchStore: Reducer {
     
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
+        case closeAlert(PresentationAction<CloseAlertAction>)
+        case showCloseAlert
         case completeButtonTapped
         case getMemories
         case getMemoriesResponse(TaskResult<[MemoryModel]>)
         case saveBunch(BunchModel)
         case saveBunchResponse
-        case showTitleAlert
         case dismiss
+    }
+    
+    enum CloseAlertAction: Equatable {
+        case close
     }
     
     @Dependency(\.dismiss) private var dismiss
@@ -48,6 +53,28 @@ struct EditBunchStore: Reducer {
         Reduce { state, action in
             switch action {
             case .binding:
+                return .none
+            case let .closeAlert(action):
+                switch action {
+                case .presented(.close):
+                    return .send(.dismiss)
+                case .dismiss:
+                    return .none
+                }
+            case .showCloseAlert:
+                state.closeAlert = AlertState(
+                    title: TextState("작성하지 않고 나가시겠습니까?"),
+                    message: nil,
+                    buttons: [
+                        .destructive(
+                            TextState("나가기"),
+                            action: .send(.close)
+                        ),
+                        .cancel(
+                            TextState("취소")
+                        )
+                    ]
+                )
                 return .none
             case .completeButtonTapped:
                 switch state.selection {
@@ -67,11 +94,6 @@ struct EditBunchStore: Reducer {
                 }
             case let .getMemoriesResponse(.success(memories)):
                 state.memories = memories
-                
-                print("뭉치메모리-----------------")
-                print(state.bunch.memories)
-                print("메모리-----------------")
-                print(state.memories)
                 return .none
             case let .getMemoriesResponse(.failure(error)):
                 print(error.localizedDescription)
@@ -86,15 +108,10 @@ struct EditBunchStore: Reducer {
                 }
             case .saveBunchResponse:
                 return .send(.dismiss)
-            case .showTitleAlert:
-                state.bunch.startDate = state.bunch.memories.map { $0.date }.min() ?? .now
-                state.bunch.endDate = state.bunch.memories.map { $0.date }.max() ?? .now
-                state.bunch.imageData = state.bunch.memories.first?.photosData.first
-                state.showingAlert = true
-                return .none
             case .dismiss:
                 return .run { _ in await self.dismiss() }
             }
         }
+        .ifLet(\.$closeAlert, action: \.closeAlert)
     }
 }

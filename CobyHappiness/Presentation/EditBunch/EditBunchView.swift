@@ -32,7 +32,7 @@ struct EditBunchView: View {
             TopBarView(
                 leftSide: .left,
                 leftAction: {
-                    self.store.send(.dismiss)
+                    self.store.send(.showCloseAlert)
                 }
             )
             
@@ -66,14 +66,8 @@ struct EditBunchView: View {
         .onAppear {
             self.store.send(.getMemories)
         }
-        .alert("뭉치 만들기", isPresented: self.$store.showingAlert) {
-            TextField(self.store.bunch.title, text: self.$store.bunch.title)
-            
-            Button("확인", action: {
-                self.store.send(.saveBunch(self.store.bunch))
-            })
-        } message: {
-            Text("뭉치 이름을 입력해주세요")
-        }
+        .alert(
+            self.$store.scope(state: \.closeAlert, action: \.closeAlert)
+        )
     }
 }

@@ -32,7 +32,7 @@ struct EditMemoryView: View {
             TopBarView(
                 leftSide: .left,
                 leftAction: {
-                    self.store.send(.dismiss)
+                    self.store.send(.showCloseAlert)
                 }
             )
             
@@ -65,5 +65,8 @@ struct EditMemoryView: View {
         .onTapGesture {
             self.closeKeyboard()
         }
+        .alert(
+            self.$store.scope(state: \.closeAlert, action: \.closeAlert)
+        )
     }
 }

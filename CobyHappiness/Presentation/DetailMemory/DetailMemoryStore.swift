@@ -19,9 +19,6 @@ struct DetailMemoryStore: Reducer {
         @Presents var editMemory: EditMemoryStore.State?
         @Presents var optionSheet: ConfirmationDialogState<OptionSheetAction>?
         @Presents var deleteAlert: AlertState<DeleteAlertAction>?
-        var isPresented: Bool = true
-        var scale: CGFloat = 1
-        var isDown: Bool = false
         var memory: MemoryModel
         
         init(
@@ -63,8 +60,6 @@ struct DetailMemoryStore: Reducer {
         
         Reduce { state, action in
             switch action {
-            case .binding(\.isPresented):
-                return .send(.dismiss)
             case .binding:
                 return .none
             case .editMemory:
