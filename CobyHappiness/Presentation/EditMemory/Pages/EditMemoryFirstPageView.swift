@@ -21,7 +21,7 @@ struct EditMemoryFirstPageView: View {
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(spacing: 32) {
+            VStack(spacing: 24) {
                 PageTitleView()
                 
                 SetMemoryTypeView(
@@ -35,7 +35,7 @@ struct EditMemoryFirstPageView: View {
                     title: self.memory.type.description
                 )
             }
-            .padding(.bottom, 20)
+            .padding(.bottom,  BaseSize.verticalPadding)
         }
     }
     

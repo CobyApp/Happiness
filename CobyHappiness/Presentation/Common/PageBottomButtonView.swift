@@ -31,7 +31,9 @@ struct PageBottomButtonView: View {
             switch self.selection {
             case .first:
                 Button {
-                    self.buttonAction()
+                    if !self.isDisabled {
+                        self.buttonAction()
+                    }
                 } label: {
                     Text("다음")
                 }

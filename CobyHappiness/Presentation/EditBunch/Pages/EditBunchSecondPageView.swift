@@ -20,20 +20,17 @@ struct EditBunchSecondPageView: View {
     }
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(spacing: 32) {
+            VStack(spacing: 24) {
                 SetBunchImageView(
                     image: self.$bunch.image,
                     imageData: self.$bunch.imageData
                 )
                 
-                CBTextFieldView(
-                    text: self.$bunch.title,
-                    title: "제목",
-                    placeholder: "제목을 입력해주세요."
+                SetBunchTitleView(
+                    title: self.$bunch.title
                 )
-                .padding(.horizontal, BaseSize.horizantalPadding)
             }
-            .padding(.bottom, 20)
+            .padding(.bottom, BaseSize.verticalPadding)
         }
     }
 }

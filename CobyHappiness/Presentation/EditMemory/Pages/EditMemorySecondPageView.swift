@@ -21,13 +21,13 @@ struct EditMemorySecondPageView: View {
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(spacing: 32) {
+            VStack(spacing: 24) {
                 SetMemoryContentView(
                     title: self.$memory.title,
                     note: self.$memory.note
                 )
             }
-            .padding(.bottom, 20)
+            .padding(.bottom,  BaseSize.verticalPadding)
         }
     }
 }

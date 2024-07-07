@@ -26,17 +26,33 @@ struct SetBunchImageView: View {
     }
     
     var body: some View {
-        PhotosPicker(
-            selection: self.$selectedItem,
-            matching: .images,
-            photoLibrary: .shared()
-        ) {
-            ThumbnailView(
-                image: self.image
-            )
-            .frame(width: 100, height: 100)
+        VStack(spacing: 4) {
+            HStack {
+                Text("추억들을 대표하는 사진을 골라주세요.")
+                    .font(.pretendard(size: 16, weight: .regular))
+                    .foregroundColor(Color.labelNormal)
+                
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, minHeight: 32)
+            
+            HStack {
+                PhotosPicker(
+                    selection: self.$selectedItem,
+                    matching: .images,
+                    photoLibrary: .shared()
+                ) {
+                    ThumbnailView(
+                        image: self.image
+                    )
+                    .frame(width: 100, height: 100)
+                }
+                .onChange(of: self.selectedItem, self.loadImage)
+                
+                Spacer()
+            }
         }
-        .onChange(of: self.selectedItem, self.loadImage)
+        .padding(.horizontal, BaseSize.horizantalPadding)
     }
     
     func loadImage() {
