@@ -44,7 +44,7 @@ struct MemoryModel: Identifiable, Hashable, Equatable {
     }
     
     var isFirstPageDisabled: Bool {
-        self.photos.isEmpty
+        self.photosData.isEmpty
     }
     
     var isSecondPageDisabled: Bool {

@@ -40,7 +40,19 @@ struct SettingView: View {
     @ViewBuilder
     private func SettingListView() -> some View {
         VStack(spacing: 0) {
-            TitleButton(title: "데이터 초기화") {
+            SettingButton(title: "언어") {
+                print("언어")
+            }
+            
+            SettingButton(title: "테마") {
+                print("테마")
+            }
+            
+            SettingButton(title: "앱 아이콘") {
+                print("아이콘")
+            }
+            
+            SettingButton(title: "데이터 초기화") {
                 print("초기화")
             }
         }

@@ -22,12 +22,12 @@ struct TitleView: View {
     var body: some View {
         HStack {
             Text(self.title)
-                .font(.pretendard(size: 20, weight: .bold))
+                .font(.pretendard(size: 21, weight: .bold))
                 .foregroundColor(Color.labelNormal)
             
             Spacer()
         }
-        .padding(.top, 8)
+        .padding(.top, 12)
         .padding(.horizontal, BaseSize.horizantalPadding)
     }
 }

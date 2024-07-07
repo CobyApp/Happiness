@@ -59,7 +59,9 @@ struct PageBottomButtonView: View {
                     .frame(width: 100)
                     
                     Button {
-                        self.buttonAction()
+                        if !self.isDisabled {
+                            self.buttonAction()
+                        }
                     } label: {
                         Text("완료")
                     }
