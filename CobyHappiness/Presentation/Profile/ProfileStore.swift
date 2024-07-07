@@ -27,7 +27,7 @@ struct ProfileStore: Reducer {
         case showDetailMemory(MemoryModel)
         case getMemories
         case getMemoriesResponse(TaskResult<[MemoryModel]>)
-        case navigateToSettingView
+        case showSettingView
     }
     
     @Dependency(\.memoryData) private var memoryContext
@@ -59,7 +59,8 @@ struct ProfileStore: Reducer {
             case let .getMemoriesResponse(.failure(error)):
                 print(error.localizedDescription)
                 return .none
-            case .navigateToSettingView:
+            case .showSettingView:
+                state.setting = SettingStore.State()
                 return .none
             }
         }

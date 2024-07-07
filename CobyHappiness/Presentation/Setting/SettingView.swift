@@ -8,24 +8,27 @@
 import SwiftUI
 
 import CobyDS
+import ComposableArchitecture
 
 struct SettingView: View {
+   
+    @Bindable private var store: StoreOf<SettingStore>
     
-    @Environment(\.dismiss) private var dismiss
+    init(store: StoreOf<SettingStore>) {
+        self.store = store
+    }
     
     var body: some View {
         VStack(spacing: 0) {
             TopBarView(
                 leftSide: .left,
                 leftAction: {
-                    self.dismiss()
+                    self.store.send(.dismiss)
                 },
                 title: "설정"
             )
+            
+            Spacer()
         }
     }
-}
-
-#Preview {
-    SettingView()
 }

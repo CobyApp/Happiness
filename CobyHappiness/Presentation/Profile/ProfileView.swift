@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftData
 
 import CobyDS
 import ComposableArchitecture
@@ -27,7 +26,7 @@ struct ProfileView: View {
                 rightSide: .text,
                 rightTitle: "설정",
                 rightAction: {
-                    self.store.send(.navigateToSettingView)
+                    self.store.send(.showSettingView)
                 }
             )
             
@@ -43,6 +42,11 @@ struct ProfileView: View {
             item: self.$store.scope(state: \.detailMemory, action: \.detailMemory)
         ) { store in
             DetailMemoryView(store: store).navigationBarHidden(true)
+        }
+        .navigationDestination(
+            item: self.$store.scope(state: \.setting, action: \.setting)
+        ) { store in
+            SettingView(store: store).navigationBarHidden(true)
         }
     }
     
