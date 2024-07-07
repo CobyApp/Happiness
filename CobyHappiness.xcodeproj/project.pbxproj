@@ -27,7 +27,6 @@
 		CB8836B12C2BE7B90037CEC7 /* BunchMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8836B02C2BE7B90037CEC7 /* BunchMapper.swift */; };
 		CB8836B32C2BE80A0037CEC7 /* MemoryMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8836B22C2BE80A0037CEC7 /* MemoryMapper.swift */; };
 		CB8836B72C2BF76E0037CEC7 /* DetailMemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8836B62C2BF76D0037CEC7 /* DetailMemoryStore.swift */; };
-		CB9651DA2C3817A6009D13A6 /* DetailPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651D92C3817A6009D13A6 /* DetailPhotosView.swift */; };
 		CB9651E02C384B6F009D13A6 /* EditMemoryFirstPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651DF2C384B6F009D13A6 /* EditMemoryFirstPageView.swift */; };
 		CB9651E22C384B79009D13A6 /* EditMemorySecondPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651E12C384B79009D13A6 /* EditMemorySecondPageView.swift */; };
 		CB9651E52C384BCB009D13A6 /* SetMemoryPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9651E42C384BCB009D13A6 /* SetMemoryPhotosView.swift */; };
@@ -46,6 +45,7 @@
 		CB9EF9082ABC829F00FDCE12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */; };
 		CBA038692ABF352F00BD74CF /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA038682ABF352F00BD74CF /* Memory.swift */; };
 		CBA741092C3AE5CD00E96E96 /* SetBunchTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA741082C3AE5CD00E96E96 /* SetBunchTitleView.swift */; };
+		CBA7410B2C3AEE3C00E96E96 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA7410A2C3AEE3C00E96E96 /* TitleView.swift */; };
 		CBAB7F4F2ACD402500257778 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F4E2ACD402500257778 /* ContentView.swift */; };
 		CBAB7F542ACD455E00257778 /* DetailMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB7F532ACD455E00257778 /* DetailMemoryView.swift */; };
 		CBABE92F2ACB313C00103BB0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBABE92E2ACB313C00103BB0 /* HomeView.swift */; };
@@ -88,7 +88,6 @@
 		CB8836B22C2BE80A0037CEC7 /* MemoryMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryMapper.swift; sourceTree = "<group>"; };
 		CB8836B62C2BF76D0037CEC7 /* DetailMemoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMemoryStore.swift; sourceTree = "<group>"; };
 		CB9651D82C3812F7009D13A6 /* CobyHappiness.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CobyHappiness.entitlements; sourceTree = "<group>"; };
-		CB9651D92C3817A6009D13A6 /* DetailPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotosView.swift; sourceTree = "<group>"; };
 		CB9651DF2C384B6F009D13A6 /* EditMemoryFirstPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoryFirstPageView.swift; sourceTree = "<group>"; };
 		CB9651E12C384B79009D13A6 /* EditMemorySecondPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemorySecondPageView.swift; sourceTree = "<group>"; };
 		CB9651E42C384BCB009D13A6 /* SetMemoryPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetMemoryPhotosView.swift; sourceTree = "<group>"; };
@@ -109,6 +108,7 @@
 		CB9EF9072ABC829F00FDCE12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CBA038682ABF352F00BD74CF /* Memory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
 		CBA741082C3AE5CD00E96E96 /* SetBunchTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBunchTitleView.swift; sourceTree = "<group>"; };
+		CBA7410A2C3AEE3C00E96E96 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		CBAB7F4E2ACD402500257778 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CBAB7F532ACD455E00257778 /* DetailMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMemoryView.swift; sourceTree = "<group>"; };
 		CBABE92E2ACB313C00103BB0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -191,8 +191,8 @@
 			children = (
 				CB7629292C267DF700138186 /* EmptyMemoryView.swift */,
 				CB76292B2C26898A00138186 /* EmptyBunchView.swift */,
-				CB9651D92C3817A6009D13A6 /* DetailPhotosView.swift */,
 				CB9651EE2C3858A6009D13A6 /* PageBottomButtonView.swift */,
+				CBA7410A2C3AEE3C00E96E96 /* TitleView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -535,7 +535,7 @@
 				CBAD45602C15841D009D4EFF /* ProfileView.swift in Sources */,
 				CB09A5492C2B115800CB8485 /* MemoryType.swift in Sources */,
 				CBAD45692C15EBB1009D4EFF /* LocationModel.swift in Sources */,
-				CB9651DA2C3817A6009D13A6 /* DetailPhotosView.swift in Sources */,
+				CBA7410B2C3AEE3C00E96E96 /* TitleView.swift in Sources */,
 				CB9651F72C38FE15009D13A6 /* Date+Extensions.swift in Sources */,
 				CB4063BC2C18A66200654F89 /* SetBunchMemoriesView.swift in Sources */,
 				CB8836AE2C2BE6B10037CEC7 /* MemoryModel.swift in Sources */,
@@ -797,7 +797,7 @@
 			repositoryURL = "https://github.com/CobyLibrary/CobyDS.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.5.6;
+				version = 1.5.7;
 			};
 		};
 		CBC3A4102C2BE5CE00B62F82 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {

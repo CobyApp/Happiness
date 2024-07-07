@@ -120,7 +120,7 @@ struct ProfileView: View {
                 showingButton: false
             )
         } else {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 LazyVStack(spacing: 8) {
                     ForEach(memories) { memory in
                         ThumbnailTileView(

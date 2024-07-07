@@ -22,7 +22,7 @@ struct DetailBunchView: View {
         VStack(spacing: 0) {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
-                    DetailPhotosView(photos: self.store.bunch.photos)
+                    PhotosView(photos: self.store.bunch.photos)
                     
                     ContentView(bunch: self.store.bunch)
                 }

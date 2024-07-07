@@ -22,7 +22,7 @@ struct EditMemoryFirstPageView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 24) {
-                PageTitleView()
+                TitleView(title: "추억 기록하기")
                 
                 SetMemoryTypeView(
                     selectedType: self.$memory.type
@@ -37,18 +37,5 @@ struct EditMemoryFirstPageView: View {
             }
             .padding(.bottom,  BaseSize.verticalPadding)
         }
-    }
-    
-    @ViewBuilder
-    private func PageTitleView() -> some View {
-        HStack {
-            Text("추억 기록하기")
-                .font(.pretendard(size: 20, weight: .bold))
-                .foregroundColor(Color.labelNormal)
-            
-            Spacer()
-        }
-        .padding(.top, 8)
-        .padding(.horizontal, BaseSize.horizantalPadding)
     }
 }

@@ -26,7 +26,7 @@ struct EditBunchFirstPageView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 24) {
-                PageTitleView()
+                TitleView(title: "추억 뭉치기")
                 
                 SetBunchMemoriesView(
                     selectedMemories: self.$bunch.memories,
@@ -35,18 +35,5 @@ struct EditBunchFirstPageView: View {
             }
             .padding(.bottom, BaseSize.verticalPadding)
         }
-    }
-    
-    @ViewBuilder
-    private func PageTitleView() -> some View {
-        HStack {
-            Text("추억 뭉치기")
-                .font(.pretendard(size: 20, weight: .bold))
-                .foregroundColor(Color.labelNormal)
-            
-            Spacer()
-        }
-        .padding(.top, 8)
-        .padding(.horizontal, BaseSize.horizantalPadding)
     }
 }

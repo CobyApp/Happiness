@@ -24,11 +24,25 @@ struct SettingView: View {
                 leftSide: .left,
                 leftAction: {
                     self.store.send(.dismiss)
-                },
-                title: "설정"
+                }
             )
             
-            Spacer()
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 24) {
+                    TitleView(title: "설정")
+                    
+                    SettingListView()
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func SettingListView() -> some View {
+        VStack(spacing: 0) {
+            TitleButton(title: "데이터 초기화") {
+                print("초기화")
+            }
         }
     }
 }

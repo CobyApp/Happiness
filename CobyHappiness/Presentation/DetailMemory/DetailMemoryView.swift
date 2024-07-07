@@ -22,7 +22,7 @@ struct DetailMemoryView: View {
         VStack(spacing: 0) {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
-                    DetailPhotosView(photos: self.store.memory.photos)
+                    PhotosView(photos: self.store.memory.photos)
                     
                     ContentView(memory: self.store.memory)
                 }
