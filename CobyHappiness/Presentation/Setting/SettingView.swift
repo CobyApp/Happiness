@@ -39,11 +39,7 @@ struct SettingView: View {
     
     @ViewBuilder
     private func SettingListView() -> some View {
-        VStack(spacing: 0) {
-            SettingButton(title: "언어") {
-                print("언어")
-            }
-            
+        VStack(spacing: 0) {            
             SettingButton(title: "테마") {
                 print("테마")
             }
