@@ -48,6 +48,7 @@ struct ThemeView: View {
             .padding(.horizontal, BaseSize.horizantalPadding)
             .padding(.bottom, 20)
         }
+        .background(Color.backgroundNormalNormal)
     }
     
     @ViewBuilder
