@@ -19,6 +19,9 @@
 		CB4196092C19CF00003D958C /* UIImage+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4196082C19CF00003D958C /* UIImage+Assets.swift */; };
 		CB4511F72C32933200B5FA02 /* EditBunchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4511F62C32933200B5FA02 /* EditBunchStore.swift */; };
 		CB4511F92C32936200B5FA02 /* EditMemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4511F82C32936200B5FA02 /* EditMemoryStore.swift */; };
+		CB744AED2C3BA2740042B58E /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB744AEC2C3BA2740042B58E /* Color+Extensions.swift */; };
+		CB744AEF2C3BA7B40042B58E /* ColorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB744AEE2C3BA7B40042B58E /* ColorType.swift */; };
+		CB744AF12C3BA8780042B58E /* ColorMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB744AF02C3BA8780042B58E /* ColorMapper.swift */; };
 		CB76292A2C267DF700138186 /* EmptyMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7629292C267DF700138186 /* EmptyMemoryView.swift */; };
 		CB76292C2C26898A00138186 /* EmptyBunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB76292B2C26898A00138186 /* EmptyBunchView.swift */; };
 		CB7D46E32C2D3D5B001E5E32 /* MapStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7D46E22C2D3D5B001E5E32 /* MapStore.swift */; };
@@ -79,6 +82,9 @@
 		CB4196082C19CF00003D958C /* UIImage+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Assets.swift"; sourceTree = "<group>"; };
 		CB4511F62C32933200B5FA02 /* EditBunchStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchStore.swift; sourceTree = "<group>"; };
 		CB4511F82C32936200B5FA02 /* EditMemoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMemoryStore.swift; sourceTree = "<group>"; };
+		CB744AEC2C3BA2740042B58E /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		CB744AEE2C3BA7B40042B58E /* ColorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorType.swift; sourceTree = "<group>"; };
+		CB744AF02C3BA8780042B58E /* ColorMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorMapper.swift; sourceTree = "<group>"; };
 		CB7629292C267DF700138186 /* EmptyMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMemoryView.swift; sourceTree = "<group>"; };
 		CB76292B2C26898A00138186 /* EmptyBunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBunchView.swift; sourceTree = "<group>"; };
 		CB7D46E22C2D3D5B001E5E32 /* MapStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStore.swift; sourceTree = "<group>"; };
@@ -172,6 +178,7 @@
 			children = (
 				CB09A5482C2B115800CB8485 /* MemoryType.swift */,
 				CB9651EC2C385562009D13A6 /* PageType.swift */,
+				CB744AEE2C3BA7B40042B58E /* ColorType.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -223,6 +230,7 @@
 				CB8836B02C2BE7B90037CEC7 /* BunchMapper.swift */,
 				CB8836B22C2BE80A0037CEC7 /* MemoryMapper.swift */,
 				CB9D9FD02C36EA79003570F0 /* LocationMapper.swift */,
+				CB744AF02C3BA8780042B58E /* ColorMapper.swift */,
 			);
 			path = Mapper;
 			sourceTree = "<group>";
@@ -347,6 +355,7 @@
 			children = (
 				CB9EF8E62ABC674F00FDCE12 /* View+Extensions.swift */,
 				CB9651F62C38FE15009D13A6 /* Date+Extensions.swift */,
+				CB744AEC2C3BA2740042B58E /* Color+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -522,6 +531,7 @@
 				CBB21C982C16F273007E6AA2 /* MapRepresentableView.swift in Sources */,
 				CB4063B32C189B4B00654F89 /* Bunch.swift in Sources */,
 				CBA038692ABF352F00BD74CF /* Memory.swift in Sources */,
+				CB744AF12C3BA8780042B58E /* ColorMapper.swift in Sources */,
 				CBFF75A42C34558B00B00CE9 /* MemoryDatabase.swift in Sources */,
 				CB8836B72C2BF76E0037CEC7 /* DetailMemoryStore.swift in Sources */,
 				CB9651EF2C3858A6009D13A6 /* PageBottomButtonView.swift in Sources */,
@@ -550,6 +560,7 @@
 				CB8836B12C2BE7B90037CEC7 /* BunchMapper.swift in Sources */,
 				CB9651E02C384B6F009D13A6 /* EditMemoryFirstPageView.swift in Sources */,
 				CB4196012C18B83E003D958C /* DetailBunchView.swift in Sources */,
+				CB744AEF2C3BA7B40042B58E /* ColorType.swift in Sources */,
 				CB9651E22C384B79009D13A6 /* EditMemorySecondPageView.swift in Sources */,
 				CBABE92F2ACB313C00103BB0 /* HomeView.swift in Sources */,
 				CBAB7F4F2ACD402500257778 /* ContentView.swift in Sources */,
@@ -567,6 +578,7 @@
 				CBAF772D2C2D539400F40F76 /* DetailBunchStore.swift in Sources */,
 				CB8836B32C2BE80A0037CEC7 /* MemoryMapper.swift in Sources */,
 				CB4063B12C1763EA00654F89 /* EditMemoryView.swift in Sources */,
+				CB744AED2C3BA2740042B58E /* Color+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
