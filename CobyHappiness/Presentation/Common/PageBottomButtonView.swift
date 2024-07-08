@@ -40,7 +40,7 @@ struct PageBottomButtonView: View {
                 .buttonStyle(
                     CBButtonStyle(
                         isDisabled: self.isDisabled,
-                        buttonColor: Color.redNormal
+                        buttonColor: Color.mainColor
                     )
                 )
             case .second:
@@ -68,7 +68,7 @@ struct PageBottomButtonView: View {
                     .buttonStyle(
                         CBButtonStyle(
                             isDisabled: self.isDisabled,
-                            buttonColor: Color.redNormal
+                            buttonColor: Color.mainColor
                         )
                     )
                 }

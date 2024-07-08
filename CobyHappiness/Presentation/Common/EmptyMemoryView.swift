@@ -39,7 +39,7 @@ struct EmptyMemoryView: View {
                 .buttonStyle(
                     CBButtonStyle(
                         buttonSize: .small,
-                        buttonColor: Color.redNormal
+                        buttonColor: Color.mainColor
                     )
                 )
                 .frame(width: 100)

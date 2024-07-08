@@ -35,22 +35,24 @@ struct SettingView: View {
                 }
             }
         }
+        .navigationDestination(
+            item: self.$store.scope(state: \.theme, action: \.theme)
+        ) { store in
+            ThemeView(store: store).navigationBarHidden(true)
+        }
     }
     
     @ViewBuilder
     private func SettingListView() -> some View {
         VStack(spacing: 0) {            
             SettingButton(title: "테마") {
-                print("테마")
-            }
-            
-            SettingButton(title: "앱 아이콘") {
-                print("아이콘")
+                self.store.send(.showThemeView)
             }
             
             SettingButton(title: "데이터 초기화") {
                 print("초기화")
             }
         }
+        .padding(.horizontal, BaseSize.horizantalPadding)
     }
 }

@@ -1,8 +1,8 @@
 //
-//  SettingStore.swift
+//  ThemeStore.swift
 //  CobyHappiness
 //
-//  Created by Coby Kim on 7/5/24.
+//  Created by Coby Kim on 7/8/24.
 //
 
 import Foundation
@@ -10,17 +10,16 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-struct SettingStore: Reducer {
+struct ThemeStore: Reducer {
     
     @ObservableState
     struct State: Equatable {
-        @Presents var theme: ThemeStore.State?
+        var selectedColorType: ColorType = UserDefaults.standard.string(forKey: "mainColor")?.toColorType ?? ColorType.red
     }
     
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
-        case theme(PresentationAction<ThemeStore.Action>)
-        case showThemeView
+        case saveColor(ColorType)
         case dismiss
     }
     
@@ -33,17 +32,12 @@ struct SettingStore: Reducer {
             switch action {
             case .binding:
                 return .none
-            case .theme:
-                return .none
-            case .showThemeView:
-                state.theme = ThemeStore.State()
-                return .none
+            case .saveColor(let colorType):
+                UserDefaults.standard.set(colorType.rawValue, forKey: "mainColor")
+                return .send(.dismiss)
             case .dismiss:
                 return .run { _ in await self.dismiss() }
             }
-        }
-        .ifLet(\.$theme, action: \.theme) {
-            ThemeStore()
         }
     }
 }

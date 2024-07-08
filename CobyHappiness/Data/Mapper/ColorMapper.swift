@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension String {
-    var toColor: ColorType {
+    var toColorType: ColorType {
         switch self {
         case "blue":
             return ColorType.blue

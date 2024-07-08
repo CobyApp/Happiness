@@ -61,9 +61,9 @@ extension ContentView {
         
         let itemAppearance = UITabBarItemAppearance()
         itemAppearance.normal.iconColor = UIColor(Color.labelAlternative)
-        itemAppearance.selected.iconColor = UIColor(Color.redNormal)
+        itemAppearance.selected.iconColor = UIColor(Color.mainColor)
         itemAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(Color.labelAlternative)]
-        itemAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(Color.redNormal)]
+        itemAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(Color.mainColor)]
         
         tabBarAppearance.stackedLayoutAppearance = itemAppearance
         tabBarAppearance.inlineLayoutAppearance = itemAppearance

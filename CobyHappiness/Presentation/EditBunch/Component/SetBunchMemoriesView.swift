@@ -48,7 +48,7 @@ struct SetBunchMemoriesView: View {
                             title: memory.title,
                             subTitle: memory.date.formatShort,
                             description: memory.note,
-                            isSelectedBorderColor: Color.redNormal
+                            isSelectedBorderColor: Color.mainColor
                         )
                         .frame(width: BaseSize.fullWidth, height: 120)
                         .onTapGesture {

@@ -11,6 +11,6 @@ import CobyDS
 
 extension Color {
     static var mainColor: Color {
-        UserDefaults.standard.string(forKey: "mainColor")?.toColor.color ?? ColorType.red.color
+        UserDefaults.standard.string(forKey: "mainColor")?.toColorType.color ?? ColorType.red.color
     }
 }
