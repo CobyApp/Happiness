@@ -73,7 +73,7 @@ struct SettingStore: Reducer {
             case .deleteAll:
                 return .run { send in
                     let _ = await TaskResult {
-                        self.bunchContext.deleteAll
+                        try self.bunchContext.deleteAll()
                     }
                     await send(.deleteAllResponse)
                 }
