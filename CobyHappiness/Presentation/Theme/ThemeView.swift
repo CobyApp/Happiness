@@ -52,14 +52,29 @@ struct ThemeView: View {
     
     @ViewBuilder
     private func ThemeListView() -> some View {
-        VStack(spacing: 0) {
-            ForEach(ColorType.allCases, id: \.self) { colorType in
-                RadioListItemWithColorView(
-                    isChecked: self.store.selectedColorType == colorType,
-                    color: colorType.color,
-                    title: colorType.rawValue
-                )
+        VStack(spacing: 4) {
+            HStack {
+                Text("변경할 테마를 선택해주세요.")
+                    .font(.pretendard(size: 16, weight: .regular))
+                    .foregroundColor(Color.labelNormal)
+                
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, minHeight: 32)
+            
+            VStack(spacing: 8) {
+                ForEach(ColorType.allCases, id: \.self) { colorType in
+                    RadioListItemWithColorView(
+                        isChecked: self.store.selectedColorType == colorType,
+                        color: colorType.color,
+                        title: colorType.rawValue
+                    )
+                    .onTapGesture {
+                        self.store.selectedColorType = colorType
+                    }
+                }
             }
         }
+        .padding(.horizontal, BaseSize.horizantalPadding)
     }
 }
