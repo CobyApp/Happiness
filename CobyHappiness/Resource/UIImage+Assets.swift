@@ -22,6 +22,10 @@ extension UIImage {
     static let icPerson = UIImage(name: "person")!
     static let icSetting = UIImage(name: "setting")!
     static let icTravel = UIImage(name: "travel")!
+    static let icTrip = UIImage(name: "trip")!
+    static let icFood = UIImage(name: "food")!
+    static let icHobby = UIImage(name: "favorite")!
+    static let icMoment = UIImage(name: "flag")!
 }
 
 extension UIImage {

@@ -8,6 +8,77 @@
 import SwiftUI
 import MapKit
 
+// Custom Annotation Class
+class MemoryAnnotation: NSObject, MKAnnotation {
+    var coordinate: CLLocationCoordinate2D
+    var title: String?
+    var image: UIImage?
+    
+    init(coordinate: CLLocationCoordinate2D, title: String?, image: UIImage?) {
+        self.coordinate = coordinate
+        self.title = title
+        self.image = image
+    }
+}
+
+// Custom Annotation View Class
+class MemoryAnnotationView: MKAnnotationView {
+    static let reuseIdentifier = "MemoryAnnotationView"
+    
+    override var annotation: MKAnnotation? {
+        willSet {
+            guard let memoryAnnotation = newValue as? MemoryAnnotation else { return }
+            
+            canShowCallout = true
+            calloutOffset = CGPoint(x: -5, y: 5)
+            rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            
+            if let image = memoryAnnotation.image {
+                iconImageView?.image = image.withRenderingMode(.alwaysTemplate)
+                iconImageView?.tintColor = .white
+            } else {
+                iconImageView?.image = nil
+            }
+        }
+    }
+    
+    private var iconImageView: UIImageView?
+    
+    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
+        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupView()
+    }
+    
+    private func setupView() {
+        // Circle background
+        let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        backgroundView.backgroundColor = UIColor(Color.mainColor)
+        backgroundView.layer.cornerRadius = 20
+        backgroundView.layer.masksToBounds = true
+        
+        // White icon
+        let iconImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+        iconImageView.contentMode = .scaleAspectFit
+        iconImageView.tintColor = .white
+        
+        backgroundView.addSubview(iconImageView)
+        addSubview(backgroundView)
+        
+        self.iconImageView = iconImageView
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        subviews.first?.center = CGPoint(x: bounds.size.width / 2, y: bounds.size.height / 2)
+        iconImageView?.center = CGPoint(x: 20, y: 20) // Center the icon within the circle
+    }
+}
+
 struct MapRepresentableView: UIViewRepresentable {
     
     @Binding var memories: [MemoryModel]
@@ -39,6 +110,20 @@ struct MapRepresentableView: UIViewRepresentable {
         func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
             self.parent.topLeft = mapView.convert(CGPoint(x: 0, y: 0), toCoordinateFrom: mapView).toLocationModel()
             self.parent.bottomRight = mapView.convert(CGPoint(x: mapView.frame.width, y: mapView.frame.height), toCoordinateFrom: mapView).toLocationModel()
+        }
+        
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            guard let annotation = annotation as? MemoryAnnotation else { return nil }
+            
+            let annotationView: MemoryAnnotationView
+            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: MemoryAnnotationView.reuseIdentifier) as? MemoryAnnotationView {
+                dequeuedView.annotation = annotation
+                annotationView = dequeuedView
+            } else {
+                annotationView = MemoryAnnotationView(annotation: annotation, reuseIdentifier: MemoryAnnotationView.reuseIdentifier)
+                annotationView.annotation = annotation
+            }
+            return annotationView
         }
         
         func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -76,12 +161,13 @@ struct MapRepresentableView: UIViewRepresentable {
     private func addMarkersToMapView(_ mapView: MKMapView) {
         mapView.removeAnnotations(mapView.annotations)
         
-        let annotations = self.memories.compactMap { memory -> MKPointAnnotation? in
+        let annotations = self.memories.compactMap { memory -> MemoryAnnotation? in
             guard let coordinate = memory.location?.toCLLocationCoordinate2D() else { return nil }
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = memory.title
-            return annotation
+            return MemoryAnnotation(
+                coordinate: coordinate,
+                title: memory.title,
+                image: memory.type.icon
+            )
         }
         
         mapView.addAnnotations(annotations)
