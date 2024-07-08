@@ -8,6 +8,8 @@
 import SwiftUI
 import MapKit
 
+import CobyDS
+
 // Custom Annotation Class
 class MemoryAnnotation: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
@@ -57,14 +59,18 @@ class MemoryAnnotationView: MKAnnotationView {
     private func setupView() {
         // Circle background
         let backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        backgroundView.backgroundColor = UIColor(Color.mainColor)
+        backgroundView.backgroundColor = UIColor(Color.staticBlack)
         backgroundView.layer.cornerRadius = 20
         backgroundView.layer.masksToBounds = true
+        
+        // Add border to backgroundView
+        backgroundView.layer.borderColor = UIColor(Color.lineNormalNormal).cgColor
+        backgroundView.layer.borderWidth = 1.0
         
         // White icon
         let iconImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
         iconImageView.contentMode = .scaleAspectFit
-        iconImageView.tintColor = .white
+        iconImageView.tintColor = UIColor(Color.staticWhite)
         
         backgroundView.addSubview(iconImageView)
         addSubview(backgroundView)
