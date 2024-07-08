@@ -53,7 +53,7 @@ struct ThemeView: View {
     
     @ViewBuilder
     private func ThemeListView() -> some View {
-        VStack(spacing: 4) {
+        VStack(spacing: 8) {
             HStack {
                 Text("변경할 테마를 선택해주세요.")
                     .font(.pretendard(size: 16, weight: .regular))
@@ -63,7 +63,7 @@ struct ThemeView: View {
             }
             .frame(maxWidth: .infinity, minHeight: 32)
             
-            VStack(spacing: 8) {
+            VStack(spacing: 16) {
                 ForEach(ColorType.allCases, id: \.self) { colorType in
                     RadioListItemWithColorView(
                         isChecked: self.store.selectedColorType == colorType,

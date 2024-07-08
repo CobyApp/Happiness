@@ -738,7 +738,7 @@
 				INFOPLIST_FILE = CobyHappiness/Supports/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Happy;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your permission to access your location data.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your permission to access your location data.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need your permission to access the photo library.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -779,7 +779,7 @@
 				INFOPLIST_FILE = CobyHappiness/Supports/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Happy;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your permission to access your location data.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your permission to access your location data.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need your permission to access the photo library.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -834,7 +834,7 @@
 			repositoryURL = "https://github.com/CobyLibrary/CobyDS.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.6.3;
+				version = 1.6.4;
 			};
 		};
 		CBC3A4102C2BE5CE00B62F82 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {

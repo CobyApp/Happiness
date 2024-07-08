@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/CobyLibrary/CobyDS.git",
       "state" : {
-        "revision" : "1afe34757006438150f63b6c5542ce27439a5c81",
-        "version" : "1.6.3"
+        "revision" : "de17bfb0d771974f4f073730cdc4a73687df6bdd",
+        "version" : "1.6.4"
       }
     },
     {
