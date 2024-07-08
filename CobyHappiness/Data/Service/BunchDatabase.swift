@@ -23,6 +23,7 @@ struct BunchDatabase {
     var add: @Sendable (BunchModel) throws -> Void
     var edit: @Sendable (BunchModel) throws -> Void
     var delete: @Sendable (UUID) throws -> Void
+    var deleteAll: @Sendable () throws -> Void
     
     enum BunchError: Error {
         case get
@@ -37,8 +38,8 @@ extension BunchDatabase: DependencyKey {
         fetch: { descriptor in
             do {
                 @Dependency(\.databaseService.context) var context
-                let bunchContext = try context()
-                return try bunchContext.fetch(descriptor).map { $0.toBunchModel() }
+                let modelContext = try context()
+                return try modelContext.fetch(descriptor).map { $0.toBunchModel() }
             } catch {
                 return []
             }
@@ -46,9 +47,9 @@ extension BunchDatabase: DependencyKey {
         fetchAll: {
             do {
                 @Dependency(\.databaseService.context) var context
-                let bunchContext = try context()
+                let modelContext = try context()
                 let descriptor = FetchDescriptor<Bunch>(sortBy: [SortDescriptor(\.startDate, order: .reverse)])
-                return try bunchContext.fetch(descriptor).map { $0.toBunchModel() }
+                return try modelContext.fetch(descriptor).map { $0.toBunchModel() }
             } catch {
                 return []
             }
@@ -56,9 +57,9 @@ extension BunchDatabase: DependencyKey {
         fetchById: { id in
             do {
                 @Dependency(\.databaseService.context) var context
-                let bunchContext = try context()
+                let modelContext = try context()
                 let descriptor = FetchDescriptor<Bunch>(predicate: #Predicate { $0.id == id })
-                return try bunchContext.fetch(descriptor).first!.toBunchModel()
+                return try modelContext.fetch(descriptor).first!.toBunchModel()
             } catch {
                 throw BunchError.get
             }
@@ -66,16 +67,16 @@ extension BunchDatabase: DependencyKey {
         add: { model in
             do {
                 @Dependency(\.databaseService.context) var context
-                let bunchContext = try context()
+                let modelContext = try context()
                 let bunch = model.toBunch()
-                bunchContext.insert(bunch)
+                modelContext.insert(bunch)
                 bunch.memories = try model.memories.map {
                     let id = $0.id
                     let descriptor = FetchDescriptor<Memory>(predicate: #Predicate { $0.id == id })
-                    let memory = try bunchContext.fetch(descriptor).first!
+                    let memory = try modelContext.fetch(descriptor).first!
                     return memory
                 }
-                return try bunchContext.save()
+                return try modelContext.save()
             } catch {
                 throw BunchError.add
             }
@@ -83,10 +84,10 @@ extension BunchDatabase: DependencyKey {
         edit: { model in
             do {
                 @Dependency(\.databaseService.context) var context
-                let bunchContext = try context()
+                let modelContext = try context()
                 let id = model.id
                 let descriptor = FetchDescriptor<Bunch>(predicate: #Predicate { $0.id == id })
-                let bunch = try bunchContext.fetch(descriptor).first!
+                let bunch = try modelContext.fetch(descriptor).first!
                 bunch.startDate = model.startDate
                 bunch.endDate = model.endDate
                 bunch.title = model.title
@@ -94,10 +95,10 @@ extension BunchDatabase: DependencyKey {
                 bunch.memories = try model.memories.map {
                     let id = $0.id
                     let descriptor = FetchDescriptor<Memory>(predicate: #Predicate { $0.id == id })
-                    let memory = try bunchContext.fetch(descriptor).first!
+                    let memory = try modelContext.fetch(descriptor).first!
                     return memory
                 }
-                return try bunchContext.save()
+                return try modelContext.save()
             } catch {
                 throw BunchError.edit
             }
@@ -105,11 +106,22 @@ extension BunchDatabase: DependencyKey {
         delete: { id in
             do {
                 @Dependency(\.databaseService.context) var context
-                let bunchContext = try context()
+                let modelContext = try context()
                 let descriptor = FetchDescriptor<Bunch>(predicate: #Predicate { $0.id == id })
-                let bunch = try bunchContext.fetch(descriptor).first!
-                bunchContext.delete(bunch)
-                return try bunchContext.save()
+                let bunch = try modelContext.fetch(descriptor).first!
+                modelContext.delete(bunch)
+                return try modelContext.save()
+            } catch {
+                throw BunchError.delete
+            }
+        },
+        deleteAll: {
+            do {
+                @Dependency(\.databaseService.context) var context
+                let modelContext = try context()
+                try modelContext.delete(model: Bunch.self)
+                try modelContext.delete(model: Memory.self)
+                return try modelContext.save()
             } catch {
                 throw BunchError.delete
             }
@@ -125,8 +137,9 @@ extension BunchDatabase: TestDependencyKey {
         fetchAll: unimplemented("\(Self.self).fetch"),
         fetchById: unimplemented("\(Self.self).fetchById"),
         add: unimplemented("\(Self.self).add"),
-        edit: unimplemented("\(Self.self).add"),
-        delete: unimplemented("\(Self.self).delete")
+        edit: unimplemented("\(Self.self).edit"),
+        delete: unimplemented("\(Self.self).delete"),
+        deleteAll: unimplemented("\(Self.self).deleteAll")
     )
     
     static let noop = Self(
@@ -135,7 +148,8 @@ extension BunchDatabase: TestDependencyKey {
         fetchById: { _ in .init() },
         add: { _ in },
         edit: { _ in },
-        delete: { _ in }
+        delete: { _ in },
+        deleteAll: { }
     )
 }
 

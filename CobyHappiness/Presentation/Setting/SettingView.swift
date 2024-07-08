@@ -40,6 +40,9 @@ struct SettingView: View {
         ) { store in
             ThemeView(store: store).navigationBarHidden(true)
         }
+        .alert(
+            self.$store.scope(state: \.deleteAlert, action: \.deleteAlert)
+        )
     }
     
     @ViewBuilder
@@ -50,7 +53,7 @@ struct SettingView: View {
             }
             
             SettingButton(title: "데이터 초기화") {
-                print("초기화")
+                self.store.send(.showDeleteAlert)
             }
         }
         .padding(.horizontal, BaseSize.horizantalPadding)

@@ -37,8 +37,8 @@ extension MemoryDatabase: DependencyKey {
         fetch: { descriptor in
             do {
                 @Dependency(\.databaseService.context) var context
-                let memoryContext = try context()
-                return try memoryContext.fetch(descriptor).map { $0.toMemoryModel() }
+                let modelContext = try context()
+                return try modelContext.fetch(descriptor).map { $0.toMemoryModel() }
             } catch {
                 return []
             }
@@ -46,9 +46,9 @@ extension MemoryDatabase: DependencyKey {
         fetchAll: {
             do {
                 @Dependency(\.databaseService.context) var context
-                let memoryContext = try context()
+                let modelContext = try context()
                 let descriptor = FetchDescriptor<Memory>(sortBy: [SortDescriptor(\.date, order: .reverse)])
-                return try memoryContext.fetch(descriptor).map { $0.toMemoryModel() }
+                return try modelContext.fetch(descriptor).map { $0.toMemoryModel() }
             } catch {
                 return []
             }
@@ -56,9 +56,9 @@ extension MemoryDatabase: DependencyKey {
         fetchById: { id in
             do {
                 @Dependency(\.databaseService.context) var context
-                let memoryContext = try context()
+                let modelContext = try context()
                 let descriptor = FetchDescriptor<Memory>(predicate: #Predicate { $0.id == id })
-                return try memoryContext.fetch(descriptor).first!.toMemoryModel()
+                return try modelContext.fetch(descriptor).first!.toMemoryModel()
             } catch {
                 throw MemoryError.get
             }
@@ -66,9 +66,9 @@ extension MemoryDatabase: DependencyKey {
         add: { model in
             do {
                 @Dependency(\.databaseService.context) var context
-                let memoryContext = try context()
-                memoryContext.insert(model.toMemory())
-                return try memoryContext.save()
+                let modelContext = try context()
+                modelContext.insert(model.toMemory())
+                return try modelContext.save()
             } catch {
                 throw MemoryError.add
             }
@@ -76,17 +76,17 @@ extension MemoryDatabase: DependencyKey {
         edit: { model in
             do {
                 @Dependency(\.databaseService.context) var context
-                let memoryContext = try context()
+                let modelContext = try context()
                 let id = model.id
                 let descriptor = FetchDescriptor<Memory>(predicate: #Predicate { $0.id == id })
-                let memory = try memoryContext.fetch(descriptor).first!
+                let memory = try modelContext.fetch(descriptor).first!
                 memory.date = model.date
                 memory.type = model.type
                 memory.title = model.title
                 memory.note = model.note
                 memory.location = model.location
                 memory.photos = model.photosData
-                return try memoryContext.save()
+                return try modelContext.save()
             } catch {
                 throw MemoryError.edit
             }
@@ -94,11 +94,11 @@ extension MemoryDatabase: DependencyKey {
         delete: { id in
             do {
                 @Dependency(\.databaseService.context) var context
-                let memoryContext = try context()
+                let modelContext = try context()
                 let descriptor = FetchDescriptor<Memory>(predicate: #Predicate { $0.id == id })
-                let memory = try memoryContext.fetch(descriptor).first!
-                memoryContext.delete(memory)
-                return try memoryContext.save()
+                let memory = try modelContext.fetch(descriptor).first!
+                modelContext.delete(memory)
+                return try modelContext.save()
             } catch {
                 throw MemoryError.delete
             }
