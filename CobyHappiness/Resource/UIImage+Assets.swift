@@ -30,12 +30,6 @@ extension UIImage {
 
 extension UIImage {
     var compressedImage: Data {
-        let newSize = CGSize(width: self.size.width * 0.3, height: self.size.height * 0.3)
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        self.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-        let compressedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return (compressedImage?.jpegData(compressionQuality: 0.7))!
+        self.jpegData(compressionQuality: 0.3)!
     }
 }
