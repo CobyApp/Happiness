@@ -36,6 +36,6 @@ extension UIImage {
         let compressedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return (compressedImage?.jpegData(compressionQuality: 0.3))!
+        return (compressedImage?.jpegData(compressionQuality: 0.7))!
     }
 }
