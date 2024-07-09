@@ -5,7 +5,7 @@
 //  Created by Coby on 6/25/24.
 //
 
-import Foundation
+import UIKit
 
 enum MemoryType: String, Identifiable, CaseIterable, Codable {
     case trip, food, hobby, moment
@@ -37,6 +37,19 @@ enum MemoryType: String, Identifiable, CaseIterable, Codable {
             return "내가 좋아하는 것들의 사진을 골라주세요."
         case .moment:
             return "기억에 남는 특별한 순간의 사진을 골라주세요."
+        }
+    }
+    
+    var icon: UIImage {
+        switch self {
+        case .trip:
+            return UIImage.icTrip
+        case .food:
+            return UIImage.icFood
+        case .hobby:
+            return UIImage.icHobby
+        case .moment:
+            return UIImage.icMoment
         }
     }
 }

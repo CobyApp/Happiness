@@ -35,6 +35,7 @@ struct SettingView: View {
                 }
             }
         }
+        .background(Color.backgroundNormalNormal)
         .navigationDestination(
             item: self.$store.scope(state: \.theme, action: \.theme)
         ) { store in

@@ -22,16 +22,14 @@ extension UIImage {
     static let icPerson = UIImage(name: "person")!
     static let icSetting = UIImage(name: "setting")!
     static let icTravel = UIImage(name: "travel")!
+    static let icTrip = UIImage(name: "trip")!
+    static let icFood = UIImage(name: "food")!
+    static let icHobby = UIImage(name: "favorite")!
+    static let icMoment = UIImage(name: "flag")!
 }
 
 extension UIImage {
     var compressedImage: Data {
-        let newSize = CGSize(width: self.size.width * 0.3, height: self.size.height * 0.3)
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        self.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-        let compressedImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return (compressedImage?.jpegData(compressionQuality: 0.3))!
+        self.jpegData(compressionQuality: 0.3)!
     }
 }
