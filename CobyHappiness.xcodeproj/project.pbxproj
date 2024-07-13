@@ -829,7 +829,7 @@
 			repositoryURL = "https://github.com/CobyLibrary/CobyDS.git";
 			requirement = {
 				kind = exactVersion;
-				version = 1.6.5;
+				version = 1.6.6;
 			};
 		};
 		CBC3A4102C2BE5CE00B62F82 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
