@@ -56,7 +56,7 @@ struct SettingStore: Reducer {
                     return .none
                 }
             case .confirmAlert:
-                return .send(.dismiss)
+                return .send(.none)
             case .showThemeView:
                 state.theme = ThemeStore.State()
                 return .none
