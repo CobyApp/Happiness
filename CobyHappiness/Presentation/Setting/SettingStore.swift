@@ -94,7 +94,7 @@ struct SettingStore: Reducer {
                     await send(.deleteAllResponse)
                 }
             case .deleteAllResponse:
-                return .none
+                return .send(.showConfirmAlert)
             case .dismiss:
                 return .run { _ in await self.dismiss() }
             }

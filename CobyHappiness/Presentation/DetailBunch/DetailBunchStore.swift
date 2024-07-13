@@ -163,7 +163,7 @@ struct DetailBunchStore: Reducer {
                 }
             case let .getBunchResponse(.success(bunch)):
                 state.bunch = bunch
-                return .none
+                return .send(.showConfirmAlert)
             case let .getBunchResponse(.failure(error)):
                 print(error.localizedDescription)
                 return .none
