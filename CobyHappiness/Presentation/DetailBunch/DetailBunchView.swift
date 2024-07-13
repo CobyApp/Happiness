@@ -65,6 +65,9 @@ struct DetailBunchView: View {
         .alert(
             self.$store.scope(state: \.deleteAlert, action: \.deleteAlert)
         )
+        .alert(
+            self.$store.scope(state: \.confirmAlert, action: \.confirmAlert)
+        )
     }
     
     @ViewBuilder

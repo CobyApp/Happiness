@@ -18,6 +18,7 @@ struct DetailBunchStore: Reducer {
         @Presents var editBunch: EditBunchStore.State?
         @Presents var optionSheet: ConfirmationDialogState<OptionSheetAction>?
         @Presents var deleteAlert: AlertState<DeleteAlertAction>?
+        @Presents var confirmAlert: AlertState<Action>?
         var isPresented: Bool = true
         var scale: CGFloat = 1
         var isDown: Bool = false
@@ -36,8 +37,10 @@ struct DetailBunchStore: Reducer {
         case editBunch(PresentationAction<EditBunchStore.Action>)
         case optionSheet(PresentationAction<OptionSheetAction>)
         case deleteAlert(PresentationAction<DeleteAlertAction>)
+        case confirmAlert(PresentationAction<Action>)
         case showOptionSheet
         case showDeleteAlert
+        case showConfirmAlert
         case showDetailMemory(MemoryModel)
         case showEditBunch(BunchModel)
         case deleteBunch(BunchModel)
@@ -88,6 +91,8 @@ struct DetailBunchStore: Reducer {
                 case .dismiss:
                     return .none
                 }
+            case .confirmAlert:
+                return .send(.dismiss)
             case .showOptionSheet:
                 state.optionSheet = ConfirmationDialogState(
                     title: TextState("원하는 옵션을 선택해주세요."),
@@ -118,6 +123,17 @@ struct DetailBunchStore: Reducer {
                         ),
                         .cancel(
                             TextState("취소")
+                        )
+                    ]
+                )
+                return .none
+            case .showConfirmAlert:
+                state.confirmAlert = AlertState(
+                    title: TextState("추억 뭉치가 삭제되었습니다."),
+                    message: nil,
+                    buttons: [
+                        .default(
+                            TextState("확인")
                         )
                     ]
                 )
@@ -163,5 +179,6 @@ struct DetailBunchStore: Reducer {
         }
         .ifLet(\.$optionSheet, action: \.optionSheet)
         .ifLet(\.$deleteAlert, action: \.deleteAlert)
+        .ifLet(\.$confirmAlert, action: \.confirmAlert)
     }
 }
