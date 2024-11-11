@@ -19,6 +19,7 @@ struct DetailMemoryStore: Reducer {
         @Presents var editMemory: EditMemoryStore.State?
         @Presents var optionSheet: ConfirmationDialogState<OptionSheetAction>?
         @Presents var deleteAlert: AlertState<DeleteAlertAction>?
+        @Presents var confirmAlert: AlertState<Action>?
         var memory: MemoryModel
         
         init(
@@ -33,8 +34,10 @@ struct DetailMemoryStore: Reducer {
         case editMemory(PresentationAction<EditMemoryStore.Action>)
         case optionSheet(PresentationAction<OptionSheetAction>)
         case deleteAlert(PresentationAction<DeleteAlertAction>)
+        case confirmAlert(PresentationAction<Action>)
         case showOptionSheet
         case showDeleteAlert
+        case showConfirmAlert
         case showEditMemory(MemoryModel)
         case deleteMemory(MemoryModel)
         case deleteMemoryResponse
@@ -80,6 +83,8 @@ struct DetailMemoryStore: Reducer {
                 case .dismiss:
                     return .none
                 }
+            case .confirmAlert:
+                return .send(.dismiss)
             case .showOptionSheet:
                 state.optionSheet = ConfirmationDialogState(
                     title: TextState("원하는 옵션을 선택해주세요."),
@@ -114,6 +119,17 @@ struct DetailMemoryStore: Reducer {
                     ]
                 )    
                 return .none
+            case .showConfirmAlert:
+                state.confirmAlert = AlertState(
+                    title: TextState("추억이 삭제되었습니다."),
+                    message: nil,
+                    buttons: [
+                        .default(
+                            TextState("확인")
+                        )
+                    ]
+                )
+                return .none
             case .showEditMemory(let memory):
                 state.editMemory = EditMemoryStore.State(memory: memory)
                 return .none
@@ -125,7 +141,7 @@ struct DetailMemoryStore: Reducer {
                     await send(.deleteMemoryResponse)
                 }
             case .deleteMemoryResponse:
-                return .send(.dismiss)
+                return .send(.showConfirmAlert)
             case .getMemory:
                 let id = state.memory.id
                 return .run { send in
@@ -149,5 +165,6 @@ struct DetailMemoryStore: Reducer {
         }
         .ifLet(\.$optionSheet, action: \.optionSheet)
         .ifLet(\.$deleteAlert, action: \.deleteAlert)
+        .ifLet(\.$confirmAlert, action: \.confirmAlert)
     }
 }

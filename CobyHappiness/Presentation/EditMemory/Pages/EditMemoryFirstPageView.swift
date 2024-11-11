@@ -35,7 +35,7 @@ struct EditMemoryFirstPageView: View {
                     title: self.memory.type.description
                 )
             }
-            .padding(.bottom,  BaseSize.verticalPadding)
+            .padding(.bottom, BaseSize.verticalPadding)
         }
     }
 }

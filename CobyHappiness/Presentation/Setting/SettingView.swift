@@ -35,6 +35,7 @@ struct SettingView: View {
                 }
             }
         }
+        .background(Color.backgroundNormalNormal)
         .navigationDestination(
             item: self.$store.scope(state: \.theme, action: \.theme)
         ) { store in
@@ -43,16 +44,19 @@ struct SettingView: View {
         .alert(
             self.$store.scope(state: \.deleteAlert, action: \.deleteAlert)
         )
+        .alert(
+            self.$store.scope(state: \.confirmAlert, action: \.confirmAlert)
+        )
     }
     
     @ViewBuilder
     private func SettingListView() -> some View {
-        VStack(spacing: 0) {            
-            SettingButton(title: "테마") {
+        VStack(spacing: 0) {
+            SettingListItem(title: "테마") {
                 self.store.send(.showThemeView)
             }
             
-            SettingButton(title: "데이터 초기화") {
+            SettingListItem(title: "데이터 초기화") {
                 self.store.send(.showDeleteAlert)
             }
         }

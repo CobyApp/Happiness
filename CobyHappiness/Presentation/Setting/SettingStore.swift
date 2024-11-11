@@ -16,14 +16,17 @@ struct SettingStore: Reducer {
     struct State: Equatable {
         @Presents var theme: ThemeStore.State?
         @Presents var deleteAlert: AlertState<DeleteAlertAction>?
+        @Presents var confirmAlert: AlertState<Action>?
     }
     
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
         case theme(PresentationAction<ThemeStore.Action>)
         case deleteAlert(PresentationAction<DeleteAlertAction>)
+        case confirmAlert(PresentationAction<Action>)
         case showThemeView
         case showDeleteAlert
+        case showConfirmAlert
         case deleteAll
         case deleteAllResponse
         case dismiss
@@ -52,6 +55,8 @@ struct SettingStore: Reducer {
                 case .dismiss:
                     return .none
                 }
+            case .confirmAlert:
+                return .none
             case .showThemeView:
                 state.theme = ThemeStore.State()
                 return .none
@@ -70,6 +75,17 @@ struct SettingStore: Reducer {
                     ]
                 )
                 return .none
+            case .showConfirmAlert:
+                state.confirmAlert = AlertState(
+                    title: TextState("모든 데이터가 삭제되었습니다."),
+                    message: nil,
+                    buttons: [
+                        .default(
+                            TextState("확인")
+                        )
+                    ]
+                )
+                return .none
             case .deleteAll:
                 return .run { send in
                     let _ = await TaskResult {
@@ -78,7 +94,7 @@ struct SettingStore: Reducer {
                     await send(.deleteAllResponse)
                 }
             case .deleteAllResponse:
-                return .none
+                return .send(.showConfirmAlert)
             case .dismiss:
                 return .run { _ in await self.dismiss() }
             }
@@ -87,5 +103,6 @@ struct SettingStore: Reducer {
             ThemeStore()
         }
         .ifLet(\.$deleteAlert, action: \.deleteAlert)
+        .ifLet(\.$confirmAlert, action: \.confirmAlert)
     }
 }

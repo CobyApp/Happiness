@@ -32,7 +32,9 @@ struct PageBottomButtonView: View {
             case .first:
                 Button {
                     if !self.isDisabled {
-                        self.buttonAction()
+                        withAnimation {
+                            self.buttonAction()
+                        }
                     }
                 } label: {
                     Text("다음")
@@ -46,7 +48,9 @@ struct PageBottomButtonView: View {
             case .second:
                 HStack(spacing: 8) {
                     Button {
-                        self.selection = .first
+                        withAnimation {
+                            self.selection = .first
+                        }
                     } label: {
                         Text("이전")
                     }
