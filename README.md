@@ -46,13 +46,6 @@ CobyHappniess
           |── 🗂 Domain
           │   │── 📁 Type
           │   └── 📁 Model
-          │  
-          |── 🗂 Models
-          │   │── 📁 Type
-          │   │── 📁 User
-          │   │── 📁 Statistics
-          │   │── 📁 Driver
-          │   └── 📁 Order
           │
           |── 🗂 Presentation
           │   │── 📁 Common
