@@ -101,7 +101,7 @@ extension SetMemoryPhotosView {
                 switch result {
                 case .success(let data):
                     if let data = data {
-                        if let compressedData = UIImage(data: data)?.compressedImage {
+                        if let compressedData = UIImage(data: data)?.jpegData(compressionQuality: 0.3)! {
                             photoDataArray.append(compressedData)
                         }
                     }

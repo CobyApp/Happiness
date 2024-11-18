@@ -43,13 +43,13 @@ enum MemoryType: String, Identifiable, CaseIterable, Codable {
     var icon: UIImage {
         switch self {
         case .trip:
-            return UIImage.icTrip
+            return CobyHappinessAsset.trip.image
         case .food:
-            return UIImage.icFood
+            return CobyHappinessAsset.food.image
         case .hobby:
-            return UIImage.icHobby
+            return CobyHappinessAsset.favorite.image
         case .moment:
-            return UIImage.icMoment
+            return CobyHappinessAsset.flag.image
         }
     }
 }
