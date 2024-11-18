@@ -1,5 +1,5 @@
-# This workflow will build a Swift project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
+# This workflow builds a Swift project using Tuist
+# For more information see: https://tuist.io/docs
 
 name: RunTest
 
@@ -11,11 +11,29 @@ on:
 
 jobs:
   build:
-
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Start xcode build
+    # Checkout the repository
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    # Install Tuist
+    - name: Install Tuist
       run: |
-        xcodebuild clean build -project FoodBowl.xcodeproj -scheme FoodBowl -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=16.2'
+        curl -Ls https://install.tuist.io | bash
+        export PATH="$HOME/.tuist/bin:$PATH"
+
+    # Generate Xcode project with Tuist
+    - name: Generate Xcode Project
+      run: |
+        tuist fetch
+        tuist generate --no-open
+
+    # Build and test with Xcode
+    - name: Build and Test
+      run: |
+        xcodebuild clean test \
+        -project CobyHappiness.xcodeproj \
+        -scheme CobyHappiness \
+        -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=16.2'
