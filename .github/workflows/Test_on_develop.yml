@@ -1,6 +1,3 @@
-# This workflow builds a Swift project using Tuist
-# For more information see: https://tuist.io/docs
-
 name: RunTest
 
 on:
@@ -30,10 +27,10 @@ jobs:
         tuist fetch
         tuist generate --no-open
 
-    # Build and test with Xcode
+    # Build and Test with Xcode
     - name: Build and Test
       run: |
         xcodebuild clean test \
         -project CobyHappiness.xcodeproj \
         -scheme CobyHappiness \
-        -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=16.2'
+        -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=17.0'
