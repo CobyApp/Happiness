@@ -1,36 +1,23 @@
 name: RunTest
 
 on:
-  push:
+    push:
     branches: [ "develop" ]
-  pull_request:
+    pull_request:
     branches: [ "develop" ]
 
 jobs:
-  build:
+    run-unitTest:
+    
     runs-on: macos-latest
-
+    
     steps:
-    # Checkout the repository
-    - name: Checkout Repository
-      uses: actions/checkout@v3
-
-    # Install Tuist
-    - name: Install Tuist
-      run: |
-        curl -Ls https://install.tuist.io | bash
-        export PATH="$HOME/.tuist/bin:$PATH"
-
-    # Generate Xcode project with Tuist
-    - name: Generate Xcode Project
-      run: |
-        tuist fetch
-        tuist generate --no-open
-
-    # Build and Test with Xcode
-    - name: Build and Test
-      run: |
-        xcodebuild clean test \
-        -project CobyHappiness.xcodeproj \
-        -scheme CobyHappiness \
-        -destination 'platform=iOS Simulator,name=iPhone 14 Pro,OS=17.0'
+    - uses: actions/checkout@v4
+    - name: Install Mise
+        run: |
+          curl https://mise.run | sh
+          mise install
+    - name: Install Tuist dependencies
+        run: mise x -- tuist install
+    - name: Run tests
+        run: mise x -- tuist test Weave2-UnitTest --no-selective-testing
