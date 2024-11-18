@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -32,7 +32,6 @@
 		53DD2C0C977DA1EBA82ECE6F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B364A914394257BB4EF19D /* ProfileView.swift */; };
 		568B2068372D3B41E8C2B8F5 /* BunchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8942B38905B6DF9C3F4CFA /* BunchStore.swift */; };
 		5C699780735C81B7A3C3912D /* BunchDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BEDF918BFB8703610424C21 /* BunchDatabase.swift */; };
-		5CA9F69D5D37A5416D56CD2C /* Sequence.swift in Resources */ = {isa = PBXBuildFile; fileRef = 698828A606457777AC9A227E /* Sequence.swift */; };
 		61BD18BD8814EFFBE66846F2 /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72702C51B4A4F21460554080 /* Memory.swift */; };
 		68FA12DD54180E3FA308EF76 /* ComposableArchitecture.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 517A52F8D3FE3CC8796A2774 /* ComposableArchitecture.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		73A45F8026146F584E72195C /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E0C75024C16BA1A15F85BB /* Color+Extensions.swift */; };
@@ -111,7 +110,6 @@
 		5863C29C95900D625D7E73E6 /* CobyHappiness.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CobyHappiness.entitlements; sourceTree = "<group>"; };
 		5C6CFDA2337952220D71BC74 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		689C478BF96DF9C82D519F8F /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
-		698828A606457777AC9A227E /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		6B22CAB9BED7D3DF5D8E2929 /* CobyHappiness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CobyHappiness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BEDF918BFB8703610424C21 /* BunchDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BunchDatabase.swift; sourceTree = "<group>"; };
 		6ECD82092F463630560D0E42 /* EditBunchStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBunchStore.swift; sourceTree = "<group>"; };
@@ -479,7 +477,6 @@
 			isa = PBXGroup;
 			children = (
 				89480AD9F91598E9FD985BE9 /* Assets.xcassets */,
-				698828A606457777AC9A227E /* Sequence.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -541,6 +538,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Coby;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = ABF5EF0ACF7760C44B7EEB7E /* Build configuration list for PBXProject "CobyHappiness" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -566,7 +565,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F75A36A3BCD6027C9323B0FB /* Assets.xcassets in Resources */,
-				5CA9F69D5D37A5416D56CD2C /* Sequence.swift in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,7 +663,21 @@
 					"-fmodule-map-file=$(SRCROOT)/Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap",
 					"-fmodule-map-file=$(SRCROOT)/Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap",
 				);
-				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/ComposableArchitectureMacros#ComposableArchitectureMacros -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/DependenciesMacrosPlugin#DependenciesMacrosPlugin -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/PerceptionMacros#PerceptionMacros -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/CasePathsMacros#CasePathsMacros";
+				OTHER_SWIFT_FLAGS = (
+					"$(inherited)",
+					"-Xcc",
+					"-fmodule-map-file=$(SRCROOT)/Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap",
+					"-Xcc",
+					"-fmodule-map-file=$(SRCROOT)/Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap",
+					"-load-plugin-executable",
+					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/PerceptionMacros#PerceptionMacros",
+					"-load-plugin-executable",
+					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/ComposableArchitectureMacros#ComposableArchitectureMacros",
+					"-load-plugin-executable",
+					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/CasePathsMacros#CasePathsMacros",
+					"-load-plugin-executable",
+					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/DependenciesMacrosPlugin#DependenciesMacrosPlugin",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.CobyHappiness;
 				PRODUCT_NAME = CobyHappiness;
 				SDKROOT = iphoneos;
@@ -815,14 +827,31 @@
 					"-fmodule-map-file=$(SRCROOT)/Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap",
 					"-fmodule-map-file=$(SRCROOT)/Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap",
 				);
-				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/PerceptionMacros#PerceptionMacros -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/ComposableArchitectureMacros#ComposableArchitectureMacros -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/CasePathsMacros#CasePathsMacros -load-plugin-executable $BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/DependenciesMacrosPlugin#DependenciesMacrosPlugin";
+				OTHER_SWIFT_FLAGS = (
+					"$(inherited)",
+					"-Xcc",
+					"-fmodule-map-file=$(SRCROOT)/Tuist/.build/checkouts/swift-syntax/Sources/_SwiftSyntaxCShims/include/module.modulemap",
+					"-Xcc",
+					"-fmodule-map-file=$(SRCROOT)/Tuist/.build/tuist-derived/UIKitNavigationShim/UIKitNavigationShim.modulemap",
+					"-load-plugin-executable",
+					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/CasePathsMacros#CasePathsMacros",
+					"-load-plugin-executable",
+					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/ComposableArchitectureMacros#ComposableArchitectureMacros",
+					"-load-plugin-executable",
+					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/DependenciesMacrosPlugin#DependenciesMacrosPlugin",
+					"-load-plugin-executable",
+					"$BUILD_DIR/Debug$EFFECTIVE_PLATFORM_NAME/PerceptionMacros#PerceptionMacros",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.CobyHappiness;
 				PRODUCT_NAME = CobyHappiness;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

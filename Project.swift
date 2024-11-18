@@ -33,7 +33,9 @@ private func createInfoPlist() -> InfoPlist {
         "CFBundleShortVersionString": "\(version)",
         "CFBundleVersion": "\(bundleVersion)",
         "CFBundleDisplayName": "$(APP_DISPLAY_NAME)",
-        "BASE_URL" : "$(BASE_URL)"
+        "BASE_URL" : "$(BASE_URL)",
+        "UIMainStoryboardFile": "",
+        "UILaunchStoryboardName": "LaunchScreen"
     ]
     return .extendingDefault(with: plist)
 }
