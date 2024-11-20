@@ -15,3 +15,10 @@ Derived/
 
 ### Tuist managed dependencies ###
 Tuist/.build/
+
+.env
+AppStore_com.coby.CobyHappiness.mobileprovision
+QCJLQF9GV4.cer
+QCJLQF9GV4.certSigningRequest
+QCJLQF9GV4.p12
+CobyHappiness.ipa
